@@ -50,7 +50,7 @@
 			</view>
 		</view>
 		
-		<view class="" style="display: flex;justify-content: center;margin-top: 64rpx;">
+		<view class="" style="display: flex;justify-content: center;margin-top: 32rpx;">
 			<view class="" style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 41rpx;border-radius: 12rpx;">
 				<view @click="usericon2Next(item)" v-for="(item,index) in usericon2" class="" style="display: flex;align-items: center;margin-top: 41rpx;">
 					<view class="" style="width: 96rpx;display: flex;justify-content: center;">
@@ -123,6 +123,16 @@
 				if(e.name == 'Spare抢单记录'){
 					uni.navigateTo({
 						url:'./SparkRecord'
+					})
+				}
+				if(e.name == '预约池'){
+					uni.navigateTo({
+						url:'./reservationPool'
+					})
+				}
+				if(e.name == '预排单记录'){
+					uni.navigateTo({
+						url:'./preOrderRecord'
 					})
 				}
 			},
