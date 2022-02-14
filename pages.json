@@ -130,106 +130,102 @@
 					"titleNView": false
 				}
 			}
-		}
-	    ,{//充币
-            "path" : "pages/capital/ChargeMoney",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "充币",
-                "enablePullDownRefresh": false,
-				"navigationBarBackgroundColor":"#F7FAFF"
-            }
-            
-        }
-        ,{//提币
-            "path" : "pages/capital/withdrawMoney",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "提币",
-                "enablePullDownRefresh": false,
-				"navigationBarBackgroundColor":"#F7FAFF"
-            }
-            
-        }
-        ,{
-            "path" : "pages/capital/Transfer",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "划转",
-                "enablePullDownRefresh": false,
-            	"navigationBarBackgroundColor":"#F7FAFF"
-            }
-        }
-        ,{//资产详情
-            "path" : "pages/capital/accountDetails",
-            "style": {
-            	"app-plus": {
-            		"titleNView": false
-            	}
-            }
-        }
-        ,{//转账
-            "path" : "pages/capital/transferAccounts",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "转账",
-                "enablePullDownRefresh": false,
-            	"navigationBarBackgroundColor":"#F7FAFF"
-            }
-        }
-        ,{//个人信息
-            "path" : "pages/user/userInfo",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "个人信息",
-                "enablePullDownRefresh": false,
-            	"navigationBarBackgroundColor":"#FAFCFF"
-            }
-        }
-        ,{//参与抢单
-            "path" : "pages/home/grabOrders",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "参与抢单",
-                "enablePullDownRefresh": false,
-            	"navigationBarBackgroundColor":"#FAFCFF"
-            }
-        }
-        ,{//我的团队
-            "path" : "pages/user/myTeam",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "我的团队",
-                "enablePullDownRefresh": false,
-            	"navigationBarBackgroundColor":"#FAFCFF"
-            }
-        }
-        ,{//Spark记录
-            "path" : "pages/user/SparkRecord",
-            "style": {
-            	"app-plus": {
-            		"titleNView": false
-            	}
-            }
-        }
-        ,{//Spark记录 - 历史订单
-            "path" : "pages/user/HistoricalOrder",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "历史订单",
-                "enablePullDownRefresh": false,
-            	"navigationBarBackgroundColor":"#FAFCFF"
-            }
-        }
-        ,{//设置
-            "path" : "pages/user/setUp",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "设置",
-                "enablePullDownRefresh": false,
-            	"navigationBarBackgroundColor":"#FAFCFF"
-            }
-            
+
+		}, { //充币
+			"path": "pages/capital/ChargeMoney",
+			"style": {
+				"navigationBarTitleText": "充币",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#F7FAFF"
+			}
+
+		}, { //提币
+			"path": "pages/capital/withdrawMoney",
+			"style": {
+				"navigationBarTitleText": "提币",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#F7FAFF"
+			}
+
+		}, {
+			"path": "pages/capital/Transfer",
+			"style": {
+				"navigationBarTitleText": "划转",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#F7FAFF"
+			}
+		}, { //资产详情
+			"path": "pages/capital/accountDetails",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		}, { //转账
+			"path": "pages/capital/transferAccounts",
+			"style": {
+				"navigationBarTitleText": "转账",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#F7FAFF"
+			}
+		}, { //个人信息
+			"path": "pages/user/userInfo",
+			"style": {
+				"navigationBarTitleText": "个人信息",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#FAFCFF"
+			}
+		}, { //参与抢单
+			"path": "pages/home/grabOrders",
+			"style": {
+				"navigationBarTitleText": "参与抢单",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#FAFCFF"
+			}
+		}, { //我的团队
+			"path": "pages/user/myTeam",
+			"style": {
+				"navigationBarTitleText": "我的团队",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#FAFCFF"
+			}
+		}, { //Spark记录
+			"path": "pages/user/SparkRecord",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		}, { //Spark记录 - 历史订单
+			"path": "pages/user/HistoricalOrder",
+			"style": {
+				"navigationBarTitleText": "历史订单",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#FAFCFF"
+			}
+		}, { //设置
+			"path": "pages/user/setUp",
+			"style": {
+				"navigationBarTitleText": "设置",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#FAFCFF"
+			}
+		},
+		{ // 销毁
+			"path": "pages/user/destroy",
+			"style": {
+				"navigationBarTitleText": "销毁",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "red",
+
+				"app-plus": {
+					"titleNView": {
+						"backgroundImage": "linear-gradient(to right, #505A71,#3B445A)",
+						"titleColor": "#fff"
+					}
+
+				}
+			}
         }
         ,{//预约池
             "path" : "pages/user/reservationPool",
@@ -246,8 +242,30 @@
             		"titleNView": false
             	}
             }
-        }
-    ],
+		}, { //预约池
+			"path": "pages/user/reservationPool",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		}, { //预排单记录
+			"path": "pages/user/preOrderRecord",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		}, {
+			"path": "pages/user/childCimps/Approve",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
+
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -296,14 +314,12 @@
 			}
 		]
 	},
-	"condition" : { //模式配置，仅开发期间生效
+	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
-		"list": [
-			{
-				"name": "", //模式名称
-				"path": "", //启动页面，必选
-				"query": "" //启动参数，在页面的onLoad函数里面得到
-			}
-		]
+		"list": [{
+			"name": "", //模式名称
+			"path": "", //启动页面，必选
+			"query": "" //启动参数，在页面的onLoad函数里面得到
+		}]
 	}
 }

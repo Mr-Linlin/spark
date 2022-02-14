@@ -125,6 +125,13 @@
 						url:'./SparkRecord'
 					})
 				}
+
+        if(e.name === '销毁'){
+          uni.navigateTo({
+            url:'./destroy'
+          })
+        }
+
 				if(e.name == '预约池'){
 					uni.navigateTo({
 						url:'./reservationPool'
@@ -135,6 +142,7 @@
 						url:'./preOrderRecord'
 					})
 				}
+
 			},
 			usericon2Next(e){
 				if(e.name == '个人信息'){
@@ -147,7 +155,7 @@
 						url:'./setUp'
 					})
 				}
-				
+
 			}
 		}
 	}
