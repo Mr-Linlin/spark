@@ -16,7 +16,7 @@
 						188****8888
 					</view>
 				</view>
-				<view @click="handleShowPassword" class="PheonCont">
+				<view @click="show = true" class="PheonCont">
 					<view class="PheonName">
 						登录密码
 					</view>
@@ -94,12 +94,12 @@
 				</view>
 			</view>
 		</view>
-		
 		<view class="">
 			<u-button class="btn" >退出登录</u-button>
 		</view>
 		<!-- 修改密码弹出 -->
-		<u-popup :show="show" @close="close" @open="open">
+		<u-popup :show="show" @close="show = false" @open="open">
+      <image @click="handleClose" class="close-img" :src="require('../../static/img/close.png')"></image>
 		    <view class="password-box">
 		        <view class="p-title">修改密码</view>
           <view class="p-sub-title">修改成功请牢记新密码</view>
@@ -141,7 +141,10 @@
 		methods: {
 			handleShowPassword(){
 				console.log("asd")
-			}
+			},
+      handleClose(){
+        this.show = false
+      }
 		}
 	}
 </script>
@@ -164,7 +167,13 @@
     padding-left: 32rpx;
     margin-bottom: 20rpx;
   }
-
+  .close-img{
+    width: 44rpx;
+    height: 44rpx;
+    position: absolute;
+    top: 80rpx;
+    right: 32rpx;
+  }
   .placeholder{
     font-size: 28rpx;
     font-weight: 500;
