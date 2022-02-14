@@ -102,7 +102,29 @@
 		<u-popup :show="show" @close="close" @open="open">
 		    <view class="password-box">
 		        <view class="p-title">修改密码</view>
-				<view class="p-sub-title">修改成功请牢记新密码</view>
+          <view class="p-sub-title">修改成功请牢记新密码</view>
+            <u--input
+                class="p-input"
+                placeholderClass="placeholder"
+                placeholder="验证原密码"
+                border="none"
+                v-model="value"
+            ></u--input>
+          <u--input
+              class="p-input"
+              placeholderClass="placeholder"
+              placeholder="设置新密码"
+              border="none"
+              v-model="value"
+          ></u--input>
+          <u--input
+              class="p-input"
+              placeholderClass="placeholder"
+              placeholder="确认新密码"
+              border="none"
+              v-model="value"
+          ></u--input>
+          <u-button color="#3A82FE" class="btn-shadow" type="primary" text="确认修改"></u-button>
 		    </view>
 		</u-popup>
 	</view>
@@ -112,7 +134,8 @@
 	export default {
 		data() {
 			return {
-				show:true
+				show:true,
+        value:""
 			}
 		},
 		methods: {
@@ -134,6 +157,20 @@
 	.flex1{
 		flex: 1;
 	}
+  .p-input{
+    width: 600rpx;
+    height: 96rpx;
+    background: #fff;
+    padding-left: 32rpx;
+    margin-bottom: 20rpx;
+  }
+
+  .placeholder{
+    font-size: 28rpx;
+    font-weight: 500;
+    padding-left: 32rpx;
+    color: rgba(0, 0, 0, 0.22);
+  }
 	.btn{
 		width: 263rpx;
 		height: 78rpx;
@@ -144,9 +181,14 @@
 		border: 2rpx solid #FFFFFF;
 		box-shadow: 0rpx 16rpx 32rpx 1rpx rgba(88, 131, 204, 0.05);
 	}
+  .btn-shadow{
+    box-shadow: 0px 20px 40px 1px rgba(88,130,204,0.17);
+    margin-top: 60rpx;
+  }
 	.password-box{
 		height: 75vh;
 		padding: 80rpx 75rpx 0;
+    background: #F7FAFF;
 		.p-title{
 			font-size: 34rpx;
 			font-weight: 500;
@@ -159,6 +201,7 @@
 			font-weight: 400;
 			color: rgba(0, 0, 0, 0.44);
 			margin-top: 20rpx;
+      margin-bottom: 60rpx;
 		}
 	}
 	.setUptitle{
