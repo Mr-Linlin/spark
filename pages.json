@@ -226,22 +226,20 @@
 
 				}
 			}
-        }
-        ,{//预约池
-            "path" : "pages/user/reservationPool",
-            "style": {
-            	"app-plus": {
-            		"titleNView": false
-            	}
-            }
-        }
-        ,{//预排单记录
-            "path" : "pages/user/preOrderRecord",
-            "style": {
-            	"app-plus": {
-            		"titleNView": false
-            	}
-            }
+		}, { //预约池
+			"path": "pages/user/reservationPool",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		}, { //预排单记录
+			"path": "pages/user/preOrderRecord",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
 		}, { //预约池
 			"path": "pages/user/reservationPool",
 			"style": {
@@ -260,6 +258,24 @@
 			"path": "pages/user/childCimps/Approve",
 			"style": {
 				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		// 预约排单
+		{
+			"path": "pages/user/subscribeChild/Scheduling",
+			"style": {
+				"navigationBarTitleText": "预约排单",
+				"enablePullDownRefresh": false
+			}
+
+		}
+		// 提取GS
+		, {
+			"path": "pages/user/subscribeChild/ExtractGs",
+			"style": {
+				"navigationBarTitleText": "提取GS",
 				"enablePullDownRefresh": false
 			}
 

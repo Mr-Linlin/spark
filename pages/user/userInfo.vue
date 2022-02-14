@@ -86,7 +86,7 @@
 		.box-card {
 			padding: 20rpx;
 			background: #FFFFFF;
-			box-shadow: 0px 32rpx 64rpx 2rpx rgba(88, 131, 204, 0.05);
+			box-shadow: 0 32rpx 64rpx 2rpx rgba(88, 131, 204, 0.05);
 			border-radius: 16rpx;
 			margin-bottom: 32rpx;
 
