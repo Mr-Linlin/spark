@@ -1,0 +1,293 @@
+{
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [
+		// {
+		// 	//引导页
+		// 	"path": "pages/lead",
+		// 	"style": {
+		// 		"app-plus": {
+		// 			"titleNView": false
+		// 		}
+		// 	}
+		// },
+		{
+			//登陆页
+			"path": "pages/login/index",
+			"style": {
+				"app-plus": {
+					"animationType": "fade-in",
+					"animationDuration": 300,
+					"titleNView": false
+				}
+			}
+		},
+		{
+			//首页
+			"path": "pages/home/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			//spark
+			"path": "pages/spark/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			//服务器
+			"path": "pages/server/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			//资产
+			"path": "pages/capital/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			//我的
+			"path": "pages/user/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			//webView
+			"path": "pages/webView",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			//密码登录
+			"path": "pages/login/pwd_login/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			//忘记密码
+			"path": "pages/login/forget_password/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			//新用户注册
+			"path": "pages/login/registration/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			//资金密码
+			"path": "pages/login/funds/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			//实名认证
+			"path": "pages/login/certification/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			//资讯详情
+			"path": "pages/home/informationdetails/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		}
+	    ,{//充币
+            "path" : "pages/capital/ChargeMoney",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "充币",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#F7FAFF"
+            }
+            
+        }
+        ,{//提币
+            "path" : "pages/capital/withdrawMoney",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "提币",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#F7FAFF"
+            }
+            
+        }
+        ,{
+            "path" : "pages/capital/Transfer",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "划转",
+                "enablePullDownRefresh": false,
+            	"navigationBarBackgroundColor":"#F7FAFF"
+            }
+        }
+        ,{//资产详情
+            "path" : "pages/capital/accountDetails",
+            "style": {
+            	"app-plus": {
+            		"titleNView": false
+            	}
+            }
+        }
+        ,{//转账
+            "path" : "pages/capital/transferAccounts",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "转账",
+                "enablePullDownRefresh": false,
+            	"navigationBarBackgroundColor":"#F7FAFF"
+            }
+        }
+        ,{//个人信息
+            "path" : "pages/user/userInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "个人信息",
+                "enablePullDownRefresh": false,
+            	"navigationBarBackgroundColor":"#FAFCFF"
+            }
+        }
+        ,{//参与抢单
+            "path" : "pages/home/grabOrders",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "参与抢单",
+                "enablePullDownRefresh": false,
+            	"navigationBarBackgroundColor":"#FAFCFF"
+            }
+        }
+        ,{//我的团队
+            "path" : "pages/user/myTeam",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的团队",
+                "enablePullDownRefresh": false,
+            	"navigationBarBackgroundColor":"#FAFCFF"
+            }
+        }
+        ,{//Spark记录
+            "path" : "pages/user/SparkRecord",
+            "style": {
+            	"app-plus": {
+            		"titleNView": false
+            	}
+            }
+        }
+        ,{//Spark记录 - 历史订单
+            "path" : "pages/user/HistoricalOrder",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "历史订单",
+                "enablePullDownRefresh": false,
+            	"navigationBarBackgroundColor":"#FAFCFF"
+            }
+        }
+        ,{//设置
+            "path" : "pages/user/setUp",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设置",
+                "enablePullDownRefresh": false,
+            	"navigationBarBackgroundColor":"#FAFCFF"
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"bounce": "none" //关闭窗口回弹效果
+		}
+	},
+	"tabBar": {
+		"color": "#7e82a6",
+		"selectedColor": "#6C56F9",
+		"borderStyle": "black",
+		"backgroundColor": "#FFFFFF",
+		"height": "60px",
+		"fontSize": "14px",
+		"list": [{
+				"pagePath": "pages/home/index",
+				"text": "首页",
+				"iconPath": "static/img/foot/foot01.png",
+				"selectedIconPath": "static/img/foot/foot01_1.png"
+			},
+			{
+				"pagePath": "pages/spark/index",
+				"text": "spark",
+				"iconPath": "static/img/foot/foot02.png",
+				"selectedIconPath": "static/img/foot/foot02_1.png"
+			},
+			{
+				"pagePath": "pages/server/index",
+				"text": "服务器",
+				"iconPath": "static/img/foot/foot03.png",
+				"selectedIconPath": "static/img/foot/foot03_1.png"
+			},
+			{
+				"pagePath": "pages/capital/index",
+				"text": "资产",
+				"iconPath": "static/img/foot/foot04.png",
+				"selectedIconPath": "static/img/foot/foot04_1.png"
+			},
+			{
+				"pagePath": "pages/user/index",
+				"text": "我的",
+				"iconPath": "static/img/foot/foot05.png",
+				"selectedIconPath": "static/img/foot/foot05_1.png"
+			}
+		]
+	},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			}
+		]
+	}
+}

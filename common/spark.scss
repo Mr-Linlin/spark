@@ -1,0 +1,166 @@
+
+.flexRow{
+	display: flex;
+	flex-direction: row; 
+}
+
+.global-container {
+	 position: fixed;
+	 top: 0;
+	 left: 0;
+	 right: 0;
+	 bottom: 0;
+	 z-index: 1;
+	 background-color: $theme-bg-color-global;
+	 height: calc(100%-20rpx);
+	 overflow: scroll;
+	 padding-bottom: 70px;
+}
+
+
+.flexCol{
+	display: flex;
+	flex-direction: column; 
+}
+
+.flexWrap{
+	display: flex;
+	flex-wrap: wrap;
+	line-height: 1;
+}
+
+.flexAlignCenter{
+	display: flex;
+	align-items: center;
+	line-height: 1;
+}
+
+.flexJustifyCenter{
+	display: flex;
+	justify-content: center;
+	line-height: 1;
+}
+
+.flexCenter{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	// line-height: 1;
+}
+
+.flexSb{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	line-height: 1;
+}
+
+.list-tj{
+	.mescroll-empty{
+		padding: 0!important;
+	}
+}
+.uni-sample-toast{width: 100%!important;}
+
+.color1Top{
+	border-top: 12rpx solid $eb;
+}
+
+.color2Top{
+	border-top: 12rpx solid #1E2E3E;
+}
+
+.borderTop{
+	border-top: 16rpx solid #F6F7F9;
+}
+
+.borderBottom{
+	border-bottom: 16rpx solid #F6F7F9;
+}
+
+.mr20{
+	margin-right: 20rpx;
+}
+
+.ml20{
+	margin-left: 20rpx;
+}
+
+.mescroll-bottombar{
+	display: none;
+}
+/**
+ * 自定义公式
+ */
+@mixin lineH($height) {
+	height: $height;
+	line-height: $height;
+}
+
+@mixin bottomLine($color, $height) {
+  &::after{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		content: "";
+		width: 100%;
+		height: $height;
+		background-color: $color;
+	}
+}
+
+@mixin topLine($color, $height) {
+	&::before {
+		position: absolute;
+		top: -2px;
+		left: 0;
+		content: "";
+		width: 100%;
+		height: $height;
+		background-color: $color;
+	}
+}
+
+
+/**
+ * 动画
+ */
+.rotate{animation: rotate 1s linear forwards;}
+@keyframes rotate{
+	0%{
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+
+*{
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.marketBuy{
+	.uni-numbox__minus,.uni-numbox__value,.uni-numbox__plus{
+		border-color: #D32D25;
+		background-color: transparent;
+	}
+	.uni-numbox__minus{
+		border: 0.5px solid #D32D25;
+	}
+	.uni-numbox__plus{
+		border: 0.5px solid #D32D25;
+	}
+	.uni-numbox__value{
+		border-top: 0.5px solid #D32D25;
+		border-bottom: 0.5px solid #D32D25;
+	}
+	.checklist-box{
+		margin-right: 10rpx!important;
+	}
+}
+
+.register {
+	.checklist-box{
+		margin-right: 0!important;
+	}
+}
