@@ -125,6 +125,11 @@
 						url:'./SparkRecord'
 					})
 				}
+        if(e.name === '销毁'){
+          uni.navigateTo({
+            url:'./destroy'
+          })
+        }
 			},
 			usericon2Next(e){
 				if(e.name == '个人信息'){
@@ -137,6 +142,7 @@
 						url:'./setUp'
 					})
 				}
+
 				
 			}
 		}

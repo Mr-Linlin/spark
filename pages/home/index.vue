@@ -14,8 +14,8 @@
 			</swiper-item>
 		</swiper>
 	</view> -->
-	
-	
+
+
 	<view class="">
 		<view class="" style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx;">
 			<view class="" style="display: flex;align-items: center;">

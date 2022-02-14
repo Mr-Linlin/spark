@@ -229,8 +229,28 @@
                 "enablePullDownRefresh": false,
             	"navigationBarBackgroundColor":"#FAFCFF"
             }
-            
-        }
+        },
+		{// 销毁
+			"path" : "pages/user/destroy",
+			"style" :
+			{
+				"navigationBarTitleText": "销毁",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"red",
+				"app-plus": {
+					"titleNView": {
+						"backgroundImage":"linear-gradient(to right, #505A71,#3B445A)",
+						"titleColor":"#fff"
+					}
+				},
+				"h5":{
+					"titleNView":{
+						"backgroundColor":"linear-gradient(to right, #505A71,#3B445A)",
+						"titleColor":"#fff"
+					}
+				}
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
