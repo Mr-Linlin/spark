@@ -130,6 +130,7 @@
 					"titleNView": false
 				}
 			}
+
 		}, { //充币
 			"path": "pages/capital/ChargeMoney",
 			"style": {
@@ -216,19 +217,31 @@
 				"navigationBarTitleText": "销毁",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "red",
+
 				"app-plus": {
 					"titleNView": {
 						"backgroundImage": "linear-gradient(to right, #505A71,#3B445A)",
 						"titleColor": "#fff"
 					}
-				},
-				"h5": {
-					"titleNView": {
-						"backgroundColor": "linear-gradient(to right, #505A71,#3B445A)",
-						"titleColor": "#fff"
-					}
+
 				}
 			}
+        }
+        ,{//预约池
+            "path" : "pages/user/reservationPool",
+            "style": {
+            	"app-plus": {
+            		"titleNView": false
+            	}
+            }
+        }
+        ,{//预排单记录
+            "path" : "pages/user/preOrderRecord",
+            "style": {
+            	"app-plus": {
+            		"titleNView": false
+            	}
+            }
 		}, { //预约池
 			"path": "pages/user/reservationPool",
 			"style": {
@@ -252,6 +265,7 @@
 
 		}
 	],
+
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

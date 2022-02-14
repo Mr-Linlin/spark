@@ -16,7 +16,7 @@
 						188****8888
 					</view>
 				</view>
-				<view class="PheonCont">
+				<view @click="handleShowPassword" class="PheonCont">
 					<view class="PheonName">
 						登录密码
 					</view>
@@ -98,6 +98,13 @@
 		<view class="">
 			<u-button class="btn" >退出登录</u-button>
 		</view>
+		<!-- 修改密码弹出 -->
+		<u-popup :show="show" @close="close" @open="open">
+		    <view class="password-box">
+		        <view class="p-title">修改密码</view>
+				<view class="p-sub-title">修改成功请牢记新密码</view>
+		    </view>
+		</u-popup>
 	</view>
 </template>
 
@@ -105,11 +112,13 @@
 	export default {
 		data() {
 			return {
-				
+				show:true
 			}
 		},
 		methods: {
-			
+			handleShowPassword(){
+				console.log("asd")
+			}
 		}
 	}
 </script>
@@ -134,6 +143,23 @@
 		color: rgba(0, 0, 0, 0.66);
 		border: 2rpx solid #FFFFFF;
 		box-shadow: 0rpx 16rpx 32rpx 1rpx rgba(88, 131, 204, 0.05);
+	}
+	.password-box{
+		height: 75vh;
+		padding: 80rpx 75rpx 0;
+		.p-title{
+			font-size: 34rpx;
+			font-weight: 500;
+			color: #1A1B1C;
+			line-height: 40rpx;
+		}
+		.p-sub-title{
+			font-size: 24rpx;
+			line-height: 28rpx;
+			font-weight: 400;
+			color: rgba(0, 0, 0, 0.44);
+			margin-top: 20rpx;
+		}
 	}
 	.setUptitle{
 		background-color: #FFFFFF;
