@@ -1,5 +1,18 @@
 <template>
   <view>
+    <u-navbar
+        title="个人中心"
+        class="header"
+        :border="false"
+    >
+      <view
+          class="u-nav-slot"
+          slot="left"
+      >
+        <image :src="require('../../static/Status.png')"></image>
+      </view>
+    </u-navbar>
+
    <view class="number-box">
      <view class="desc">FNT销毁总量</view>
      <view class="num">744289.28</view>
@@ -39,6 +52,11 @@ export default {
       nbFrontColor: '#000000',
       nbBackgroundColor: '#ffffff'
     }
+  },
+  methods:{
+    leftClick() {
+      console.log('leftClick');
+    }
   }
 }
 </script>
@@ -51,6 +69,8 @@ page{
   text-align: center;
   background: red;
   height: 144rpx;
+  margin-top: 88rpx;
+  background: linear-gradient(to right,#4F5970,#3A4359);
   .desc{
     font-size: 24rpx;
     margin-bottom: 24rpx;
@@ -60,6 +80,15 @@ page{
     font-size: 54rpx;
     color: #FFFFFF;
   }
+}
+.header{
+  /deep/ .u-navbar__content{
+    background: linear-gradient(to right,#4F5970,#3A4359) !important;
+  }
+
+}
+ .u-navbar__content{
+  background: red;
 }
 .list-box{
   width: 686rpx;
