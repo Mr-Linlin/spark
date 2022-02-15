@@ -279,8 +279,6 @@
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor":"#FAFCFF"
 			}
-<<<<<<< HEAD
-
 		},
 		// 组件，切换tabs
 		{
@@ -303,8 +301,6 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
-
-=======
 		}, {
 			"path": "pages/home/announcement",
 			"style": {
@@ -317,7 +313,6 @@
 				"navigationBarTitleText": "消息/公告",
 				"enablePullDownRefresh": false
 			}
->>>>>>> 1256bc7634e7d5240ef6f2f0fd1825316539ab61
 		}
 	],
 
