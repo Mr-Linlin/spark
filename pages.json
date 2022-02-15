@@ -276,7 +276,18 @@
 				"navigationBarTitleText": "提取GS",
 				"enablePullDownRefresh": false
 			}
-
+		}, {
+			"path": "pages/home/announcement",
+			"style": {
+				"navigationBarTitleText": "消息/公告",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/home/Information",
+			"style": {
+				"navigationBarTitleText": "消息/公告",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 
