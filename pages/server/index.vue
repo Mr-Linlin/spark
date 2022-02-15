@@ -42,10 +42,14 @@
 				],
 				list:[
 					{
-						title:'FIL 算力 1T'
+						title:'FIL 算力 1T',
+						contract:'合约期三年',
+						icon:'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/8eef12b2-48b8-4917-962c-51da6dc058d2.jpg'
 					},
 					{
-						title:'FIL 预约流动性的挖'
+						title:'FIL 预约流动性的挖',
+						contract:'合约期三年',
+						icon:'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2241b0c8-e24a-4532-baae-7436d6e58cac.jpg'
 					}
 				]
 				

@@ -279,10 +279,6 @@
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor":"#FAFCFF"
 			}
-<<<<<<< HEAD
-
-=======
->>>>>>> e136294eab17cddf63eb638973f315a7a8229114
 		},
 		// 组件，切换tabs
 		{
@@ -293,6 +289,7 @@
 			}
 
 		}, 
+		// 服务器组件页面
 		{
 			"path": "pages/server/childComps/serverfil",
 			"style": {
@@ -300,7 +297,9 @@
 				"enablePullDownRefresh": false
 			}
 
-		}, {
+		}, 
+		// 服务器组件页面
+		{
 			"path": "pages/server/childComps/serverfnt",
 			"style": {
 				"navigationBarTitleText": "",
