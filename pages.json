@@ -45,6 +45,7 @@
 			//服务器
 			"path": "pages/server/index",
 			"style": {
+				"navigationStyle": "custom",
 				"app-plus": {
 					"titleNView": false
 				}
@@ -216,14 +217,12 @@
 			"style": {
 				"navigationBarTitleText": "销毁",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "red",
-
+				"navigationStyle":"custom",
 				"app-plus": {
 					"titleNView": {
 						"backgroundImage": "linear-gradient(to right, #505A71,#3B445A)",
 						"titleColor": "#fff"
 					}
-
 				}
 			}
 		}, { //预约池
@@ -280,7 +279,45 @@
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor":"#FAFCFF"
 			}
+<<<<<<< HEAD
 
+		},
+		// 组件，切换tabs
+		{
+			"path": "pages/server/childComps/LztTabs",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/server/childComps/serverfil",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/server/childComps/serverfnt",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+=======
+		}, {
+			"path": "pages/home/announcement",
+			"style": {
+				"navigationBarTitleText": "消息/公告",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/home/Information",
+			"style": {
+				"navigationBarTitleText": "消息/公告",
+				"enablePullDownRefresh": false
+			}
+>>>>>>> 1256bc7634e7d5240ef6f2f0fd1825316539ab61
 		}
 	],
 

@@ -4,20 +4,20 @@
 			<view class="group_1">
 				<text>预排数量</text>
 				<view class="sched_input">
-					<u--input v-model="value" border="none" @change="fntChange"></u--input>
+					<u--input v-model="GS" border="none" @change="gsChange" type="number"></u--input>
 					<text style="margin-right: 20rpx;">可用GS 8392</text>
 				</view>
 			</view>
 			<view class="group_2">
 				<view class="fnt_num">
-					所需FNT 3023
+					所需FNT {{this.FNT}}
 				</view>
 				<text style="margin-right: 10rpx;">FNT所需数量=GS×2倍</text>
 				<text style="color:rgba(247, 69, 57, 1) ;">FNTFNG可用GS 239</text>
 			</view>
 		</view>
 		<view class="sched-btn">
-			<u-button text="确定预约" class="btn"></u-button>
+			<u-button text="确定预约" class="btn" @click="subscribe"></u-button>
 		</view>
 	</view>
 </template>
@@ -26,13 +26,31 @@
 	export default {
 		data() {
 			return {
-				value: 0
+				GS: 0,
+				FNT: 0
 			}
 		},
 		methods: {
-			fntChange() {
-				console.log(555)
-			}
+			gsChange() {
+				this.FNT = this.GS * 2
+			},
+			// 点击确定预约
+			subscribe() {
+				console.log(222)
+			},
+			// debounce(fn, wait) {
+			// 	let timer;
+			// 	return function() {
+			// 		let _this = this;
+			// 		let args = arguments;
+			// 		if (timer) {
+			// 			clearTimeout(timer);
+			// 		}
+			// 		timer = setTimeout(function() {
+			// 			fn.apply(_this, args);
+			// 		}, wait);
+			// 	};
+			// }
 		}
 	}
 </script>
