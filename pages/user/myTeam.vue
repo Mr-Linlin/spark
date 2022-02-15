@@ -1,5 +1,6 @@
 <template>
 	<view>
+		
 		<view class="bgd">
 			<view class="teamImg">
 				<image src="../../static/42faa7bf26eee16ee32afc6470bb9e6.jpg" mode=""></image>

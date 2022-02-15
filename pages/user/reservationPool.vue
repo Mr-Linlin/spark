@@ -20,17 +20,17 @@
 			</view>
 
 			<view class="" style="display: flex;justify-content: center;">
-				<view @click="transferAccountsNext" class=""
+				<view @click="schedulOrder" class=""
 					style="display: flex;align-items: center;width: 375rpx;justify-content: center;">
 					<view class="">
 						<image src="../../static/23946562.png" style="width: 32rpx;height: 32rpx;" mode=""></image>
 					</view>
-					<view class="" style="margin-left: 20rpx;color: #FFFFFF;">
+					<view class="" style="margin-left: 20rpx;color: #FFFFFF;" >
 						预约排单
 					</view>
 				</view>
 
-				<view @click="TransferNext" class=""
+				<view @click="extractGs" class=""
 					style="display: flex;align-items: center;width: 375rpx;justify-content: center;">
 					<view class="">
 						<image src="../../static/34563923.png" style="width: 32rpx;height: 32rpx;" mode=""></image>
@@ -92,14 +92,16 @@
 
 				})
 			},
-			transferAccountsNext() { //转账
+			// 点击进入提取GS页面
+			extractGs() { 
 				uni.navigateTo({
-					url: './transferAccounts'
+					url: './subscribeChild/ExtractGs'
 				})
 			},
-			TransferNext() { //划转
+			// 点击进入预约排单
+			schedulOrder(){
 				uni.navigateTo({
-					url: './Transfer'
+					url:'./subscribeChild/Scheduling'
 				})
 			}
 		}
