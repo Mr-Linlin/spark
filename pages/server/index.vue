@@ -10,8 +10,8 @@
 		<view class="gs-content">
 			<!-- 切换Tab -->
 			<lzt-tabs :titles="serves" @currentIndex='currentIndex' />
-			<view class="fil" v-if="curent===0">
-				<serverfil/>
+			<view class="fil" v-if="curent===0" >
+				<serverfil :list="list" />
 			</view>
 			<view class="fnt" v-if="curent===1">
 				<serverfnt/>
@@ -39,7 +39,16 @@
 					{
 						name: 'FNT预约'
 					}
+				],
+				list:[
+					{
+						title:'FIL 算力 1T'
+					},
+					{
+						title:'FIL 预约流动性的挖'
+					}
 				]
+				
 			}
 		},
 		mounted() {},
