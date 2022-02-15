@@ -267,7 +267,8 @@
 			"path": "pages/user/subscribeChild/Scheduling",
 			"style": {
 				"navigationBarTitleText": "预约排单",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#FAFCFF"
 			}
 
 		}
@@ -276,7 +277,8 @@
 			"path": "pages/user/subscribeChild/ExtractGs",
 			"style": {
 				"navigationBarTitleText": "提取GS",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#FAFCFF"
 			}
 
 		}
