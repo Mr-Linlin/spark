@@ -1,22 +1,83 @@
 <template>
-	<view>
-		
+	<view class="gs-server">
+		<u-navbar @rightClick="rightClick">
+			<view class="slot-left" slot="left">服务器</view>
+			<view class="slot-right" slot='right'>
+				<image src="../../static/sever/msg.png" mode=""></image>
+			</view>
+		</u-navbar>
+		<!-- 内容 -->
+		<view class="gs-content">
+			<!-- 切换Tab -->
+			<lzt-tabs :titles="serves" @currentIndex='currentIndex' />
+			<view class="fil" v-if="curent===0">
+				<serverfil/>
+			</view>
+			<view class="fnt" v-if="curent===1">
+				<serverfnt/>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
+	import lztTabs from './childComps/LztTabs'
+	import serverfil from './childComps/serverfil'
+	import serverfnt from './childComps/serverfnt'
 	export default {
-		data() {
-			return {}
+		components: {
+			lztTabs,
+			serverfil,
+			serverfnt
 		},
-		components: {},
+		data() {
+			return {
+				curent: 0,
+				serves: [{
+						name: '服务器FIL'
+					},
+					{
+						name: 'FNT预约'
+					}
+				]
+			}
+		},
 		mounted() {},
 		methods: {
-
+			// 点击消息
+			rightClick() {
+				console.log('消息')
+			},
+			// 切换tabs
+			currentIndex(index) {
+				this.curent = index
+			}
 		}
 	}
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+	page {
+		background-color: #F7FAFF;
+	}
 
+	.gs-server {
+		.slot-left {
+			font-size: 42rpx;
+			font-weight: 550;
+			color: #1A1B1C;
+			line-height: 50rpx;
+		}
+
+		.slot-right {
+			// background: red;
+			width: 44rpx;
+			height: 44rpx;
+		}
+
+		.gs-content {
+			margin-top: 88rpx;
+			padding: 0 34rpx 34rpx 34rpx;
+		}
+	}
 </style>

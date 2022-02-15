@@ -45,6 +45,7 @@
 			//服务器
 			"path": "pages/server/index",
 			"style": {
+				"navigationStyle": "custom",
 				"app-plus": {
 					"titleNView": false
 				}
@@ -276,6 +277,29 @@
 			"path": "pages/user/subscribeChild/ExtractGs",
 			"style": {
 				"navigationBarTitleText": "提取GS",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		// 组件，切换tabs
+		{
+			"path": "pages/server/childComps/LztTabs",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/server/childComps/serverfil",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/server/childComps/serverfnt",
+			"style": {
+				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
