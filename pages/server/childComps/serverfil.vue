@@ -12,7 +12,7 @@
 				<view class="text-buy">
 					<text>100FUSD</text>
 					<view class="">
-						<u-button text="立即购买" class="btn"></u-button>
+						<u-button text="立即购买" class="btn" @click="buyClick"></u-button>
 					</view>
 				</view>
 			</view>
@@ -34,7 +34,9 @@
 			}
 		},
 		methods: {
-
+		buyClick(){
+			this.$emit('buyClick')
+		}
 		}
 	}
 </script>

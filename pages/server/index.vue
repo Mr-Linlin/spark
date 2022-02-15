@@ -11,7 +11,7 @@
 			<!-- 切换Tab -->
 			<lzt-tabs :titles="serves" @currentIndex='currentIndex' />
 			<view class="fil" v-if="curent===0" >
-				<serverfil :list="list" />
+				<serverfil :list="list" @buyClick="buyClick"/>
 			</view>
 			<view class="fnt" v-if="curent===1">
 				<serverfnt/>
@@ -57,13 +57,17 @@
 		},
 		mounted() {},
 		methods: {
-			// 点击消息
+			// 点击查看消息内容
 			rightClick() {
 				console.log('消息')
 			},
 			// 切换tabs
 			currentIndex(index) {
 				this.curent = index
+			},
+			// 点击立即购买
+			buyClick(){
+				console.log('立即购买')
 			}
 		}
 	}
