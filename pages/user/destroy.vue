@@ -4,12 +4,13 @@
         title="个人中心"
         class="header"
         :border="false"
+        @leftClick="handleBack"
     >
       <view
           class="u-nav-slot"
           slot="left"
       >
-        <image :src="require('../../static/Status.png')"></image>
+        <image class="close-img" :src="require('../../static/Status.png')"></image>
       </view>
     </u-navbar>
 
@@ -56,6 +57,11 @@ export default {
   methods:{
     leftClick() {
       console.log('leftClick');
+    },
+    handleBack(){
+      uni.navigateBack({
+      	delta:1
+      })
     }
   }
 }
@@ -69,8 +75,8 @@ page{
   text-align: center;
   background: red;
   height: 144rpx;
-  margin-top: 88rpx;
   background: linear-gradient(to right,#4F5970,#3A4359);
+  margin-top: 88rpx;
   .desc{
     font-size: 24rpx;
     margin-bottom: 24rpx;
@@ -81,10 +87,18 @@ page{
     color: #FFFFFF;
   }
 }
+.close-img{
+	width: 60rpx;
+	height: 60rpx;
+}
 .header{
-  /deep/ .u-navbar__content{
-    background: linear-gradient(to right,#4F5970,#3A4359) !important;
-  }
+	color: #fff;
+	  /deep/ .u-navbar__content{
+		background: linear-gradient(to right,#4F5970,#3A4359) !important;
+	  }
+	  /deep/ .u-navbar__content__title{
+		  color: #fff;
+	  }
 
 }
  .u-navbar__content{

@@ -31,7 +31,7 @@
 					</view>
 				</view>
 				
-				<view class="PheonCont">
+				<view @click="show2 = true" class="PheonCont">
 					<view class="PheonName">
 						交易密码
 					</view>
@@ -98,7 +98,7 @@
 			<u-button class="btn" >退出登录</u-button>
 		</view>
 		<!-- 修改密码弹出 -->
-		<u-popup :show="show" @close="show = false" @open="open">
+		<u-popup round="40rpx" :show="show" @close="show = false" @open="open">
       <image @click="handleClose" class="close-img" :src="require('../../static/img/close.png')"></image>
 		    <view class="password-box">
 		        <view class="p-title">修改密码</view>
@@ -127,6 +127,44 @@
           <u-button color="#3A82FE" class="btn-shadow" type="primary" text="确认修改"></u-button>
 		    </view>
 		</u-popup>
+<!--    交易密码-->
+    <u-popup :show="show2" round="40rpx" mode="bottom" @close="close" @open="open">
+      <image @click="handleClose" class="close-img" :src="require('../../static/img/close.png')"></image>
+      <view class="trade-box">
+        <view class="sub-title">
+          修改资金密码
+        </view>
+        <swiper disable-touch :current="current">
+          <swiper-item class="swiper-item">
+            <view>
+              <view class="title p75">验证当前资金密码</view>
+              <view class="code-box p75">
+                <u-code-input class="code-input" v-model="value3" :maxlength="6"></u-code-input>
+              </view>
+              <u-button @click="handleNext(1)" class="btn-shadow next-btn" color="#3A82FE" type="primary" text="下一步"></u-button>
+            </view>
+          </swiper-item>
+          <swiper-item>
+            <view>
+              <view class="title p75">验证当前资金密码</view>
+              <view class="code-box p75">
+                <u-code-input class="code-input" v-model="value3" :maxlength="6"></u-code-input>
+              </view>
+              <u-button @click="handleNext(2)" class="btn-shadow next-btn" color="#3A82FE" type="primary" text="下一步"></u-button>
+            </view>
+          </swiper-item>
+          <swiper-item>
+            <view>
+              <view class="title p75">确认资金密码</view>
+              <view class="code-box p75">
+                <u-code-input class="code-input" v-model="value3" :maxlength="6"></u-code-input>
+              </view>
+              <u-button @click="handleNext(3)" class="btn-shadow next-btn" color="#3A82FE" type="primary" text="确认修改"></u-button>
+            </view>
+          </swiper-item>
+        </swiper>
+      </view>
+    </u-popup>
 	</view>
 </template>
 
@@ -134,8 +172,11 @@
 	export default {
 		data() {
 			return {
-				show:true,
-        value:""
+				show:false,
+        show2:false,
+        value:"",
+        value3:"",
+        current:0
 			}
 		},
 		methods: {
@@ -144,6 +185,10 @@
 			},
       handleClose(){
         this.show = false
+        this.show2 = false
+      },
+      handleNext(){
+        this.current++
       }
 		}
 	}
@@ -160,6 +205,16 @@
 	.flex1{
 		flex: 1;
 	}
+  .title{
+    margin-bottom: 60rpx;
+    font-weight: bold;
+  }
+  .next-btn{
+    width: 600rpx;
+  }
+  .code-input{
+    justify-content: space-between;
+  }
   .p-input{
     width: 600rpx;
     height: 96rpx;
@@ -194,10 +249,16 @@
     box-shadow: 0px 20px 40px 1px rgba(88,130,204,0.17);
     margin-top: 60rpx;
   }
+  uni-swiper{
+    height: 100%;
+  }
 	.password-box{
 		height: 75vh;
 		padding: 80rpx 75rpx 0;
     background: #F7FAFF;
+
+    overflow: hidden;
+    border-radius: 40rpx 40rpx 0px 0px;
 		.p-title{
 			font-size: 34rpx;
 			font-weight: 500;
@@ -242,4 +303,20 @@
 			}
 		}
 	}
+  // 交易密码
+  .trade-box{
+    height: 70vh;
+    padding: 80rpx 0rpx 0;
+    font-size: 34rpx;
+    .sub-title{
+      margin-bottom: 64rpx;
+      padding: 0 75rpx;
+    }
+    .swiper-item{
+      font-weight: bold;
+    }
+  }
+  .p75{
+    padding: 0 75rpx;
+  }
 </style>

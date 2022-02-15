@@ -216,14 +216,12 @@
 			"style": {
 				"navigationBarTitleText": "销毁",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "red",
-
+				"navigationStyle":"custom",
 				"app-plus": {
 					"titleNView": {
 						"backgroundImage": "linear-gradient(to right, #505A71,#3B445A)",
 						"titleColor": "#fff"
 					}
-
 				}
 			}
         }
