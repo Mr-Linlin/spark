@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import App from './App'
 import store from './store'
-import {
-	get,
-	post
-} from "./http/http.js"
-import {
-	userApi,
-	homeApi,
-	machineApi,
-	planApi
-} from "./http/api.js"
+// import {
+// 	get,
+// 	post
+// } from "./http/http.js"
+// import {
+// 	userApi,
+// 	homeApi,
+// 	machineApi,
+// 	planApi
+// } from "./http/api.js"
 
 import emptyTips from '@/components/empty/empty.vue'
 import Header from '@/components/backHeader/index.vue'
@@ -27,13 +27,12 @@ Vue.component('emptyTips', emptyTips)
 Vue.component('Header', Header)
 Vue.component('THeader', THeader)
 Vue.prototype.$store = store
-Vue.prototype.$get = get;
-Vue.prototype.$post = post;
-Vue.prototype.$userApi = userApi;
-Vue.prototype.$homeApi = homeApi;
-// Vue.prototype.$Login = login
-Vue.prototype.$machineApi = machineApi;
-Vue.prototype.$planApi = planApi;
+// Vue.prototype.$get = get;
+// Vue.prototype.$post = post;
+// Vue.prototype.$userApi = userApi;
+// Vue.prototype.$homeApi = homeApi;
+// Vue.prototype.$machineApi = machineApi;
+// Vue.prototype.$planApi = planApi;
 Vue.prototype.$tools = tools;
 Vue.prototype.$ui = ui;
 Vue.prototype.$verify = verify;
@@ -44,7 +43,8 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 
 const app = new Vue({
-	...App
+	...App,
+	store
 })
 // 引入请求封装，将app参数传递到配置中
 require('@/http/request.js')(app)

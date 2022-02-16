@@ -231,9 +231,9 @@
 			// }, 1000)
 		},
 		onLoad() {
-			this.$homeApi.getConsulting().then(r => {
-				this.consultingData = r.obj;
-			});
+			// this.$homeApi.getConsulting().then(r => {
+			// 	this.consultingData = r.obj;
+			// });
 		},
 		methods: {
 			grabOrdersNext() { //参与抢单

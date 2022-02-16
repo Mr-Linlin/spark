@@ -22,8 +22,7 @@
 		methods: {
 			onSubmit() {
 				Login(this.loginForm).then(res => {
-					console.log(res)
-					console.log('登录成功')
+					uni.$u.toast(res.msg)
 				})
 			}
 		}
