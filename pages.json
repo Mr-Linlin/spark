@@ -217,7 +217,7 @@
 			"style": {
 				"navigationBarTitleText": "销毁",
 				"enablePullDownRefresh": false,
-				"navigationStyle":"custom",
+				"navigationStyle": "custom",
 				"app-plus": {
 					"titleNView": {
 						"backgroundImage": "linear-gradient(to right, #505A71,#3B445A)",
@@ -267,7 +267,7 @@
 			"style": {
 				"navigationBarTitleText": "预约排单",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor":"#FAFCFF"
+				"navigationBarBackgroundColor": "#FAFCFF"
 			}
 
 		}
@@ -277,7 +277,7 @@
 			"style": {
 				"navigationBarTitleText": "提取GS",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor":"#FAFCFF"
+				"navigationBarBackgroundColor": "#FAFCFF"
 			}
 		},
 		// 组件，切换tabs
@@ -288,7 +288,7 @@
 				"enablePullDownRefresh": false
 			}
 
-		}, 
+		},
 		// 服务器组件页面
 		{
 			"path": "pages/server/childComps/serverfil",
@@ -297,7 +297,7 @@
 				"enablePullDownRefresh": false
 			}
 
-		}, 
+		},
 		// 服务器组件页面
 		{
 			"path": "pages/server/childComps/serverfnt",
@@ -317,6 +317,15 @@
 				"navigationBarTitleText": "消息/公告",
 				"enablePullDownRefresh": false
 			}
+		}
+		// 进入服务器消息页面
+		, {
+			"path": "pages/server/childComps/serverMsg",
+			"style": {
+				"navigationBarTitleText": "消息",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 

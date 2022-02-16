@@ -59,7 +59,9 @@
 		methods: {
 			// 点击查看消息内容
 			rightClick() {
-				console.log('消息')
+				uni.navigateTo({
+					url:'./childComps/serverMsg'
+				})
 			},
 			// 切换tabs
 			currentIndex(index) {
@@ -87,9 +89,21 @@
 		}
 
 		.slot-right {
-			// background: red;
+			position: relative;
 			width: 44rpx;
 			height: 44rpx;
+		}
+		.slot-right::after{
+			position: absolute;
+			display: inline-block;
+			content: '';
+			width: 14rpx;
+			height: 14rpx;
+			background: #F74539;
+			border-radius: 50%;
+			opacity: 1;
+			top: -2rpx;
+			right: -3rpx;
 		}
 
 		.gs-content {

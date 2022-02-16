@@ -35,7 +35,6 @@
 			return {
 				GS: 0,
 				FNT: 0,
-				disabled: true
 			}
 		},
 		methods: {
@@ -47,7 +46,6 @@
 						icon: false,
 						duration: 2000
 					})
-					this.disabled = true
 				} else if (this.FNT > 0 && this.FNT !== null) {
 					this.disabled = false
 				}
