@@ -16,8 +16,11 @@
 	</view> -->
 
 
+
 	<view class="">
-		<view class="" style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx;">
+    <u-icon name="photo" color="#2979ff" size="28"></u-icon>
+
+    <view class="" style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx;">
 			<view class="" style="display: flex;align-items: center;">
 				<view class="" style="">
 					<image src="../../static/home/Title.png"
