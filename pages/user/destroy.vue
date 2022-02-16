@@ -25,7 +25,7 @@
         <view style="text-align: right">业绩</view>
       </view>
       <view class="list">
-        <view class="item" v-for="item in 10">
+        <view class="item" :key="i" v-for="(item,i) in 10">
           <view class="user-info">
             <image class="header-image"></image>
             <view>

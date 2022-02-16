@@ -77,7 +77,7 @@
 							<image src="../../static/12312425.png" style="width: 32rpx;height: 32rpx;" mode=""></image>
 						</view>
 					</view>
-					<view v-for="(item,index) in account" class="">
+					<view v-for="(item,index) in account" class="" :key="index">
 						<view @click="close" class="" style="display: flex;justify-content: center;">
 							<view class="" style="width: 630rpx;height: 96rpx;background-color: #F7FAFF;border-radius: 8rpx;margin-top: 20rpx;display: flex;align-items: center;">
 								<view class="" style="margin-left: 33rpx;">
