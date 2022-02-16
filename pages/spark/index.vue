@@ -28,7 +28,7 @@
 		<wyb-popup ref="popup" type="left" width="500" radius="6">
 			<view class="popup-content">
 				<view class="plr3 fz-wb2" :style="'margin-top:'+sliderTop+'px'">GS</view>
-				<view class="plr3" v-for="(item,index) of slider_tabs">
+				<view class="plr3" v-for="(item,index) of slider_tabs" :key="index">
 					<view class="slider-tabs-bgcolor mt2 flexC space-between"
 						:class="index === sliderIndex?'slider-tabs-bgcolor-activer':'slider-tabs-bgcolor'"
 						@click="changeSliderIndex(index)">

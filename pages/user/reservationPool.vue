@@ -52,7 +52,7 @@
 				全部
 			</view>
 		</view>
-		<view v-for="(item,index) in 5" class="" style="margin-top: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
+		<view :key="index" v-for="(item,index) in 5" class="" style="margin-top: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
 			<view class="" style="display: flex;align-items: center;">
 				<view class="" style="font-size: 28rpx;color: rgba(0, 0, 0, 0.66);text-shadow: 0px 0px #000;">
 					身份奖励

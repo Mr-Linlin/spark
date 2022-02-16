@@ -1,6 +1,6 @@
 <template>
   <view class="list">
-    <view class="item" v-for="item in 10">
+    <view class="item" :key="i" v-for="(item,i) in 10">
       <view class="time">1分钟前</view>
       <view class="content">
         <image class="image" src=""></image>

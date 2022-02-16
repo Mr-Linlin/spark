@@ -33,7 +33,7 @@
 		
 		<view class="" style="display: flex;justify-content: center;margin-top: 64rpx;">
 			<view class="" style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 41rpx;border-radius: 12rpx;">
-				<view @click="usericonNext(item)" v-for="(item,index) in usericon" class="" style="display: flex;align-items: center;margin-top: 41rpx;">
+				<view @click="usericonNext(item)" v-for="(item,index) in usericon" :key="index" style="display: flex;align-items: center;margin-top: 41rpx;">
 					<view class="" style="width: 96rpx;display: flex;justify-content: center;">
 						<image :src="item.img" style="width: 32rpx;height: 32rpx;" mode=""></image>
 					</view>
@@ -52,7 +52,7 @@
 		
 		<view class="" style="display: flex;justify-content: center;margin-top: 32rpx;">
 			<view class="" style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 41rpx;border-radius: 12rpx;">
-				<view @click="usericon2Next(item)" v-for="(item,index) in usericon2" class="" style="display: flex;align-items: center;margin-top: 41rpx;">
+				<view @click="usericon2Next(item)" v-for="(item,index) in usericon2" :key="index" style="display: flex;align-items: center;margin-top: 41rpx;">
 					<view class="" style="width: 96rpx;display: flex;justify-content: center;">
 						<image :src="item.img" style="width: 32rpx;height: 32rpx;" mode=""></image>
 					</view>
