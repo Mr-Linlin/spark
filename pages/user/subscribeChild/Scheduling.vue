@@ -4,34 +4,57 @@
 			<view class="group_1">
 				<text>预排数量</text>
 				<view class="sched_input">
-					<u--input v-model="value" border="none" @change="fntChange"></u--input>
+					<u--input v-model="GS" border="none" @change="gsChange" type="number"></u--input>
 					<text style="margin-right: 20rpx;">可用GS 8392</text>
 				</view>
 			</view>
 			<view class="group_2">
 				<view class="fnt_num">
-					所需FNT 3023
+					所需FNT {{this.FNT}}
 				</view>
 				<text style="margin-right: 10rpx;">FNT所需数量=GS×2倍</text>
 				<text style="color:rgba(247, 69, 57, 1) ;">FNTFNG可用GS 239</text>
 			</view>
 		</view>
 		<view class="sched-btn">
-			<u-button text="确定预约" class="btn"></u-button>
+			<u-button text="确定预约" class="btn" @click="subscribe" v-if="FNT > 0 && FNT!==null && FNT < 239">
+			</u-button>
+			<u-button text="确定预约" class="btn1" @click="subscribe" :disabled="true" v-else>
+			</u-button>
 		</view>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
 <script>
+	import {
+		debounce
+	} from '@/utils/linTools.js'
 	export default {
 		data() {
 			return {
-				value: 0
+				GS: 0,
+				FNT: 0,
 			}
 		},
 		methods: {
-			fntChange() {
-				console.log(555)
+			gsChange() {
+				this.FNT = this.GS * 2
+				if (this.FNT > 239) {
+					this.$refs.uToast.show({
+						message: '兑换FNT不能超过239',
+						icon: false,
+						duration: 2000
+					})
+				} else if (this.FNT > 0 && this.FNT !== null) {
+					this.disabled = false
+				}
+			},
+			// 点击确定预约
+			subscribe() {
+				debounce(() => {
+					console.log(5555)
+				}, 1000)
 			}
 		}
 	}
@@ -99,6 +122,16 @@
 				opacity: 1;
 				border: 0;
 				color: #FFFFFF;
+			}
+
+			.btn1 {
+				height: 88rpx;
+				box-shadow: 0px 40rpx 80rpx 2rpx rgba(88, 130, 204, 0.17);
+				border-radius: 18rpx;
+				opacity: 1;
+				border: 0;
+				background: #F7FAFF;
+				color: rgba(0, 0, 0, 0.22);
 			}
 		}
 	}

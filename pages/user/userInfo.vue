@@ -7,7 +7,7 @@
 			</view>
 			<view class="group_1">
 				<text>昵称</text>
-				<view style="display: flex;">
+				<view style="display: flex;align-items: center;">
 					<text>李言言</text>
 					<image src="../../static/user/right.png" mode="" class="right-img"></image>
 				</view>
@@ -27,7 +27,7 @@
 		<view class="box-card">
 			<view class="group_1">
 				<text>地址管理</text>
-				<view style="display: flex;">
+				<view style="display: flex;align-items: center;">
 					<text>管理</text>
 					<image src="../../static/user/right.png" mode="" class="right-img"></image>
 				</view>
@@ -105,8 +105,8 @@
 				.right-img {
 					width: 24rpx;
 					height: 24rpx;
-					margin-top: 33rpx;
-					margin-left: 10rpx;
+					// margin-top: 33rpx;
+					margin-left: 5rpx;
 				}
 			}
 		}
