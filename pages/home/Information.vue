@@ -1,7 +1,7 @@
 <template>
   <view class="box">
     <view class="list">
-      <view class="item" v-for="item in 20">
+      <view class="item" :key="i" v-for="(item,i) in 20">
         <view class="left">
           <view class="title">
             微信大改版UI设计分析！分析点大统计

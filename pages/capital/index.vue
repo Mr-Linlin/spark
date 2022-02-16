@@ -19,7 +19,7 @@
 			</view>
 		</view>
 		<view class="" style="display: flex;align-items: center;height: 212rpx;">
-			<view @click="currencyType(item)" v-for="(item,index) in currency" class="" style="display: flex;align-items: center;justify-content: center;flex-direction: column;width: 190rpx;">
+			<view @click="currencyType(item)" :key="index" v-for="(item,index) in currency" class="" style="display: flex;align-items: center;justify-content: center;flex-direction: column;width: 190rpx;">
 				<view class="">
 					<image :src="item.url" style="width: 80rpx;height: 80rpx;" mode=""></image>
 				</view>
@@ -33,7 +33,7 @@
 			现金账户
 		</view>
 		<view class="" style="">
-			<view @click="accountDetailsNext" v-for="(item,index) in account" class="" style="width: 333rpx;height: 130rpx;background-color: #FFFFFF;float: left;margin-left: 32rpx;margin-top: 32rpx;">
+			<view @click="accountDetailsNext" v-for="(item,index) in account" :key="index" class="" style="width: 333rpx;height: 130rpx;background-color: #FFFFFF;float: left;margin-left: 32rpx;margin-top: 32rpx;">
 				<view class="" style="display: flex;align-items: center;height: 72rpx;">
 					<view class="" style="margin-left: 24rpx;">
 						<image :src="item.url" style="width: 24rpx;height: 24rpx;" mode=""></image>

@@ -25,7 +25,7 @@ import throttle from './libs/function/throttle.js'
 import index from './libs/function/index.js'
 
 // 配置信息
-import config from './libs/config/config.js'
+// import config from './libs/config/config.js'
 // props配置信息
 import props from './libs/config/props.js'
 // 各个需要fixed的地方的z-index配置文件
@@ -45,7 +45,7 @@ const $u = {
     test,
     type: ['primary', 'success', 'error', 'warning', 'info'],
     http: new Request(),
-    config, // uView配置信息相关，比如版本号
+    // config, // uView配置信息相关，比如版本号
     zIndex,
     debounce,
     throttle,

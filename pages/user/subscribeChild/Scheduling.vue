@@ -17,40 +17,45 @@
 			</view>
 		</view>
 		<view class="sched-btn">
-			<u-button text="确定预约" class="btn" @click="subscribe"></u-button>
+			<u-button text="确定预约" class="btn" @click="subscribe" v-if="FNT > 0 && FNT!==null && FNT < 239">
+			</u-button>
+			<u-button text="确定预约" class="btn1" @click="subscribe" :disabled="true" v-else>
+			</u-button>
 		</view>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
 <script>
+	import {
+		debounce
+	} from '@/utils/linTools.js'
 	export default {
 		data() {
 			return {
 				GS: 0,
-				FNT: 0
+				FNT: 0,
 			}
 		},
 		methods: {
 			gsChange() {
 				this.FNT = this.GS * 2
+				if (this.FNT > 239) {
+					this.$refs.uToast.show({
+						message: '兑换FNT不能超过239',
+						icon: false,
+						duration: 2000
+					})
+				} else if (this.FNT > 0 && this.FNT !== null) {
+					this.disabled = false
+				}
 			},
 			// 点击确定预约
 			subscribe() {
-				console.log(222)
-			},
-			// debounce(fn, wait) {
-			// 	let timer;
-			// 	return function() {
-			// 		let _this = this;
-			// 		let args = arguments;
-			// 		if (timer) {
-			// 			clearTimeout(timer);
-			// 		}
-			// 		timer = setTimeout(function() {
-			// 			fn.apply(_this, args);
-			// 		}, wait);
-			// 	};
-			// }
+				debounce(() => {
+					console.log(5555)
+				}, 1000)
+			}
 		}
 	}
 </script>
@@ -117,6 +122,16 @@
 				opacity: 1;
 				border: 0;
 				color: #FFFFFF;
+			}
+
+			.btn1 {
+				height: 88rpx;
+				box-shadow: 0px 40rpx 80rpx 2rpx rgba(88, 130, 204, 0.17);
+				border-radius: 18rpx;
+				opacity: 1;
+				border: 0;
+				background: #F7FAFF;
+				color: rgba(0, 0, 0, 0.22);
 			}
 		}
 	}

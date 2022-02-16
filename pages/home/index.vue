@@ -16,8 +16,9 @@
 	</view> -->
 
 
+
 	<view class="">
-		<view class="" style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx;">
+    <view class="" style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx;">
 			<view class="" style="display: flex;align-items: center;">
 				<view class="" style="">
 					<image src="../../static/home/Title.png"
@@ -141,7 +142,7 @@
 			</view>
 			
 			<view  class="flex_j" style="height: 234rpx;">
-				<view v-for="(item,index) in NoticeType" class="homeType" >
+				<view v-for="(item,index) in NoticeType" :key="index" class="homeType" >
 					<view class="homeTypeImg">
 						<image :src="item.img" mode=""></image>
 					</view>
@@ -163,7 +164,7 @@
 				</view>
 			</view>
 			
-			<view v-for="(item,index) in 10" class="flex_j">
+			<view v-for="(item,index) in 10" :key="index" class="flex_j">
 				<view  class="consultingServiceContent">
 					<view class="">
 						<view class="consultingServiceContentName">

@@ -288,14 +288,18 @@
 				"enablePullDownRefresh": false
 			}
 
-		}, {
+		},
+		// 服务器组件页面
+		{
 			"path": "pages/server/childComps/serverfil",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
-		}, {
+		},
+		// 服务器组件页面
+		{
 			"path": "pages/server/childComps/serverfnt",
 			"style": {
 				"navigationBarTitleText": "",
@@ -315,6 +319,15 @@
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor":"#FAFCFF"
 			}
+		}
+		// 进入服务器消息页面
+		, {
+			"path": "pages/server/childComps/serverMsg",
+			"style": {
+				"navigationBarTitleText": "消息",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 
