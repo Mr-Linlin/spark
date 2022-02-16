@@ -119,7 +119,7 @@
 			</view> -->
 			
 			<view class="flex_j" >
-				<view class="Notice" >
+				<view @click="announcementNext" class="Notice" >
 					<view class="flex_j" style="width: 106rpx;">
 						<view class="NoticeImg">
 							<image src="../../static/6394695.png" mode=""></image>
@@ -158,7 +158,7 @@
 				<view class="flex1">
 					
 				</view>
-				<view class="consultingServiceMore">
+				<view @click="InformationNext" class="consultingServiceMore">
 					查看更多
 				</view>
 			</view>
@@ -238,6 +238,16 @@
 			grabOrdersNext() { //参与抢单
 				uni.navigateTo({
 					url: './grabOrders'
+				})
+			},
+			announcementNext(){//消息公告
+				uni.navigateTo({
+					url:'./announcement'
+				})
+			},
+			InformationNext(){//快捷咨询
+				uni.navigateTo({
+					url:'./Information'
 				})
 			}
 		}
