@@ -4,15 +4,15 @@
 	</view>
 </template>
 <script>
-	// import {
-	// 	Login
-	// } from '@/http/common.js'
+	import {
+		Login
+	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
 				loginForm: {
 					username: "admin",
-					password: "123456"
+					password: "admin"
 				}
 			}
 		},
@@ -21,9 +21,10 @@
 		},
 		methods: {
 			onSubmit() {
-			uni.$u.post('user/login',this.loginForm).then(res=>{
-				console.log(res)
-			})
+				Login(this.loginForm).then(res => {
+					console.log(res)
+					console.log('登录成功')
+				})
 			}
 		}
 	}

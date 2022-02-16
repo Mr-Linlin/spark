@@ -1,9 +1,9 @@
 module.exports = (vm) => {
 	uni.$u.http.setConfig(config => {
-		config.baseURL = 'http://localhost:5050/'
+		config.baseURL = 'http://sanxiancheng.vaiwan.com/api/v1/member/'
 		config.timeout = 5000
 		config.header = {
-			'content-type': 'application/x-www-form-urlencoded'
+			// 'content-type': 'application/x-www-form-urlencoded'
 		}
 		return config
 	})
@@ -11,6 +11,6 @@ module.exports = (vm) => {
 		return config
 	})
 	uni.$u.http.interceptors.response.use(res => {
-		return res
+		return res.data
 	})
 }
