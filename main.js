@@ -12,9 +12,6 @@ import {
 	planApi
 } from "./http/api.js"
 
-import {
-	Login
-} from './http/common.js'
 import emptyTips from '@/components/empty/empty.vue'
 import Header from '@/components/backHeader/index.vue'
 import THeader from '@/components/tabberHeader/index.vue'
@@ -24,8 +21,8 @@ import ui from 'utils/ui.js'
 import verify from 'utils/verify.js'
 import uView from "uview-ui";
 
-Vue.use(mixin, uView)
-
+Vue.use(mixin)
+Vue.use(uView)
 Vue.component('emptyTips', emptyTips)
 Vue.component('Header', Header)
 Vue.component('THeader', THeader)

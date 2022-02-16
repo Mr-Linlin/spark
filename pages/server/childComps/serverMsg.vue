@@ -4,6 +4,9 @@
 	</view>
 </template>
 <script>
+	// import {
+	// 	Login
+	// } from '@/http/common.js'
 	export default {
 		data() {
 			return {
@@ -18,10 +21,9 @@
 		},
 		methods: {
 			onSubmit() {
-				console.log(this.uni.$u)
-				this.$longin(this.loginForm).then(res=>{
-					console.log('res')
-				})
+			uni.$u.post('user/login',this.loginForm).then(res=>{
+				console.log(res)
+			})
 			}
 		}
 	}
