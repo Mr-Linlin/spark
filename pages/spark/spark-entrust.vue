@@ -1,6 +1,6 @@
 <template>
 	<view class="plr3 theme" :style="theme">
-		<view class="container mt2" v-for="item of 10">
+		<view class="container mt2" :key="index" v-for="(item,index) of [1,2,3,4,5,6]">
 			<view class="p3">
 				<view class="flexC space-between">
 					<view class="flexC">

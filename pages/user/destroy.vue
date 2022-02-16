@@ -99,7 +99,6 @@ page{
 	  /deep/ .u-navbar__content__title{
 		  color: #fff;
 	  }
-
 }
  .u-navbar__content{
   background: red;

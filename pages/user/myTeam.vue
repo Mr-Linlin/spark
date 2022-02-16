@@ -35,7 +35,7 @@
 			<view class="myTeamListTitle">
 				团队成员
 			</view>
-			<view v-for="(item,index) in 5" class="myTeamListCont">
+			<view v-for="(item,index) in 5" :key="index" class="myTeamListCont">
 				<view class="myTeamListContImg">
 					<image src="../../static/42faa7bf26eee16ee32afc6470bb9e6.jpg" mode=""></image>
 				</view>

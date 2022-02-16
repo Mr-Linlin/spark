@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view v-for="(item,index) in 5" class="flex_j mt_30">
+		<view :key="index" v-for="(item,index) in 5"  class="flex_j mt_30">
 			<view class="SparkListCont">
 				<view class="SparkListContType">
 					<view class="Venus">
