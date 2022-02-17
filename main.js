@@ -15,6 +15,7 @@ import store from './store'
 import emptyTips from '@/components/empty/empty.vue'
 import Header from '@/components/backHeader/index.vue'
 import THeader from '@/components/tabberHeader/index.vue'
+import Popup from '@/components/common/LztPopup.vue'
 import mixin from "./mixin/mixin.js"
 import tools from "utils/tools.js"
 import ui from 'utils/ui.js'
@@ -26,6 +27,7 @@ Vue.use(uView)
 Vue.component('emptyTips', emptyTips)
 Vue.component('Header', Header)
 Vue.component('THeader', THeader)
+Vue.component('lztPopup', Popup)
 Vue.prototype.$store = store
 // Vue.prototype.$get = get;
 // Vue.prototype.$post = post;

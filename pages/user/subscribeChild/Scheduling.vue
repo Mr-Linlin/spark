@@ -73,17 +73,16 @@
 			.group_1 {
 				color: rgba(0, 0, 0, 0.66);
 				height: 138rpx;
-				padding: 0 24rpx;
-
+				// padding: 0 24rpx;
 				.sched_input {
 					display: flex;
 					justify-content: space-between;
-					background: #F7FAFF;
 					border-radius: 12rpx;
 					opacity: 1;
 					height: 88rpx;
 					line-height: 88rpx;
 					margin-top: 20rpx;
+					background: #F7FAFF;
 					text-indent: 20rpx;
 				}
 			}
@@ -124,7 +123,7 @@
 				border-radius: 18rpx;
 				opacity: 1;
 				border: 0;
-				background: #F7FAFF;
+				background: rgba(255, 255, 255, 1);
 				color: rgba(0, 0, 0, 0.22);
 			}
 		}
