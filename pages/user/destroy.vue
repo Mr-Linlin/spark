@@ -1,7 +1,7 @@
 <template>
   <view>
     <u-navbar
-        title="个人中心"
+        title=""
         class="header"
         :border="false"
         @leftClick="handleBack"
@@ -76,7 +76,8 @@ page{
   background: red;
   height: 144rpx;
   background: linear-gradient(to right,#4F5970,#3A4359);
-  margin-top: 88rpx;
+  margin-top: 44px;
+  border-radius: 0 0 32rpx 32rpx;
   .desc{
     font-size: 24rpx;
     margin-bottom: 24rpx;
@@ -109,6 +110,8 @@ page{
   border-radius: 12rpx 12rpx 12rpx 12rpx;
   margin: 32rpx auto 0;
   padding:24rpx;
+
+  background: #FFFFFF;
   .list-header{
     display: flex;
     justify-content: space-between;
@@ -153,6 +156,8 @@ page{
       line-height: 70rpx;
       text-align: right;
       font-weight: 400;
+      font-size: 22rpx;
+      color: rgba(0, 0, 0, 0.44);
     }
     .money{
       font-size: 28rpx;
