@@ -296,7 +296,6 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
-
 		},
 		// 服务器组件页面
 		{
@@ -317,6 +316,13 @@
 				"navigationBarTitleText": "消息/公告",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/capital/list",
+			"style": {
+				"navigationBarTitleText": "快捷资讯",
+				"enablePullDownRefresh": false
+			}
 		}
 		// 进入服务器消息页面
 		, {
@@ -327,7 +333,6 @@
 			}
 		}
 	],
-
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
