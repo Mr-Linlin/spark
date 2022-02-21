@@ -64,6 +64,7 @@
 	export default {
 		data() {
 			return {
+				assetsSum:{},
 				currency:[{
 					url:'../../static/489149079.png',
 					name:'充币'
@@ -109,15 +110,20 @@
 		onShow() {
 			let token = uni.getStorageSync('token')
 			console.log(token)
-			statistic(this.loginForm).then(res => {
-				
+			statistic().then(res => {
+				console.log(res.obj)
+				this.assetsSum = res.obj
 			})
 		},
 		methods: {
 			currencyType(e){
 				if(e.name == '充币'){
-					uni.navigateTo({
-						url:'./ChargeMoney'
+					// uni.navigateTo({
+					// 	url:'./ChargeMoney'
+					// })
+					uni.showToast({
+						title:'暂未开放',
+						icon:'none'
 					})
 				}
 				if(e.name == '提币'){

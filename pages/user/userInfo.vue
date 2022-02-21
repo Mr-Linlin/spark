@@ -62,6 +62,7 @@
 
 <script>
 	import Approve from './childCimps/Approve'
+	
 	export default {
 		components: {
 			Approve
@@ -69,8 +70,9 @@
 		data() {
 			return {}
 		},
+		
 		methods: {
-
+			
 		}
 	}
 </script>

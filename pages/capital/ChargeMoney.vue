@@ -65,7 +65,7 @@
 		</view>
 		<u-popup :show="show" @close="close" @open="open" :round="15">
 			<view>
-				<view class="" style="height: 738rpx;">
+				<view class="" style="padding-bottom: 32rpx;">
 					<view class="" style="font-size: 36rpx;text-shadow: 0px 0px #000;height: 146rpx;display: flex;align-items: center;margin-left: 60rpx;">
 						<view class="">
 							选择币种
@@ -77,14 +77,14 @@
 							<image src="../../static/12312425.png" style="width: 32rpx;height: 32rpx;" mode=""></image>
 						</view>
 					</view>
-					<view v-for="(item,index) in account" class="" :key="index">
-						<view @click="close" class="" style="display: flex;justify-content: center;">
+					<view v-for="(item,index) in Allcurrency" class="" :key="index">
+						<view @click="AllcurrencyNext(item)" class="" style="display: flex;justify-content: center;">
 							<view class="" style="width: 630rpx;height: 96rpx;background-color: #F7FAFF;border-radius: 8rpx;margin-top: 20rpx;display: flex;align-items: center;">
-								<view class="" style="margin-left: 33rpx;">
+								<!-- <view class="" style="margin-left: 33rpx;">
 									<image :src="item.url" mode="" style="width: 30rpx;height: 30rpx;"></image>
-								</view>
+								</view> -->
 								<view class="" style="margin-left: 26rpx;">
-									{{item.name}}
+									{{item.currencyName}}
 								</view>
 								<view class="" style="flex: 1;">
 									
@@ -102,6 +102,10 @@
 </template>
 
 <script>
+	import {
+		rechargeAddress,
+		currencyList
+	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
@@ -121,10 +125,32 @@
 				},{
 					url:'../../static/13451346.png',
 					name:'FNT',
-				}]
+				}],
+				Allcurrency:{}
 			}
 		},
+		onShow() {
+			this.rechargeAddressFun()
+			this.currencyListFun()
+		},
 		methods: {
+			rechargeAddressFun(){//获取充币地址
+				rechargeAddress().then(res=>{
+					console.log(res)
+				})
+			},
+			currencyListFun(){//获取所有币种
+				let data = {
+					type:1
+				}
+				currencyList(data).then(res=>{
+					console.log('获取所有币种',res)
+					this.Allcurrency = res.obj
+				})
+			},
+			AllcurrencyNext(){//选着币种
+				
+			},
 			open() {
 			},
 			close() {
