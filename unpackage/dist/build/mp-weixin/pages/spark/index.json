@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "uni-nav-bar": "/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar",
+    "wyb-popup": "/components/wyb-popup/wyb-popup",
+    "liuyuno-tabs": "/components/pzy-tabs/pzy-tabs",
+    "spark-deals": "/pages/spark/spark-deals",
+    "spark-entrust": "/pages/spark/spark-entrust",
+    "spark-buy": "/pages/spark/spark-buy",
+    "spark-sell": "/pages/spark/spark-sell",
+    "spark-data": "/pages/spark/spark-data"
+  }
+}

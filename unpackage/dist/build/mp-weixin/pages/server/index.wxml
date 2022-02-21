@@ -1,0 +1,21 @@
+<view class="gs-server data-v-c0e51022">
+  <u-navbar bind:rightClick="__e" vue-id="4a2f1fe7-1" data-event-opts="{{[['^rightClick',[['rightClick']]]]}}" class="data-v-c0e51022" bind:__l="__l" vue-slots="{{['left','right']}}">
+    <view class="slot-left data-v-c0e51022" slot="left">服务器</view>
+    <view class="slot-right data-v-c0e51022" slot="right">
+      <image src="../../static/sever/msg.png" mode class="data-v-c0e51022"></image>
+    </view>
+  </u-navbar>
+  <view class="gs-content data-v-c0e51022">
+    <lzt-tabs vue-id="4a2f1fe7-2" titles="{{serves}}" data-event-opts="{{[['^currentIndex',[['currentIndex']]]]}}" bind:currentIndex="__e" class="data-v-c0e51022" bind:__l="__l"></lzt-tabs>
+    <block wx:if="{{curent===0}}">
+      <view class="fil data-v-c0e51022">
+        <serverfil vue-id="4a2f1fe7-3" list="{{list}}" data-event-opts="{{[['^buyClick',[['buyClick']]]]}}" bind:buyClick="__e" class="data-v-c0e51022" bind:__l="__l"></serverfil>
+      </view>
+    </block>
+    <block wx:if="{{curent===1}}">
+      <view class="fnt data-v-c0e51022">
+        <serverfnt vue-id="4a2f1fe7-4" class="data-v-c0e51022" bind:__l="__l"></serverfnt>
+      </view>
+    </block>
+  </view>
+</view>
