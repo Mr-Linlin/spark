@@ -5,7 +5,7 @@
 		<view style="padding: 0 75rpx;">
 			<view style="margin-top: 80rpx;font-size: 44rpx;" class="fz-wb2">验证码手机号/邮件</view>
 			<view class="" style="width: 600rpx;margin-top: 60rpx;background-color: #FFFFFF;">
-				<u--input type="number" placeholder="手机号" border="surround" clearable 
+				<u--input type="number" placeholder="请输入手机号/邮箱号" border="surround" clearable
 					style="height: 88rpx;" :border="'false'"></u--input>
 			</view>
 			<view class=""
@@ -15,12 +15,12 @@
 				<view style="margin-right: 32rpx;color: #3A82FE;" class="reg-text">获取验证码</view>
 			</view>
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
-				<u--input placeholder="设置登录秘密" password border="surround" clearable 
+				<u--input placeholder="请设置登录密码" password border="surround" clearable
 					style="height: 88rpx;" :border="'false'"></u--input>
 			</view>
 
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
-				<u--input placeholder="设置登录秘密" password border="surround" clearable 
+				<u--input placeholder="请设置登录密码" password border="surround" clearable
 					style="height: 88rpx;" :border="'false'"></u--input>
 			</view>
 
@@ -33,7 +33,8 @@
 
 <script>
 	import container from '../input-bg.vue';
-	import myButton from '../../../components/my-button/my-button.vue'
+	import myButton from '../../../components/my-button/my-button.vue';
+	import {Login} from '@/http/common.js'
 	export default {
 		components: {
 			container,
@@ -45,6 +46,10 @@
 					
 				})
 			}
+		},
+		created() {
+			console.log("-----------------")
+			console.log(Login())
 		}
 	}
 </script>
