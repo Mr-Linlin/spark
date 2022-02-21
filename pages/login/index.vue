@@ -100,10 +100,20 @@
 				this.$refs.loginForm.validate().then(res => {
 					Login(this.loginForm).then(res => {
 						console.log(res)
-						uni.setStorageSync('token', res.obj.token)
-						uni.switchTab({
-							url: '/pages/home/index'
-						})
+						if (res.code === 0) {
+							uni.setStorageSync('token', res.obj.token)
+							uni.showLoading({
+								title: '登录中',
+								success: () => {
+									uni.switchTab({
+										url: '/pages/home/index'
+									})
+								}
+							})
+
+						} else {
+							uni.$u.toast(res.msg)
+						}
 					})
 				}).catch(errors => {
 					uni.$u.toast('校验失败')
