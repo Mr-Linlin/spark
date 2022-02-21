@@ -1,0 +1,1 @@
+<view class="page-warp content"><header vue-id="75ff53d6-1" title="{{title}}" bind:__l="__l"></header><view class="webView"><view src="{{url}}" frameborder="0" width="100%" class="_iframe"></view></view></view>

@@ -1,0 +1,66 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/home/index",
+    "pages/spark/index",
+    "pages/server/index",
+    "pages/capital/index",
+    "pages/user/index",
+    "pages/webView"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7e82a6",
+    "selectedColor": "#6C56F9",
+    "borderStyle": "black",
+    "backgroundColor": "#FFFFFF",
+    "height": "60px",
+    "fontSize": "14px",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "static/img/foot/foot01.png",
+        "selectedIconPath": "static/img/foot/foot01_1.png"
+      },
+      {
+        "pagePath": "pages/spark/index",
+        "text": "spark",
+        "iconPath": "static/img/foot/foot02.png",
+        "selectedIconPath": "static/img/foot/foot02_1.png"
+      },
+      {
+        "pagePath": "pages/server/index",
+        "text": "服务器",
+        "iconPath": "static/img/foot/foot03.png",
+        "selectedIconPath": "static/img/foot/foot03_1.png"
+      },
+      {
+        "pagePath": "pages/capital/index",
+        "text": "资产",
+        "iconPath": "static/img/foot/foot04.png",
+        "selectedIconPath": "static/img/foot/foot04_1.png"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "text": "我的",
+        "iconPath": "static/img/foot/foot05.png",
+        "selectedIconPath": "static/img/foot/foot05_1.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 15000
+  },
+  "usingComponents": {
+    "empty-tips": "/components/empty/empty",
+    "header": "/components/backHeader/index",
+    "t-header": "/components/tabberHeader/index"
+  }
+}

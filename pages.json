@@ -307,13 +307,15 @@
 			"path": "pages/home/announcement",
 			"style": {
 				"navigationBarTitleText": "消息/公告",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#FAFCFF"
 			}
 		}, {
 			"path": "pages/home/Information",
 			"style": {
-				"navigationBarTitleText": "消息/公告",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "快捷资讯",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#FAFCFF"
 			}
 		},
 		{

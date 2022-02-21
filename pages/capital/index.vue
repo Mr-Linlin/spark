@@ -58,6 +58,9 @@
 </template>
 
 <script>
+	import {
+		statistic
+	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
@@ -103,7 +106,13 @@
 				}]
 			};
 		},
-		onShow() {},
+		onShow() {
+			let token = uni.getStorageSync('token')
+			console.log(token)
+			statistic(this.loginForm).then(res => {
+				
+			})
+		},
 		methods: {
 			currencyType(e){
 				if(e.name == '充币'){
