@@ -1,0 +1,1 @@
+<view><uni-nav-bar vue-id="1c75c2e6-1" leftIcon="left" fixed="{{true}}" title="spark" color="#1A1B1C" border="{{false}}" bind:__l="__l"></uni-nav-bar><view>12333333</view></view>

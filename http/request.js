@@ -1,6 +1,7 @@
+import qs from 'qs'
 module.exports = (vm) => {
 	uni.$u.http.setConfig(config => {
-		config.baseURL = 'http://sanxiancheng.vaiwan.com/api/v1/member/'
+		config.baseURL = 'http://211.149.135.240:7788/front/'
 		config.timeout = 5000
 		config.header = {
 			'content-type': 'application/json' || 'application/x-www-form-urlencoded'
@@ -9,6 +10,7 @@ module.exports = (vm) => {
 	})
 	uni.$u.http.interceptors.request.use(config => {
 		config.data = config.data || {}
+		config.data = qs.stringify(config.data)
 		return config
 	}, config => {
 		return Promise.reject(config)

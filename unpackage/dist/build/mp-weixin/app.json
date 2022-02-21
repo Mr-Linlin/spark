@@ -1,0 +1,96 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/home/index",
+    "pages/spark/index",
+    "pages/server/index",
+    "pages/capital/index",
+    "pages/user/index",
+    "pages/webView",
+    "pages/login/pwd_login/index",
+    "pages/login/forget_password/index",
+    "pages/login/registration/index",
+    "pages/login/funds/index",
+    "pages/login/certification/index",
+    "pages/home/informationdetails/index",
+    "pages/capital/ChargeMoney",
+    "pages/capital/withdrawMoney",
+    "pages/capital/Transfer",
+    "pages/capital/accountDetails",
+    "pages/capital/transferAccounts",
+    "pages/user/userInfo",
+    "pages/home/grabOrders",
+    "pages/user/myTeam",
+    "pages/user/SparkRecord",
+    "pages/user/HistoricalOrder",
+    "pages/user/setUp",
+    "pages/user/destroy",
+    "pages/user/reservationPool",
+    "pages/user/preOrderRecord",
+    "pages/user/childCimps/Approve",
+    "pages/user/subscribeChild/Scheduling",
+    "pages/user/subscribeChild/ExtractGs",
+    "pages/server/childComps/LztTabs",
+    "pages/server/childComps/serverfil",
+    "pages/server/childComps/serverfnt",
+    "pages/home/announcement",
+    "pages/home/Information",
+    "pages/server/childComps/serverMsg"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7e82a6",
+    "selectedColor": "#6C56F9",
+    "borderStyle": "black",
+    "backgroundColor": "#FFFFFF",
+    "height": "60px",
+    "fontSize": "14px",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "static/img/foot/foot01.png",
+        "selectedIconPath": "static/img/foot/foot01_1.png"
+      },
+      {
+        "pagePath": "pages/spark/index",
+        "text": "spark",
+        "iconPath": "static/img/foot/foot02.png",
+        "selectedIconPath": "static/img/foot/foot02_1.png"
+      },
+      {
+        "pagePath": "pages/server/index",
+        "text": "服务器",
+        "iconPath": "static/img/foot/foot03.png",
+        "selectedIconPath": "static/img/foot/foot03_1.png"
+      },
+      {
+        "pagePath": "pages/capital/index",
+        "text": "资产",
+        "iconPath": "static/img/foot/foot04.png",
+        "selectedIconPath": "static/img/foot/foot04_1.png"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "text": "我的",
+        "iconPath": "static/img/foot/foot05.png",
+        "selectedIconPath": "static/img/foot/foot05_1.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 15000
+  },
+  "usingComponents": {
+    "empty-tips": "/components/empty/empty",
+    "header": "/components/backHeader/index",
+    "t-header": "/components/tabberHeader/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

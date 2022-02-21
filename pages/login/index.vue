@@ -1,69 +1,123 @@
 <template>
 	<view class="page-warp" :style="theme">
-		<uni-nav-bar :backgroundColor="theme['--bg-color-global']" :fixed='true' left-icon="close" :border="false">
-		</uni-nav-bar>
-		<view style="margin-top: 80rpx;padding: 0 75rpx;">
-			<view style="width: 600rpx;height: 586rpx;">
-				<image src="../../static/pzy-images/AppIcon.png" lazy-load class="icon-app"></image>
-				<view class="login-text fz-wb2 mt3">欢迎登录spark</view>
-				<view class="fz1 mt1" style="color: rgba(0, 0, 0, 0.44);">Welcome to Spark plan</view>
-
-				<view class="" style="width: 600rpx;margin-top: 60rpx;background-color: #FFFFFF;">
-					<u--input placeholder="手机号" type="number" border="surround" clearable v-model="phlone" @change="phloneChange"
-						style="height: 88rpx;" :border="'false'"></u--input>
-				</view>
-
-				<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
-					<u--input placeholder="登录密码" password border="surround" v-model="paswd" @change="paswdChange"
-						style="height: 88rpx;" :border="'false'"></u--input>
-				</view>
-				<!-- <container style="margin-top: 60rpx;">
-						<view class="phone-color">本机号码 187****3571</view>
-						<view class="fz-wb2">其他号码</view>
-					</container>
-					<my-button title="一键登录" :height="88" :radius="12" style="margin-top: 80rpx;"></my-button>
-					<view class="fz-wb2" style="margin-top: 60rpx;" @click="goTopwd">密码登录</view> -->
+		<u-navbar @rightClick="rightClick" height="44" bgColor="#F7FAFF">
+			<view class="slot-left" slot="left">
+				<image src="../../static/login/Close.png" mode="" style="width: 44rpx;height: 44rpx;"></image>
 			</view>
-			<view class="">
-				<u-button  @click="homeNext" type="primary" style="background-color: #3A82FE;color: #FFFFFF;height: 88upx;" text="登录">
-				</u-button>
-			</view>
-			<view @click="forget_passwordNext" class="" style="color: #3A82FE;font-size: 28rpx;margin-top: 60rpx;">
-				忘记密码
+		</u-navbar>
+		<view class="login-wrap">
+			<view class="login-box">
+				<view class="logo">
+					<image src="../../static/pzy-images/AppIcon.png" lazy-load class="icon-app"></image>
+				</view>
+				<view class="login-title">
+					<view class="login-text">
+						欢迎登录Spark
+					</view>
+					<view style="color: rgba(0, 0, 0, 0.44);margin-bottom: 60rpx;">Welcome to Spark plan</view>
+				</view>
+				<u--form :model="loginForm" ref="loginForm" class="loginForm" :rules="rules">
+					<u-form-item borderBottom ref="item1" prop="account" :borderBottom="false">
+						<view class="login-input">
+							<u--input v-model="loginForm.account" border="none" placeholder="请输入手机号/邮箱"
+								:clearable="true" style="height: 88rpx;  line-height: 88rpx;">
+							</u--input>
+						</view>
+					</u-form-item>
+					<u-form-item borderBottom ref="item1" prop="data" :borderBottom="false">
+						<view class="login-input">
+							<u--input v-model="loginForm.data" border="none" placeholder="请输入密码" :password="true"
+								style="height: 88rpx;  line-height: 88rpx;">
+							</u--input>
+						</view>
+					</u-form-item>
+					<u-form-item ref="item3" :borderBottom="false" class="loginBtn">
+						<u-button text="登录" color="#3A82FE" style="border: 0;" @click="onSubmit"></u-button>
+					</u-form-item>
+				</u--form>
+				<view class="forget" @click="forget_passwordNext">
+					忘记密码
+				</view>
 			</view>
 		</view>
-		<view class="fixed">
-			<view @click="registrationNext" class="new-user-text">新用户注册</view>
-		</view>
+		<view @click="registrationNext" class="new-user-text">新用户注册</view>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
 <script>
-	import container from './input-bg.vue';
-	import myButton from '../../components/my-button/my-button.vue'
+	import {
+		Login
+	} from '@/http/common.js'
 	export default {
-		components: {
-			container,
-			myButton
-		},
 		data() {
+			var validatePass = (rule, value, callback) => {
+				if (value.length < 6) {
+					this.$refs.uToast.show({
+						message: '密码长度不能少于6位！',
+						type: 'error',
+						icon: false
+					})
+				} else {
+					callback();
+				}
+			}
+			var validateAccount = (rule, value, callback) => {
+				if (!value) {
+					this.$refs.uToast.show({
+						message: '手机号不能为空！',
+						type: 'error',
+						icon: false
+					})
+				} else {
+					callback();
+				}
+			};
 			return {
-				phlone: '',
-				paswd: ''
+				loginForm: {
+					account: '18675425169',
+					data: '111111',
+					type: 1
+				},
+				rules: {
+					account: [{
+						validator: validateAccount,
+						trigger: "blur"
+					}],
+					data: [{
+						validator: validatePass,
+						trigger: "blur"
+					}]
+				}
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-			registrationNext(){//新用户注册
-				uni.navigateTo({
-					url:'/pages/login/registration/index'
+			// 登录
+			onSubmit() {
+				this.$refs.loginForm.validate().then(res => {
+					// const formData = new FormData
+					// formData.append('account',this.loginForm.account)
+					// formData.append('data',this.loginForm.data)
+					// formData.append('type',this.loginForm.type)
+					// console.log(formData)
+						Login(this.loginForm).then(res => {
+							console.log(res)
+						})
+				}).catch(errors => {
+					uni.$u.toast('校验失败')
 				})
 			},
-			forget_passwordNext(){//忘记密码
+			registrationNext() { //新用户注册
 				uni.navigateTo({
-					url:'./forget_password/index'
+					url: '/pages/login/registration/index'
+				})
+			},
+			forget_passwordNext() { //忘记密码
+				uni.navigateTo({
+					url: './forget_password/index'
 				})
 			},
 			homeNext() { //跳转首页
@@ -82,7 +136,7 @@
 					url: '/pages/login/pwd_login/index'
 				})
 			}
-		}
+		},
 	}
 </script>
 
@@ -96,32 +150,57 @@
 			flex-direction: column;
 			background-color: $theme-bg-color-global;
 
-			.login-text {
-				font-size: 58rpx;
-				color: $theme-color-text-colion;
-			}
-
-			.icon-app {
-				width: 128rpx;
-				height: 128rpx;
-				display: block;
-				box-shadow: 0px 12px 24px rgba(133, 146, 188, 0.17);
-				border-radius: 28rpx;
-			}
-
-			.phone-color {
-				color: $theme-color-text-colion;
-			}
-
-			.fixed {
+			.new-user-text {
 				position: fixed;
+				// background-color: red;
+				font-size: 28rpx;
+				font-weight: 500;
+				color: #3A82FE;
+				text-align: center;
 				bottom: 144rpx;
-				width: 100%;
+				left: 50%;
+				// top: 50%;
+				transform: translate(-50%, -50%);
+			}
 
-				.new-user-text {
-					color: $theme-color-text-colion;
-					text-align: center;
-					color: #3A82FE;
+			.login-wrap {
+				margin-top: 88rpx;
+
+				.login-box {
+					// background-color: red;
+					padding: 80rpx 75rpx;
+
+					.logo {
+						width: 128rpx;
+						height: 128rpx;
+					}
+
+					.login-text {
+						font-size: 58rpx;
+						line-height: 58rpx;
+						font-weight: 500;
+						margin: 60rpx 0 20rpx 0;
+					}
+
+					.login-input {
+						width: 600rpx;
+						height: 88rpx;
+						background: #FFFFFF;
+						box-shadow: 0 16rpx 32rpx 2rpxpx rgba(88, 131, 204, 0.05);
+						border-radius: 12rpx;
+						line-height: 88rpx;
+						padding: 0 32rpx;
+						margin-bottom: -20rpx;
+					}
+
+					.loginBtn {
+						margin: 50rpx 0;
+					}
+
+					.forget {
+						color: #3A82FE;
+						font-size: 28rpx;
+					}
 				}
 			}
 		}
