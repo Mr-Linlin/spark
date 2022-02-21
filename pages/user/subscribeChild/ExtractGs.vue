@@ -23,22 +23,34 @@
 			</view>
 		</view>
 		<view class="sched-btn">
-			<u-button text="确定" class="btn"></u-button>
+			<u-button text="确定" class="btn" @click="show = true"></u-button>
 		</view>
+		<u-popup :show="show" @close="close" @open="open" :round="15">
+			<lzt-popup/>
+		</u-popup>
 	</view>
 </template>
 
 <script>
+	// import LztPopup from '@/components/LztPopup'
 	export default {
 		data() {
 			return {
 				GS: 0,
-				FNT: 28923.374923
+				FNT: 28923.374923,
+				show: false
 			}
 		},
 		methods: {
 			fntChange() {
 				console.log(555)
+			},
+			open() {
+				// console.log('open');
+			},
+			close() {
+				this.show = false
+				// console.log('close');
 			}
 		}
 	}
@@ -53,7 +65,7 @@
 		padding: 32rpx;
 
 		.box-card {
-			padding: 32rpx;
+			padding: 34rpx;
 			background: #FFFFFF;
 			box-shadow: 0 32rpx 64rpx 2rpx rgba(88, 131, 204, 0.05);
 			border-radius: 12rpx;
@@ -63,8 +75,9 @@
 			.group_1 {
 				color: rgba(0, 0, 0, 0.66);
 				// height: 138rpx;
-				padding: 0 24rpx;
+				// padding: 0 24rpx;
 				margin-bottom: 24rpx;
+
 				.sched_input {
 					display: flex;
 					justify-content: space-between;
@@ -76,7 +89,8 @@
 					margin-top: 20rpx;
 					text-indent: 20rpx;
 				}
-				.info-title{
+
+				.info-title {
 					margin-top: 10rpx;
 				}
 			}

@@ -27,9 +27,6 @@
 </template>
 
 <script>
-	import {
-		debounce
-	} from '@/utils/linTools.js'
 	export default {
 		data() {
 			return {
@@ -41,20 +38,17 @@
 			gsChange() {
 				this.FNT = this.GS * 2
 				if (this.FNT > 239) {
-					this.$refs.uToast.show({
-						message: '兑换FNT不能超过239',
-						icon: false,
-						duration: 2000
-					})
+					uni.$u.toast('兑换FNT不能超过239')
 				} else if (this.FNT > 0 && this.FNT !== null) {
 					this.disabled = false
 				}
 			},
 			// 点击确定预约
 			subscribe() {
-				debounce(() => {
-					console.log(5555)
-				}, 1000)
+				// 使用防抖限制用户点击的次数
+				uni.$u.debounce(()=>{
+					console.log('点击')
+				}, 500)
 			}
 		}
 	}
@@ -79,17 +73,16 @@
 			.group_1 {
 				color: rgba(0, 0, 0, 0.66);
 				height: 138rpx;
-				padding: 0 24rpx;
-
+				// padding: 0 24rpx;
 				.sched_input {
 					display: flex;
 					justify-content: space-between;
-					background: #F7FAFF;
 					border-radius: 12rpx;
 					opacity: 1;
 					height: 88rpx;
 					line-height: 88rpx;
 					margin-top: 20rpx;
+					background: #F7FAFF;
 					text-indent: 20rpx;
 				}
 			}
@@ -130,7 +123,7 @@
 				border-radius: 18rpx;
 				opacity: 1;
 				border: 0;
-				background: #F7FAFF;
+				background: rgba(255, 255, 255, 1);
 				color: rgba(0, 0, 0, 0.22);
 			}
 		}

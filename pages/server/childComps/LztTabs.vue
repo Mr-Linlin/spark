@@ -36,7 +36,8 @@
 		display: flex;
 		height: 80rpx;
 		line-height: 80rpx;
-		// background: red;
+		background: #FAFAFC;
+		padding-left: 34rpx;
 		.item {
 			margin-right: 34rpx;
 		}

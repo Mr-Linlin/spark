@@ -1,6 +1,6 @@
 <template>
 	<view class="gs-server">
-		<u-navbar @rightClick="rightClick">
+		<u-navbar @rightClick="rightClick" bgColor="#FAFAFC">
 			<view class="slot-left" slot="left">服务器</view>
 			<view class="slot-right" slot='right'>
 				<image src="../../static/sever/msg.png" mode=""></image>
@@ -9,12 +9,15 @@
 		<!-- 内容 -->
 		<view class="gs-content">
 			<!-- 切换Tab -->
-			<lzt-tabs :titles="serves" @currentIndex='currentIndex' />
-			<view class="fil" v-if="curent===0" >
-				<serverfil :list="list" @buyClick="buyClick"/>
+			<u-sticky offset-top="0">
+				<lzt-tabs :titles="serves" @currentIndex='currentIndex' />
+			</u-sticky>
+
+			<view class="fil" v-if="curent===0">
+				<serverfil :list="list" @buyClick="buyClick" />
 			</view>
 			<view class="fnt" v-if="curent===1">
-				<serverfnt/>
+				<serverfnt />
 			</view>
 		</view>
 	</view>
@@ -40,19 +43,18 @@
 						name: 'FNT预约'
 					}
 				],
-				list:[
-					{
-						title:'FIL 算力 1T',
-						contract:'合约期三年',
-						icon:'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/8eef12b2-48b8-4917-962c-51da6dc058d2.jpg'
+				list: [{
+						title: 'FIL 算力 1T',
+						contract: '合约期三年',
+						icon: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/8eef12b2-48b8-4917-962c-51da6dc058d2.jpg'
 					},
 					{
-						title:'FIL 预约流动性的挖',
-						contract:'合约期三年',
-						icon:'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2241b0c8-e24a-4532-baae-7436d6e58cac.jpg'
+						title: 'FIL 预约流动性的挖',
+						contract: '合约期三年',
+						icon: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2241b0c8-e24a-4532-baae-7436d6e58cac.jpg'
 					}
 				]
-				
+
 			}
 		},
 		mounted() {},
@@ -60,7 +62,7 @@
 			// 点击查看消息内容
 			rightClick() {
 				uni.navigateTo({
-					url:'./childComps/serverMsg'
+					url: './childComps/serverMsg'
 				})
 			},
 			// 切换tabs
@@ -68,7 +70,7 @@
 				this.curent = index
 			},
 			// 点击立即购买
-			buyClick(){
+			buyClick() {
 				console.log('立即购买')
 			}
 		}
@@ -93,7 +95,8 @@
 			width: 44rpx;
 			height: 44rpx;
 		}
-		.slot-right::after{
+
+		.slot-right::after {
 			position: absolute;
 			display: inline-block;
 			content: '';
@@ -108,7 +111,12 @@
 
 		.gs-content {
 			margin-top: 88rpx;
-			padding: 0 34rpx 34rpx 34rpx;
+
+			.fil {
+				display: flex;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
 		}
 	}
 </style>

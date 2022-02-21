@@ -81,10 +81,10 @@
 	}
 
 	.user-info {
-		padding: 32rpx;
+		padding: 34rpx;
 
 		.box-card {
-			padding: 20rpx;
+			padding:0 20rpx;
 			background: #FFFFFF;
 			box-shadow: 0 32rpx 64rpx 2rpx rgba(88, 131, 204, 0.05);
 			border-radius: 16rpx;

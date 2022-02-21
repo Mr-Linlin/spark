@@ -296,7 +296,6 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
-
 		},
 		// 服务器组件页面
 		{
@@ -319,6 +318,13 @@
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor":"#FAFCFF"
 			}
+		},
+		{
+			"path": "pages/capital/list",
+			"style": {
+				"navigationBarTitleText": "快捷资讯",
+				"enablePullDownRefresh": false
+			}
 		}
 		// 进入服务器消息页面
 		, {
@@ -327,10 +333,8 @@
 				"navigationBarTitleText": "消息",
 				"enablePullDownRefresh": false
 			}
-
 		}
 	],
-
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -344,7 +348,7 @@
 		"color": "#7e82a6",
 		"selectedColor": "#6C56F9",
 		"borderStyle": "black",
-		"backgroundColor": "#FFFFFF",
+		"backgroundColor": "#FAFAFC",
 		"height": "60px",
 		"fontSize": "14px",
 		"list": [{
