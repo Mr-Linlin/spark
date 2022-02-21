@@ -345,7 +345,7 @@
 		"color": "#7e82a6",
 		"selectedColor": "#6C56F9",
 		"borderStyle": "black",
-		"backgroundColor": "#FFFFFF",
+		"backgroundColor": "#FAFAFC",
 		"height": "60px",
 		"fontSize": "14px",
 		"list": [{
