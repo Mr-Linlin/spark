@@ -98,14 +98,13 @@
 			// 登录
 			onSubmit() {
 				this.$refs.loginForm.validate().then(res => {
-					// const formData = new FormData
-					// formData.append('account',this.loginForm.account)
-					// formData.append('data',this.loginForm.data)
-					// formData.append('type',this.loginForm.type)
-					// console.log(formData)
-						Login(this.loginForm).then(res => {
-							console.log(res)
+					Login(this.loginForm).then(res => {
+						console.log(res)
+						uni.setStorageSync('token', res.obj.token)
+						uni.switchTab({
+							url: '/pages/home/index'
 						})
+					})
 				}).catch(errors => {
 					uni.$u.toast('校验失败')
 				})
