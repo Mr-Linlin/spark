@@ -1,0 +1,1 @@
+<view class="page-warp content"><view class="mid-warp"><view class="mid-box"></view></view><block wx:if="{{version_num!=''}}"><wm-upgrade vue-id="6b3d36ea-1" Versions="{{version_num}}" WgtLink="{{wgt_url}}" AppLink="{{App_url}}" Uptxt="{{version_con}}" bind:__l="__l"></wm-upgrade></block></view>
