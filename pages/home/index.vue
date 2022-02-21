@@ -18,7 +18,7 @@
 
 
 	<view class="">
-    <view class="" style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx;">
+		<view class="" style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx;">
 			<view class="" style="display: flex;align-items: center;">
 				<view class="" style="">
 					<image src="../../static/home/Title.png"
@@ -38,9 +38,9 @@
 				</view>
 			</view>
 		</view>
-		
-		
-		
+
+
+
 		<view class="">
 			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
 				<view class="" style="width: 709rpx;height: 709rpx;border: 1rpx solid #007AFF;border-radius: 50%;">
@@ -98,40 +98,23 @@
 					</view>
 				</view>
 			</view>
-
-			<!-- <view class="" style="display: flex;align-items: center;height: 80rpx;justify-content: center;">
-				<view class="" style="display: flex;">
-					<image src="../../static/346283.png" style="width: 32rpx;height: 32rpx;" mode=""></image>
-				</view>
-				<view class="" style="font-size: 24rpx;margin-left: 20rpx;">
-					继续向上滚动查看快捷资讯
-				</view>
-			</view> -->
 		</view>
-			
+
 		<view class="">
-			<!-- <view class="" style="display: flex;align-items: center;height: 80rpx;justify-content: center;">
-				<view class="" style="display: flex;">
-					<image src="../../static/346283.png" style="width: 32rpx;height: 32rpx;" mode=""></image>
-				</view>
-				<view class="" style="font-size: 24rpx;margin-left: 20rpx;">
-					继续下拉回到首页
-				</view>
-			</view> -->
-			
-			<view class="flex_j" >
-				<view @click="announcementNext" class="Notice" >
+			<!-- <u-notice-bar :text="content.title" bgColor="#FFFFFF" color="#1A1B1C"></u-notice-bar> -->
+			<view class="flex_j">
+				<view @click="announcementNext" class="Notice">
 					<view class="flex_j" style="width: 106rpx;">
 						<view class="NoticeImg">
 							<image src="../../static/6394695.png" mode=""></image>
 						</view>
 					</view>
-					
+
 					<view class="NoticeNmae">
-						今天下班回来又整理出一本曾...
+						{{content.title}}
 					</view>
 					<view class="NoticeDeta">
-						12-16 15:15
+						{{content.updateTime}}
 					</view>
 					<view class="flex_j" style="width: 64rpx;">
 						<view class="Noticeimg2">
@@ -140,9 +123,9 @@
 					</view>
 				</view>
 			</view>
-			
-			<view  class="flex_j" style="height: 234rpx;">
-				<view v-for="(item,index) in NoticeType" :key="index" class="homeType" >
+
+			<view class="flex_j" style="height: 234rpx;">
+				<view v-for="(item,index) in NoticeType" :key="index" class="homeType">
 					<view class="homeTypeImg">
 						<image :src="item.img" mode=""></image>
 					</view>
@@ -151,45 +134,49 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="consultingService">
 				<view class="consultingServiceName">
 					快捷资讯
 				</view>
 				<view class="flex1">
-					
+
 				</view>
 				<view @click="InformationNext" class="consultingServiceMore">
 					查看更多
 				</view>
 			</view>
-			
-			<view v-for="(item,index) in 10" :key="index" class="flex_j">
-				<view  class="consultingServiceContent">
+
+			<view v-for="(item,index) in messageList" :key="item.id" class="flex_j">
+				<view class="consultingServiceContent">
 					<view class="">
 						<view class="consultingServiceContentName">
-							微信大改版UI设计分析！分析点大统计
+							{{item.title}}
 						</view>
 						<view class="consultingServiceContentDate">
-							1分钟前
+							{{item.publishedAt}}
 						</view>
 					</view>
 					<view class="flex1">
-						
+
 					</view>
 					<view class="">
-						<image class="consultingServiceContentImg" src="../../static/42faa7bf26eee16ee32afc6470bb9e6.jpg" mode=""></image>
+						<image class="consultingServiceContentImg" :src="item.thumbnail" mode=""></image>
 					</view>
 				</view>
 			</view>
 		</view>
-		
+
 	</view>
 </template>
 
 <script>
 	import LoadLine from '../../components/load-line/load-line.vue'
 	import conSulting from './consulting.vue';
+	import {
+		getMessage,
+		getNotice
+	} from '@/http/home.js'
 	export default {
 		components: {
 			conSulting,
@@ -199,56 +186,70 @@
 			return {
 				consultingData: [],
 				process: 0,
-				NoticeType:[{
-					img:'../../static/2379645.png',
-					name:'交易所'
-				},{
-					img:'../../static/34976018.png',
-					name:'商城'
-				},{
-					img:'../../static/1724597.png',
-					name:'FIL概况'
-				},{
-					img:'../../static/1438913.png',
-					name:'团队'
-				}]
+				NoticeType: [{
+					img: '../../static/2379645.png',
+					name: '交易所'
+				}, {
+					img: '../../static/34976018.png',
+					name: '商城'
+				}, {
+					img: '../../static/1724597.png',
+					name: 'FIL概况'
+				}, {
+					img: '../../static/1438913.png',
+					name: '团队'
+				}],
+				messageList: null, //资讯
+				content: {}, //公告
 			}
 		},
 		onShow() {
 
-			// setInterval(function() {
-			// 	var mask = document.querySelector("#loadingMask")
-			// 	var loadText = document.querySelector("#loading")
-
-			// 	var top = 100 - this.process
-			// 	console.log(top)
-			// 	mask.style.top = top + "%"
-
-			// 	loadText.innerHTML = this.process + "%"
-
-			// 	this.process = this.process >= 100 ? 0 : this.process + 1
-
-			// }, 1000)
 		},
 		onLoad() {
-			// this.$homeApi.getConsulting().then(r => {
-			// 	this.consultingData = r.obj;
-			// });
+			this.getMessage()
+			this.getNotice()
 		},
 		methods: {
+			/**处理网络请求，获取数据**/
+			// 获取首页资讯
+			async getMessage() {
+				let {
+					code,
+					msg,
+					obj
+				} = await getMessage()
+				if (code !== 0) return uni.$u.toast(msg)
+				// console.log(obj)
+				this.messageList = obj
+			},
+			// 获取首页公告
+			async getNotice() {
+				let {
+					code,
+					msg,
+					obj
+				} = await getNotice()
+				if (code !== 0) return uni.$u.toast(msg)
+				this.content = obj.contentList[0]
+				console.log(this.content)
+			},
+			/**
+			 * 处理点击事件
+			 * **/
 			grabOrdersNext() { //参与抢单
 				uni.navigateTo({
 					url: './grabOrders'
 				})
 			},
-			announcementNext(){//消息公告
+			announcementNext() { //消息公告
 				uni.navigateTo({
-					url:'./announcement'
+					url: './announcement'
 				})
 			},
-			InformationNext(){//快捷咨询
+			InformationNext() { //快捷咨询
 				uni.navigateTo({
-					url:'./Information'
+					url: './Information'
 				})
 			}
 		}
@@ -256,67 +257,77 @@
 </script>
 
 <style>
-	page{
+	page {
 		background-color: #F7FAFF;
 	}
 </style>
 <style lang="scss">
-	
-	.flex_j{
+	.flex_j {
 		display: flex;
 		justify-content: center;
 	}
-	.flex1{
+
+	.flex1 {
 		flex: 1;
 	}
-	.consultingServiceContent{
+
+	.consultingServiceContent {
 		width: 686rpx;
 		height: 165rpx;
-		
+
 		margin-top: 32rpx;
 		display: flex;
-		.consultingServiceContentName{
+
+		.consultingServiceContentName {
 			font-size: 32rpx;
 			width: 434rpx;
 		}
-		.consultingServiceContentDate{
+
+		.consultingServiceContentDate {
 			font-size: 22rpx;
 			color: rgba(0, 0, 0, 0.22);
 			margin-top: 40rpx;
 		}
-		.consultingServiceContentImg{
+
+		.consultingServiceContentImg {
 			width: 220rpx;
 			height: 165rpx;
 		}
 	}
-	.consultingService{
+
+	.consultingService {
 		display: flex;
 		align-items: center;
-		.consultingServiceName{
+
+		.consultingServiceName {
 			font-size: 32rpx;
 			margin-left: 32rpx;
 		}
-		.consultingServiceMore{
+
+		.consultingServiceMore {
 			font-size: 24rpx;
 			margin-right: 32rpx;
 		}
 	}
-	.homeType{
+
+	.homeType {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
 		width: 188rpx;
-		
-		.homeTypeImg{
+
+		.homeTypeImg {
 			width: 96rpx;
 			height: 96rpx;
 		}
-		.homeTypeName{
+
+		.homeTypeName {
 			font-size: 26rpx;
 		}
 	}
-	.Notice{
+
+	.Notice {
 		display: flex;
 		align-items: center;
 		width: 686rpx;
@@ -324,23 +335,34 @@
 		background-color: #FFFFFF;
 		border-radius: 12rpx;
 		margin-top: 16rpx;
-		.NoticeImg{
+
+		.NoticeImg {
 			width: 66rpx;
 			height: 32rpx;
 		}
-		.NoticeNmae{
+
+		.NoticeNmae {
 			font-size: 26rpx;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
-		.NoticeDeta{
+
+		.NoticeDeta {
 			font-size: 22rpx;
 			color: rgba(0, 0, 0, 0.22);
 			margin-left: 10rpx;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
-		.Noticeimg2{
+
+		.Noticeimg2 {
 			width: 24rpx;
 			height: 24rpx;
 		}
 	}
+
 	.swiper-item {
 		width: 100%;
 		height: 100vh;

@@ -100,20 +100,33 @@
 				this.$refs.loginForm.validate().then(res => {
 					Login(this.loginForm).then(res => {
 						console.log(res)
-						if (res.code === 0) {
-							uni.setStorageSync('token', res.obj.token)
-							uni.showLoading({
-								title: '登录中',
-								success: () => {
+						// this.$store.dispatch('user/login',this.loginForm)
+						if (res.code !== 0) return this.$refs.uToast.show({
+							message: res.msg,
+							type: "error"
+						})
+						uni.setStorageSync('token', res.obj.token)
+						uni.showLoading({
+							title:"",
+							success() {
+								setTimeout(function(){
 									uni.switchTab({
 										url: '/pages/home/index'
 									})
-								}
-							})
-
-						} else {
-							uni.$u.toast(res.msg)
-						}
+								},1000)
+							}
+						})
+						// this.$refs.uToast.show({
+						// 	message: '',
+						// 	type: "loading",
+						// 	icon: false,
+						// 	duration: 1000,
+						// 	complete: () => {
+						// 		uni.switchTab({
+						// 			url: '/pages/home/index'
+						// 		})
+						// 	}
+						// })
 					})
 				}).catch(errors => {
 					uni.$u.toast('校验失败')
