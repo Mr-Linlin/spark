@@ -1,3 +1,3 @@
 .idea/
 .hbuilderx/
-!/pages/login/index.vue
+!./pages/login/index.vue
