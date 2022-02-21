@@ -100,14 +100,24 @@
 				this.$refs.loginForm.validate().then(res => {
 					Login(this.loginForm).then(res => {
 						console.log(res)
+						// this.$store.dispatch('user/login',this.loginForm)
 						if (res.code !== 0) return this.$refs.uToast.show({
 							message: res.msg,
 							type: "error"
 						})
 						uni.setStorageSync('token', res.obj.token)
+						// uni.showLoading({
+						// 	title:"登录成功",
+						// 	duration:2000,
+						// 	complete:()=>{
+						// 		uni.switchTab({
+						// 			url: '/pages/home/index'
+						// 		})
+						// 	}
+						// })
 						this.$refs.uToast.show({
-							message: '登录成功！',
-							type: "success",
+							message: '登录成功',
+							type: "loading",
 							icon: false,
 							duration: 1000,
 							complete: () => {

@@ -20,7 +20,7 @@
 				</view>
 			</view>
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
-				<u--input placeholder="设置登录秘密" password border="surround" clearable style="height: 88rpx;"
+				<u--input placeholder="设置登录密码" password border="surround" clearable style="height: 88rpx;"
 					:border="'false'"></u--input>
 			</view>
 
@@ -30,7 +30,7 @@
 			</view>
 			<my-button title="下一步" :height="88" :radius="12" style="margin-top: 60rpx;" @myClick="goToRouter">
 			</my-button>
-			<view class="ta fz-wb2" style="margin-top: 60rpx;">返回登录</view>
+			<view class="ta fz-wb2" style="margin-top: 60rpx;" @click="goBack">返回登录</view>
 		</view>
 		<view class="fixed">
 			<u-checkbox-group v-model="checkboxValue1" placement="column" @change="checkboxChange">
@@ -54,8 +54,6 @@
 			myButton
 		},
 		data() {
-			console.log("-----------------")
-			console.log(uni.$u.http)
 			return {
 				checkboxValue1: [],
 				// 基本案列数据
@@ -72,6 +70,12 @@
 			}
 		},
 		methods: {
+			// 返回登录页面
+			goBack(){
+				uni.navigateBack({
+					
+				})
+			},
 			codeChange(text) {
 				this.tips = text;
 			},

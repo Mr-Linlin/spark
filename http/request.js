@@ -1,6 +1,6 @@
 
 uni.$u.http.setConfig(config => {
-	config.baseURL = 'http://211.149.135.240:7799/front/'
+	config.baseURL = 'http://211.149.135.240:7799/'
 	config.timeout = 5000
 	config.header = {
 		'content-type': 'application/x-www-form-urlencoded' || 'application/json',
@@ -10,6 +10,7 @@ uni.$u.http.setConfig(config => {
 })
 uni.$u.http.interceptors.request.use(config => {
 	config.data = config.data || {}
+	// console.log(config.header)
 	return config
 }, config => {
 	return Promise.reject(config)
@@ -23,5 +24,7 @@ uni.$u.http.interceptors.response.use(res => {
 	// }
 
 	return res.data
+},res=>{
+	return uni.$u.toast('请求超时！')
 })
 export default uni.$u.http
