@@ -24,10 +24,11 @@
 // 		}
 // =======
 uni.$u.http.setConfig(config => {
-	config.baseURL = 'http://211.149.135.240:7788/front/'
+	config.baseURL = 'http://211.149.135.240:7799/front/'
 	config.timeout = 5000
 	config.header = {
-		'content-type': 'application/x-www-form-urlencoded' || 'application/json'
+		'content-type': 'application/x-www-form-urlencoded' || 'application/json',
+		'token': uni.getStorageSync('token')
 	}
 	return config
 })
