@@ -39,7 +39,6 @@ Vue.prototype.$tools = tools;
 Vue.prototype.$ui = ui;
 Vue.prototype.$verify = verify;
 Vue.prototype.$fire = new Vue();
-
 Vue.config.productionTip = false
 
 App.mpType = 'app'
@@ -49,6 +48,6 @@ const app = new Vue({
 	store
 })
 // 引入请求封装，将app参数传递到配置中
-require('@/http/request.js')(app)
+// require('@/http/request.js')()
 
 app.$mount()

@@ -13,7 +13,6 @@
 				style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;display: flex;align-items: center;">
 				<u--input type="number" placeholder="6位验证码" border="surround" clearable style="height: 88rpx;" :border="'false'">
 				</u--input>
-				
 				<view style="margin-right: 32rpx;color: #3A82FE;" class="reg-text">
 					<u-toast ref="uToast"></u-toast>
 					<u-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange"></u-code>
@@ -55,6 +54,8 @@
 			myButton
 		},
 		data() {
+			console.log("-----------------")
+			console.log(uni.$u.http)
 			return {
 				checkboxValue1: [],
 				// 基本案列数据
@@ -65,6 +66,9 @@
 				tips: '',
 				// refCode: null,
 				seconds: 60,
+				form: {
+					
+				}
 			}
 		},
 		methods: {

@@ -131,7 +131,6 @@
 					"titleNView": false
 				}
 			}
-
 		}, { //充币
 			"path": "pages/capital/ChargeMoney",
 			"style": {
