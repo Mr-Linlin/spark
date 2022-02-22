@@ -51,42 +51,22 @@
 	} from '@/http/common.js'
 	export default {
 		data() {
-			var validatePass = (rule, value, callback) => {
-				if (value.length < 6) {
-					this.$refs.uToast.show({
-						message: '密码长度不能少于6位！',
-						type: 'error',
-						icon: false
-					})
-				} else {
-					callback();
-				}
-			}
-			var validateAccount = (rule, value, callback) => {
-				if (!value) {
-					this.$refs.uToast.show({
-						message: '手机号不能为空！',
-						type: 'error',
-						icon: false
-					})
-				} else {
-					callback();
-				}
-			};
 			return {
 				loginForm: {
-					account: '13812345678',
+					account: '18675425169',
 					data: '111111',
 					type: 1
 				},
 				rules: {
 					account: [{
-						validator: validateAccount,
-						trigger: "blur"
+						required: true,
+						message: '请输入手机号/邮箱',
+						trigger: ['blur', 'change']
 					}],
 					data: [{
-						validator: validatePass,
-						trigger: "blur"
+						required: true,
+						message: '请输入密码',
+						trigger: ['blur', 'change']
 					}]
 				}
 			}
@@ -99,37 +79,24 @@
 			onSubmit() {
 				this.$refs.loginForm.validate().then(res => {
 					Login(this.loginForm).then(res => {
-						console.log(res)
-						// this.$store.dispatch('user/login',this.loginForm)
 						if (res.code !== 0) return this.$refs.uToast.show({
 							message: res.msg,
 							type: "error"
 						})
 						uni.setStorageSync('token', res.obj.token)
 						uni.showLoading({
-							title:"",
+							title: "",
 							success() {
-								setTimeout(function(){
+								setTimeout(function() {
 									uni.switchTab({
 										url: '/pages/home/index'
 									})
-								},1000)
+								}, 1000)
 							}
 						})
-						// this.$refs.uToast.show({
-						// 	message: '',
-						// 	type: "loading",
-						// 	icon: false,
-						// 	duration: 1000,
-						// 	complete: () => {
-						// 		uni.switchTab({
-						// 			url: '/pages/home/index'
-						// 		})
-						// 	}
-						// })
 					})
 				}).catch(errors => {
-					uni.$u.toast('校验失败')
+					// uni.$u.toast('校验失败')
 				})
 			},
 			registrationNext() { //新用户注册
@@ -212,7 +179,7 @@
 						border-radius: 12rpx;
 						line-height: 88rpx;
 						padding: 0 32rpx;
-						margin-bottom: -20rpx;
+						margin-bottom: -10rpx;
 					}
 
 					.loginBtn {
