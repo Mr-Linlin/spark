@@ -1,6 +1,9 @@
 <template>
 	<view class="popup">
-		账户验证
+		<view class="lzt-title">
+			账号验证
+		</view>
+		<text>验证码已发送至您的账号lovaoing@gj.cn</text>
 	</view>
 </template>
 
@@ -11,4 +14,7 @@
 </script>
 
 <style scoped lang="scss">
+	.popup{
+		padding: 60rpx;
+	}
 </style>

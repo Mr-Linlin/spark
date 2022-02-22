@@ -16,7 +16,7 @@
 					</view>
 					<view style="color: rgba(0, 0, 0, 0.44);margin-bottom: 60rpx;">Welcome to Spark plan</view>
 				</view>
-				<u--form :model="loginForm" ref="loginForm" class="loginForm" :rules="rules">
+				<u--form :model="loginForm" ref="loginForm" class="loginForm" :rules=rules>
 					<u-form-item borderBottom ref="item1" prop="account" :borderBottom="false">
 						<view class="login-input">
 							<u--input v-model="loginForm.account" border="none" placeholder="请输入手机号/邮箱"
@@ -59,14 +59,14 @@
 				},
 				rules: {
 					account: [{
-						required: true,
-						message: '请输入手机号/邮箱',
-						trigger: ['blur', 'change']
+						message: '请输入手机号或邮箱',
+						// blur和change事件触发检验
+						trigger: ['blur'],
 					}],
-					data: [{
-						required: true,
+					data:[{
 						message: '请输入密码',
-						trigger: ['blur', 'change']
+						// blur和change事件触发检验
+						trigger: ['blur'],
 					}]
 				}
 			}
@@ -77,8 +77,11 @@
 		methods: {
 			// 登录
 			onSubmit() {
-				this.$refs.loginForm.validate().then(res => {
-					Login(this.loginForm).then(res => {
+				let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
+				if (uni.$u.test.mobile(this.loginForm.account) || reg.test(this.loginForm.account)) {
+					if (this.loginForm.data.length < 6) return uni.$u.toast('密码长度不能少于6位')
+					return Login(this.loginForm).then(res => {
+
 						if (res.code !== 0) return this.$refs.uToast.show({
 							message: res.msg,
 							type: "error"
@@ -95,9 +98,9 @@
 							}
 						})
 					})
-				}).catch(errors => {
-					// uni.$u.toast('校验失败')
-				})
+				} else {
+					uni.$u.toast('请输入正确的手机号或邮箱')
+				}
 			},
 			registrationNext() { //新用户注册
 				uni.navigateTo({
@@ -179,7 +182,7 @@
 						border-radius: 12rpx;
 						line-height: 88rpx;
 						padding: 0 32rpx;
-						margin-bottom: -10rpx;
+						margin-bottom: -20rpx;
 					}
 
 					.loginBtn {

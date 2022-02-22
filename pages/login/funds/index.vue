@@ -31,6 +31,12 @@
 	import numberKeyboard from '@/components/number-keyboard/number-keyboard.vue';
 	import passwordInput from '@/components/password-input/password-input.vue';
 	import myButton from '../../../components/my-button/my-button.vue'
+	import {
+		registerTwo
+	} from '@/http/common.js'
+	import {
+		mapGetters
+	} from 'vuex'
 	export default {
 		components: {
 			numberKeyboard,
@@ -49,6 +55,8 @@
 			setTimeout(() => {
 				this.$refs.KeyboarHid.open()
 			}, 50)
+			// console.log(this.registerInfo)
+			// console.log('11'+uni.getStorageSync('regsiterInfo'))
 		},
 		methods: {
 			goToCertification() {
@@ -66,9 +74,21 @@
 					});
 					return;
 				};
-				uni.navigateTo({
-					url: '/pages/login/certification/index'
-				});
+				this.registerInfo.tradePwd = this.password
+				registerTwo(this.registerInfo).then(res=>{
+					console.log(res)
+					if(res.code!==0)return uni.$u.toast(res.msg);
+					uni.showLoading({
+						title: "注册成功",
+						success() {
+							setTimeout(() => {
+								uni.navigateTo({
+									url: '/pages/login/certification/index'
+								})
+							}, 1000)
+						}
+					})
+				})
 			},
 			setPasswordConfirm(e) {
 				this.password_confirm = e;
@@ -77,10 +97,20 @@
 				this.password = e;
 			},
 			changeSwiper() {
+				if (this.password.length < 6) {
+					uni.showToast({
+						title: '请输入6位',
+						icon: 'none'
+					});
+					return;
+				};
 				this.currentIndex = 1;
 				this.$refs.KeyboarHid.close();
 				this.$refs.KeyboarHid1.open();
 			}
+		},
+		computed: {
+			...mapGetters(['registerInfo'])
 		}
 	}
 </script>

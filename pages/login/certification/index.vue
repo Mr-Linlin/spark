@@ -1,37 +1,27 @@
 <template>
 	<view class="">
-		<uni-nav-bar fixed left-icon="left" backgroundColor="#F7FAFF" :border="false" right-text="跳过实名">
+		<uni-nav-bar fixed left-icon="left" backgroundColor="#F7FAFF" :border="false" right-text="跳过实名"
+			@clickRight="loginClick">
 		</uni-nav-bar>
-		<view class="plr3 mt3" >
+		<view class="plr3 mt3">
 			<view class="container-top" style="background-color: #FFFFFF;">
 				<view class="" style="display: flex;align-items: center;">
 					<view class="" style="width: 100rpx;">
 						姓名
 					</view>
 					<view class="">
-						<u--input
-						    placeholder="请输入姓名"
-						    border="surround"
-						    v-model="value"
-						    @change="change"
-							style="width: 500rpx;"
-						  ></u--input>
+						<u--input placeholder="请输入姓名" border="surround" v-model="value" @change="change"
+							style="width: 500rpx;"></u--input>
 					</view>
 				</view>
-				
+
 				<view class="" style="display: flex;align-items: center;margin-top: 20rpx;">
 					<view class="" style="width: 100rpx;">
 						身份证
 					</view>
 					<view class="">
-						<u--input
-						    placeholder="请输入身份证"
-						    border="surround"
-						    v-model="value"
-						    @change="change"
-							style="width: 500rpx;"
-							:type="'idcard'"
-						  ></u--input>
+						<u--input placeholder="请输入身份证" border="surround" v-model="value" @change="change"
+							style="width: 500rpx;" :type="'idcard'"></u--input>
 					</view>
 				</view>
 			</view>
@@ -65,7 +55,7 @@
 		</view>
 		<view style="display: block;height: 200rpx;"></view>
 		<view class="plr3 fixed">
-			<my-button title="提交并登录" :radius="12" :height="88"></my-button>
+			<my-button title="提交并登录" :radius="12" :height="88" @myClick="goToRouter"></my-button>
 		</view>
 	</view>
 </template>
@@ -78,12 +68,28 @@
 		},
 		data() {
 			return {
-				value:''
+				value: ''
 			}
 		},
-		methods:{
-			change(){
-				
+		methods: {
+			change() {
+
+			},
+			goToRouter() {
+				uni.$u.toast('实名认证功能暂未开放');
+			},
+			// 返回登录页面进行登录
+			loginClick() {
+				uni.showLoading({
+					title: "",
+					success() {
+						setTimeout(() => {
+							uni.navigateTo({
+								url: '/pages/login/index'
+							})
+						}, 1000)
+					}
+				})
 			}
 		}
 	}
