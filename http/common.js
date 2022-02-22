@@ -29,3 +29,6 @@ export const destroytotal = user => http.post('/search/destroy/total', user)
 
 // FNT销毁记录
 export const destroylist = user => http.post('/search/destroy/list', user)
+
+// 团队信息
+export const subinfo = user => http.post('/front/user/sub/info', user)

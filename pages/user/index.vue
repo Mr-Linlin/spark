@@ -6,11 +6,11 @@
 		</view>
 	</view> -->
 	<view class="">
-		<view class=""
+		<view class="" 
 			style="height: 176rpx;background: linear-gradient(180deg, #E5EFFF 0%, rgba(229, 239, 255, 0) 100%);">
 
 		</view>
-		<view class="" style="display: flex;align-items: center;height: 140rpx;width: 90%;margin-left: 32rpx;">
+		<view v-if="userData" class="" style="display: flex;align-items: center;height: 140rpx;width: 90%;margin-left: 32rpx;">
 			<view class="">
 				<view class="" style="font-size: 48rpx;text-shadow: 0px 0px #000;">
 					{{userData.name}}
@@ -124,6 +124,7 @@
 		},
 		mounted() {},
 		onShow() {
+			console.log(uni.getStorageSync('token'))
 			this.userInfoFun()
 		},
 		methods: {

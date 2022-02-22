@@ -24,7 +24,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="box-card">
+		<view @click="notYetOpen" class="box-card">
 			<view class="group_1">
 				<text>地址管理</text>
 				<view style="display: flex;align-items: center;">
@@ -61,6 +61,9 @@
 </template>
 
 <script>
+	import {
+		userbaseInfo
+	} from '@/http/common.js'
 	import Approve from './childCimps/Approve'
 	
 	export default {
@@ -68,11 +71,25 @@
 			Approve
 		},
 		data() {
-			return {}
+			return {
+				userData:{}
+			}
 		},
-		
+		onShow() {
+			this.userInfoFun()
+		},
 		methods: {
-			
+			userInfoFun(){//用户个人信息
+				userbaseInfo().then(res=>{
+					this.userData = res.obj
+				})
+			},
+			notYetOpen(){
+				uni.showToast({
+					title:'暂未开放',
+					icon:'none'
+				})
+			}
 		}
 	}
 </script>

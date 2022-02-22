@@ -3,10 +3,10 @@
 		
 		<view class="bgd">
 			<view class="teamImg">
-				<image src="../../static/42faa7bf26eee16ee32afc6470bb9e6.jpg" mode=""></image>
+				<image :src="userData.pic" mode=""></image>
 			</view>
 			<view class="">
-				李言言呐
+				{{userData.name}}
 			</view>
 		</view>
 		
@@ -14,7 +14,7 @@
 			<view class="tramCont">
 				<view class="tramNumCount">
 					<view class="tramCountst">
-						289392
+						{{subinfoData.directCount}}
 					</view>
 					<view class="tramNum">
 						成员数
@@ -22,7 +22,7 @@
 				</view>
 				<view class="tramNumCount">
 					<view class="tramCountst">
-						289392
+						{{subinfoData.indirectCount}}
 					</view>
 					<view class="tramNum">
 						团队总业绩
@@ -59,14 +59,32 @@
 </template>
 
 <script>
+import {
+	subinfo,userbaseInfo
+} from '@/http/common.js'
 	export default {
 		data() {
 			return {
-
+				subinfoData:{},
+				userData:{}
 			}
 		},
+		onShow() {
+			this.subinfoFun()
+			this.userInfoFun()
+		},
 		methods: {
-
+			subinfoFun(){//团队信息
+				subinfo().then(res=>{
+					console.log('res',res)
+					this.subinfoData = res.obj
+				})
+			},
+			userInfoFun(){//用户个人信息
+				userbaseInfo().then(res=>{
+					this.userData = res.obj
+				})
+			},
 		}
 	}
 </script>
