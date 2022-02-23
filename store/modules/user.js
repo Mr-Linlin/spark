@@ -1,12 +1,13 @@
-	// import {
-	// 	Login
-	// } from '@/http/common.js'
+// import {
+// 	Login
+// } from '@/http/common.js'
 const state = {
 	token: "",
-	userinfo: ''
+	userinfo: '',
 }
 
 const mutations = {
+
 	setToken(state, token) {
 
 	},
@@ -15,8 +16,10 @@ const mutations = {
 	}
 }
 const actions = {
- login({commit},loginForm){
-		Login(loginForm).then(res=>{
+	login({
+		commit
+	}, loginForm) {
+		Login(loginForm).then(res => {
 			console.log(res)
 		})
 		console.log(obj)
