@@ -35,49 +35,76 @@
 			<view class="myTeamListTitle">
 				团队成员
 			</view>
-			<view v-for="(item,index) in 5" :key="index" class="myTeamListCont">
+			<view v-for="(item,index) in teamlistData" :key="index" class="myTeamListCont">
 				<view class="myTeamListContImg">
-					<image src="../../static/42faa7bf26eee16ee32afc6470bb9e6.jpg" mode=""></image>
+					<image :src="item.pic" mode=""></image>
 				</view>
 				<view class="">
-					<view class="myTeamListContName">
-						细雨微风
-					</view>
-					<view class="myTeamListContPheon">
-						189****	8788
+					<view v-if="item.account" class="myTeamListContPheon">
+						{{item.account.substring(0,3)}}***{{item.account.substring(item.account.length-4,item.account.length)}}
 					</view>
 				</view>
 				<view class="flex1">
 					
 				</view>
-				<view class="myTeamListContTime">
-					2022-01-10
+				<view v-if="item.createTime" class="myTeamListContTime">
+					{{item.createTime.split(' ')[0]}}
 				</view>
 			</view>
+			<u-loadmore :status="status" />
 		</view>
 	</view>
 </template>
 
 <script>
 import {
-	subinfo,userbaseInfo
+	subinfo,userbaseInfo,teamlist
 } from '@/http/common.js'
 	export default {
 		data() {
 			return {
 				subinfoData:{},
-				userData:{}
+				userData:{},
+				teamlistData:[],
+				
+				status: 'loadmore',
+				page: 1,
+				pageType:true
+			}
+		},
+		onReachBottom() {
+			if(this.pageType){
+				this.status = 'loading';
+				this.page++
+				this.teamlistFun()
+			}else{
+				this.status = 'nomore';
 			}
 		},
 		onShow() {
 			this.subinfoFun()
 			this.userInfoFun()
+			this.teamlistFun()
 		},
 		methods: {
 			subinfoFun(){//团队信息
 				subinfo().then(res=>{
-					console.log('res',res)
 					this.subinfoData = res.obj
+				})
+			},
+			teamlistFun(){//团队列表
+				let data = {
+					type:2,
+					pageNum: this.page,
+					pageSize: 20
+				}
+				teamlist(data).then(res=>{
+					if(res.code == 0){
+						this.teamlistData.push(...res.obj.list)
+					}
+					else{
+					 	this.pageType = !this.pageType
+					}
 				})
 			},
 			userInfoFun(){//用户个人信息

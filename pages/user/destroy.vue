@@ -26,7 +26,7 @@
 						</view>
 					</view>
 					<view v-if="item.createTime" class="time">
-						{{item.createTime.split(' ')[1]}}
+						{{item.createTime.split(' ')[0]}}
 					</view>
 					<view class="money">
 						{{item.qty}}
@@ -89,10 +89,8 @@
 					pageSize: 20
 				}
 				destroylist(data).then(res => {
-					if (res.obj.list.length == 20) {
-						for(let i=0;i<res.obj.list.length;i++){
-							this.destroylistData.push(res.obj.list[i])
-						}
+					if (res.code == 0) {
+						this.destroylistData.push(...res.obj.list)
 					}else{
 					 	this.pageType = !this.pageType
 					}

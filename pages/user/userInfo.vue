@@ -3,24 +3,24 @@
 		<view class="box-card">
 			<view class="group_1">
 				<text>头像</text>
-				<image src="../../static/42faa7bf26eee16ee32afc6470bb9e6.jpg"></image>
+				<image :src="userData.pic"></image>
 			</view>
 			<view class="group_1">
-				<text>昵称</text>
+				<text>手机号</text>
 				<view style="display: flex;align-items: center;">
-					<text>李言言</text>
+					<text>{{userData.name}}</text>
 					<image src="../../static/user/right.png" mode="" class="right-img"></image>
 				</view>
 			</view>
 			<view class="group_1">
 				<text>UID</text>
-				<text>2309203</text>
+				<text>{{userData.uid}}</text>
 			</view>
 			<view class="group_1">
 				<text>邀请码</text>
 				<view style="display: flex;">
-					<text>845408</text>
-					<text style="color:rgba(86, 123, 240, 1) ;margin-left: 10rpx;">复制</text>
+					<text>{{userData.inviteCode}}</text>
+					<text @click="copy(userData.inviteCode)" style="color:rgba(86, 123, 240, 1) ;margin-left: 10rpx;">复制</text>
 				</view>
 			</view>
 		</view>
@@ -33,7 +33,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="box-card">
+		<!-- <view class="box-card">
 			<view class="group_1">
 				<text style="font-weight: 600;font-size: 32rpx;">实名认证</text>
 				<text style="color: rgba(9, 187, 7, 1);">审核中</text>
@@ -56,7 +56,7 @@
 			</view>
 		</view>
 		<approve title="根据监管部门要求,您需要完善实名认证才可以使用全部功能" btn-title="立即认证" color="#3A82FE" />
-		<approve title="认证未通过,请使用有效期内的身份证进行验证" btn-title="重新认证" color="#F74539" />
+		<approve title="认证未通过,请使用有效期内的身份证进行验证" btn-title="重新认证" color="#F74539" /> -->
 	</view>
 </template>
 
@@ -79,6 +79,16 @@
 			this.userInfoFun()
 		},
 		methods: {
+			copy(value){
+			  uni.setClipboardData({
+				data: value,
+				success:()=>{
+				  uni.showToast({
+					title:'复制成功'
+				  })
+				}
+			  });
+			},
 			userInfoFun(){//用户个人信息
 				userbaseInfo().then(res=>{
 					this.userData = res.obj

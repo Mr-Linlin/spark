@@ -5,21 +5,21 @@
 				<text>预排数量</text>
 				<view class="sched_input">
 					<u--input v-model="GS" border="none" @change="gsChange" type="number"></u--input>
-					<text style="margin-right: 20rpx;">可用GS 8392</text>
+					<text style="margin-right: 20rpx;">可用GS {{poolassetData.gs}}</text>
 				</view>
 			</view>
 			<view class="group_2">
 				<view class="fnt_num">
 					所需FNT {{this.FNT}}
 				</view>
-				<text style="margin-right: 10rpx;">FNT所需数量=GS×2倍</text>
-				<text style="color:rgba(247, 69, 57, 1) ;">FNTFNG可用GS 239</text>
+				<text style="margin-right: 10rpx;">FNT所需数量=(GS的2%)*2</text>
+				<text style="color:rgba(247, 69, 57, 1) ;">FNT可用{{poolassetData.fnt}}</text>
 			</view>
 		</view>
 		<view class="sched-btn">
-			<u-button text="确定预约" class="btn" @click="subscribe" v-if="FNT > 0 && FNT!==null && FNT < 239">
+			<u-button text="确定预约" class="btn" @click="poolrechargeFun" v-if="FNT > 0 && FNT!==null && FNT < poolassetData.fnt">
 			</u-button>
-			<u-button text="确定预约" class="btn1" @click="subscribe" :disabled="true" v-else>
+			<u-button text="确定预约" class="btn1" @click="poolrechargeFun" :disabled="true" v-else>
 			</u-button>
 		</view>
 		<u-toast ref="uToast"></u-toast>
@@ -27,18 +27,49 @@
 </template>
 
 <script>
+	import {
+		poolasset,poolrecharge
+	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
 				GS: 0,
 				FNT: 0,
+				poolassetData:{}
 			}
 		},
+		onShow() {
+			this.poolassetFun()
+		},
 		methods: {
+			poolrechargeFun(){//预排【预约池充值】
+				let data = {
+					quantity:this.GS
+				}
+				poolrecharge(data).then(res=>{
+					console.log('asdf',res)
+					uni.showToast({
+						title:res.msg,
+						icon:'none'
+					})
+					if(res.code == 0){
+						setTimeout(function(){
+							uni.navigateBack({
+								
+							})
+						},2000)
+					}
+				})
+			},
+			poolassetFun(){//预排金额
+				poolasset().then(res=>{
+					this.poolassetData = res.obj
+				})
+			},
 			gsChange() {
-				this.FNT = this.GS * 2
-				if (this.FNT > 239) {
-					uni.$u.toast('兑换FNT不能超过239')
+				this.FNT = (this.GS * 0.02)*2
+				if (this.FNT > this.poolassetData.fnt) {
+					uni.$u.toast('兑换FNT不能超过'+this.poolassetData.fnt)
 				} else if (this.FNT > 0 && this.FNT !== null) {
 					this.disabled = false
 				}

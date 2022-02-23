@@ -12,7 +12,7 @@
 					预约池金额(GS)
 				</view>
 				<view class="" style="margin-top: 24rpx;font-size: 54rpx;text-shadow: 0px 0px #000;">
-					744289.28
+					{{fnt}}
 				</view>
 			</view>
 			<view class="" style="height: 55rpx;">
@@ -52,41 +52,83 @@
 				全部
 			</view>
 		</view>
-		<view :key="index" v-for="(item,index) in 5" class="" style="margin-top: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
+		<view :key="index" v-for="(item,index) in joinlistData" class="" style="margin-top: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
 			<view class="" style="display: flex;align-items: center;">
 				<view class="" style="font-size: 28rpx;color: rgba(0, 0, 0, 0.66);text-shadow: 0px 0px #000;">
-					身份奖励
+					{{item.name}}
 				</view>
 				<view class="" style="flex: 1;">
 
 				</view>
 				<view class="" style="font-size: 32rpx;color: rgba(0, 0, 0, 0.66);text-shadow: 0px 0px #000;">
-					+744289.28
+					+{{item.useUsdt}}
 				</view>
 			</view>
 			<view class="" style="display: flex;align-items: center;margin-top: 20rpx;">
-				<view class="" style="font-size: 24rpx;color: rgba(0, 0, 0, 0.44);">
-					2022-12-29
+				<view v-if="item.createTime" class="" style="font-size: 24rpx;color: rgba(0, 0, 0, 0.44);">
+					{{item.createTime.split(' ')[0]}}
 				</view>
 				<view class="" style="flex: 1;">
 
 				</view>
 				<view class="" style="text-shadow: 0px 0px #000;font-size: 24rpx;">
-					≈10.29CNY
+					≈{{item.useFnt}}CNY
 				</view>
 			</view>
 		</view>
+		<u-loadmore :status="status" />
 	</view>
 </template>
-
 <script>
+	import {
+		poolasset,joinlist
+	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
-
+				fnt:'',
+				joinlistData:[],
+				
+				status: 'loadmore',
+				page: 1,
+				pageType:true
+			}
+		},
+		onShow() {
+			this.poolassetFun()
+			this.joinlistFun()
+		},
+		onReachBottom() {
+			if(this.pageType){
+				this.status = 'loading';
+				this.page++
+				this.joinlistFun()
+			}else{
+				this.status = 'nomore';
 			}
 		},
 		methods: {
+			poolassetFun(){//预约池金额
+				poolasset().then(res=>{
+					console.log(res)
+				 	this.fnt = res.obj.fnt
+				})
+			},
+			joinlistFun(){//预约池List
+				let data = {
+					type:2,
+					pageNum:1,
+					pageSize:20
+				}
+				joinlist(data).then(res=>{
+					if(res.code == 0){
+						this.joinlistData.push(...res.obj.list)
+					}
+					else{
+					 	this.pageType = !this.pageType
+					}
+				})
+			},
 			retn() {
 				uni.navigateBack({
 
