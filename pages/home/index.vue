@@ -1,22 +1,4 @@
 <template>
-	<!-- <view class="" :style="theme">
-		  
-		<swiper vertical style="width: 100vw;height: 100vh;">
-			<swiper-item>
-				<view class="swiper-item"></view>
-			</swiper-item>
-			<swiper-item>
-				<view class="ta" style="padding-top: 30rpx;" :style="'background-color:'+ theme['--bg-color-global']">
-					继续下拉回到首页</view>
-				<scroll-view scroll-y="true" class="swiper-item pt1">
-					<con-sulting :constlting_data="consultingData"></con-sulting>
-				</scroll-view>
-			</swiper-item>
-		</swiper>
-	</view> -->
-
-
-
 	<view class="">
 		<view class="" style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx;">
 			<view class="" style="display: flex;align-items: center;">
@@ -38,16 +20,11 @@
 				</view>
 			</view>
 		</view>
-
-
-
 		<view class="">
 			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
 				<view class="" style="width: 709rpx;height: 709rpx;border: 1rpx solid #007AFF;border-radius: 50%;">
-
 				</view>
 			</view>
-
 			<view @click="grabOrdersNext" class="">
 				<view class=""
 					style="display: flex;align-items: center;margin-left: 32rpx;margin-right: 32rpx;height: 94rpx;">
@@ -55,51 +32,43 @@
 						天空之神乌拉诺斯
 					</view>
 					<view class="" style="flex: 1;">
-
 					</view>
 					<view class="" style="font-size: 24rpx;">
 						剩余时间 00:00:01
 					</view>
 				</view>
-
-				<view class=""
-					style="width: 280rpx;height: 231rpx;background: linear-gradient(90deg, #F9BE3F 0%, #F19645 100%);border-radius: 12rpx;color: #FFFFFF;margin-left: 20rpx;">
-					<view class="" style="height: 74rpx;display: flex;align-items: center;color: #FFFFFF;">
-						<view class=""
-							style="font-size: 28rpx;font-family: PingFang SC-Medium, PingFang SC;margin-left: 20rpx;">
-							A轨道
-						</view>
-						<view class="" style="flex: 1;"></view>
-						<view class=""
-							style="background: rgba(255, 255, 255, 0.17);border-radius: 4rpx;font-size: 22rpx;padding: 8rpx;margin-right: 20rpx;">
-							金星
-						</view>
-					</view>
-
-					<view class="" style="font-size: 28rpx;text-shadow: 0px 0px #000;margin-left: 20rpx;">
-						01:33:1
-					</view>
-
-					<view class="" style="display: flex;align-items: center;margin-top: 32rpx;">
-						<view class=""
-							style="font-size: 24rpx;color: rgba(255, 255, 255, 0.84);margin-left: 20rpx;font-family: DIN-Medium, DIN;">
-							1-2000GS
-						</view>
-
-						<view class="" style="flex: 1;">
-
-						</view>
-						<view class="container" style="margin-right: 20rpx;">
-							<view class="loading">
-								<view id="loadingMask" class="loading-mask"></view>
-								<view id="loading" class="loading-text">0%</view>
+				<scroll-view scroll-x="true">
+					<view style="display: flex;">
+						<view v-for="(item,index) in orders" :key="index" @click="onDetail(item.resourceId)">
+							<view class="order-item">
+								<view class="between">
+									<view style="font-size: 28rpx;">
+										{{item.time}}点场
+									</view>
+									<view
+										style="padding:0 10rpx; font-size: 22rpx;height: 34rpx;line-height: 34rpx;background: rgba(255, 255, 255, 0.17);">
+										{{item.teamName}}
+									</view>
+								</view>
+								<view class="countdown">
+									{{item.countDown}}
+								</view>
+								<view class="between fixed">
+									<view style="font-size: 24rpx;color: rgba(255, 255, 255, 0.84);">
+										{{item.minMax}}GS
+									</view>
+									<view class="ball">
+										{{item.rate*100}}%
+									</view>
+								</view>
 							</view>
 						</view>
 					</view>
-				</view>
+				</scroll-view>
+				
 			</view>
 		</view>
-
+		<!--  -->
 		<view class="">
 			<!-- <u-notice-bar :text="content.title" bgColor="#FFFFFF" color="#1A1B1C"></u-notice-bar> -->
 			<view class="flex_j">
@@ -175,7 +144,8 @@
 	import conSulting from './consulting.vue';
 	import {
 		getMessage,
-		getNotice
+		getNotice,
+		getPddList
 	} from '@/http/home.js'
 	export default {
 		components: {
@@ -201,6 +171,7 @@
 				}],
 				messageList: null, //资讯
 				content: {}, //公告
+				orders: null
 			}
 		},
 		onShow() {
@@ -232,14 +203,17 @@
 				} = await getNotice()
 				if (code !== 0) return uni.$u.toast(msg)
 				this.content = obj.contentList[0]
-				console.log(this.content)
+				let res = await getPddList()
+				this.orders = res.obj
+				console.log(this.orders)
 			},
 			/**
 			 * 处理点击事件
 			 * **/
-			grabOrdersNext() { //参与抢单
+			 // 点击进入抢单详情页面
+			onDetail(resourceId) { 
 				uni.navigateTo({
-					url: './grabOrders'
+					url: `./grabOrders?resourceId=${resourceId}`,
 				})
 			},
 			announcementNext() { //消息公告
@@ -262,6 +236,42 @@
 	}
 </style>
 <style lang="scss">
+	.order-item {
+		width: 280rpx;
+		height: 231rpx;
+		background: linear-gradient(90deg, #F9BE3F 0%, #F19645 100%);
+		border-radius: 12rpx;
+		color: #FFFFFF;
+		margin-left: 20rpx;
+		padding: 20rpx;
+
+		.between {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.fixed {
+			position: relative;
+			margin-top: 50rpx;
+
+			.ball {
+				position: absolute;
+				right: 0;
+				top: -40rpx;
+				background: linear-gradient(100deg, rgba(0, 0, 0, 0.11) 0%, rgba(0, 0, 0, 0) 100%);
+				width: 88rpx;
+				height: 89rpx;
+				border-radius: 50%;
+				text-align: center;
+				line-height: 88rpx;
+			}
+		}
+
+		.countdown {
+			margin: 20rpx 0;
+		}
+	}
+
 	.flex_j {
 		display: flex;
 		justify-content: center;
