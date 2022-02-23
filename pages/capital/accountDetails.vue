@@ -12,7 +12,7 @@
 							GS资产
 						</view>
 						<view class="" style="margin-top: 24rpx;font-size: 38rpx;text-shadow: 0px 0px #000;">
-							744289.28
+							{{assetsingleData.available}}
 						</view>
 					</view>
 				</view>
@@ -24,7 +24,7 @@
 							CNY≈
 						</view>
 						<view class="" style="margin-top: 24rpx;font-size: 38rpx;text-shadow: 0px 0px #000;">
-							744289.28
+							{{assetsingleData.cnyQty}}
 						</view>
 					</view>
 				</view>
@@ -64,41 +64,89 @@
 				全部
 			</view>
 		</view>
-		<view :key="index" v-for="(item,index) in 5" class="" style="margin-top: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
+		<view :key="index" v-for="(item,index) in financialgetLogData" class="" style="margin-top: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
 			<view class="" style="display: flex;align-items: center;">
 				<view class="" style="font-size: 28rpx;color: rgba(0, 0, 0, 0.66);text-shadow: 0px 0px #000;">
-					身份奖励
+					{{item.typeStr}}
 				</view>
 				<view class="" style="flex: 1;">
 					
 				</view>
 				<view class="" style="font-size: 32rpx;color: rgba(0, 0, 0, 0.66);text-shadow: 0px 0px #000;">
-					+744289.28
+					{{item.money}}
 				</view>
 			</view>
 			<view class="" style="display: flex;align-items: center;margin-top: 20rpx;">
-				<view class="" style="font-size: 24rpx;color: rgba(0, 0, 0, 0.44);">
-					2022-12-29
+				<view v-if="item.createTime" class="" style="font-size: 24rpx;color: rgba(0, 0, 0, 0.44);">
+					{{item.createTime.split(' ')[0]}}
 				</view>
 				<view class="" style="flex: 1;">
 					
 				</view>
 				<view class="" style="text-shadow: 0px 0px #000;font-size: 24rpx;">
-					≈10.29CNY
+					≈{{item.cny}}CNY
 				</view>
 			</view>
 		</view>
+		<u-loadmore :status="status" />
 	</view>
 </template>
 
 <script>
+	import {
+		assetsingle,financialgetLog
+	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
+				assetsingleData:{},
+				financialgetLogData:[],
+				ids:'',
 				
+				status: 'nomore',
+				page: 1,
+				pageType:true
+			}
+		},
+		onLoad(e) {
+			this.ids = e.id
+			this.assetsingleFun(e.id)
+			this.financialgetLogFun(e.id)
+		},
+		onReachBottom() {
+			if(this.pageType){
+				this.status = 'loading';
+				this.page++
+				this.financialgetLogFun(this.ids)
+			}else{
+				this.status = 'nomore';
 			}
 		},
 		methods: {
+			assetsingleFun(e){//资产数据
+				let data = {
+					currencyId:e,
+					type:3
+				}
+				assetsingle(data).then(res=>{
+					this.assetsingleData = res.obj
+				})
+			},
+			financialgetLogFun(e){//财务明细
+				let data = {
+					pageNum:1,
+					pageSize:20,
+					currencyId:e,
+				}
+				financialgetLog(data).then(res=>{
+					if(res.code == 0){
+						this.financialgetLogData.push(...res.obj.list)
+					}
+					else{
+					 	this.pageType = !this.pageType
+					}
+				})
+			},
 			retn(){
 				uni.navigateBack({
 					

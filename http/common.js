@@ -53,3 +53,15 @@ export const joinlist = user => http.post('/front/pre/join/list', user)
 
 //预排【预约池充值】
 export const poolrecharge = user => http.post('/front/pre/pool/recharge', user)
+
+//提取GS
+export const walletex = user => http.post('/front/pre/wallet/ex', user)
+
+//资产List
+export const assetlist = user => http.post('/front/financial/asset/list', user)
+
+//资产List详情
+export const assetsingle = user => http.post('/front/financial/asset/single', user)
+
+//资产List详情财务明细
+export const financialgetLog = user => http.post('/front/financial/getLog', user)
