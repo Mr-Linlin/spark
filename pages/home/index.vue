@@ -25,7 +25,7 @@
 				<view class="" style="width: 709rpx;height: 709rpx;border: 1rpx solid #007AFF;border-radius: 50%;">
 				</view>
 			</view>
-			<view @click="grabOrdersNext" class="">
+			<view class="">
 				<view class=""
 					style="display: flex;align-items: center;margin-left: 32rpx;margin-right: 32rpx;height: 94rpx;">
 					<view class="" style="font-size: 32rpx;color: #1A1B1C;text-shadow: 0px 0px #000;">
@@ -51,7 +51,14 @@
 									</view>
 								</view>
 								<view class="countdown">
-									{{item.countDown}}
+									<!-- {{item.countDown}} -->
+									<u-count-down :time="item.countDown*1000" format="HH:mm:ss">
+										<!-- <view class="time">
+											<!-- <text>{{ timeData.hours>10?timeData.hours:'0'+timeData.hours}}:</text>
+											<text>{{ timeData.minutes>10?timeData.minutes:'0'+timeData.minutes }}:</text>
+											<text>{{ timeData.seconds >10?timeData.seconds:'0'+timeData.seconds}}</text> -->
+										<!-- </view> -->
+									</u-count-down>
 								</view>
 								<view class="between fixed">
 									<view style="font-size: 24rpx;color: rgba(255, 255, 255, 0.84);">
@@ -65,7 +72,7 @@
 						</view>
 					</view>
 				</scroll-view>
-				
+
 			</view>
 		</view>
 		<!--  -->
@@ -171,7 +178,8 @@
 				}],
 				messageList: null, //资讯
 				content: {}, //公告
-				orders: null
+				orders: null,
+				timeData: {},
 			}
 		},
 		onShow() {
@@ -182,6 +190,10 @@
 			this.getNotice()
 		},
 		methods: {
+			// onChange(e) {
+			// 	console.log(e)
+			// 	// this.timeData = e
+			// },
 			/**处理网络请求，获取数据**/
 			// 获取首页资讯
 			async getMessage() {
@@ -210,8 +222,8 @@
 			/**
 			 * 处理点击事件
 			 * **/
-			 // 点击进入抢单详情页面
-			onDetail(resourceId) { 
+			// 点击进入抢单详情页面
+			onDetail(resourceId) {
 				uni.navigateTo({
 					url: `./grabOrders?resourceId=${resourceId}`,
 				})
@@ -236,7 +248,7 @@
 	}
 </style>
 <style lang="scss">
-	.order-item {
+	 .order-item {
 		width: 280rpx;
 		height: 231rpx;
 		background: linear-gradient(90deg, #F9BE3F 0%, #F19645 100%);
@@ -269,6 +281,9 @@
 
 		.countdown {
 			margin: 20rpx 0;
+			::v-deep .u-count-down__text[data-v-7ebf7480]{
+					color: #FFFFFF !important;
+			}
 		}
 	}
 
