@@ -31,6 +31,17 @@
 		<view class="sched-btn">
 			<u-button text="确定" class="btn" @click="show = true"></u-button>
 		</view>
+<!-- <<<<<<< HEAD
+		<u-popup :show="show" @close="close" @open="open" :round="15">
+			<lzt-popup>
+				<u--input placeholder="6位验证码" border="none">
+					<template slot="suffix">
+						<u-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange"></u-code>
+						<text @tap="getCode" style="color: #007AFF;">{{tips}}</text>
+					</template>
+				</u--input>
+			</lzt-popup>
+======= -->
 		<u-popup :show="show" round="40rpx" mode="bottom" @close="close" @open="open">
 			<view class="trade-box">
 				<view class="sub-title">
@@ -115,7 +126,39 @@
 			close() {
 				this.show = false
 				// console.log('close');
-			}
+			},
+			codeChange(text) {
+				this.tips = text;
+			},
+			getCode() {
+				if (this.$refs.uCode.canGetCode) {
+					// 模拟向后端请求验证码
+					uni.showLoading({
+						title: '正在获取验证码'
+					})
+					setTimeout(() => {
+						uni.hideLoading();
+						// 这里此提示会被this.start()方法中的提示覆盖
+						uni.$u.toast('验证码已发送');
+						// 通知验证码组件内部开始倒计时
+						this.$refs.uCode.start();
+					}, 2000);
+				} else {
+					uni.$u.toast('倒计时结束后再发送');
+				}
+			},
+			end() {
+				uni.$u.toast('倒计时结束');
+			},
+			async start() {
+				// uni.$u.toast('发送成功');
+				// let {
+				// 	code,
+				// 	msg,
+				// 	obj
+				// } = await sendCode(this.userInfo)
+				console.log(111)
+			},
 		}
 	}
 </script>

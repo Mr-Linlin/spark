@@ -353,32 +353,32 @@
 		"list": [{
 				"pagePath": "pages/home/index",
 				"text": "首页",
-				"iconPath": "static/img/foot/foot01.png",
-				"selectedIconPath": "static/img/foot/foot01_1.png"
+				"iconPath": "static/tarbar/home.png",
+				"selectedIconPath": "static/tarbar/home_active.png"
 			},
 			{
 				"pagePath": "pages/spark/index",
 				"text": "spark",
-				"iconPath": "static/img/foot/foot02.png",
-				"selectedIconPath": "static/img/foot/foot02_1.png"
+				"iconPath": "static/tarbar/spark.png",
+				"selectedIconPath": "static/tarbar/spark_active.png"
 			},
 			{
 				"pagePath": "pages/server/index",
 				"text": "服务器",
-				"iconPath": "static/img/foot/foot03.png",
-				"selectedIconPath": "static/img/foot/foot03_1.png"
+				"iconPath": "static/tarbar/server.png",
+				"selectedIconPath": "static/tarbar/server_active.png"
 			},
 			{
 				"pagePath": "pages/capital/index",
 				"text": "资产",
-				"iconPath": "static/img/foot/foot04.png",
-				"selectedIconPath": "static/img/foot/foot04_1.png"
+				"iconPath": "static/tarbar/property.png",
+				"selectedIconPath": "static/tarbar/property_active.png"
 			},
 			{
 				"pagePath": "pages/user/index",
 				"text": "我的",
-				"iconPath": "static/img/foot/foot05.png",
-				"selectedIconPath": "static/img/foot/foot05_1.png"
+				"iconPath": "static/tarbar/profile.png",
+				"selectedIconPath": "static/tarbar/profile_active.png"
 			}
 		]
 	},
