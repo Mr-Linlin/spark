@@ -123,7 +123,7 @@
 				</view>
 			</view>
 
-			<view v-for="(item,index) in messageList" :key="item.id" class="flex_j">
+			<view v-for="(item,index) in messageList" :key="item.id" class="flex_j" @click="onNewsDetail(item.aid)">
 				<view class="consultingServiceContent">
 					<view class="">
 						<view class="consultingServiceContentName">
@@ -190,10 +190,6 @@
 			this.getNotice()
 		},
 		methods: {
-			// onChange(e) {
-			// 	console.log(e)
-			// 	// this.timeData = e
-			// },
 			/**处理网络请求，获取数据**/
 			// 获取首页资讯
 			async getMessage() {
@@ -226,6 +222,12 @@
 			onDetail(resourceId) {
 				uni.navigateTo({
 					url: `./grabOrders?resourceId=${resourceId}`,
+				})
+			},
+			// 进入新闻详情
+			onNewsDetail(aid){
+				uni.navigateTo({
+					url:`/pages/home/informationdetails/index?aid=${aid}`
 				})
 			},
 			announcementNext() { //消息公告

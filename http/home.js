@@ -12,3 +12,5 @@ export const getPddList = () => http.post('front/pdd/name/list')
 export const getPddDetail = info => http.post('front/pdd/join/detail',info)
 // 参与拼团
 export const pddTake = info => http.post('front/pdd/join/pdd',info)
+// 获取资讯详情
+export const newsDetail = info => http.post('search/message/detail',info)

@@ -1,4 +1,3 @@
-
 uni.$u.http.setConfig(config => {
 	config.baseURL = 'http://211.149.135.240:7799/'
 	config.timeout = 5000
@@ -10,7 +9,7 @@ uni.$u.http.setConfig(config => {
 })
 uni.$u.http.interceptors.request.use(config => {
 	config.data = config.data || {}
-	config.header.token=uni.getStorageSync('token')
+	config.header.token = uni.getStorageSync('token')
 	// console.log(config.header)
 	return config
 }, config => {
@@ -20,12 +19,22 @@ uni.$u.http.interceptors.request.use(config => {
 uni.$u.http.interceptors.response.use(res => {
 	if (res.data.code === 500) {
 		uni.$u.toast('服务器错误')
-	} else if (res.data.code === 401) {
-		return uni.$u.toast('token过期')
+	} else if (res.data.code === -2) {
+		uni.showLoading({
+			title: '登录失效',
+			success: () => {
+				setTimeout(() => {
+					uni.navigateTo({
+						url: '/pages/login/index'
+					})
+				}, 2000)
+			}
+		})
+		return
 	}
 
 	return res.data
-},res=>{
+}, res => {
 	return uni.$u.toast('请求超时！')
 })
 export default uni.$u.http
