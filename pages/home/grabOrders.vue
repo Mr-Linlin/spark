@@ -56,7 +56,7 @@
 							开始
 						</view>
 						<view style="font-size: 24rpx;font-weight: 550;">
-							{{orderInfo.total}}
+							{{orderInfo.start}}
 						</view>
 					</view>
 					<view style="display: flex; justify-content: space-between; padding: 0 32rpx;margin-bottom: 24rpx;">
@@ -88,8 +88,8 @@
 
 				<view class="flex_j">
 					<view class="Isum">
-						<u--input style="text-indent: 1rem;" border="none" class="uinput" placeholder="自定义数量"
-							v-model="gs" @change="change">
+						<u--input type="number" style="text-indent: 1rem;" border="none" class="uinput"
+							placeholder="自定义数量" v-model="gs" @change="change">
 						</u--input>
 						<view class="">
 							GS
@@ -188,7 +188,7 @@
 			async onTake() {
 				let token = uni.getStorageSync('token')
 				this.queryInfo.token = token
-				console.log(qs.stringify(this.queryInfo))
+				// console.log(qs.stringify(this.queryInfo))
 				this.queryInfo.info = md5(qs.stringify(this.queryInfo))
 				if (this.queryInfo.quantity === 0) return uni.$u.toast('请输入参与金额')
 				let {
@@ -200,12 +200,20 @@
 			},
 			radioClick(index, value) {
 				this.currentIndex = index
+				console.log(this.currentIndex)
 				this.gs = ''
 				this.queryInfo.quantity = value * 0.02
 				console.log(this.queryInfo)
 			},
 			change(e) {
 				this.currentIndex = -1
+				if (e > this.orderInfo.max) {
+					this.gs = ''
+					return uni.$u.toast(`参与金额最大为${this.orderInfo.max}GS`)
+				} else if (e < 1) {
+					this.gs = ''
+					return uni.$u.toast(`参与金额最小为${this.orderInfo.min}GS`)
+				}
 				this.queryInfo.quantity = e * 0.02
 				// console.log(this.queryInfo.quantity)
 			}

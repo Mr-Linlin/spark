@@ -1,7 +1,7 @@
 <template>
 	<view class="box">
 		<view class="list">
-			<view class="item" :key="i.id" v-for="(item,i) in messageList">
+			<view class="item" :key="i.id" v-for="(item,i) in messageList" @click="onNewsDetail(item.aid)">
 				<view class="left">
 					<view class="title">
 						{{item.title}}
@@ -21,7 +21,8 @@
 </template>
 <script>
 	import {
-		getMessageList
+		getMessageList,
+		newsDetail
 	} from '@/http/home.js'
 	export default {
 		name: "Information",
@@ -53,7 +54,13 @@
 				} = await getMessageList(this.queryInfo)
 				if (code !== 0) return uni.$u.toast(msg)
 				this.messageList.push(...obj.list)
-			}
+			},
+			// 进入新闻详情
+			onNewsDetail(aid) {
+				uni.navigateTo({
+					url: `/pages/home/informationdetails/index?aid=${aid}`
+				})
+			},
 		}
 	}
 </script>
