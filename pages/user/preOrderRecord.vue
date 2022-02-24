@@ -85,7 +85,7 @@
 					</view>
 					<view class="flex1">
 					</view>
-					<view class="SparkListContNameType">
+					<view class="SparkListContNameType" style="color: #09BB07;">
 						{{getStatus(item.status)}}
 					</view>
 				</view>
@@ -128,8 +128,8 @@
 				orderList: null,
 				statistics: {},
 				status:{
-					1:'未结算',
-					2:'已结算'
+					1:'未完成能量值星体',
+					2:'完成能量值星体'
 				}
 			}
 		},

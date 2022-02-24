@@ -86,24 +86,24 @@
 				usericon: [
 					{
 						img: '../../static/user/134850618435.png',
-						name: 'Sparek',
+						name: '能量守护',
 						icon: '../../static/user/7124571.png'
 					},
 				{
 					img: '../../static/user/83649.png',
-					name: 'GS预约排单',
+					name: '能量预存储【GS预约排单(原预排单)】',
 					icon: '../../static/user/7124571.png'
 				}, {
 					img: '../../static/user/1148901653.png',
-					name: '预排单记录',
+					name: '我的能量【我的预排单(原预排单记录)】',
 					icon: '../../static/user/7124571.png'
 				},  {
 					img: '../../static/user/138458134.png',
-					name: '销毁',
+					name: '体力消耗',
 					icon: '../../static/user/7124571.png'
 				}, {
 					img: '../../static/user/2865089.png',
-					name: '我的团队',
+					name: '我的战队',
 					icon: '../../static/user/7124571.png'
 				}],
 
@@ -117,7 +117,7 @@
 					icon: '../../static/user/7124571.png'
 				}, {
 					img: '../../static/user/19347659.png',
-					name: '在线客服',
+					name: '星际客服',
 					icon: '../../static/user/7124571.png'
 				}],
 
@@ -137,29 +137,30 @@
 				})
 			},
 			usericonNext(e) {
-				if (e.name == '我的团队') {
+				console.log(111)
+				if (e.name === '我的战队') {
 					uni.navigateTo({
 						url: './myTeam'
 					})
 				}
-				if (e.name == 'Sparek') {
+				if (e.name === '能量守护') {
 					uni.navigateTo({
 						url: './SparkRecord'
 					})
 				}
 
-				if (e.name === '销毁') {
+				if (e.name ==='体力消耗') {
 					uni.navigateTo({
 						url: './destroy'
 					})
 				}
 
-				if (e.name == 'GS预约排单') {
+				if (e.name === '能量预存储【GS预约排单(原预排单)】') {
 					uni.navigateTo({
 						url: './reservationPool'
 					})
 				}
-				if (e.name == '预排单记录') {
+				if (e.name === '我的能量【我的预排单(原预排单记录)】') {
 					uni.navigateTo({
 						url: './preOrderRecord'
 					})
@@ -167,12 +168,12 @@
 
 			},
 			usericon2Next(e) {
-				if (e.name == '个人信息') {
+				if (e.name ==='个人信息') {
 					uni.navigateTo({
 						url: './userInfo'
 					})
 				}
-				if (e.name == '设置') {
+				if (e.name === '设置') {
 					uni.navigateTo({
 						url: './setUp'
 					})

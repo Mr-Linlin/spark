@@ -178,7 +178,7 @@
 		}, { //参与抢单
 			"path": "pages/home/grabOrders",
 			"style": {
-				"navigationBarTitleText": "参与抢单",
+				"navigationBarTitleText": "参与乌拉诺斯的诺言",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#FAFCFF"
 			}
