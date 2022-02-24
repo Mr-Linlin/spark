@@ -1,18 +1,40 @@
 <template>
 	<view>
 		<view class="bagks" style="width: 750rpx;height: 422rpx;">
-			<view @click="retn" class="">
-				<image src="../../static/38192485.png"
-					style="width: 44rpx;height: 44rpx;margin-top: 70rpx;margin-left: 32rpx;" mode=""></image>
+			<view class="" style="display: flex;align-items: center;padding-top: 70rpx;color: #FFFFFF;">
+				<image @click="retn" src="../../static/38192485.png" style="width: 44rpx;height: 44rpx;margin-left: 32rpx;" mode=""></image>
+				<view class="" style="font-size: 34rpx;margin-left: 248rpx;">
+					预排单
+				</view>
+				<view class="" style="flex: 1;"></view>
+				<view @click="preOrderRecordNext" class="" style="font-size: 24rpx;margin-right: 32rpx;color:rgba(255,255,255,0.8)">
+					我的预排单
+				</view>
 			</view>
 
-			<view class=""
-				style="display: flex;color: #FFFFFF;margin-top: 25rpx;justify-content: center;align-items: center;flex-direction: column;">
-				<view class="" style="font-size: 24rpx;">
-					预约池金额(GS)
+
+			<view class="" style="display: flex;color: #FFFFFF;margin-top: 45rpx;">
+				<view class="" style="width: 49%;">
+					<view class="" style="margin-left: 40rpx;">
+						<view class="" style="font-size: 24rpx;color:rgba(255,255,255,0.8)">
+							奖金池GS
+						</view>
+						<view class="" style="margin-top: 24rpx;font-size: 38rpx;text-shadow: 0px 0px #000;">
+							{{fnt}}
+						</view>
+					</view>
 				</view>
-				<view class="" style="margin-top: 24rpx;font-size: 54rpx;text-shadow: 0px 0px #000;">
-					{{fnt}}
+
+
+				<view class="" style="width: 49%;">
+					<view class="" style="">
+						<view class="" style="font-size: 24rpx;color:rgba(255,255,255,0.8)">
+							FNT数量
+						</view>
+						<view class="" style="margin-top: 24rpx;font-size: 38rpx;text-shadow: 0px 0px #000;">
+							744289.28
+						</view>
+					</view>
 				</view>
 			</view>
 			<view class="" style="height: 55rpx;">
@@ -25,8 +47,8 @@
 					<view class="">
 						<image src="../../static/23946562.png" style="width: 32rpx;height: 32rpx;" mode=""></image>
 					</view>
-					<view class="" style="margin-left: 20rpx;color: #FFFFFF;" >
-						预约排单
+					<view class="" style="margin-left: 20rpx;color: #FFFFFF;">
+						GS预存
 					</view>
 				</view>
 
@@ -41,18 +63,58 @@
 				</view>
 			</view>
 		</view>
-		<view class="" style="display: flex;align-items: center;">
-			<view class="" style="font-size: 32rpx;text-shadow: 0px 0px #000;margin-left: 32rpx;">
-				财务明细
+		<view class="" style="display: flex;align-items: center;font-size: 32rpx;">
+			<view @click="typeFun(0)" :class="type == 0 ? 'asdf' : 'asdf2'" style="margin-left: 32rpx;">
+				GS预存
 			</view>
-			<view class="" style="flex: 1;">
 
-			</view>
-			<view class="" style="margin-right: 32rpx;font-size: 24rpx;">
-				全部
+			<view @click="typeFun(1)" :class="type == 1 ? 'asdf' : 'asdf2'" style="margin-left: 68rpx;">
+				GS提取
 			</view>
 		</view>
-		<view :key="index" v-for="(item,index) in joinlistData" class="" style="margin-top: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
+		<view class="" style="display: flex;justify-content: center;">
+			<view class=""
+				style="width: 686rpx;height: 234rpx;background-color: #FFFFFF;border-radius: 12rpx;margin-top: 40rpx;padding-left: 24rpx;padding-right: 24rpx;">
+				<view class=""
+					style="height: 82rpx;display: flex;align-items: center;font-size: 28rpx;text-shadow: 0px 0px #000;">
+					预约成功
+				</view>
+				<view class="" style="display: flex;align-items: center;">
+					<view class="" style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
+						GS存入
+					</view>
+					<view class="" style="flex: 1;">
+
+					</view>
+					<view class="" style="font-size: 24rpx;text-shadow: 0px 0px #000;">
+						7887.81
+					</view>
+				</view>
+				<view class="" style="display: flex;align-items: center;margin-top: 20rpx;">
+					<view class="" style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
+						FNT存入
+					</view>
+					<view class="" style="flex: 1;">
+
+					</view>
+					<view class="" style="font-size: 24rpx;text-shadow: 0px 0px #000;">
+						7887.81
+					</view>
+				</view>
+				<view class="" style="display: flex;align-items: center;margin-top: 20rpx;">
+					<view class="" style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
+						预约时间
+					</view>
+					<view class="" style="flex: 1;">
+
+					</view>
+					<view class="" style="font-size: 24rpx;text-shadow: 0px 0px #000;">
+						7887.81
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- <view :key="index" v-for="(item,index) in joinlistData" class="" style="margin-top: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
 			<view class="" style="display: flex;align-items: center;">
 				<view class="" style="font-size: 28rpx;color: rgba(0, 0, 0, 0.66);text-shadow: 0px 0px #000;">
 					{{item.name}}
@@ -76,56 +138,66 @@
 				</view>
 			</view>
 		</view>
-		<u-loadmore :status="status" />
+		<u-loadmore :status="status" /> -->
 	</view>
 </template>
 <script>
 	import {
-		poolasset,joinlist
+		poolasset,
+		joinlist
 	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
-				fnt:'',
-				joinlistData:[],
-				
-				status: 'loadmore',
+				fnt: '',
+				joinlistData: [],
+
+				status: 'nomore',
 				page: 1,
-				pageType:true
+				pageType: true,
+				type: 0
 			}
 		},
-		onShow() {
+		onLoad() {
 			this.poolassetFun()
 			this.joinlistFun()
 		},
 		onReachBottom() {
-			if(this.pageType){
+			if (this.pageType) {
 				this.status = 'loading';
 				this.page++
 				this.joinlistFun()
-			}else{
+			} else {
 				this.status = 'nomore';
 			}
 		},
 		methods: {
-			poolassetFun(){//预约池金额
-				poolasset().then(res=>{
-					console.log(res)
-				 	this.fnt = res.obj.fnt
+			preOrderRecordNext(){//我的预排单
+				uni.navigateTo({
+					url:'./preOrderRecord'
 				})
 			},
-			joinlistFun(){//预约池List
+			typeFun(e) {
+				this.type = e
+			},
+			poolassetFun() { //预约池金额
+				poolasset().then(res => {
+					console.log(res)
+					this.fnt = res.obj.fnt
+				})
+			},
+			joinlistFun() { //预约池List
+				console.log('asdfasd')
 				let data = {
-					type:2,
-					pageNum:1,
-					pageSize:20
+					type: 2,
+					pageNum: this.page,
+					pageSize: 20
 				}
-				joinlist(data).then(res=>{
-					if(res.code == 0){
+				joinlist(data).then(res => {
+					if (res.code == 0) {
 						this.joinlistData.push(...res.obj.list)
-					}
-					else{
-					 	this.pageType = !this.pageType
+					} else {
+						this.pageType = !this.pageType
 					}
 				})
 			},
@@ -135,15 +207,15 @@
 				})
 			},
 			// 点击进入提取GS页面
-			extractGs() { 
+			extractGs() {
 				uni.navigateTo({
 					url: './subscribeChild/ExtractGs'
 				})
 			},
 			// 点击进入预约排单
-			schedulOrder(){
+			schedulOrder() {
 				uni.navigateTo({
-					url:'./subscribeChild/Scheduling'
+					url: './subscribeChild/Scheduling'
 				})
 			}
 		}
@@ -160,5 +232,15 @@
 		background-image: url(../../static/7bc8f795899a2e61a62b6da0d457c01.png);
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
+	}
+
+	.asdf {
+		color: #3A82FE;
+		text-shadow: 0px 0px #000;
+		font-size: 34rpx;
+	}
+
+	.asdf2 {
+		font-size: 24rpx;
 	}
 </style>

@@ -81,7 +81,7 @@ import {
 				this.status = 'nomore';
 			}
 		},
-		onShow() {
+		onLoad() {
 			this.subinfoFun()
 			this.userInfoFun()
 			this.teamlistFun()
