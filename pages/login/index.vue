@@ -91,6 +91,7 @@
 							title: "",
 							success() {
 								setTimeout(function() {
+									uni.hideLoading();
 									uni.switchTab({
 										url: '/pages/home/index'
 									})

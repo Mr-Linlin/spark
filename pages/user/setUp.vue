@@ -175,6 +175,7 @@
 				});
 				uni.removeStorageSync('token')
 				setTimeout(function(){
+					uni.hideLoading();
 					uni.reLaunch({
 						url:'../login/index'
 					})

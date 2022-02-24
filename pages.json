@@ -214,14 +214,8 @@
 		{ // 销毁
 			"path": "pages/user/destroy",
 			"style": {
-				"navigationBarTitleText": "销毁",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom",
 				"app-plus": {
-					"titleNView": {
-						"backgroundImage": "linear-gradient(to right, #505A71,#3B445A)",
-						"titleColor": "#fff"
-					}
+					"titleNView": false
 				}
 			}
 		}, { //预约池

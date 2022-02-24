@@ -84,6 +84,7 @@
 					title: "",
 					success() {
 						setTimeout(() => {
+							uni.hideLoading();
 							uni.navigateTo({
 								url: '/pages/login/index'
 							})

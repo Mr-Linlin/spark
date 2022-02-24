@@ -24,6 +24,7 @@ uni.$u.http.interceptors.response.use(res => {
 			title: '登录失效',
 			success: () => {
 				setTimeout(() => {
+					uni.hideLoading();
 					uni.navigateTo({
 						url: '/pages/login/index'
 					})

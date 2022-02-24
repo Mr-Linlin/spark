@@ -1,12 +1,17 @@
 <template>
 	<view>
-		<u-navbar title="" class="header" :border="false" @leftClick="handleBack">
+		<!-- <u-navbar title="销毁" class="header" :border="false" @leftClick="handleBack">
 			<view class="u-nav-slot" slot="left">
 				<image class="close-img" :src="require('../../static/Status.png')"></image>
 			</view>
-		</u-navbar>
-
-		<view class="number-box">
+		</u-navbar> -->
+		
+		<view class="" style="background: linear-gradient(to right, #4F5970, #3A4359);padding-top: 88rpx;">
+			<view class="" style="margin-left: 32rpx;">
+				<image @click="handleBack" src="../../static/38192485.png" style="width: 44rpx;height: 44rpx;" mode=""></image>
+			</view>
+		</view>
+		<view class="number-box" >
 			<view class="desc">FNT销毁总量</view>
 			<view class="num">{{destroytotalData}}</view>
 		</view>
@@ -115,15 +120,12 @@
 
 	.number-box {
 		text-align: center;
-		background: red;
 		height: 144rpx;
 		background: linear-gradient(to right, #4F5970, #3A4359);
-		margin-top: 44px;
 		border-radius: 0 0 32rpx 32rpx;
 
 		.desc {
 			font-size: 24rpx;
-			margin-bottom: 24rpx;
 			color: #FFFFFF;
 		}
 
@@ -136,6 +138,7 @@
 	.close-img {
 		width: 60rpx;
 		height: 60rpx;
+	
 	}
 
 	.header {
