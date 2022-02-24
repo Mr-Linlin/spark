@@ -60,8 +60,8 @@
 			<view class="" style="flex: 1;">
 				
 			</view>
-			<view class="" style="margin-right: 32rpx;font-size: 24rpx;">
-				全部
+			<view @click="show = true" class="" style="margin-right: 32rpx;font-size: 24rpx;">
+				筛选
 			</view>
 		</view>
 		<view :key="index" v-for="(item,index) in financialgetLogData" class="" style="margin-top: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
@@ -89,12 +89,36 @@
 			</view>
 		</view>
 		<u-loadmore :status="status" />
+		
+		<u-popup :show="show" @close="close" @open="open">
+			<view class="" style="height: 700rpx;">
+				<view class="filterTransactionTypes flex_a">
+					<view class="filterTransactionTypesName ">
+						筛选交易类型
+					</view>
+					<view class="flex1"></view>
+					<view class="">
+						<image @click="close" class="filterTransactionTypesImg flex_a" src="../../static/12312425.png" mode=""></image>
+					</view>
+				</view>
+				<view :class="typeData == 0 ? 'clr_3A82FE' : ''" @click="typeFun(0)" class="AllfilterTransactionTypes">
+					全部交易
+				</view>
+				<scroll-view class='left' scroll-y style="height: 500rpx;">
+					<view @click="typeFun(item.key)" v-for="(item,index) in financialgetLogTypeData" class="flex_j">
+						<view :class="typeData == item.key ? 'clr_3A82FE' : ''" class="filterTransactionCnt flex_a">
+							{{item.name}}
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+		</u-popup>
 	</view>
 </template>
 
 <script>
 	import {
-		assetsingle,financialgetLog
+		assetsingle,financialgetLog,financialgetLogType
 	} from '@/http/common.js'
 	export default {
 		data() {
@@ -102,27 +126,53 @@
 				assetsingleData:{},
 				financialgetLogData:[],
 				ids:'',
+				financialgetLogTypeData:[],
+				typeData:0,//选中的下标
 				
 				status: 'nomore',
 				page: 1,
-				pageType:true
+				pageType:true,
+				
+				show:false
 			}
 		},
 		onLoad(e) {
 			this.ids = e.id
 			this.assetsingleFun(e.id)
-			this.financialgetLogFun(e.id)
+			this.financialgetLogFun(e.id,0)
+			this.financialgetLogTypeFun()
 		},
 		onReachBottom() {
 			if(this.pageType){
 				this.status = 'loading';
 				this.page++
-				this.financialgetLogFun(this.ids)
+				this.financialgetLogFun(this.ids,this.typeData)
 			}else{
 				this.status = 'nomore';
 			}
 		},
 		methods: {
+			typeFun(e){//选着类型
+				this.typeData = e
+				//重置数据
+				this.status = 'nomore',
+				this.page = 1,
+				this.pageType = true,
+				this.financialgetLogData = []
+				this.financialgetLogFun(this.ids,this.typeData)
+				this.close()
+			},
+			close(){
+				this.show = !this.show
+			},
+			open(){
+				
+			},
+			financialgetLogTypeFun(){//获取类型
+				financialgetLogType().then(res=>{
+					this.financialgetLogTypeData = res.obj
+				})
+			},
 			assetsingleFun(e){//资产数据
 				let data = {
 					currencyId:e,
@@ -132,11 +182,12 @@
 					this.assetsingleData = res.obj
 				})
 			},
-			financialgetLogFun(e){//财务明细
+			financialgetLogFun(e,e1){//财务明细
 				let data = {
 					pageNum:1,
 					pageSize:20,
 					currencyId:e,
+					type:e1 == 0 ? '' : e1
 				}
 				financialgetLog(data).then(res=>{
 					if(res.code == 0){
@@ -167,9 +218,54 @@
 </script>
 
 <style>
+	
+</style>
+<style lang="scss" scoped>
 page{
 	background-color: #F7FAFF;
 	
+}
+.clr_3A82FE{
+	color: #3A82FE !important;
+}
+.filterTransactionTypes{
+	height: 126rpx;
+	.filterTransactionTypesName{
+		
+		margin-left: 32rpx;
+		font-size: 36rpx;
+	}
+	.filterTransactionTypesImg{
+		width: 32rpx;
+		height: 32rpx;
+		margin-right: 32rpx;
+		
+	}
+}
+.AllfilterTransactionTypes{
+	font-size: 32rpx;
+	margin-bottom: 32rpx;
+	margin-left: 32rpx;
+}
+
+.filterTransactionCnt{
+	width: 686rpx;
+	height: 82rpx;
+	border-radius: 8rpx;
+	color: #1A1B1C;
+	font-size: 32rpx;
+	margin-bottom: 32rpx;
+}
+.flex_a{
+	display: flex;
+	align-items: center;
+}
+.flex_j{
+	display: flex;
+	justify-content: center;
+}
+.flex1{
+	flex: 1;
 }
 .bagks{
 	background-image: url(../../static/7bc8f795899a2e61a62b6da0d457c01.png);

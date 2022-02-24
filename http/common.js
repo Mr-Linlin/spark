@@ -65,3 +65,12 @@ export const assetsingle = user => http.post('/front/financial/asset/single', us
 
 //资产List详情财务明细
 export const financialgetLog = user => http.post('/front/financial/getLog', user)
+
+//获取账单记录类型
+export const financialgetLogType = user => http.post('/front/financial/getLogType', user)
+
+//发送验证码给当前用户
+export const ajaxsendMyCode = user => http.post('/ajax/sendMyCode', user)
+
+//转账
+export const financialdotransfer = user => http.post('/front/financial/do/transfer', user)
