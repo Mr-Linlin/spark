@@ -9,7 +9,7 @@
 				<view class="" style="width: 49%;">
 					<view class="" style="margin-left: 40rpx;">
 						<view class="" style="font-size: 24rpx;">
-							GS资产
+							{{assetsingleData.currencyName}}资产
 						</view>
 						<view class="" style="margin-top: 24rpx;font-size: 38rpx;text-shadow: 0px 0px #000;">
 							{{assetsingleData.available}}
@@ -205,7 +205,7 @@
 			},
 			transferAccountsNext(){//转账
 				uni.navigateTo({
-					url:'./transferAccounts'
+					url:'./transferAccounts?id='+this.ids
 				})
 			},
 			TransferNext(){//划转

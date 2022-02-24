@@ -53,7 +53,7 @@
 		data() {
 			return {
 				loginForm: {
-					account: '18675425169',
+					account: '16816816888',
 					data: '111111',
 					type: 1
 				},
@@ -91,6 +91,7 @@
 							title: "",
 							success() {
 								setTimeout(function() {
+									uni.hideLoading();
 									uni.switchTab({
 										url: '/pages/home/index'
 									})

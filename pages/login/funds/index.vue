@@ -82,6 +82,7 @@
 						title: "注册成功",
 						success() {
 							setTimeout(() => {
+								uni.hideLoading();
 								uni.navigateTo({
 									url: '/pages/login/certification/index'
 								})

@@ -130,6 +130,7 @@
 						title: "修改密码成功",
 						success() {
 							setTimeout(() => {
+								uni.hideLoading();
 								uni.navigateTo({
 									url: '/pages/login/index'
 								})
