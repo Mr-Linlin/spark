@@ -83,19 +83,21 @@
 	export default {
 		data() {
 			return {
-				usericon: [{
+				usericon: [
+					{
+						img: '../../static/user/134850618435.png',
+						name: 'Sparek',
+						icon: '../../static/user/7124571.png'
+					},
+				{
 					img: '../../static/user/83649.png',
-					name: '预约池',
+					name: 'GS预约排单',
 					icon: '../../static/user/7124571.png'
 				}, {
 					img: '../../static/user/1148901653.png',
 					name: '预排单记录',
 					icon: '../../static/user/7124571.png'
-				}, {
-					img: '../../static/user/134850618435.png',
-					name: 'Spare抢单记录',
-					icon: '../../static/user/7124571.png'
-				}, {
+				},  {
 					img: '../../static/user/138458134.png',
 					name: '销毁',
 					icon: '../../static/user/7124571.png'
@@ -140,7 +142,7 @@
 						url: './myTeam'
 					})
 				}
-				if (e.name == 'Spare抢单记录') {
+				if (e.name == 'Sparek') {
 					uni.navigateTo({
 						url: './SparkRecord'
 					})
@@ -152,7 +154,7 @@
 					})
 				}
 
-				if (e.name == '预约池') {
+				if (e.name == 'GS预约排单') {
 					uni.navigateTo({
 						url: './reservationPool'
 					})

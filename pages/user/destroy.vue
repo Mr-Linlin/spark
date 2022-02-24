@@ -78,7 +78,7 @@
 				this.status = 'nomore';
 			}
 		},
-		onShow() {
+		onLoad() {
 			this.destroytotalFun()
 			this.destroylistFun()
 		},
