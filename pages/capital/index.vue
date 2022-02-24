@@ -13,7 +13,7 @@
 						钱包资产（CNY）
 					</view>
 					<view class="" style="font-size: 54rpx;margin-top: 24rpx;">
-						744289.28
+						{{totalCnyData}}
 					</view>
 				</view>
 			</view>
@@ -33,24 +33,24 @@
 			现金账户
 		</view>
 		<view class="" style="">
-			<view @click="accountDetailsNext" v-for="(item,index) in account" :key="index" class="" style="width: 333rpx;height: 130rpx;background-color: #FFFFFF;float: left;margin-left: 32rpx;margin-top: 32rpx;">
+			<view @click="accountDetailsNext(item)" v-for="(item,index) in assetlistData" :key="index" class="" style="width: 333rpx;height: 130rpx;background-color: #FFFFFF;float: left;margin-left: 32rpx;margin-top: 32rpx;">
 				<view class="" style="display: flex;align-items: center;height: 72rpx;">
 					<view class="" style="margin-left: 24rpx;">
-						<image :src="item.url" style="width: 24rpx;height: 24rpx;" mode=""></image>
+						<image :src="item.currencyLogo" style="width: 24rpx;height: 24rpx;" mode=""></image>
 					</view>
 					<view class="" style="margin-left: 12rpx;font-size: 24rpx;">
-						{{item.name}}
+						{{item.currencyName}}
 					</view>
 					<view class="" style="flex: 1;">
 						
 					</view>
 					<view class="" style="margin-right: 24rpx;">
-						<image :src="item.url2" style="width: 24rpx;height: 24rpx;" mode=""></image>
+						<image src="../../static/2581.png" style="width: 24rpx;height: 24rpx;" mode=""></image>
 					</view>
 				</view>
 				
 				<view class="" style="margin-left: 24rpx;font-size: 32rpx;text-shadow: 0px 0px #000;">
-					{{item.pice}}
+					{{item.available}}
 				</view>
 			</view>
 		</view>
@@ -59,12 +59,12 @@
 
 <script>
 	import {
-		statistic
+		statistic,assetlist
 	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
-				assetsSum:{},
+				totalCnyData:'',
 				currency:[{
 					url:'../../static/489149079.png',
 					name:'充币'
@@ -104,18 +104,27 @@
 					url2:'../../static/2581.png',
 					name:'FNT',
 					pice:'2892.2'
-				}]
+				}],
+				assetlistData:[]
 			};
 		},
 		onShow() {
-			let token = uni.getStorageSync('token')
-			console.log(token)
 			statistic().then(res => {
 				console.log(res.obj)
-				this.assetsSum = res.obj
+				this.totalCnyData = res.obj.totalCny
 			})
+			this.assetlistFun()
 		},
 		methods: {
+			assetlistFun(){
+				let data = {
+					type:3
+				}
+				assetlist(data).then(res=>{
+					console.log(res)
+					this.assetlistData = res.obj
+				})
+			},
 			currencyType(e){
 				if(e.name == '充币'){
 					// uni.navigateTo({
@@ -127,8 +136,12 @@
 					})
 				}
 				if(e.name == '提币'){
-					uni.navigateTo({
-						url:'./withdrawMoney'
+					// uni.navigateTo({
+					// 	url:'./withdrawMoney'
+					// })
+					uni.showToast({
+						title:'暂未开放',
+						icon:'none'
 					})
 				}
 				if(e.name == '转账'){
@@ -142,9 +155,9 @@
 					})
 				}
 			},
-			accountDetailsNext(){
+			accountDetailsNext(e){
 				uni.navigateTo({
-					url:'./accountDetails'
+					url:'./accountDetails?id='+e.currencyId
 				})
 			}
 		},

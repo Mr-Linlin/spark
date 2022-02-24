@@ -58,3 +58,15 @@ export const getLog = user => http.post('/front/financial/getLog ', user)
 
 // 预派单统计
 export const statistics = user => http.post('/front/pre/join/statistic ', user)
+
+//提取GS
+export const walletex = user => http.post('/front/pre/wallet/ex', user)
+
+//资产List
+export const assetlist = user => http.post('/front/financial/asset/list', user)
+
+//资产List详情
+export const assetsingle = user => http.post('/front/financial/asset/single', user)
+
+//资产List详情财务明细
+export const financialgetLog = user => http.post('/front/financial/getLog', user)

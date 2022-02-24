@@ -4,27 +4,34 @@
 			<view class="group_1">
 				<text>提取GS</text>
 				<view class="sched_input">
-					<u--input v-model="GS" border="none" @change="fntChange" color="rgba(0, 0, 0, 0.22)"></u--input>
+					<u--input v-model="GS" border="none" @change="fntChange" ></u--input>
 				</view>
 				<view class="info-title">
-					<text>最多可提出 {{FNT}}</text>
-					<text style="margin-left: 15rpx; color:rgba(58, 130, 254, 1);">全部提出</text>
+					<text>最多可提出 {{poolassetData.gs}}</text>
+					<view class="" style="flex: 1;">
+						
+					</view>
+					<text @click="poolassetDataGs" style="margin-left: 15rpx; color:rgba(58, 130, 254, 1);">全部提出</text>
 				</view>
 			</view>
-			<view class="group_1">
+			<view class="group_1" style="margin-top: 50rpx;">
 				<text>提取FNT</text>
 				<view class="sched_input">
 					<u--input v-model="FNT" border="none" @change="fntChange" color="rgba(26, 27, 28, 1)"></u--input>
 				</view>
 				<view class="info-title">
-					<text>最多可提出 {{FNT}}</text>
-					<text style="margin-left: 15rpx; color:rgba(58, 130, 254, 1);">全部提出</text>
+					<view>最多可提出 {{poolassetData.fnt}}</view>
+					<view class="" style="flex: 1;">
+						
+					</view>
+					<view @click="poolassetDataFnt" style="margin-left: 15rpx; color:rgba(58, 130, 254, 1);">全部提出</view>
 				</view>
 			</view>
 		</view>
 		<view class="sched-btn">
 			<u-button text="确定" class="btn" @click="show = true"></u-button>
 		</view>
+<!-- <<<<<<< HEAD
 		<u-popup :show="show" @close="close" @open="open" :round="15">
 			<lzt-popup>
 				<u--input placeholder="6位验证码" border="none">
@@ -34,23 +41,82 @@
 					</template>
 				</u--input>
 			</lzt-popup>
+======= -->
+		<u-popup :show="show" round="40rpx" mode="bottom" @close="close" @open="open">
+			<view class="trade-box">
+				<view class="sub-title">
+					请输入资金密码
+				</view>
+				<view>
+					<view class="code-box p75">
+						<u-code-input dot class="code-input" v-model="tradePwd" :maxlength="6"></u-code-input>
+					</view>
+					<u-button @click="handleNext()" class="btn-shadow next-btn" color="#3A82FE" type="primary"
+						text="提取"></u-button>
+				</view>
+			</view>
 		</u-popup>
 	</view>
 </template>
 
 <script>
 	// import LztPopup from '@/components/LztPopup'
+	import {
+		poolasset,walletex
+	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
 				GS: 0,
-				FNT: 28923.374923,
+				FNT: 0,
 				show: false,
-				tips: '',
-				seconds: 60,
+				tradePwd:'',
+				poolassetData:{}
 			}
 		},
+		onShow() {
+			this.poolassetFun()
+		},
 		methods: {
+			poolassetDataGs(){//全部提取GS
+				this.GS = this.poolassetData.gs
+			},
+			poolassetDataFnt(){//全部提取Fnt
+				this.FNT = this.poolassetData.fnt
+			},
+			poolassetFun(){//预排金额
+				poolasset().then(res=>{
+					this.poolassetData = res.obj
+				})
+			},
+			handleNext(){
+				if(!this.tradePwd || this.tradePwd.length!=6){
+					uni.showToast({
+						title:'请输入有效的密码',
+						icon:'none'
+					})
+					return
+				}
+				let data = {
+					tradePwd:this.tradePwd,
+					usdt:this.GS,
+					fnt:this.FNT
+				}
+				walletex(data).then(res=>{
+					console.log('asdf',res)
+					uni.showToast({
+						title:res.msg,
+						icon:'none'
+					})
+					if(res.code == 0){
+						uni.navigateBack({
+							
+						})
+					}else{
+						this.tradePwd = ''
+					}
+				})
+			},
 			fntChange() {
 				console.log(555)
 			},
@@ -101,7 +167,34 @@
 	page {
 		background-color: #F7FAFF;
 	}
+	.code-input {
+		justify-content: space-between;
+	}
+	.next-btn {
+		width: 600rpx;
+	}
+	.p75 {
+		padding: 0 75rpx;
+	}
+	.btn-shadow {
+		box-shadow: 0px 20px 40px 1px rgba(88, 130, 204, 0.17);
+		margin-top: 60rpx;
+	}
+	// 交易密码
+	.trade-box {
+		height: 70vh;
+		padding: 80rpx 0rpx 0;
+		font-size: 34rpx;
 
+		.sub-title {
+			margin-bottom: 64rpx;
+			padding: 0 75rpx;
+		}
+
+		.swiper-item {
+			font-weight: bold;
+		}
+	}
 	.extract {
 		padding: 32rpx;
 
@@ -133,6 +226,7 @@
 
 				.info-title {
 					margin-top: 10rpx;
+					display: flex;
 				}
 			}
 
