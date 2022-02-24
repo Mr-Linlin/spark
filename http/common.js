@@ -79,3 +79,10 @@ export const ajaxsendMyCode = user => http.post('/ajax/sendMyCode', user)
 
 //转账
 export const financialdotransfer = user => http.post('/front/financial/do/transfer', user)
+
+//存入记录
+export const rechargelist = user => http.post('/front/pre/recharge/list', user)
+
+//提取记录
+export const preexlist = user => http.post('/front/pre/ex/list', user)
+

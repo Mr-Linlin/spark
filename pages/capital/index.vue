@@ -32,7 +32,7 @@
 		<view class="" style="font-size: 32rpx;margin-left: 32rpx;font-weight: 600;">
 			现金账户
 		</view>
-		<view class="" style="">
+		<view class="" style="height: 700rpx;">
 			<view @click="accountDetailsNext(item)" v-for="(item,index) in assetlistData" :key="index" class="" style="width: 333rpx;height: 130rpx;background-color: #FFFFFF;float: left;margin-left: 32rpx;margin-top: 32rpx;">
 				<view class="" style="display: flex;align-items: center;height: 72rpx;">
 					<view class="" style="margin-left: 24rpx;">
@@ -54,6 +54,7 @@
 				</view>
 			</view>
 		</view>
+		
 	</view>
 </template>
 
