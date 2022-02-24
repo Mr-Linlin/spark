@@ -99,7 +99,7 @@ import {
 					pageSize: 20
 				}
 				teamlist(data).then(res=>{
-					if(res.code == 0){
+					if (res.obj.list.length !=0) {
 						this.teamlistData.push(...res.obj.list)
 					}
 					else{

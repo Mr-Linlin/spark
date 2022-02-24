@@ -94,7 +94,7 @@
 					pageSize: 20
 				}
 				destroylist(data).then(res => {
-					if (res.code == 0) {
+					if (res.obj.list.length !=0) {
 						this.destroylistData.push(...res.obj.list)
 					}else{
 					 	this.pageType = !this.pageType

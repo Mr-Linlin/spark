@@ -190,7 +190,7 @@
 					type:e1 == 0 ? '' : e1
 				}
 				financialgetLog(data).then(res=>{
-					if(res.code == 0){
+					if (res.obj.list.length !=0) {
 						this.financialgetLogData.push(...res.obj.list)
 					}
 					else{

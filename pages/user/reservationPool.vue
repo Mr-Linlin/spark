@@ -20,7 +20,7 @@
 							奖金池GS
 						</view>
 						<view class="" style="margin-top: 24rpx;font-size: 38rpx;text-shadow: 0px 0px #000;">
-							{{fnt}}
+							{{poolassetData.gs}}
 						</view>
 					</view>
 				</view>
@@ -32,7 +32,7 @@
 							FNT数量
 						</view>
 						<view class="" style="margin-top: 24rpx;font-size: 38rpx;text-shadow: 0px 0px #000;">
-							744289.28
+							{{poolassetData.fnt}}
 						</view>
 					</view>
 				</view>
@@ -72,48 +72,49 @@
 				GS提取
 			</view>
 		</view>
-		<view class="" style="display: flex;justify-content: center;">
-			<view class=""
+		<view v-for="(item,index) in rechargelistData" class="" style="display: flex;justify-content: center;">
+			<view  class=""
 				style="width: 686rpx;height: 234rpx;background-color: #FFFFFF;border-radius: 12rpx;margin-top: 40rpx;padding-left: 24rpx;padding-right: 24rpx;">
 				<view class=""
 					style="height: 82rpx;display: flex;align-items: center;font-size: 28rpx;text-shadow: 0px 0px #000;">
-					预约成功
+					{{type == 0 ? '预约' : '提取'}}成功
 				</view>
 				<view class="" style="display: flex;align-items: center;">
 					<view class="" style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
-						GS存入
+						GS{{type == 0 ? '存入' : '提取'}}
 					</view>
 					<view class="" style="flex: 1;">
 
 					</view>
 					<view class="" style="font-size: 24rpx;text-shadow: 0px 0px #000;">
-						7887.81
+						{{item.gs}}
 					</view>
 				</view>
 				<view class="" style="display: flex;align-items: center;margin-top: 20rpx;">
 					<view class="" style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
-						FNT存入
+						FNT{{type == 0 ? '存入' : '提取'}}
 					</view>
 					<view class="" style="flex: 1;">
 
 					</view>
 					<view class="" style="font-size: 24rpx;text-shadow: 0px 0px #000;">
-						7887.81
+						{{item.fnt}}
 					</view>
 				</view>
 				<view class="" style="display: flex;align-items: center;margin-top: 20rpx;">
 					<view class="" style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
-						预约时间
+						{{type == 0 ? '预约' : '提取'}}时间
 					</view>
 					<view class="" style="flex: 1;">
 
 					</view>
 					<view class="" style="font-size: 24rpx;text-shadow: 0px 0px #000;">
-						7887.81
+						{{item.createTime}}
 					</view>
 				</view>
 			</view>
 		</view>
+		<u-loadmore :status="status" />
 		<!-- <view :key="index" v-for="(item,index) in joinlistData" class="" style="margin-top: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
 			<view class="" style="display: flex;align-items: center;">
 				<view class="" style="font-size: 28rpx;color: rgba(0, 0, 0, 0.66);text-shadow: 0px 0px #000;">
@@ -144,29 +145,31 @@
 <script>
 	import {
 		poolasset,
-		joinlist
+		rechargelist,
+		preexlist
 	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
-				fnt: '',
-				joinlistData: [],
+				poolassetData: {},
 
 				status: 'nomore',
 				page: 1,
 				pageType: true,
-				type: 0
+				type: 0,
+				
+				rechargelistData:[]//预存记录
 			}
 		},
 		onLoad() {
 			this.poolassetFun()
-			this.joinlistFun()
+			this.rechargelistFun()
 		},
 		onReachBottom() {
 			if (this.pageType) {
 				this.status = 'loading';
 				this.page++
-				this.joinlistFun()
+				this.rechargelistFun()
 			} else {
 				this.status = 'nomore';
 			}
@@ -179,28 +182,40 @@
 			},
 			typeFun(e) {
 				this.type = e
+				this.page = 1//重置分页
+				this.pageType=true
+				this.rechargelistData=[]
+				this.rechargelistFun()
 			},
-			poolassetFun() { //预约池金额
+			poolassetFun() { //预排单金额
 				poolasset().then(res => {
-					console.log(res)
-					this.fnt = res.obj.fnt
+					this.poolassetData = res.obj
 				})
 			},
-			joinlistFun() { //预约池List
-				console.log('asdfasd')
+			rechargelistFun() {
 				let data = {
-					type: 2,
 					pageNum: this.page,
-					pageSize: 20
+					pageSize: 5
 				}
-				joinlist(data).then(res => {
-					if (res.code == 0) {
-						this.joinlistData.push(...res.obj.list)
-					} else {
-						this.pageType = !this.pageType
-					}
-				})
+				if(this.type == 0){//存入记录
+					rechargelist(data).then(res => {
+						if (res.obj.list.length !=0) {
+							this.rechargelistData.push(...res.obj.list)
+						} else {
+							this.pageType = !this.pageType
+						}
+					})
+				}else{//提取记录
+					preexlist(data).then(res => {
+						if (res.obj.list.length !=0) {
+							this.rechargelistData.push(...res.obj.list)
+						} else {
+							this.pageType = !this.pageType
+						}
+					})
+				}
 			},
+			
 			retn() {
 				uni.navigateBack({
 

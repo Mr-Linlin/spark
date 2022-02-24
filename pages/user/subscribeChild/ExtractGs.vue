@@ -100,10 +100,10 @@
 				let data = {
 					tradePwd:this.tradePwd,
 					usdt:this.GS,
-					fnt:this.FNT
+					fnt:this.FNT,
+					gs:this.GS
 				}
 				walletex(data).then(res=>{
-					console.log('asdf',res)
 					uni.showToast({
 						title:res.msg,
 						icon:'none'
@@ -118,7 +118,6 @@
 				})
 			},
 			fntChange() {
-				console.log(555)
 			},
 			open() {
 				// console.log('open');
