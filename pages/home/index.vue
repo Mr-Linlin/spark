@@ -23,26 +23,7 @@
 		<view class="">
 			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
 				<view ref="div" id="div1">
-					<a href="#">标签云</a>
-					<a href="#" class="red">PHP</a>
-					<a href="#">瀑布流</a>
-					<a href="#">Tab</a>
-					<a href="#" class="blue">流体布局</a>
-					<a href="#">SEO</a>
-					<a href="#" class="red">彩蛋</a>
-					<a href="#" class="green">JavaScript</a>
-					<a href="#">miaov</a>
-					<a href="#" class="red">CSS</a>
-					<a href="#">asp.net</a>
-					<a href="#" class="blue">蓝色经典</a>
-					<a href="#">OOP</a>
-					<a href="#" class="red">Android</a>
-					<a href="#" class="blue">妙味茶馆</a>
-					<a href="#">dialog</a>
-					<a href="#" class="blue">淘客</a>
-					<a href="#">Pin</a>
-					<a href="#">微博</a>
-					<a href="#" class="green">IPhone</a>
+					<a href="#" v-for="(item,index) in tagsNum" :style="{color:colors[index]}">+{{item}}</a>
 				</view>
 			</view>
 			<view class="">
@@ -200,6 +181,9 @@
 				content: {}, //公告
 				orders: null,
 				timeData: {},
+				tagsNum: [],
+				colors: [], //存储颜色
+
 			}
 		},
 		onShow() {
@@ -214,8 +198,29 @@
 		onLoad() {
 			this.getMessage()
 			this.getNotice()
+			this.changeColors();
+			for (let i = 0; i < 30; i++) {
+				let num = this.getRandomIntInclusive(1, 50);
+				num = parseInt(num, 10);
+				this.tagsNum.push(num);
+			}
 		},
 		methods: {
+			//生成50个随机数
+			getRandomIntInclusive(min, max) {
+				min = Math.ceil(min);
+				max = Math.floor(max);
+				return Math.floor(Math.random() * (max - min + 1)) + min; //含最大值，含最小值 
+			},
+			changeColors() {
+				//随机变色
+			 for (var i = 0; i < 50; i++) {
+					var r = Math.floor(Math.random() * 256);
+					var g = Math.floor(Math.random() * 256);
+					var b = Math.floor(Math.random() * 256);
+					this.colors[i] = "rgb(" + r + "," + g + "," + b + ")";
+				}
+			},
 			/**处理网络请求，获取数据**/
 			// 获取首页资讯
 			async getMessage() {
@@ -278,10 +283,10 @@
 <style lang="scss">
 	#div1 {
 		position: relative;
-		width: 350px;
-		height: 350px;
+		width: 600rpx;
+		height: 600rpx;
 		/* border: 1px solid #000; */
-		margin: 20px auto 0;
+		margin: 20rpx auto 0;
 	}
 
 	#div1 a {
@@ -292,11 +297,11 @@
 		color: #000;
 		font-weight: bold;
 		text-decoration: none;
-		padding: 3px 6px;
+		padding: 3rpx 6rpx;
 	}
 
 	#div1 a:hover {
-		border: 1px solid #eee;
+		border: 2rpx solid #eee;
 		background: #FFF;
 	}
 
@@ -313,13 +318,13 @@
 	}
 
 	p {
-		font: 16px Microsoft YaHei;
+		font: 16rpx Microsoft YaHei;
 		text-align: center;
 		color: #ba0c0c;
 	}
 
 	p a {
-		font-size: 14px;
+		font-size: 14rpx;
 		color: #ba0c0c;
 	}
 
