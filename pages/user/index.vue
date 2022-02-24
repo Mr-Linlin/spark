@@ -91,11 +91,11 @@
 					},
 				{
 					img: '../../static/user/83649.png',
-					name: '能量预存储【GS预约排单(原预排单)】',
+					name: '能量预存储',
 					icon: '../../static/user/7124571.png'
 				}, {
 					img: '../../static/user/1148901653.png',
-					name: '我的能量【我的预排单(原预排单记录)】',
+					name: '我的能量',
 					icon: '../../static/user/7124571.png'
 				},  {
 					img: '../../static/user/138458134.png',
@@ -155,12 +155,12 @@
 					})
 				}
 
-				if (e.name === '能量预存储【GS预约排单(原预排单)】') {
+				if (e.name === '能量预存储') {
 					uni.navigateTo({
 						url: './reservationPool'
 					})
 				}
-				if (e.name === '我的能量【我的预排单(原预排单记录)】') {
+				if (e.name === '我的能量') {
 					uni.navigateTo({
 						url: './preOrderRecord'
 					})

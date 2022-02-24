@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App'
 import store from './store'
-import $ from './static/js/jquery-1.7.2.min.js'
-import windstagball from './static/js/jquery.windstagball.js'
+// import $ from './static/js/jquery-1.7.2.min.js'
+// import windstagball from './static/js/jquery.windstagball.js'
 
 
 import emptyTips from '@/components/empty/empty.vue'
@@ -14,6 +14,9 @@ import tools from "utils/tools.js"
 import ui from 'utils/ui.js'
 import verify from 'utils/verify.js'
 import uView from "uview-ui";
+import tagCloud from 'v-tag-cloud'
+
+Vue.use(tagCloud)
 
 Vue.use(mixin)
 Vue.use(uView)

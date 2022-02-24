@@ -22,9 +22,10 @@
 		</view>
 		<view class="">
 			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
-				<view ref="div" id="div1">
+				<!-- <view ref="div" id="div1">
 					<a href="#" v-for="(item,index) in tagsNum" :style="{color:colors[index]}">+{{item}}</a>
-				</view>
+				</view> -->
+				<tag-cloud :data="hotTag" @clickTag="clickTagItem"></tag-cloud>
 			</view>
 			<view class="">
 				<view class=""
@@ -183,6 +184,51 @@
 				timeData: {},
 				tagsNum: [],
 				colors: [], //存储颜色
+				hotTag: [{
+						id: "05023f8da31c4b4187cc6899e2a3aec2",
+						name: "镇远县"
+					},
+					{
+						id: "0ef028e5278f4f5ca31f99f1bd22b1cc",
+						name: "剑河县"
+					},
+					{
+						id: "1a32ef04d3c548eaa6777abb46da32f2",
+						name: "台江县"
+					},
+					{
+						id: "2c26488325bd493687d16315fe0e5fdd",
+						name: "岑巩县"
+					},
+					{
+						id: "3a786111828a4b9f89ae9da25753eedd",
+						name: "黎平"
+					},
+					{
+						id: "4ed593eed91b4244969995237f5c96c5",
+						name: "丹寨县"
+					},
+					{
+						id: "615d2c178f1a47cb8d473823e74f5386",
+						name: "凯里市"
+					},
+					{
+						id: "76f652df03db43349272a9aff492b065",
+						name: "榕江县"
+					},
+					{
+						id: "8ff29d0d35e548feb945063b34ed9c9b",
+						name: "黄平县"
+					},
+					{
+						id: "a8ac2170008746fdadc05ea461bc5e37",
+						name: "雷山县"
+					},
+					{
+						id: "a8ac2170008746fdadc05ea461bc5e37",
+						name: "99"
+					},
+				],
 
 			}
 		},
@@ -190,10 +236,10 @@
 
 		},
 		mounted() {
-			$('#div1').windstagball({
-				radius: 120,
-				speed: 10
-			});
+			// $('#div1').windstagball({
+			// 	radius: 120,
+			// 	speed: 10
+			// });
 		},
 		onLoad() {
 			this.getMessage()
@@ -214,12 +260,15 @@
 			},
 			changeColors() {
 				//随机变色
-			 for (var i = 0; i < 50; i++) {
+				for (var i = 0; i < 50; i++) {
 					var r = Math.floor(Math.random() * 256);
 					var g = Math.floor(Math.random() * 256);
 					var b = Math.floor(Math.random() * 256);
 					this.colors[i] = "rgb(" + r + "," + g + "," + b + ")";
 				}
+			},
+			clickTagItem(tag) {
+				console.log(tag)
 			},
 			/**处理网络请求，获取数据**/
 			// 获取首页资讯

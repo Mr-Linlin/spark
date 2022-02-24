@@ -114,6 +114,15 @@
 				}
 			}
 		},
+		// {
+		// 	//测试
+		// 	"path": "pages/server/childComps/index",
+		// 	"style": {
+		// 		"app-plus": {
+		// 			"titleNView": false
+		// 		}
+		// 	}
+		// },
 		{
 			//实名认证
 			"path": "pages/login/certification/index",
@@ -191,6 +200,7 @@
 			}
 		}, { //Spark记录
 			"path": "pages/user/SparkRecord",
+
 			"style": {
 				"app-plus": {
 					"titleNView": false
@@ -302,14 +312,14 @@
 			"style": {
 				"navigationBarTitleText": "消息/公告",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor":"#FAFCFF"
+				"navigationBarBackgroundColor": "#FAFCFF"
 			}
 		}, {
 			"path": "pages/home/Information",
 			"style": {
 				"navigationBarTitleText": "快捷资讯",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor":"#FAFCFF"
+				"navigationBarBackgroundColor": "#FAFCFF"
 			}
 		},
 		{
