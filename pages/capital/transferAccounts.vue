@@ -5,10 +5,10 @@
 				style="width: 686rpx;height: 162rpx;border-radius: 12rpx;display: flex;align-items: center;background: linear-gradient(135deg, #4679F0 0%, #2D67F0 100%);color: #FFFFFF;">
 				<view class="" style="margin-left: 44rpx;">
 					<view class="" style="font-size: 24rpx;">
-						{{currencyListData.name}}资产
+						{{currencyListData.currencyName}}资产
 					</view>
 					<view class="" style="font-size: 38rpx;margin-top: 10rpx;text-shadow: 0px 0px #000;">
-						2891.1
+						{{currencyListData.available}}
 					</view>
 				</view>
 				<view class="" style="flex: 1;">
@@ -58,7 +58,7 @@
 
 				<view class="" style="display: flex;align-items: center;height: 80rpx;font-size: 24rpx;">
 					<view class="" style="margin-left: 32rpx;">
-						最多可转出：28923.374923
+						最多可转出：{{currencyListData.available}}
 					</view>
 					<view @click="allProposed" class="" style="color: #3A82FE;margin-left: 10rpx;">
 						全部提出
@@ -78,7 +78,7 @@
 
 					</view>
 					<view class="">
-						239.902
+						{{currencyListData.transferFee}}
 					</view>
 				</view>
 
@@ -91,7 +91,7 @@
 
 					</view>
 					<view class="">
-						239.902
+						{{quantity - (quantity*currencyListData.transferFee)}}
 					</view>
 				</view>
 			</view>
@@ -140,10 +140,10 @@
 							<view class=""
 								style="width: 630rpx;height: 96rpx;background-color: #F7FAFF;border-radius: 8rpx;margin-top: 20rpx;display: flex;align-items: center;">
 								<view class="" style="margin-left: 33rpx;">
-									<image :src="item.pic" mode="" style="width: 30rpx;height: 30rpx;"></image>
+									<image :src="item.currencyLogo" mode="" style="width: 30rpx;height: 30rpx;"></image>
 								</view>
 								<view class="" style="margin-left: 26rpx;">
-									{{item.name}}
+									{{item.currencyName}}
 								</view>
 								<view class="" style="flex: 1;">
 
@@ -213,7 +213,8 @@
 		currencyList,
 		userbaseInfo,
 		ajaxsendMyCode,
-		financialdotransfer
+		financialdotransfer,
+		assetlist
 	} from '@/http/common.js'
 	export default {
 		data() {
@@ -231,8 +232,10 @@
 				account:'',
 				tradePwd:'',
 				quantity:'',
-				code:''
+				code:'',
 			}
+		},
+		onLoad(e) {
 		},
 		onShow() {
 			this.currencyListFun()
@@ -240,7 +243,7 @@
 		},
 		methods: {
 			allProposed(){//全部提出
-				
+				this.quantity = this.currencyListData.available
 			},
 			transferAccounts(){//转账
 				if(!this.account || !this.tradePwd || !this.quantity || !this.code){
@@ -254,11 +257,23 @@
 					account:this.account,
 					tradePwd:this.tradePwd,
 					quantity:this.quantity,
-					currencyId:this.currencyListData.id,
+					currencyId:this.currencyListData.currencyId,
 					code:this.code,
 				}
 				financialdotransfer(data).then(res=>{
-					
+					uni.showToast({
+						title:res.msg,
+						icon:'none'
+					})
+					if(res.code == 0){
+						setTimeout(() => {
+							uni.navigateBack({
+								
+							})
+						},2000)
+					}else{
+						this.tradePwd = ''
+					}
 				})
 			},
 			ajaxsendMyCodeFun(){//发送验证码
@@ -303,9 +318,9 @@
 			},
 			currencyListFun() { //获取可转账币种
 				let data = {
-					type: 3
+					type: 4
 				}
-				currencyList(data).then(res => {
+				assetlist(data).then(res => {
 					this.currencyListData = res.obj[0]
 					this.AllcurrencyListData = res.obj
 				})
