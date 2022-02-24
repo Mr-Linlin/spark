@@ -84,34 +84,27 @@
 						银河系星体
 					</view>
 					<view class="flex1">
-
 					</view>
 					<view class="SparkListContNameType">
-						未结算
+						{{getStatus(item.status)}}
 					</view>
 				</view>
-
-				<view class="GS">
-					<view class="GSprice">
-						82932
-					</view>
-					<view class="flex1">
-
-					</view>
-					<view class="GSAddprice">
-						+744289.28
+				<view class="between" style="margin-top: 37rpx;">
+					<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">排单额度</view>
+					<view style="font-size: 28rpx;font-weight: 550;">
+						8888
 					</view>
 				</view>
-
-				<view class="GSsum">
-					<view class="GSsumName">
-						预排总额
+				<view class="between">
+					<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">我的额度</view>
+					<view style="font-size: 28rpx;font-weight: 550;">
+						8888
 					</view>
-					<view class="flex1">
-
-					</view>
-					<view class="GSsumTime">
-						2023-12-29 23:51
+				</view>
+				<view class="between">
+					<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">创建时间</view>
+					<view style="font-size: 28rpx;font-weight: 550;">
+						{{item.createTime}}
 					</view>
 				</view>
 			</view>
@@ -133,7 +126,11 @@
 					type: 2
 				},
 				orderList: null,
-				statistics: {}
+				statistics: {},
+				status:{
+					1:'未结算',
+					2:'已结算'
+				}
 			}
 		},
 		onLoad() {
@@ -172,6 +169,9 @@
 				uni.navigateTo({
 					url: './HistoricalOrder'
 				})
+			},
+			getStatus(status){
+				return this.status[status]
 			}
 		}
 	}
@@ -185,6 +185,13 @@
 <style lang="scss" scoped>
 	.flex1 {
 		flex: 1;
+	}
+
+	.between {
+		display: flex;
+		justify-content: space-between;
+		padding: 0 32rpx;
+		margin-bottom: 24rpx;
 	}
 
 	.ht_88 {
@@ -202,9 +209,10 @@
 
 	.SparkRecordTitleBak {
 		width: 750rpx;
-		height: 562rpx;
+		// height: 562rpx;
 		background: linear-gradient(135deg, #4679F0 0%, #2D67F0 100%);
 		border-radius: 0rpx 0rpx 32rpx 32rpx;
+		padding-bottom: 54rpx;
 
 		.SparkRecordTitle {
 			display: flex;
