@@ -111,7 +111,6 @@
 		},
 		onShow() {
 			statistic().then(res => {
-				console.log(res.obj)
 				this.totalCnyData = res.obj.totalCny
 			})
 			this.assetlistFun()
@@ -122,7 +121,6 @@
 					type:3
 				}
 				assetlist(data).then(res=>{
-					console.log(res)
 					this.assetlistData = res.obj
 				})
 			},
@@ -151,8 +149,13 @@
 					})
 				}
 				if(e.name == '划转'){
-					uni.navigateTo({
-						url:'./Transfer'
+					// uni.navigateTo({
+					// 	url:'./Transfer'
+					// })
+					
+					uni.showToast({
+						title:'暂未开放',
+						icon:'none'
 					})
 				}
 			},

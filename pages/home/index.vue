@@ -101,7 +101,7 @@
 			</view>
 
 			<view class="flex_j" style="height: 234rpx;">
-				<view v-for="(item,index) in NoticeType" :key="index" class="homeType">
+				<view @click="NoticeTypeFun(item)" v-for="(item,index) in NoticeType" :key="index" class="homeType">
 					<view class="homeTypeImg">
 						<image :src="item.img" mode=""></image>
 					</view>
@@ -190,6 +190,20 @@
 			this.getNotice()
 		},
 		methods: {
+			NoticeTypeFun(e){
+				if(e.name == '交易所'){
+					
+				}
+				else if(e.name == '商城'){
+					
+				}
+				else if(e.name == 'FIL概况'){
+					
+				}
+				else if(e.name == '团队'){
+					
+				}
+			},
 			/**处理网络请求，获取数据**/
 			// 获取首页资讯
 			async getMessage() {

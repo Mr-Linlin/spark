@@ -18,10 +18,10 @@
 				</view>
 				<view class="" style="display: flex;align-items: center;margin-top: 20rpx;">
 					<view class=""
-						style="width: 82rpx;height: 36rpx;background: rgba(0, 0, 0, 0.22);color: #FFFFFF;font-size: 22rpx;text-align: center;border-radius: 5rpx;">
-						分享码
+						style="width: 82rpx;height: 36rpx;background: rgba(46, 122, 254, 0.11);color: #3A82FE;font-size: 22rpx;text-align: center;border-radius: 5rpx;">
+						邀请码
 					</view>
-					<view class="" style="font-size: 24rpx;color: rgba(0, 0, 0, 0.44);margin-left: 10rpx;">
+					<view class="" style="font-size: 24rpx;color: #3A82FE;margin-left: 10rpx;">
 						{{userData.inviteCode}}
 					</view>
 				</view>
@@ -83,29 +83,29 @@
 	export default {
 		data() {
 			return {
-				usericon: [
-					{
+				usericon: [{
 						img: '../../static/user/134850618435.png',
 						name: 'Sparek',
 						icon: '../../static/user/7124571.png'
 					},
-				{
-					img: '../../static/user/83649.png',
-					name: 'GS预约排单',
-					icon: '../../static/user/7124571.png'
-				}, {
-					img: '../../static/user/1148901653.png',
-					name: '预排单记录',
-					icon: '../../static/user/7124571.png'
-				},  {
-					img: '../../static/user/138458134.png',
-					name: '销毁',
-					icon: '../../static/user/7124571.png'
-				}, {
-					img: '../../static/user/2865089.png',
-					name: '我的团队',
-					icon: '../../static/user/7124571.png'
-				}],
+					{
+						img: '../../static/user/83649.png',
+						name: 'GS预约排单',
+						icon: '../../static/user/7124571.png'
+					}, {
+						img: '../../static/user/1148901653.png',
+						name: '预排单记录',
+						icon: '../../static/user/7124571.png'
+					}, {
+						img: '../../static/user/138458134.png',
+						name: '销毁',
+						icon: '../../static/user/7124571.png'
+					}, {
+						img: '../../static/user/2865089.png',
+						name: '我的团队',
+						icon: '../../static/user/7124571.png'
+					}
+				],
 
 				usericon2: [{
 					img: '../../static/user/09878234.png',
