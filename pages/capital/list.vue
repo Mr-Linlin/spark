@@ -1,6 +1,6 @@
 <template>
   <view class="box">
-    <view class="item" v-for="item in 10">
+    <view  class="item" :key="index" v-for="(item,index) in 10">
       <view class="desc">
         <view class="title">
           微信大改版UI设计分析！分析点大统计

@@ -105,7 +105,7 @@
 					全部交易
 				</view>
 				<scroll-view class='left' scroll-y style="height: 500rpx;">
-					<view @click="typeFun(item.key)" v-for="(item,index) in financialgetLogTypeData" class="flex_j">
+					<view :key="index" @click="typeFun(item.key)" v-for="(item,index) in financialgetLogTypeData" class="flex_j">
 						<view :class="typeData == item.key ? 'clr_3A82FE' : ''" class="filterTransactionCnt flex_a">
 							{{item.name}}
 						</view>
