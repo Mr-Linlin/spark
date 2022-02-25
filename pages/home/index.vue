@@ -11,7 +11,7 @@
 
 				</view>
 				<view class="" style="margin-right: 32rpx;">
-					<image src="../../static/home/Status.png" style="width: 44rpx;height: 44rpx;margin-top: 98rpx;"
+					<image @click="announcementNext" src="../../static/home/Status.png" style="width: 44rpx;height: 44rpx;margin-top: 98rpx;"
 						mode=""></image>
 				</view>
 				<view class=""
@@ -22,24 +22,15 @@
 		</view>
 		<view class="">
 			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
-				<!-- <view class="" style="width: 709rpx;height: 709rpx;border: 1rpx solid #007AFF;border-radius: 50%;">
-				</view> -->
-				
-				<!-- <video  enable-progress-gesture="false" autoplay controls="false" loop  style="width: 750rpx;height: 700rpx;" id="myVideo" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2018cd11-5bff-40a9-9f0f-1202263c2472.mp4" controls>
-					<cover-view style="width: 100rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;">
-					</cover-view>
-					<cover-view style="width: 50rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;right: 0;">
-					</cover-view>  
-				</video> -->
-					<video id="myVideo" :muted="true" :enable-play-gesture="false" :duration="10" enable-progress-gesture="false" autoplay controls="false" loop style="width: 750rpx;height: 700rpx;"
-					     src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2018cd11-5bff-40a9-9f0f-1202263c2472.mp4">
-					     <cover-view style="width: 100rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;">
-					     </cover-view>
-					     <cover-view style="width: 50rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;right: 0;">
-					     </cover-view>
-						 <cover-view v-if="vidoType" style="width: 100%;height: 700rpx;position: absolute;background-color: #FFFFFF;">
-						 </cover-view>
-					</video>
+				<video id="myVideo" :muted="true" :enable-play-gesture="false" :duration="10" enable-progress-gesture="false" autoplay controls="false" loop style="width: 750rpx;height: 700rpx;"
+					 src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2018cd11-5bff-40a9-9f0f-1202263c2472.mp4">
+					 <cover-view style="width: 100rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;">
+					 </cover-view>
+					 <cover-view style="width: 50rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;right: 0;">
+					 </cover-view>
+					 <cover-view v-if="vidoType" style="width: 100%;height: 700rpx;position: absolute;background-color: #FFFFFF;">
+					 </cover-view>
+				</video>
 			</view>
 			<view class="">
 				<view class=""
@@ -190,7 +181,7 @@
 					name: 'FIL概况'
 				}, {
 					img: '../../static/1438913.png',
-					name: '团队'
+					name: '战队'
 				}],
 				messageList: null, //资讯
 				content: {}, //公告
@@ -217,19 +208,26 @@
 			this.getNotice()
 		},
 		methods: {
-			
 			NoticeTypeFun(e){
 				if(e.name == '交易所'){
 					
 				}
 				else if(e.name == '商城'){
-					
+					uni.showToast({
+						title:'暂未开放',
+						icon:'none'
+					})
 				}
 				else if(e.name == 'FIL概况'){
-					
+					uni.showToast({
+						title:'暂未开放',
+						icon:'none'
+					})
 				}
 				else if(e.name == '团队'){
-					
+					uni.navigateTo({
+						url:'../user/myTeam'
+					})
 				}
 			},
 			clickTagItem(tag) {

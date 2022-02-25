@@ -3,8 +3,8 @@
 		<view class="bagks" style="width: 750rpx;height: 422rpx;">
 			<view class="" style="display: flex;align-items: center;padding-top: 70rpx;color: #FFFFFF;">
 				<image @click="retn" src="../../static/38192485.png" style="width: 44rpx;height: 44rpx;margin-left: 32rpx;" mode=""></image>
-				<view class="" style="font-size: 34rpx;margin-left: 248rpx;">
-					预排单
+				<view class="" style="font-size: 34rpx;margin-left: 218rpx;">
+					能量预存储
 				</view>
 				<view class="" style="flex: 1;"></view>
 				<view @click="preOrderRecordNext" class="" style="font-size: 24rpx;margin-right: 32rpx;color:rgba(255,255,255,0.8)">

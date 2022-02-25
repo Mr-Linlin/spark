@@ -86,3 +86,8 @@ export const rechargelist = user => http.post('/front/pre/recharge/list', user)
 //提取记录
 export const preexlist = user => http.post('/front/pre/ex/list', user)
 
+//修改头像
+export const modify = user => http.post('/front/user/modify/pic', user)
+
+// 公告
+export const searchgetContent= user => http.post('/front/search/getContent', user)

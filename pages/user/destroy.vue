@@ -12,7 +12,7 @@
 			</view>
 		</view>
 		<view class="number-box" >
-			<view class="desc">FNT销毁总量</view>
+			<view class="desc">体力消耗(FNT)</view>
 			<view class="num">{{destroytotalData}}</view>
 		</view>
 		<view class="list-box">

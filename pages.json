@@ -24,17 +24,6 @@
 			}
 		},
 		{
-			//
-			"path": "pages/login/index",
-			"style": {
-				"app-plus": {
-					"animationType": "fade-in",
-					"animationDuration": 300,
-					"titleNView": false
-				}
-			}
-		},
-		{
 			//首页
 			"path": "pages/home/index",
 			"style": {
@@ -202,16 +191,15 @@
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#FAFCFF"
 			}
-		}, { //我的团队
+		}, { //我的战队
 			"path": "pages/user/myTeam",
 			"style": {
-				"navigationBarTitleText": "我的团队",
+				"navigationBarTitleText": "我的战队",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#FAFCFF"
 			}
 		}, { //Spark记录
 			"path": "pages/user/SparkRecord",
-
 			"style": {
 				"app-plus": {
 					"titleNView": false
@@ -321,7 +309,7 @@
 		}, {
 			"path": "pages/home/announcement",
 			"style": {
-				"navigationBarTitleText": "消息/公告",
+				"navigationBarTitleText": "消息",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#FAFCFF"
 			}

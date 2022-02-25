@@ -10,7 +10,7 @@
 					<image @click="retn" src="../../static/38192485.png" mode=""></image>
 				</view>
 				<view class="SparkRecordTitleName">
-					Spark记录
+					能量守护
 				</view>
 				<view class="flex1">
 

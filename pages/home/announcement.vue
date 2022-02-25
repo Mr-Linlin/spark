@@ -1,14 +1,14 @@
 <template>
   <view class="list">
-    <view class="item" :key="i" v-for="(item,i) in 10">
-      <view class="time">1分钟前</view>
+    <view class="item" :key="i" v-for="(item,i) in getNoticeData">
+      <view class="time">{{item.createTime}}</view>
       <view class="content">
-        <image class="image" src=""></image>
+        <!-- <image class="image" src=""></image> -->
         <view class="title">
-          智联盟再创新高，APP日活跃提升80%
+          {{item.title}}
         </view>
-        <view class="text">
-          7月10日，移动应用市场研究机构App Annie发布的数据显示，2019年第二季度全球App下载量和用户支
+        <view v-html="item.content" class="text">
+          
         </view>
       </view>
     </view>
@@ -16,12 +16,28 @@
 </template>
 
 <script>
+import {getNotice} from '@/http/home.js'
 export default {
   name:"",
   data(){
     return{
-
+		getNoticeData:[]
     }
+  },
+  onShow() {
+  	this.getNoticeFun()
+  },
+  methods:{
+	  getNoticeFun(){//公告列表
+		  let data = {
+			  pageNum:1,
+			  pageSize:20,
+		  }
+		  getNotice(data).then(res=>{
+			  console.log(res)
+			  this.getNoticeData = res.obj.contentList
+		  })
+	  }
   }
 }
 </script>

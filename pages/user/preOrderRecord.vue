@@ -10,7 +10,7 @@
 					<image @click="retn" src="../../static/38192485.png" mode=""></image>
 				</view>
 				<view class="SparkRecordTitleName">
-					预排单
+					我的能量
 				</view>
 				<view class="flex1">
 
@@ -230,7 +230,7 @@
 			.SparkRecordTitleName {
 				font-size: 34rpx;
 				color: #FFFFFF;
-				margin-left: 248rpx;
+				margin-left: 238rpx;
 			}
 
 			.SparkRecordTitleName2 {
