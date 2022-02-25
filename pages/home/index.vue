@@ -219,10 +219,12 @@
 					})
 				}
 				else if(e.name == 'FIL概况'){
-					uni.showToast({
-						title:'暂未开放',
-						icon:'none'
-					})
+					// uni.showToast({
+					// 	title:'暂未开放',
+					// 	icon:'none'
+					// })
+					// https://fifox.info/en
+					location.href = 'https://fifox.info/en'
 				}
 				else if(e.name == '团队'){
 					uni.navigateTo({
