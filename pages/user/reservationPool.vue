@@ -75,8 +75,9 @@
 				提取能量
 			</view>
 		</view>
-		<view v-for="(item,index) in rechargelistData" class="" style="display: flex;justify-content: center;">
-			<view class=""
+		<view v-for="(item,index) in rechargelistData" :key="index" class="" style="display: flex;justify-content: center;">
+			<view  class=""
+
 				style="width: 686rpx;height: 234rpx;background-color: #FFFFFF;border-radius: 12rpx;margin-top: 40rpx;padding-left: 24rpx;padding-right: 24rpx;">
 				<view class=""
 					style="height: 82rpx;display: flex;align-items: center;font-size: 28rpx;text-shadow: 0px 0px #000;">

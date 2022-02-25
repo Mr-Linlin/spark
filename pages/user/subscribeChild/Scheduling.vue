@@ -12,11 +12,7 @@
 				<view class="fnt_num">
 					所需体力{{this.FNT}}FNT
 				</view>
-<<<<<<< HEAD
 				<text style="margin-right: 10rpx;">所需体力FNT=GS*4%</text>
-=======
-				<text style="margin-right: 10rpx;">所需FNT=GS*%4</text>
->>>>>>> 4db1ff106095c7f3683035986aa7df015abbcaa3
 				<text style="color:rgba(247, 69, 57, 1) ;">FNT可用{{poolassetData.fnt}}</text>
 			</view>
 		</view>
