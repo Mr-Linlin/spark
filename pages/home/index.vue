@@ -232,6 +232,9 @@
 					
 				}
 			},
+			clickTagItem(tag) {
+				console.log(tag)
+			},
 			/**处理网络请求，获取数据**/
 			// 获取首页资讯
 			async getMessage() {

@@ -14,6 +14,9 @@ import tools from "utils/tools.js"
 import ui from 'utils/ui.js'
 import verify from 'utils/verify.js'
 import uView from "uview-ui";
+import tagCloud from 'v-tag-cloud'
+
+Vue.use(tagCloud)
 
 Vue.use(mixin)
 Vue.use(uView)

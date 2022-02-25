@@ -9,14 +9,14 @@
 		<!-- 内容 -->
 		<view class="gs-content">
 			<!-- 切换Tab -->
-			<u-sticky offset-top="0">
+			<u-sticky offset-top="88">
 				<lzt-tabs :titles="serves" @currentIndex='currentIndex' />
 			</u-sticky>
 
 			<view class="fil" v-if="curent===0">
 				<serverfil :list="list" @buyClick="buyClick" />
 			</view>
-			<view class="fnt" v-if="curent===1">
+			<view class="fnt" v-if="curent===1" style="margin-top: 88rpx;">
 				<serverfnt />
 			</view>
 		</view>
