@@ -229,7 +229,7 @@
 						name: "99"
 					},
 				],
-
+				
 			}
 		},
 		onShow() {
@@ -245,11 +245,7 @@
 			this.getMessage()
 			this.getNotice()
 			this.changeColors();
-			for (let i = 0; i < 30; i++) {
-				let num = this.getRandomIntInclusive(1, 50);
-				num = parseInt(num, 10);
-				this.tagsNum.push(num);
-			}
+			
 		},
 		methods: {
 			//生成50个随机数

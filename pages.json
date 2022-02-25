@@ -194,7 +194,7 @@
 		}, { //我的团队
 			"path": "pages/user/myTeam",
 			"style": {
-				"navigationBarTitleText": "我的团队",
+				"navigationBarTitleText": "我的战队",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#FAFCFF"
 			}
@@ -202,6 +202,7 @@
 			"path": "pages/user/SparkRecord",
 
 			"style": {
+				"navigationBarTitleText": "能量守护",
 				"app-plus": {
 					"titleNView": false
 				}
@@ -268,7 +269,7 @@
 		{
 			"path": "pages/user/subscribeChild/Scheduling",
 			"style": {
-				"navigationBarTitleText": "预约排单",
+				"navigationBarTitleText": "预存能量",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#FAFCFF"
 			}
@@ -278,7 +279,7 @@
 		, {
 			"path": "pages/user/subscribeChild/ExtractGs",
 			"style": {
-				"navigationBarTitleText": "提取GS",
+				"navigationBarTitleText": "提取能量",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#FAFCFF"
 			}

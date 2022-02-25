@@ -85,4 +85,8 @@ export const rechargelist = user => http.post('/front/pre/recharge/list', user)
 
 //提取记录
 export const preexlist = user => http.post('/front/pre/ex/list', user)
+// spark抢单记录
+export const getRobbery = user => http.post('/front/pdd/join/list', user)
+// spark抢单统计
+export const pddStatistics = user => http.post('/front/pdd/join/statistic ', user)
 

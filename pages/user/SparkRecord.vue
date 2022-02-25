@@ -10,7 +10,7 @@
 					<image @click="retn" src="../../static/38192485.png" mode=""></image>
 				</view>
 				<view class="SparkRecordTitleName">
-					Spark记录
+					能量守护
 				</view>
 				<view class="flex1">
 
@@ -22,7 +22,7 @@
 
 			<view class="grabOrders">
 				<view class="grabOrdersName">
-					抢单总数
+					充能总数
 				</view>
 				<view class="grabOrdersSum">
 					{{statistics.total}}
@@ -32,7 +32,7 @@
 			<view class="sumCount">
 				<view class="sumCountName">
 					<view class="sumCountName2">
-						已结束总数
+						充能结束
 					</view>
 					<view class="sumCountNamePrice">
 						{{statistics.settled}}
@@ -40,7 +40,7 @@
 				</view>
 				<view class="sumCountName">
 					<view class="sumCountName2">
-						待结算总数
+						充能中
 					</view>
 					<view class="sumCountNamePrice">
 						{{statistics.unSettled}}
@@ -51,7 +51,7 @@
 			<view class="sumCount">
 				<view class="sumCountName">
 					<view class="sumCountName2">
-						已回馈能量碎片
+						已回馈能量
 					</view>
 					<view class="sumCountNamePrice">
 						{{statistics.hasReturned}}
@@ -59,7 +59,7 @@
 				</view>
 				<view class="sumCountName">
 					<view class="sumCountName2">
-						待返能量碎片
+						待回馈能量
 					</view>
 					<view class="sumCountNamePrice">
 						{{statistics.unReturned}}
@@ -76,7 +76,7 @@
 		</view>
 
 		<view class="backlog" v-if="current===0">
-			<view :key="index" v-for="(item,index) in orderList" class="flex_j mt_30">
+			<view :key="index" v-for="(item,index) in sparks[type].list" class="flex_j mt_30">
 				<view class="SparkListCont">
 					<view class="SparkListContType">
 						<view class="Venus">
@@ -93,19 +93,19 @@
 						</view>
 					</view>
 					<view class="between" style="margin-top: 37rpx;">
-						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">预排GS总额</view>
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">我参与的充能</view>
 						<view style="font-size: 28rpx;font-weight: 550;">
-							+8888
+							{{item.quantity || 0}}
 						</view>
 					</view>
 					<view class="between">
-						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">参收益GS数量</view>
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">可获得充能</view>
 						<view style="font-size: 28rpx;font-weight: 550;">
-							+8888
+							{{item.profit || 0}}
 						</view>
 					</view>
 					<view class="between">
-						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">成功时间</view>
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">参与时间</view>
 						<view style="font-size: 28rpx;font-weight: 550;">
 							{{item.createTime}}
 						</view>
@@ -114,15 +114,52 @@
 			</view>
 		</view>
 		<view class="order-history" v-if="current===1">
-			历史订单
+			<view :key="index" v-for="(item,index) in sparks[type].list" class="flex_j mt_30">
+				<view class="SparkListCont">
+					<view class="SparkListContType">
+						<view class="Venus">
+							{{item.name}}
+						</view>
+						<view class="SparkListContName">
+							{{item.time}}点场
+						</view>
+						<view class="flex1">
+
+						</view>
+						<view class="SparkListContNameType" style="color: rgba(0, 0, 0, 0.66);">
+							{{getStatus(item.status)}}
+						</view>
+					</view>
+					<view class="between" style="margin-top: 37rpx;">
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">我参与的充能</view>
+						<view style="font-size: 28rpx;font-weight: 550;">
+							{{item.quantity || 0}}
+						</view>
+					</view>
+					<view class="between">
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">可获得充能</view>
+						<view style="font-size: 28rpx;font-weight: 550;">
+							{{item.profit || 0}}
+						</view>
+					</view>
+					<view class="between">
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">参与时间</view>
+						<view style="font-size: 28rpx;font-weight: 550;">
+							{{item.createTime}}
+						</view>
+					</view>
+				</view>
+			</view>
 		</view>
+		<!-- 上拉加载更多组件 -->
+		<u-loadmore :status="loading" />
 	</view>
 </template>
 
 <script>
 	import {
-		statistics,
-		joinlist
+		pddStatistics,
+		getRobbery
 	} from '@/http/common.js'
 	export default {
 		data() {
@@ -130,33 +167,53 @@
 				statistics: {},
 				orderList: null,
 				queryInfo: {
-					pageNum: 1,
+					pageNum: 0,
 					pageSize: 20,
-					type: 2
+					type: ''
 				},
+				type: 1,
 				status: {
-					1: '未完成能量值星体',
-					2: '完成能量值星体'
+					1: '充能中',
+					2: '已充能'
 				},
+				loading:'loadmore',
 				current: 0,
-				title: ['未完成订单', "以完成订单"]
+				title: ['星体充能', "充能结束"],
+				sparks: {
+					0: {
+						pageNum: 0,
+						list: []
+					},
+					1: {
+						pageNum: 0,
+						list: []
+					}
+				}
 			}
 		},
 		onLoad() {
-			this.getLogList()
+			this.getLogList(0)
+			this.getLogList(1)
 			this.getStatistic()
 		},
 		methods: {
 			// 获取去预派单记录
-			async getLogList() {
+			async getLogList(type) {
+				const pageNum = this.sparks[type].pageNum + 1;
+				let query = {
+					pageNum: pageNum,
+					pageSize: 20,
+					type: type
+				}
 				let {
 					code,
 					msg,
 					obj
-				} = await joinlist(this.queryInfo)
+				} = await getRobbery(query)
 				if (code !== 0) return uni.$u.toast(msg)
-				console.log(obj)
-				this.orderList = obj.list
+				this.sparks[type].pageNum += 1
+				this.sparks[type].list.push(...obj.list)
+				// console.log(this.sparks)
 			},
 			// 获取预排统计
 			async getStatistic() {
@@ -164,7 +221,7 @@
 					code,
 					msg,
 					obj
-				} = await statistics()
+				} = await pddStatistics()
 				if (code !== 0) return uni.$u.toast(msg)
 				console.log(obj)
 				this.statistics = obj
@@ -185,7 +242,16 @@
 			// 切换订单状态
 			tabOrder(index) {
 				this.current = index
+				if (this.current === 0) {
+					this.type = 1
+				} else if (this.current === 1) {
+					this.type = 0
+				}
 			}
+		},
+		onReachBottom() {
+			this.loading = 'loading';
+			this.getLogList(this.type)
 		}
 	}
 </script>

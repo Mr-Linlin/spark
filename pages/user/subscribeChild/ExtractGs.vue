@@ -2,12 +2,12 @@
 	<view class="extract">
 		<view class="box-card">
 			<view class="group_1">
-				<text>提取GS</text>
+				<text>提取能量</text>
 				<view class="sched_input">
 					<u--input v-model="GS" border="none" @change="fntChange" ></u--input>
 				</view>
 				<view class="info-title">
-					<text>最多可提出 {{poolassetData.gs}}</text>
+					<text>能量最多可提出 {{poolassetData.gs}}</text>
 					<view class="" style="flex: 1;">
 						
 					</view>
@@ -15,12 +15,12 @@
 				</view>
 			</view>
 			<view class="group_1" style="margin-top: 50rpx;">
-				<text>提取FNT</text>
+				<text>体力FNT</text>
 				<view class="sched_input">
 					<u--input v-model="FNT" border="none" @change="fntChange" color="rgba(26, 27, 28, 1)"></u--input>
 				</view>
 				<view class="info-title">
-					<view>最多可提出 {{poolassetData.fnt}}</view>
+					<view>体力最多可提出 {{poolassetData.fnt}}</view>
 					<view class="" style="flex: 1;">
 						
 					</view>
@@ -29,7 +29,7 @@
 			</view>
 		</view>
 		<view class="sched-btn">
-			<u-button text="确定" class="btn" @click="show = true"></u-button>
+			<u-button text="确定提取" class="btn" @click="show = true"></u-button>
 		</view>
 <!-- <<<<<<< HEAD
 		<u-popup :show="show" @close="close" @open="open" :round="15">

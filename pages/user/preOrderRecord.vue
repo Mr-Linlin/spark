@@ -10,19 +10,19 @@
 					<image @click="retn" src="../../static/38192485.png" mode=""></image>
 				</view>
 				<view class="SparkRecordTitleName">
-					预排单
+					我的能量
 				</view>
 				<view class="flex1">
 
 				</view>
 				<view @click="HistoricalOrderNext" class="SparkRecordTitleName2">
-					历史订单
+					<!-- 历史订单 -->
 				</view>
 			</view>
 
 			<view class="grabOrders">
 				<view class="grabOrdersName">
-					预排总数
+					充能总数
 				</view>
 				<view class="grabOrdersSum">
 					{{statistics.total}}
@@ -32,7 +32,7 @@
 			<view class="sumCount">
 				<view class="sumCountName">
 					<view class="sumCountName2">
-						已结束总数
+						充能结束
 					</view>
 					<view class="sumCountNamePrice">
 						{{statistics.settled}}
@@ -40,7 +40,7 @@
 				</view>
 				<view class="sumCountName">
 					<view class="sumCountName2">
-						待结算总数
+						充能中
 					</view>
 					<view class="sumCountNamePrice">
 						{{statistics.unSettled}}
@@ -51,7 +51,7 @@
 			<view class="sumCount">
 				<view class="sumCountName">
 					<view class="sumCountName2">
-						已返本金
+						已获得能量
 					</view>
 					<view class="sumCountNamePrice">
 						{{statistics.hasReturned}}
@@ -59,7 +59,7 @@
 				</view>
 				<view class="sumCountName">
 					<view class="sumCountName2">
-						待返本金
+						待回馈能量
 					</view>
 					<view class="sumCountNamePrice">
 						{{statistics.unReturned}}
@@ -69,46 +69,90 @@
 		</view>
 
 		<view class="SparkList">
-			<view class="SparkListTitle">
-				预排单交易
+			<view class="SparkListTitle" v-for="(item,index) in title" :key="index" :class="{active:current===index}"
+				@click="tabOrder(index)">
+				{{item}}
 			</view>
 		</view>
 
-		<view :key="index" v-for="(item,index) in orderList" class="flex_j mt_30">
-			<view class="SparkListCont">
-				<view class="SparkListContType">
-					<view class="Venus">
-						{{item.name}}
+		<view class="backlog" v-if="current===0">
+			<view :key="index" v-for="(item,index) in sparks[type].list" class="flex_j mt_30">
+				<view class="SparkListCont">
+					<view class="SparkListContType">
+						<view class="Venus">
+							{{item.name}}
+						</view>
+						<view class="SparkListContName">
+							{{item.time}}点场
+						</view>
+						<view class="flex1">
+
+						</view>
+						<view class="SparkListContNameType" style="color: #09BB07;">
+							{{getStatus(item.status)}}
+						</view>
 					</view>
-					<view class="SparkListContName">
-						银河系星体
+					<view class="between" style="margin-top: 37rpx;">
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">星体充能</view>
+						<view style="font-size: 28rpx;font-weight: 550;">
+							{{item.joinFnt/0.02 || 0}}
+						</view>
 					</view>
-					<view class="flex1">
+					<view class="between">
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">充能额度</view>
+						<view style="font-size: 28rpx;font-weight: 550;">
+							{{item.profit || 0}}
+						</view>
 					</view>
-					<view class="SparkListContNameType" style="color: #09BB07;">
-						{{getStatus(item.status)}}
-					</view>
-				</view>
-				<view class="between" style="margin-top: 37rpx;">
-					<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">排单额度</view>
-					<view style="font-size: 28rpx;font-weight: 550;">
-						8888
-					</view>
-				</view>
-				<view class="between">
-					<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">我的额度</view>
-					<view style="font-size: 28rpx;font-weight: 550;">
-						8888
-					</view>
-				</view>
-				<view class="between">
-					<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">创建时间</view>
-					<view style="font-size: 28rpx;font-weight: 550;">
-						{{item.createTime}}
+					<view class="between">
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">预存储时间</view>
+						<view style="font-size: 28rpx;font-weight: 550;">
+							{{item.createTime}}
+						</view>
 					</view>
 				</view>
 			</view>
 		</view>
+		<view class="order-history" v-if="current===1">
+			<view :key="index" v-for="(item,index) in sparks[type].list" class="flex_j mt_30">
+				<view class="SparkListCont">
+					<view class="SparkListContType">
+						<view class="Venus">
+							{{item.name}}
+						</view>
+						<view class="SparkListContName">
+							{{item.time}}点场
+						</view>
+						<view class="flex1">
+
+						</view>
+						<view class="SparkListContNameType" style="color: rgba(0, 0, 0, 0.66);">
+							{{getStatus(item.status)}}
+						</view>
+					</view>
+					<view class="between" style="margin-top: 37rpx;">
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">星体充能</view>
+						<view style="font-size: 28rpx;font-weight: 550;">
+							{{item.quantity || 0}}
+						</view>
+					</view>
+					<view class="between">
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">充能额度</view>
+						<view style="font-size: 28rpx;font-weight: 550;">
+							{{item.profit || 0}}
+						</view>
+					</view>
+					<view class="between">
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">预存储时间</view>
+						<view style="font-size: 28rpx;font-weight: 550;">
+							{{item.createTime}}
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 上拉加载更多组件 -->
+		<u-loadmore :status="loading" />
 	</view>
 </template>
 
@@ -125,29 +169,50 @@
 					pageSize: 20,
 					type: 2
 				},
+				type: 1,
+				current: 0,
 				orderList: null,
+				title: ['星体充能', "充能结束"],
 				statistics: {},
-				status:{
-					1:'未完成能量值星体',
-					2:'完成能量值星体'
+				loading: 'loadmore',
+				status: {
+					1: '充能中',
+					2: '充能完成'
+				},
+				sparks: {
+					0: {
+						pageNum: 0,
+						list: []
+					},
+					1: {
+						pageNum: 0,
+						list: []
+					}
 				}
 			}
 		},
 		onLoad() {
-			this.getLogList()
+			this.getLogList(0)
+			this.getLogList(1)
 			this.getStatistic()
 		},
 		methods: {
 			// 获取去预派单记录
-			async getLogList() {
+			async getLogList(type) {
+				const pageNum = this.sparks[type].pageNum + 1;
+				let query = {
+					pageNum: pageNum,
+					pageSize: 20,
+					type: type
+				}
 				let {
 					code,
 					msg,
 					obj
-				} = await joinlist(this.queryInfo)
+				} = await joinlist(query)
 				if (code !== 0) return uni.$u.toast(msg)
-				console.log(obj)
-				this.orderList = obj.list
+				this.sparks[type].pageNum += 1
+				this.sparks[type].list.push(...obj.list)
 			},
 			// 获取预排统计
 			async getStatistic() {
@@ -170,9 +235,22 @@
 					url: './HistoricalOrder'
 				})
 			},
-			getStatus(status){
+			getStatus(status) {
 				return this.status[status]
+			},
+			// 切换订单状态
+			tabOrder(index) {
+				this.current = index
+				if (this.current === 0) {
+					this.type = 1
+				} else if (this.current === 1) {
+					this.type = 0
+				}
 			}
+		},
+		onReachBottom() {
+			this.loading = 'loading';
+			this.getLogList(this.type)
 		}
 	}
 </script>
@@ -185,6 +263,12 @@
 <style lang="scss" scoped>
 	.flex1 {
 		flex: 1;
+	}
+
+	.active {
+		color: #3A82FE;
+		font-size: 32rpx;
+		font-weight: 550;
 	}
 
 	.between {
