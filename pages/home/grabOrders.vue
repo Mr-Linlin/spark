@@ -39,12 +39,12 @@
 
 						</view>
 						<view class="" style="margin-right: 32rpx;font-size: 24rpx;color: #F74539;">
-							已参与98%
+							已充能98%
 						</view>
 					</view>
 					<view style="display: flex; justify-content: space-between; padding: 0 32rpx;margin-bottom: 24rpx;">
 						<view style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
-							参与金额
+							您参与的充能
 						</view>
 						<view style="font-size: 24rpx;font-weight: 550;">
 							{{orderInfo.min}}-{{orderInfo.max}}GS
@@ -61,7 +61,7 @@
 					</view>
 					<view style="display: flex; justify-content: space-between; padding: 0 32rpx;margin-bottom: 24rpx;">
 						<view style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
-							当前奖金池数量
+							当前星体能量
 						</view>
 						<view style="font-size: 24rpx;font-weight: 550;">
 							{{orderInfo.total}}

@@ -15,9 +15,9 @@
 				<view class="flex1">
 
 				</view>
-				<view @click="HistoricalOrderNext" class="SparkRecordTitleName2">
+				<!-- <view @click="HistoricalOrderNext" class="SparkRecordTitleName2">
 					历史订单
-				</view>
+				</view> -->
 			</view>
 
 			<view class="grabOrders">
@@ -35,7 +35,7 @@
 						已结束总数
 					</view>
 					<view class="sumCountNamePrice">
-							{{statistics.settled}}
+						{{statistics.settled}}
 					</view>
 				</view>
 				<view class="sumCountName">
@@ -43,7 +43,7 @@
 						待结算总数
 					</view>
 					<view class="sumCountNamePrice">
-							{{statistics.unSettled}}
+						{{statistics.unSettled}}
 					</view>
 				</view>
 			</view>
@@ -69,52 +69,52 @@
 		</view>
 
 		<view class="SparkList">
-			<view class="SparkListTitle">
-				乌拉诺斯的预言
+			<view class="SparkListTitle" v-for="(item,index) in title" :key="index" :class="{active:current===index}"
+				@click="tabOrder(index)">
+				{{item}}
 			</view>
 		</view>
 
-		<view :key="index" v-for="(item,index) in orderList" class="flex_j mt_30">
-			<view class="SparkListCont">
-				<view class="SparkListContType">
-					<view class="Venus">
-						{{item.name}}
-					</view>
-					<view class="SparkListContName">
-						{{item.time}}点场
-					</view>
-					<view class="flex1">
+		<view class="backlog" v-if="current===0">
+			<view :key="index" v-for="(item,index) in orderList" class="flex_j mt_30">
+				<view class="SparkListCont">
+					<view class="SparkListContType">
+						<view class="Venus">
+							{{item.name}}
+						</view>
+						<view class="SparkListContName">
+							{{item.time}}点场
+						</view>
+						<view class="flex1">
 
+						</view>
+						<view class="SparkListContNameType" style="color: #09BB07;">
+							{{getStatus(item.status)}}
+						</view>
 					</view>
-					<view class="SparkListContNameType">
-						已结算
+					<view class="between" style="margin-top: 37rpx;">
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">预排GS总额</view>
+						<view style="font-size: 28rpx;font-weight: 550;">
+							+8888
+						</view>
 					</view>
-				</view>
-
-				<view class="GS">
-					<view class="GSprice">
-						82932
+					<view class="between">
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">参收益GS数量</view>
+						<view style="font-size: 28rpx;font-weight: 550;">
+							+8888
+						</view>
 					</view>
-					<view class="flex1">
-
-					</view>
-					<view class="GSAddprice">
-						+744289.28
-					</view>
-				</view>
-
-				<view class="GSsum">
-					<view class="GSsumName">
-						数量(GS)
-					</view>
-					<view class="flex1">
-
-					</view>
-					<view class="GSsumTime">
-						2023-12-29 23:51
+					<view class="between">
+						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">成功时间</view>
+						<view style="font-size: 28rpx;font-weight: 550;">
+							{{item.createTime}}
+						</view>
 					</view>
 				</view>
 			</view>
+		</view>
+		<view class="order-history" v-if="current===1">
+			历史订单
 		</view>
 	</view>
 </template>
@@ -134,6 +134,12 @@
 					pageSize: 20,
 					type: 2
 				},
+				status: {
+					1: '未完成能量值星体',
+					2: '完成能量值星体'
+				},
+				current: 0,
+				title: ['未完成订单', "以完成订单"]
 			}
 		},
 		onLoad() {
@@ -172,6 +178,13 @@
 				uni.navigateTo({
 					url: './HistoricalOrder'
 				})
+			},
+			getStatus(status) {
+				return this.status[status]
+			},
+			// 切换订单状态
+			tabOrder(index) {
+				this.current = index
 			}
 		}
 	}
@@ -185,6 +198,19 @@
 <style lang="scss" scoped>
 	.flex1 {
 		flex: 1;
+	}
+
+	.active {
+		color: #3A82FE;
+		font-size: 32rpx;
+		font-weight: 550;
+	}
+
+	.between {
+		display: flex;
+		justify-content: space-between;
+		padding: 0 32rpx;
+		margin-bottom: 24rpx;
 	}
 
 	.ht_88 {
@@ -202,7 +228,7 @@
 
 	.SparkRecordTitleBak {
 		width: 750rpx;
-		height: 562rpx;
+		// height: 562rpx;
 		background: linear-gradient(135deg, #4679F0 0%, #2D67F0 100%);
 		border-radius: 0rpx 0rpx 32rpx 32rpx;
 
@@ -210,6 +236,7 @@
 			display: flex;
 			align-items: center;
 			height: 88rpx;
+
 
 			.SparkRecordTitleImg {
 				image {
@@ -254,6 +281,7 @@
 			align-items: center;
 			color: #FFFFFF;
 			margin-top: 32rpx;
+			padding-bottom: 47rpx;
 
 			.sumCountName {
 				width: 375rpx;
@@ -279,7 +307,7 @@
 		align-items: center;
 
 		.SparkListTitle {
-			font-size: 32rpx;
+			// font-size: 24rpx;
 			text-shadow: 0px 0px #000;
 			margin-left: 32rpx;
 		}

@@ -12,7 +12,7 @@
 				<view class="fnt_num">
 					所需FNT {{this.FNT}}
 				</view>
-				<text style="margin-right: 10rpx;">FNT所需数量=(GS的2%)*2</text>
+				<text style="margin-right: 10rpx;">所需FNT=GS*%4</text>
 				<text style="color:rgba(247, 69, 57, 1) ;">FNT可用{{poolassetData.fnt}}</text>
 			</view>
 		</view>
@@ -67,7 +67,7 @@
 				})
 			},
 			gsChange() {
-				this.FNT = (this.GS * 0.02)*2
+				this.FNT = this.GS * 0.04
 				if (this.FNT > this.poolassetData.fnt) {
 					uni.$u.toast('兑换FNT不能超过'+this.poolassetData.fnt)
 				} else if (this.FNT > 0 && this.FNT !== null) {

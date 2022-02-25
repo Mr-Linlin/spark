@@ -24,6 +24,17 @@
 			}
 		},
 		{
+			//
+			"path": "pages/login/index",
+			"style": {
+				"app-plus": {
+					"animationType": "fade-in",
+					"animationDuration": 300,
+					"titleNView": false
+				}
+			}
+		},
+		{
 			//首页
 			"path": "pages/home/index",
 			"style": {
@@ -178,7 +189,7 @@
 		}, { //参与抢单
 			"path": "pages/home/grabOrders",
 			"style": {
-				"navigationBarTitleText": "参与抢单",
+				"navigationBarTitleText": "参与乌拉诺斯的诺言",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#FAFCFF"
 			}
@@ -302,14 +313,14 @@
 			"style": {
 				"navigationBarTitleText": "消息/公告",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor":"#FAFCFF"
+				"navigationBarBackgroundColor": "#FAFCFF"
 			}
 		}, {
 			"path": "pages/home/Information",
 			"style": {
 				"navigationBarTitleText": "快捷资讯",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor":"#FAFCFF"
+				"navigationBarBackgroundColor": "#FAFCFF"
 			}
 		},
 		{

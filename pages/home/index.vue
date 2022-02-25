@@ -22,14 +22,30 @@
 		</view>
 		<view class="">
 			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
-				<view class="" style="width: 709rpx;height: 709rpx;border: 1rpx solid #007AFF;border-radius: 50%;">
-				</view>
+				<!-- <view class="" style="width: 709rpx;height: 709rpx;border: 1rpx solid #007AFF;border-radius: 50%;">
+				</view> -->
+				
+				<!-- <video  enable-progress-gesture="false" autoplay controls="false" loop  style="width: 750rpx;height: 700rpx;" id="myVideo" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2018cd11-5bff-40a9-9f0f-1202263c2472.mp4" controls>
+					<cover-view style="width: 100rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;">
+					</cover-view>
+					<cover-view style="width: 50rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;right: 0;">
+					</cover-view>  
+				</video> -->
+					<video id="myVideo" :muted="true" :enable-play-gesture="false" :duration="10" enable-progress-gesture="false" autoplay controls="false" loop style="width: 750rpx;height: 700rpx;"
+					     src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2018cd11-5bff-40a9-9f0f-1202263c2472.mp4">
+					     <cover-view style="width: 100rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;">
+					     </cover-view>
+					     <cover-view style="width: 50rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;right: 0;">
+					     </cover-view>
+						 <cover-view v-if="vidoType" style="width: 100%;height: 700rpx;position: absolute;background-color: #FFFFFF;">
+						 </cover-view>
+					</video>
 			</view>
 			<view class="">
 				<view class=""
 					style="display: flex;align-items: center;margin-left: 32rpx;margin-right: 32rpx;height: 94rpx;">
 					<view class="" style="font-size: 32rpx;color: #1A1B1C;text-shadow: 0px 0px #000;">
-						天空之神乌拉诺斯
+						乌拉诺斯的预言
 					</view>
 					<view class="" style="flex: 1;">
 					</view>
@@ -180,16 +196,28 @@
 				content: {}, //公告
 				orders: null,
 				timeData: {},
+				vidoType:true
 			}
 		},
 		onShow() {
-
+			this.videoContext = uni.createVideoContext('myVideo')
+			this.videoContext.play()
+			if(this.vidoType){
+				uni.showLoading({
+					title: '加载中'
+				});
+			}
+			setTimeout(()=>{
+				this.vidoType = false
+				uni.hideLoading();
+			},3000)
 		},
 		onLoad() {
 			this.getMessage()
 			this.getNotice()
 		},
 		methods: {
+			
 			NoticeTypeFun(e){
 				if(e.name == '交易所'){
 					
@@ -260,7 +288,10 @@
 
 <style>
 	page {
-		background-color: #F7FAFF;
+		background-color: #FFFFFF;
+	}
+	.asdf{
+		background-color: #FFFFFF !important;
 	}
 </style>
 <style lang="scss">

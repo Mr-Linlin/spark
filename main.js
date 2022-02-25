@@ -1,16 +1,9 @@
 import Vue from 'vue'
 import App from './App'
 import store from './store'
-// import {
-// 	get,
-// 	post
-// } from "./http/http.js"
-// import {
-// 	userApi,
-// 	homeApi,
-// 	machineApi,
-// 	planApi
-// } from "./http/api.js"
+// import $ from './static/js/jquery-1.7.2.min.js'
+// import windstagball from './static/js/jquery.windstagball.js'
+
 
 import emptyTips from '@/components/empty/empty.vue'
 import Header from '@/components/backHeader/index.vue'
