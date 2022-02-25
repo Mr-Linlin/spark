@@ -32,11 +32,11 @@
 		<view class="" style="font-size: 32rpx;margin-left: 32rpx;font-weight: 600;">
 			现金账户
 		</view>
-		<view class="" style="height: 700rpx;">
-			<view @click="accountDetailsNext(item)" v-for="(item,index) in assetlistData" :key="index" class="" style="width: 333rpx;height: 130rpx;background-color: #FFFFFF;float: left;margin-left: 32rpx;margin-top: 32rpx;">
+		<view class="" style="height: 700rpx;margin-left: 14rpx;">
+			<view @click="accountDetailsNext(item)" v-for="(item,index) in assetlistData" :key="index" class="" style="width: 333rpx;height: 130rpx;background-color: #FFFFFF;float: left;margin-left: 20rpx;margin-top: 20rpx;">
 				<view class="" style="display: flex;align-items: center;height: 72rpx;">
 					<view class="" style="margin-left: 24rpx;">
-						<image :src="item.currencyLogo" style="width: 24rpx;height: 24rpx;" mode=""></image>
+						<image class="flex_a" :src="item.currencyLogo" style="width: 24rpx;height: 24rpx;" mode=""></image>
 					</view>
 					<view class="" style="margin-left: 12rpx;font-size: 24rpx;">
 						{{item.currencyName}}
@@ -45,7 +45,7 @@
 						
 					</view>
 					<view class="" style="margin-right: 24rpx;">
-						<image src="../../static/2581.png" style="width: 24rpx;height: 24rpx;" mode=""></image>
+						<image class="flex_a" src="../../static/2581.png" style="width: 24rpx;height: 24rpx;" mode=""></image>
 					</view>
 				</view>
 				
@@ -178,5 +178,9 @@
 		background-size: 100% 100%;
 		width: 686rpx;
 		height: 221rpx;
+	}
+	.flex_a{
+		display: flex;
+		align-items: center;
 	}
 </style>

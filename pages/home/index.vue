@@ -210,7 +210,6 @@
 		onLoad() {
 			this.getMessage()
 			this.getNotice()
-			this.changeColors();
 		},
 		methods: {
 			NoticeTypeFun(e) {
