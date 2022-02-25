@@ -126,13 +126,13 @@
 							<view>
 								<view class="title p75">验证当前资金密码</view>
 								<view class="code-box p75">
-									<u-code-input size="48" dot :class="code-input" v-model="tradePwd" :maxlength="6" borderColor="#fff"></u-code-input>
+									<u-code-input size="48" dot class="code-input" v-model="tradePwd" :maxlength="6" borderColor="#fff"></u-code-input>
 								</view> 
 								<u-button @click="handleNext()" class="btn-shadow" color="#3A82FE" type="primary" style="width: 600rpx;height: 96rpx;"
 									text="下一步"></u-button>
 							</view>
 						</swiper-item>
-						<swiper-item>
+						<swiper-item class="swiper-item">
 							<view>
 								<view class="title p75">确认资金密码</view>
 								<view class="code-box p75">
@@ -190,12 +190,14 @@
 						title:'请输入密码',
 						icon:'none'
 					})
+					return
 				}
 				if(this.passwordData.newPwd != this.passwordData.newPwd2){
 					uni.showToast({
 						title:'两次密码不一致',
 						icon:'none'
 					})
+					return
 				}
 				let data = {
 					pwd:this.passwordData.newPwd,
