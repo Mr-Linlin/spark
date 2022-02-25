@@ -1,6 +1,8 @@
 
+export const BASE_URL = "http://211.149.135.240:7799/"
+
 uni.$u.http.setConfig(config => {
-	config.baseURL = 'http://211.149.135.240:7799/'
+	config.baseURL = BASE_URL
 	config.timeout = 5000
 	config.header = {
 		'content-type': 'application/x-www-form-urlencoded' || 'application/json',
@@ -39,4 +41,5 @@ uni.$u.http.interceptors.response.use(res => {
 }, res => {
 	return uni.$u.toast('请求超时！')
 })
+
 export default uni.$u.http

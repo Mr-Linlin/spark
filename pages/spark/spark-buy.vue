@@ -45,14 +45,14 @@
 						<view>数量</view>
 					</view>
 					<view style="display: block;height: 10rpx;"></view>
-					<view v-for="(item,index) of 4">
+					<view :key="index" v-for="(item,index) of 4">
 						<view class="flexC space-between" style="font-size: 20rpx;height: 56rpx;">
 							<view>871.64</view>
 							<view>291.6911</view>
 						</view>
 					</view>
 					<view class="ptb1">≈10.29CNY</view>
-					<view v-for="(item,index) of 5">
+					<view :key="item" v-for="(item,index) of [10,11,22,546,789,7]">
 						<view class="flexC space-between" style="font-size: 20rpx;height: 56rpx;">
 							<view>871.64</view>
 							<view>291.6911</view>

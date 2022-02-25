@@ -50,6 +50,9 @@
 	import sparkBuy from './spark-buy.vue';
 	import sparkSell from './spark-sell.vue';
 	import sparkData from './spark-data.vue'
+	import {
+		BASE_URL
+	} from "../../http/request.js"
 	export default {
 		components: {
 			liuyunoTabs,
@@ -88,6 +91,11 @@
 					this.sliderTop = statusBarHeight;
 				}
 			})
+
+			var socketOpen = false;
+
+			this.createSocket()
+
 		},
 		methods: {
 			// 打开侧边栏
@@ -100,6 +108,47 @@
 			},
 			changeSliderIndex(idx) {
 				this.sliderIndex = idx;
+			},
+			// 初始化socked
+			createSocket() {
+				uni.connectSocket({
+					url: 'ws://211.149.135.240:7888/websocket/trade',
+					success(e) {
+						console.log(e)
+					},
+					fail(e) {
+						console.log("链接失败" + e)
+					}
+				});
+				uni.onSocketOpen((res) => {
+					console.log("链接打开", res)
+					this.sendSocket({
+						"method": "kData",
+						"tradeId": 4,
+						"resolution": 4,
+						"from": 1556689555,
+						"to": 1645767955
+					})
+				});
+				uni.onSocketError(function(res) {
+					console.log(res)
+					console.log('WebSocket连接打开失败，请检查！');
+				})
+				uni.onSocketMessage(function(res) {
+					const data = JSON.parse(res.data)
+					console.log(data)
+				});
+			},
+			sendSocket(data) {
+				uni.sendSocketMessage({
+					data: (typeof data === 'string') ? data : JSON.stringify(data),
+					success(e) {
+						console.log(e)
+					},
+					fail(e) {
+						console.log(e)
+					}
+				});
 			}
 		}
 	}

@@ -1,16 +1,16 @@
 <template>
 	<view class="">
-		<uni-nav-bar left-icon="left" color="#89878C" backgroundColor="#F7FAFF" :border="false">
+		<uni-nav-bar left-icon="left" color="#89878C" backgroundColor="#F7FAFF" :border="false" style="margin-left: 11rpx;">
 		</uni-nav-bar>
 		<view style="padding: 0 75rpx;">
 			<view style="margin-top: 80rpx;font-size: 44rpx;" class="fz-wb2">验证码手机号/邮件</view>
 			<view class="" style="width: 600rpx;margin-top: 60rpx;background-color: #FFFFFF;">
-				<u--input type="text" placeholder="请输入手机号/邮箱号" border="surround" clearable style="height: 88rpx;"
+				<u--input class="text_indnts" type="text" placeholder="请输入手机号/邮箱号" border="surround" clearable style="height: 88rpx;"
 					:border="'false'" v-model="userInfo.account"></u--input>
 			</view>
 			<view class=""
 				style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;display: flex;align-items: center;">
-				<u--input type="number" placeholder="6位验证码" border="surround" clearable style="height: 88rpx;"
+				<u--input class="text_indnts" type="number" placeholder="6位验证码" border="surround" clearable style="height: 88rpx;"
 					:border="'false'" v-model="userInfo.code">
 				</u--input>
 				<view style="margin-right: 32rpx;color: #3A82FE;" class="reg-text">
@@ -20,12 +20,12 @@
 				</view>
 			</view>
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
-				<u--input placeholder="请设置登录密码" password border="surround" clearable style="height: 88rpx;"
+				<u--input class="text_indnts" placeholder="请设置登录密码" password border="surround" clearable style="height: 88rpx;"
 					:border="'false'" v-model="password"></u--input>
 			</view>
 
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
-				<u--input placeholder="请设置登录密码" password border="surround" clearable style="height: 88rpx;"
+				<u--input class="text_indnts" placeholder="请设置登录密码" password border="surround" clearable style="height: 88rpx;"
 					:border="'false'" v-model="password_confirm" @change="inputChange"></u--input>
 			</view>
 
@@ -149,5 +149,8 @@
 <style lang="scss">
 	page {
 		background: #F7FAFF;
+	}
+	.text_indnts{
+		text-indent: 0.7em;
 	}
 </style>

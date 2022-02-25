@@ -38,7 +38,7 @@
 			</view>
 			<view class="">
 				<view class=""
-					style="display: flex;align-items: center;margin-left: 32rpx;margin-right: 32rpx;height: 94rpx;">
+					style="display: flex;align-items: center;margin-left: 32rpx;margin-right: 32rpx;height: 84rpx;">
 					<view class="" style="font-size: 32rpx;color: #1A1B1C;text-shadow: 0px 0px #000;">
 						乌拉诺斯的预言
 					</view>
@@ -48,9 +48,9 @@
 						<!-- 剩余时间 00:00:01 -->
 					</view>
 				</view>
-				<scroll-view scroll-x="true">
-					<view style="display: flex;">
-						<view v-for="(item,index) in orders" :key="index" @click="onDetail(item.resourceId)">
+				<scroll-view scroll-x="true" >
+					<view style="display: flex;width: 680rpx;margin-left: 32rpx;">
+						<view style="" v-for="(item,index) in orders" :key="index" @click="onDetail(item.resourceId)">
 							<view class="order-item">
 								<view class="between">
 									<view style="font-size: 28rpx;">
@@ -90,21 +90,21 @@
 		<view class="">
 			<!-- <u-notice-bar :text="content.title" bgColor="#FFFFFF" color="#1A1B1C"></u-notice-bar> -->
 			<view class="flex_j">
-				<view @click="announcementNext" class="Notice">
+				<view @click="announcementNext" class="Notice" >
 					<view class="flex_j" style="width: 106rpx;">
-						<view class="NoticeImg">
+						<view class="NoticeImg" style="margin-left: 24rpx;">
 							<image src="../../static/6394695.png" mode=""></image>
 						</view>
 					</view>
 
-					<view class="NoticeNmae">
+					<view class="NoticeNmae" style="">
 						{{content.title}}
 					</view>
-					<view class="NoticeDeta">
-						{{content.updateTime}}
+					<view class="" style="flex: 1;">
+						
 					</view>
 					<view class="flex_j" style="width: 64rpx;">
-						<view class="Noticeimg2">
+						<view class="Noticeimg2" style="margin-right: 24rpx;">
 							<image src="../../static/2581.png" mode=""></image>
 						</view>
 					</view>
@@ -114,7 +114,7 @@
 			<view class="flex_j" style="height: 234rpx;">
 				<view @click="NoticeTypeFun(item)" v-for="(item,index) in NoticeType" :key="index" class="homeType">
 					<view class="homeTypeImg">
-						<image :src="item.img" mode=""></image>
+						<image :src="item.img" ></image>
 					</view>
 					<view class="homeTypeName">
 						{{item.name}}
@@ -138,7 +138,7 @@
 				<view class="consultingServiceContent">
 					<view class="">
 						<view class="consultingServiceContentName">
-							{{item.title}}
+							{{item.title.substring(0,28)}}...
 						</view>
 						<view class="consultingServiceContentDate">
 							{{item.publishedAt}}
@@ -148,7 +148,7 @@
 
 					</view>
 					<view class="">
-						<image class="consultingServiceContentImg" :src="item.thumbnail" mode=""></image>
+						<image class="consultingServiceContentImg" :src="item.thumbnail" mode="heightFix heightFix center" style="border-radius: 8rpx;"></image>
 					</view>
 				</view>
 			</view>
@@ -306,9 +306,8 @@
 		background: linear-gradient(90deg, #F9BE3F 0%, #F19645 100%);
 		border-radius: 12rpx;
 		color: #FFFFFF;
-		margin-left: 20rpx;
+		margin-right: 24rpx;
 		padding: 20rpx;
-
 		.between {
 			display: flex;
 			justify-content: space-between;
@@ -412,8 +411,8 @@
 		height: 72rpx;
 		background-color: #FFFFFF;
 		border-radius: 12rpx;
-		margin-top: 16rpx;
-
+		margin-top: 32rpx;
+		background-color: #F7FAFF;
 		.NoticeImg {
 			width: 66rpx;
 			height: 32rpx;
@@ -424,6 +423,7 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
+			margin-left: 20rpx;
 		}
 
 		.NoticeDeta {
@@ -438,6 +438,8 @@
 		.Noticeimg2 {
 			width: 24rpx;
 			height: 24rpx;
+			display: flex;
+			align-items: center;
 		}
 	}
 

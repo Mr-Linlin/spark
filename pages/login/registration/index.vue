@@ -6,13 +6,13 @@
 			<view style="font-size: 44rpx;" class="fz-wb2">新用户注册</view>
 			<view class="fz1 mt1" style="color: rgba(0, 0, 0, 0.44);">邀请新用户获得红包奖励</view>
 			<view class="" style="width: 600rpx;margin-top: 60rpx;background-color: #FFFFFF;">
-				<u--input type="text" placeholder="手机号/邮箱" border="surround" clearable style="height: 88rpx;"
+				<u--input class="text_indnts" type="text" placeholder="手机号/邮箱" border="surround" clearable style="height: 88rpx;"
 					:border="'false'" v-model="userInfo.account">
 				</u--input>
 			</view>
 			<view class=""
 				style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;display: flex;align-items: center;">
-				<u--input type="number" placeholder="6位验证码" border="surround" clearable style="height: 88rpx;"
+				<u--input class="text_indnts" type="number" placeholder="6位验证码" border="surround" clearable style="height: 88rpx;"
 					:border="'false'" v-model="userInfo.code">
 				</u--input>
 				<view style="margin-right: 32rpx;color: #3A82FE;" class="reg-text">
@@ -22,12 +22,12 @@
 				</view>
 			</view>
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
-				<u--input placeholder="设置登录密码" password border="surround" clearable style="height: 88rpx;"
+				<u--input class="text_indnts" placeholder="设置登录密码" password border="surround" clearable style="height: 88rpx;"
 					:border="'false'" v-model="password"></u--input>
 			</view>
 
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
-				<u--input placeholder="邀请码" password border="surround" clearable style="height: 88rpx;"
+				<u--input class="text_indnts" placeholder="邀请码" password border="surround" clearable style="height: 88rpx;"
 					:border="'false'" v-model="inviteCode"></u--input>
 			</view>
 			<my-button title="下一步" :height="88" :radius="12" style="margin-top: 60rpx;" @myClick="goToRouter">
@@ -176,5 +176,8 @@
 			justify-content: center;
 			align-items: center;
 		}
+	}
+	.text_indnts{
+		text-indent: 0.7em;
 	}
 </style>

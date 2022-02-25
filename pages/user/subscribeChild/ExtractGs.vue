@@ -31,17 +31,7 @@
 		<view class="sched-btn">
 			<u-button text="确定提取" class="btn" @click="show = true"></u-button>
 		</view>
-<!-- <<<<<<< HEAD
-		<u-popup :show="show" @close="close" @open="open" :round="15">
-			<lzt-popup>
-				<u--input placeholder="6位验证码" border="none">
-					<template slot="suffix">
-						<u-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange"></u-code>
-						<text @tap="getCode" style="color: #007AFF;">{{tips}}</text>
-					</template>
-				</u--input>
-			</lzt-popup>
-======= -->
+
 		<u-popup :show="show" round="40rpx" mode="bottom" @close="close" @open="open">
 			<view class="trade-box">
 				<view class="sub-title">
