@@ -90,3 +90,8 @@ export const getRobbery = user => http.post('/front/pdd/join/list', user)
 // spark抢单统计
 export const pddStatistics = user => http.post('/front/pdd/join/statistic ', user)
 
+//修改头像
+export const modify = user => http.post('/front/user/modify/pic', user)
+
+// 公告
+export const searchgetContent= user => http.post('/front/search/getContent', user)

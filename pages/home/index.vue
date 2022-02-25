@@ -11,8 +11,8 @@
 
 				</view>
 				<view class="" style="margin-right: 32rpx;">
-					<image src="../../static/home/Status.png" style="width: 44rpx;height: 44rpx;margin-top: 98rpx;"
-						mode=""></image>
+					<image @click="announcementNext" src="../../static/home/Status.png"
+						style="width: 44rpx;height: 44rpx;margin-top: 98rpx;" mode=""></image>
 				</view>
 				<view class=""
 					style="width: 14rpx;height: 14rpx;background-color: red;border-radius: 50%;position: relative;right: 5%;top: 25rpx;">
@@ -22,21 +22,30 @@
 		</view>
 		<view class="">
 			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
-				<!-- <view ref="div" id="div1">
-					<a href="#" v-for="(item,index) in tagsNum" :style="{color:colors[index]}">+{{item}}</a>
-				</view> -->
-				<tag-cloud :data="hotTag" @clickTag="clickTagItem"></tag-cloud>
+				<video id="myVideo" :muted="true" :enable-play-gesture="false" :duration="10"
+					enable-progress-gesture="false" autoplay controls="false" loop style="width: 750rpx;height: 700rpx;"
+					src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2018cd11-5bff-40a9-9f0f-1202263c2472.mp4">
+					<cover-view
+						style="width: 100rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;">
+					</cover-view>
+					<cover-view
+						style="width: 50rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;right: 0;">
+					</cover-view>
+					<cover-view v-if="vidoType"
+						style="width: 100%;height: 700rpx;position: absolute;background-color: #FFFFFF;">
+					</cover-view>
+				</video>
 			</view>
 			<view class="">
 				<view class=""
 					style="display: flex;align-items: center;margin-left: 32rpx;margin-right: 32rpx;height: 94rpx;">
 					<view class="" style="font-size: 32rpx;color: #1A1B1C;text-shadow: 0px 0px #000;">
-						天空之神乌拉诺斯
+						乌拉诺斯的预言
 					</view>
 					<view class="" style="flex: 1;">
 					</view>
 					<view class="" style="font-size: 24rpx;">
-						剩余时间 00:00:01
+						<!-- 剩余时间 00:00:01 -->
 					</view>
 				</view>
 				<scroll-view scroll-x="true">
@@ -103,7 +112,7 @@
 			</view>
 
 			<view class="flex_j" style="height: 234rpx;">
-				<view v-for="(item,index) in NoticeType" :key="index" class="homeType">
+				<view @click="NoticeTypeFun(item)" v-for="(item,index) in NoticeType" :key="index" class="homeType">
 					<view class="homeTypeImg">
 						<image :src="item.img" mode=""></image>
 					</view>
@@ -176,91 +185,53 @@
 					name: 'FIL概况'
 				}, {
 					img: '../../static/1438913.png',
-					name: '团队'
+					name: '战队'
 				}],
 				messageList: null, //资讯
 				content: {}, //公告
 				orders: null,
 				timeData: {},
-				tagsNum: [],
-				colors: [], //存储颜色
-				hotTag: [{
-						id: "05023f8da31c4b4187cc6899e2a3aec2",
-						name: "镇远县"
-					},
-					{
-						id: "0ef028e5278f4f5ca31f99f1bd22b1cc",
-						name: "剑河县"
-					},
-					{
-						id: "1a32ef04d3c548eaa6777abb46da32f2",
-						name: "台江县"
-					},
-					{
-						id: "2c26488325bd493687d16315fe0e5fdd",
-						name: "岑巩县"
-					},
-					{
-						id: "3a786111828a4b9f89ae9da25753eedd",
-						name: "黎平"
-					},
-					{
-						id: "4ed593eed91b4244969995237f5c96c5",
-						name: "丹寨县"
-					},
-					{
-						id: "615d2c178f1a47cb8d473823e74f5386",
-						name: "凯里市"
-					},
-					{
-						id: "76f652df03db43349272a9aff492b065",
-						name: "榕江县"
-					},
-					{
-						id: "8ff29d0d35e548feb945063b34ed9c9b",
-						name: "黄平县"
-					},
-					{
-						id: "a8ac2170008746fdadc05ea461bc5e37",
-						name: "雷山县"
-					},
-					{
-						id: "a8ac2170008746fdadc05ea461bc5e37",
-						name: "99"
-					},
-				],
-				
+				vidoType: true
 			}
 		},
 		onShow() {
-
-		},
-		mounted() {
-			// $('#div1').windstagball({
-			// 	radius: 120,
-			// 	speed: 10
-			// });
+			this.videoContext = uni.createVideoContext('myVideo')
+			this.videoContext.play()
+			if (this.vidoType) {
+				uni.showLoading({
+					title: '加载中'
+				});
+			}
+			setTimeout(() => {
+				this.vidoType = false
+				uni.hideLoading();
+			}, 3000)
 		},
 		onLoad() {
 			this.getMessage()
 			this.getNotice()
 			this.changeColors();
-			
 		},
 		methods: {
-			//生成50个随机数
-			getRandomIntInclusive(min, max) {
-				min = Math.ceil(min);
-				max = Math.floor(max);
-				return Math.floor(Math.random() * (max - min + 1)) + min; //含最大值，含最小值 
-			},
-			changeColors() {
-				//随机变色
-				for (var i = 0; i < 50; i++) {
-					var r = Math.floor(Math.random() * 256);
-					var g = Math.floor(Math.random() * 256);
-					var b = Math.floor(Math.random() * 256);
-					this.colors[i] = "rgb(" + r + "," + g + "," + b + ")";
+			NoticeTypeFun(e) {
+				if (e.name == '交易所') {
+
+				} else if (e.name == '商城') {
+					uni.showToast({
+						title: '暂未开放',
+						icon: 'none'
+					})
+				} else if (e.name == 'FIL概况') {
+					// uni.showToast({
+					// 	title:'暂未开放',
+					// 	icon:'none'
+					// })
+					// https://fifox.info/en
+					location.href = 'https://fifox.info/en'
+				} else if (e.name == '团队') {
+					uni.navigateTo({
+						url: '../user/myTeam'
+					})
 				}
 			},
 			clickTagItem(tag) {
@@ -322,61 +293,14 @@
 
 <style>
 	page {
-		background-color: rgb(247, 250, 255);
+		background-color: #FFFFFF;
+	}
+
+	.asdf {
+		background-color: #FFFFFF !important;
 	}
 </style>
 <style lang="scss">
-	#div1 {
-		position: relative;
-		width: 600rpx;
-		height: 600rpx;
-		/* border: 1px solid #000; */
-		margin: 20rpx auto 0;
-	}
-
-	#div1 a {
-		position: absolute;
-		top: 0px;
-		left: 0px;
-		font-family: Microsoft YaHei;
-		color: #000;
-		font-weight: bold;
-		text-decoration: none;
-		padding: 3rpx 6rpx;
-	}
-
-	#div1 a:hover {
-		border: 2rpx solid #eee;
-		background: #FFF;
-	}
-
-	#div1 .blue {
-		color: blue;
-	}
-
-	#div1 .red {
-		color: red;
-	}
-
-	#div1 .green {
-		color: green;
-	}
-
-	p {
-		font: 16rpx Microsoft YaHei;
-		text-align: center;
-		color: #ba0c0c;
-	}
-
-	p a {
-		font-size: 14rpx;
-		color: #ba0c0c;
-	}
-
-	p a:hover {
-		color: red;
-	}
-
 	.order-item {
 		width: 280rpx;
 		height: 231rpx;

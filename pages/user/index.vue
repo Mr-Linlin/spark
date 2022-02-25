@@ -18,10 +18,10 @@
 				</view>
 				<view class="" style="display: flex;align-items: center;margin-top: 20rpx;">
 					<view class=""
-						style="width: 82rpx;height: 36rpx;background: rgba(0, 0, 0, 0.22);color: #FFFFFF;font-size: 22rpx;text-align: center;border-radius: 5rpx;">
-						分享码
+						style="width: 82rpx;height: 36rpx;background: rgba(46, 122, 254, 0.11);color: #3A82FE;font-size: 22rpx;text-align: center;border-radius: 5rpx;">
+						邀请码
 					</view>
-					<view class="" style="font-size: 24rpx;color: rgba(0, 0, 0, 0.44);margin-left: 10rpx;">
+					<view class="" style="font-size: 24rpx;color: #3A82FE;margin-left: 10rpx;">
 						{{userData.inviteCode}}
 					</view>
 				</view>
@@ -83,8 +83,7 @@
 	export default {
 		data() {
 			return {
-				usericon: [
-					{
+				usericon: [{
 						img: '../../static/user/134850618435.png',
 						name: '能量守护',
 						icon: '../../static/user/7124571.png'

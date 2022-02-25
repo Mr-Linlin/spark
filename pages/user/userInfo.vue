@@ -3,7 +3,7 @@
 		<view class="box-card">
 			<view class="group_1">
 				<text>头像</text>
-				<image :src="userData.pic"></image>
+				<image @click="chooseImageFun" :src="userData.pic"></image>
 			</view>
 			<view class="group_1">
 				<text>手机号</text>
@@ -62,8 +62,9 @@
 
 <script>
 	import {
-		userbaseInfo
+		userbaseInfo,uploadFilePromise
 	} from '@/http/common.js'
+	import {up} from '@/http/public.js'
 	import Approve from './childCimps/Approve'
 	
 	export default {
@@ -72,13 +73,40 @@
 		},
 		data() {
 			return {
-				userData:{}
+				userData:{},
+				fileList1: [],
 			}
 		},
 		onShow() {
 			this.userInfoFun()
 		},
 		methods: {
+			chooseImageFun(){//打开本地相册
+				let that = this
+				uni.chooseImage({
+				    count: 1, //上传图片的数量，默认是9
+				    sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+				    sourceType: ['album'], //从相册选择
+				    success: function (res) {
+				        const tempFilePaths = res.tempFilePaths;    //拿到选择的图片，是一个数组
+						console.log('res',tempFilePaths)
+						uni.uploadFile({
+						  url:'http://211.149.135.240:7799/front/user/modify/pic',//post请求的地址
+						  filePath: tempFilePaths[0],
+						  name:'file',
+						  formData: {
+							  file: tempFilePaths[0]
+						  },
+						  header: {
+							'token': uni.getStorageSync('token')
+						  },	
+						  success: (uploadFileRes) => {
+							that.userInfoFun()
+						  }
+						})
+				    }
+				});
+			},
 			copy(value){
 			  uni.setClipboardData({
 				data: value,
