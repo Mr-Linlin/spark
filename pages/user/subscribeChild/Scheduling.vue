@@ -10,16 +10,20 @@
 			</view>
 			<view class="group_2">
 				<view class="fnt_num">
-					所需FNT {{this.FNT}}
+					所需体力{{this.FNT}}FNT
 				</view>
+<<<<<<< HEAD
+				<text style="margin-right: 10rpx;">所需体力FNT=GS*4%</text>
+=======
 				<text style="margin-right: 10rpx;">所需FNT=GS*%4</text>
+>>>>>>> 4db1ff106095c7f3683035986aa7df015abbcaa3
 				<text style="color:rgba(247, 69, 57, 1) ;">FNT可用{{poolassetData.fnt}}</text>
 			</view>
 		</view>
 		<view class="sched-btn">
-			<u-button text="确定预约" class="btn" @click="poolrechargeFun" v-if="FNT > 0 && FNT!==null && FNT < poolassetData.fnt">
+			<u-button text="确定预存" class="btn" @click="poolrechargeFun" v-if="FNT > 0 && FNT!==null && FNT < poolassetData.fnt">
 			</u-button>
-			<u-button text="确定预约" class="btn1" @click="poolrechargeFun" :disabled="true" v-else>
+			<u-button text="确定预存" class="btn1" @click="poolrechargeFun" :disabled="true" v-else>
 			</u-button>
 		</view>
 		<u-toast ref="uToast"></u-toast>

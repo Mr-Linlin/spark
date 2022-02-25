@@ -44,7 +44,7 @@
 					</view>
 					<view style="display: flex; justify-content: space-between; padding: 0 32rpx;margin-bottom: 24rpx;">
 						<view style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
-							您参与的充能
+							星体充能
 						</view>
 						<view style="font-size: 24rpx;font-weight: 550;">
 							{{orderInfo.min}}-{{orderInfo.max}}GS
@@ -53,7 +53,7 @@
 
 					<view style="display: flex; justify-content: space-between; padding: 0 32rpx;margin-bottom: 32rpx;">
 						<view style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
-							开始
+							开始时间
 						</view>
 						<view style="font-size: 24rpx;font-weight: 550;">
 							{{orderInfo.start}}
@@ -76,7 +76,7 @@
 			<view class="" style="width: 686rpx;background-color: #FFFFFF;border-radius: 12rpx;">
 				<view class=""
 					style="font-size: 24rpx;display: flex;align-items: center;height: 80rpx;margin-left: 32rpx;">
-					您参与的金额
+					您参与的充能
 				</view>
 
 				<view style="display: flex;height: 88rpx; padding:0 32rpx;">

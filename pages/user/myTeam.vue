@@ -17,7 +17,7 @@
 						{{subinfoData.directCount}}
 					</view>
 					<view class="tramNum">
-						成员数
+						战队成员
 					</view>
 				</view>
 				<view class="tramNumCount">
@@ -25,7 +25,7 @@
 						{{subinfoData.indirectCount}}
 					</view>
 					<view class="tramNum">
-						团队总业绩
+						总业绩
 					</view>
 				</view>
 			</view>
@@ -33,7 +33,7 @@
 		
 		<view class="myTeamList">
 			<view class="myTeamListTitle">
-				团队成员
+				战队成员
 			</view>
 			<view v-for="(item,index) in teamlistData" :key="index" class="myTeamListCont">
 				<view class="myTeamListContImg">

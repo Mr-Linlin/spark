@@ -1,4 +1,6 @@
+
 export const BASE_URL = "http://211.149.135.240:7799/"
+
 uni.$u.http.setConfig(config => {
 	config.baseURL = BASE_URL
 	config.timeout = 5000

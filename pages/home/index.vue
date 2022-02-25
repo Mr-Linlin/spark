@@ -11,8 +11,8 @@
 
 				</view>
 				<view class="" style="margin-right: 32rpx;">
-					<image src="../../static/home/Status.png" style="width: 44rpx;height: 44rpx;margin-top: 98rpx;"
-						mode=""></image>
+					<image @click="announcementNext" src="../../static/home/Status.png"
+						style="width: 44rpx;height: 44rpx;margin-top: 98rpx;" mode=""></image>
 				</view>
 				<view class=""
 					style="width: 14rpx;height: 14rpx;background-color: red;border-radius: 50%;position: relative;right: 5%;top: 25rpx;">
@@ -22,24 +22,19 @@
 		</view>
 		<view class="">
 			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
-				<!-- <view class="" style="width: 709rpx;height: 709rpx;border: 1rpx solid #007AFF;border-radius: 50%;">
-				</view> -->
-				
-				<!-- <video  enable-progress-gesture="false" autoplay controls="false" loop  style="width: 750rpx;height: 700rpx;" id="myVideo" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2018cd11-5bff-40a9-9f0f-1202263c2472.mp4" controls>
-					<cover-view style="width: 100rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;">
+				<video id="myVideo" :muted="true" :enable-play-gesture="false" :duration="10"
+					enable-progress-gesture="false" autoplay controls="false" loop style="width: 750rpx;height: 700rpx;"
+					src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2018cd11-5bff-40a9-9f0f-1202263c2472.mp4">
+					<cover-view
+						style="width: 100rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;">
 					</cover-view>
-					<cover-view style="width: 50rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;right: 0;">
-					</cover-view>  
-				</video> -->
-					<video id="myVideo" :muted="true" :enable-play-gesture="false" :duration="10" enable-progress-gesture="false" autoplay controls="false" loop style="width: 750rpx;height: 700rpx;"
-					     src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2018cd11-5bff-40a9-9f0f-1202263c2472.mp4">
-					     <cover-view style="width: 100rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;">
-					     </cover-view>
-					     <cover-view style="width: 50rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;right: 0;">
-					     </cover-view>
-						 <cover-view v-if="vidoType" style="width: 100%;height: 700rpx;position: absolute;background-color: #FFFFFF;">
-						 </cover-view>
-					</video>
+					<cover-view
+						style="width: 50rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;right: 0;">
+					</cover-view>
+					<cover-view v-if="vidoType"
+						style="width: 100%;height: 700rpx;position: absolute;background-color: #FFFFFF;">
+					</cover-view>
+				</video>
 			</view>
 			<view class="">
 				<view class=""
@@ -50,7 +45,7 @@
 					<view class="" style="flex: 1;">
 					</view>
 					<view class="" style="font-size: 24rpx;">
-						剩余时间 00:00:01
+						<!-- 剩余时间 00:00:01 -->
 					</view>
 				</view>
 				<scroll-view scroll-x="true">
@@ -190,46 +185,53 @@
 					name: 'FIL概况'
 				}, {
 					img: '../../static/1438913.png',
-					name: '团队'
+					name: '战队'
 				}],
 				messageList: null, //资讯
 				content: {}, //公告
 				orders: null,
 				timeData: {},
-				vidoType:true
+				vidoType: true
 			}
 		},
 		onShow() {
 			this.videoContext = uni.createVideoContext('myVideo')
 			this.videoContext.play()
-			if(this.vidoType){
+			if (this.vidoType) {
 				uni.showLoading({
 					title: '加载中'
 				});
 			}
-			setTimeout(()=>{
+			setTimeout(() => {
 				this.vidoType = false
 				uni.hideLoading();
-			},3000)
+			}, 3000)
 		},
 		onLoad() {
 			this.getMessage()
 			this.getNotice()
+			this.changeColors();
 		},
 		methods: {
-			
-			NoticeTypeFun(e){
-				if(e.name == '交易所'){
-					
-				}
-				else if(e.name == '商城'){
-					
-				}
-				else if(e.name == 'FIL概况'){
-					
-				}
-				else if(e.name == '团队'){
-					
+			NoticeTypeFun(e) {
+				if (e.name == '交易所') {
+
+				} else if (e.name == '商城') {
+					uni.showToast({
+						title: '暂未开放',
+						icon: 'none'
+					})
+				} else if (e.name == 'FIL概况') {
+					// uni.showToast({
+					// 	title:'暂未开放',
+					// 	icon:'none'
+					// })
+					// https://fifox.info/en
+					location.href = 'https://fifox.info/en'
+				} else if (e.name == '团队') {
+					uni.navigateTo({
+						url: '../user/myTeam'
+					})
 				}
 			},
 			clickTagItem(tag) {
@@ -270,9 +272,9 @@
 				})
 			},
 			// 进入新闻详情
-			onNewsDetail(aid){
+			onNewsDetail(aid) {
 				uni.navigateTo({
-					url:`/pages/home/informationdetails/index?aid=${aid}`
+					url: `/pages/home/informationdetails/index?aid=${aid}`
 				})
 			},
 			announcementNext() { //消息公告
@@ -293,12 +295,13 @@
 	page {
 		background-color: #FFFFFF;
 	}
-	.asdf{
+
+	.asdf {
 		background-color: #FFFFFF !important;
 	}
 </style>
 <style lang="scss">
-	 .order-item {
+	.order-item {
 		width: 280rpx;
 		height: 231rpx;
 		background: linear-gradient(90deg, #F9BE3F 0%, #F19645 100%);
@@ -331,8 +334,9 @@
 
 		.countdown {
 			margin: 20rpx 0;
-			::v-deep .u-count-down__text[data-v-7ebf7480]{
-					color: #FFFFFF !important;
+
+			::v-deep .u-count-down__text[data-v-7ebf7480] {
+				color: #FFFFFF !important;
 			}
 		}
 	}

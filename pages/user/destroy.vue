@@ -12,14 +12,14 @@
 			</view>
 		</view>
 		<view class="number-box" >
-			<view class="desc">FNT销毁总量</view>
+			<view class="desc">体力消耗(FNT)</view>
 			<view class="num">{{destroytotalData}}</view>
 		</view>
 		<view class="list-box">
 			<view class="list-header">
 				<view>用户</view>
 				<view style="text-align: right">时间</view>
-				<view style="text-align: right">业绩</view>
+				<view style="text-align: right">体力</view>
 			</view>
 			<view class="list">
 				<view class="item" :key="i" v-for="(item,i) in destroylistData">

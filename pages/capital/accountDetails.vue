@@ -209,8 +209,12 @@
 				})
 			},
 			TransferNext(){//划转
-				uni.navigateTo({
-					url:'./Transfer'
+				// uni.navigateTo({
+				// 	url:'./Transfer'
+				// })
+				uni.showToast({
+					title:'暂未开放',
+					icon:'none'
 				})
 			}
 		}
