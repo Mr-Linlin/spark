@@ -1,7 +1,7 @@
 <template>
   <view class="list">
     <view class="item" :key="i" v-for="(item,i) in getNoticeData">
-      <view class="time">{{item.createTime}}</view>
+      <view v-if="item.createTime" class="time">{{item.createTime.split(' ')[0]}}</view>
       <view class="content">
         <!-- <image class="image" src=""></image> -->
         <view class="title">
@@ -11,7 +11,7 @@
           
         </view>
       </view>
-    </view>
+    </view> 
   </view>
 </template>
 

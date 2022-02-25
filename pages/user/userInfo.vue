@@ -1,6 +1,6 @@
 <template>
 	<view class="user-info">
-		<view class="box-card">
+		<view class="box-card bx_sard">
 			<view class="group_1">
 				<text>头像</text>
 				<image @click="chooseImageFun" :src="userData.pic"></image>
@@ -24,11 +24,11 @@
 				</view>
 			</view>
 		</view>
-		<view @click="notYetOpen" class="box-card">
+		<view @click="notYetOpen" class="box-card bx_sard">
 			<view class="group_1">
 				<text>地址管理</text>
 				<view style="display: flex;align-items: center;">
-					<text>管理</text>
+					<text>暂未开放</text>
 					<image src="../../static/user/right.png" mode="" class="right-img"></image>
 				</view>
 			</view>
@@ -132,19 +132,22 @@
 	}
 </script>
 
-<style scoped lang="scss">
+<style>
 	page {
 		background-color: #F7FAFF;
 	}
+</style>
+<style scoped lang="scss">
+	
 
 	.user-info {
 		padding: 34rpx;
 
 		.box-card {
-			padding:0 20rpx;
+			padding:0 32rpx;
 			background: #FFFFFF;
 			box-shadow: 0 32rpx 64rpx 2rpx rgba(88, 131, 204, 0.05);
-			border-radius: 16rpx;
+			border-radius: 12rpx;
 			margin-bottom: 32rpx;
 
 			.group_1 {

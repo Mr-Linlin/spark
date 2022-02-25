@@ -18,7 +18,7 @@
 				</view>
 				<view class="" style="display: flex;align-items: center;margin-top: 20rpx;">
 					<view class=""
-						style="width: 82rpx;height: 36rpx;background: rgba(46, 122, 254, 0.11);color: #3A82FE;font-size: 22rpx;text-align: center;border-radius: 5rpx;">
+						style="width: 82rpx;height: 36rpx;background: rgba(46, 122, 254, 0.11);color: #3A82FE;font-size: 22rpx;text-align: center;border-radius: 5rpx;display: flex;align-items: center;justify-content: center;">
 						邀请码
 					</view>
 					<view class="" style="font-size: 24rpx;color: #3A82FE;margin-left: 10rpx;">
@@ -30,14 +30,14 @@
 
 			</view>
 			<view class="">
-				<image :src="userData.pic" style="width: 140rpx;height: 140rpx;border-radius: 50%;" mode=""></image>
+				<image :src="userData.pic" style="width: 140rpx;height: 140rpx;border-radius: 50%;box-shadow: 0px 20rpx 40rpx 1rpx rgba(88, 130, 204, 0.17);border: 2rpx solid #FFFFFF;" mode=""></image>
 			</view>
 		</view>
 
 		<view class="" style="display: flex;justify-content: center;margin-top: 64rpx;">
-			<view class="" style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 41rpx;border-radius: 12rpx;">
+			<view class="bx_sard" style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 32rpx;border-radius: 12rpx;">
 				<view @click="usericonNext(item)" v-for="(item,index) in usericon" :key="index"
-					style="display: flex;align-items: center;margin-top: 41rpx;">
+					style="display: flex;align-items: center;margin-top: 32rpx;">
 					<view class="" style="width: 96rpx;display: flex;justify-content: center;">
 						<image :src="item.img" style="width: 32rpx;height: 32rpx;" mode=""></image>
 					</view>
@@ -53,11 +53,11 @@
 				</view>
 			</view>
 		</view>
-
+ 
 		<view class="" style="display: flex;justify-content: center;margin-top: 32rpx;">
-			<view class="" style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 41rpx;border-radius: 12rpx;">
+			<view class="bx_sard" style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 32rpx;border-radius: 12rpx;">
 				<view @click="usericon2Next(item)" v-for="(item,index) in usericon2" :key="index"
-					style="display: flex;align-items: center;margin-top: 41rpx;">
+					style="display: flex;align-items: center;margin-top: 32rpx;">
 					<view class="" style="width: 96rpx;display: flex;justify-content: center;">
 						<image :src="item.img" style="width: 32rpx;height: 32rpx;" mode=""></image>
 					</view>

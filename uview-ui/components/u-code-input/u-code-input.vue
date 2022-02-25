@@ -176,7 +176,9 @@
 			@include flex;
 			justify-content: center;
 			align-items: center;
-
+			background-color: #FFFFFF;
+			border-radius: 12rpx;
+			border: 2upx solid #FFFFFF;
 			&__text {
 				font-size: 15px;
 				color: $u-content-color;
