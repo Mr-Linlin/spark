@@ -4,14 +4,17 @@
 			<view class="type">
 				<view class="key">交易类型</view>
 				<view class="val">
-					<switch checked  />
+					<u-switch
+						space="2" v-model="value11" activeColor="#3A82FE" 
+						inactiveColor="#3ED7AC">
+					</u-switch>
 				</view>
 			</view>
 			<view class="sub-title">价格</view>
 			<view class="price-box">
 				 <u--input
 					class="price-input"
-				    placeholder="请输入内容"
+				    placeholder="请输入价格"
 				    border="none"
 				    v-model="value"
 				  >
@@ -25,7 +28,7 @@
 			<view class="price-box">
 				 <u--input
 					class="price-input"
-				    placeholder="请输入内容"
+				    placeholder="请输入数量"
 				    border="none"
 				    v-model="value"
 				  >
@@ -77,7 +80,8 @@
 		data() {
 			return {
 				value12:true,
-				value:""
+				value:"",
+				value11:false
 			}
 		},
 		methods:{
@@ -177,6 +181,7 @@
 			box-shadow: 0px 20rpx 40rpx 1px rgba(88,130,204,0.17);
 			border-radius: 12rpx;
 			color: #fff;
+			height: 88rpx;
 		}
 	}
 	.title{
@@ -193,7 +198,7 @@
 	.e-item{
 		width: 686rpx;
 		background: #FFFFFF;
-		padding: 32rpx;
+		padding: 24rpx 32rpx 32rpx;
 		box-shadow: 0px 16rpx 32rpx 1px rgba(88,131,204,0.05);
 		border-radius: 12rpx;
 		.top{
@@ -218,7 +223,7 @@
 			}
 			.top-right{
 				.top-right-btn{
-					width: 133rpx;
+					width: 96rpx;
 					height: 48rpx;
 					background: #F7FAFF !important;
 					border-radius: 8rpx;
