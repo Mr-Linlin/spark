@@ -9,7 +9,7 @@
 						</image>
 					</view>
 					<view class="" style="flex: 1;">
-			
+
 					</view>
 					<view class="" style="margin-right: 32rpx;">
 						<image @click="announcementNext" src="../../static/home/Status.png"
@@ -17,11 +17,13 @@
 					</view>
 					<view class=""
 						style="width: 14rpx;height: 14rpx;background-color: red;border-radius: 50%;position: relative;right: 5%;top: 25rpx;">
-			
+
 					</view>
 				</view>
 			</view>
 		</view>
+		<!-- </u-sticky> -->
+		<!-- jj -->
 		<view class="">
 			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
 				<video id="myVideo" :muted="true" :enable-play-gesture="false" :duration="10"
@@ -53,7 +55,7 @@
 				<scroll-view scroll-x="true">
 					<view style="display: flex;width: 680rpx;margin-left: 32rpx;">
 						<view style="" v-for="(item,index) in orders" :key="index" @click="onDetail(item.resourceId)">
-							<view class="order-item" >
+							<view class="order-item" :style="{background:background[index]}">
 								<view class="between">
 									<view style="font-size: 28rpx;">
 										{{item.time}}点场
@@ -191,9 +193,17 @@
 				orders: null,
 				timeData: {},
 				vidoType: true,
-				status:{
-					2:'可参与充能',
-					3:'充能结束'
+				status: {
+					2: '可参与充能',
+					3: '充能结束'
+				},
+				background: {
+					0: ' linear-gradient(90deg, #F9BE3F 0%, #F19645 100%)',
+					1: ' linear-gradient(90deg, #FF58DC 0%, #FF45B4 100%)',
+					2: ' linear-gradient(90deg, #4BD9F9 0%, #29C5F1 100%)',
+					3: ' linear-gradient(90deg, #FFA58F 0%, #FF7957 100%)',
+					4: ' linear-gradient(90deg, #F4B76D 0%, #EBA147 100%)',
+					5: ' linear-gradient(90deg, #8F9CFF 0%, #7484FF 100%)',
 				}
 			}
 		},
@@ -217,7 +227,9 @@
 		methods: {
 			NoticeTypeFun(e) {
 				if (e.name == '交易所') {
-
+					uni.switchTab({
+					    url: '/pages/spark/index'
+					});
 				} else if (e.name == '商城') {
 					uni.showToast({
 						title: '暂未开放',
@@ -229,9 +241,9 @@
 					// 	icon:'none'
 					// })
 					// #ifdef APP-PLUS
-						plus.runtime.openURL('https://fifox.info/en')
+					plus.runtime.openURL('https://fifox.info/en')
 					// #endif
-				} else if (e.name == '团队') {
+				} else if (e.name == '战队') {
 					uni.navigateTo({
 						url: '../user/myTeam'
 					})
@@ -307,7 +319,7 @@
 	.order-item {
 		width: 280rpx;
 		height: 231rpx;
-		background: linear-gradient(90deg, #F9BE3F 0%, #F19645 100%);
+		// background: linear-gradient(90deg, #F9BE3F 0%, #F19645 100%);
 		border-radius: 12rpx;
 		color: #FFFFFF;
 		margin-right: 24rpx;

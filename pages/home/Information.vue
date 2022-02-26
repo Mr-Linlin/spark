@@ -33,7 +33,7 @@
 					pageNum: 0,
 					pageSize: 20
 				},
-				status: 'loadmore', //刷新状态
+				status: 'nomore', //刷新状态
 			}
 		},
 		onLoad() {

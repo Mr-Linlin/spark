@@ -176,7 +176,7 @@
 					1: '充能中',
 					2: '已充能'
 				},
-				loading:'loadmore',
+				loading:'nomore',
 				current: 0,
 				title: ['星体充能', "充能结束"],
 				sparks: {

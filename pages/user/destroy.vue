@@ -64,7 +64,7 @@
 				destroytotalData: '',
 				destroylistData: [],
 
-				status: 'loadmore',
+				status: 'nomore',
 				page: 1,
 				pageType:true
 			}

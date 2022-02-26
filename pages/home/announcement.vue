@@ -46,6 +46,9 @@ export default {
 page{
   background-color: #F7FAFF;
 }
+.list{
+	padding-top: 20rpx;
+}
 .item{
   text-align: center;
   margin-bottom: 32rpx;

@@ -54,7 +54,7 @@
 			return {
 				loginForm: {
 					account: '13812345678',
-					data: '',
+					data: '123123',
 					type: 1
 				},
 				rules: {

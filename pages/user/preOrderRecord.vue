@@ -174,7 +174,7 @@
 				orderList: null,
 				title: ['星体充能', "充能结束"],
 				statistics: {},
-				loading: 'loadmore',
+				loading: 'nomore',
 				status: {
 					1: '充能中',
 					2: '充能完成'

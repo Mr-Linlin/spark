@@ -29,13 +29,16 @@
 			<view class="" style="flex: 1;">
 
 			</view>
-			<view class="">
-				<image :src="userData.pic ? userData.pic : imgst" style="width: 140rpx;height: 140rpx;border-radius: 50%;box-shadow: 0px 20rpx 40rpx 1rpx rgba(88, 130, 204, 0.17);border: 2rpx solid #FFFFFF;" mode=""></image>
+			<view class="" @click="onProfile">
+				<image :src="userData.pic ? userData.pic : imgst"
+					style="width: 140rpx;height: 140rpx;border-radius: 50%;box-shadow: 0px 20rpx 40rpx 1rpx rgba(88, 130, 204, 0.17);border: 2rpx solid #FFFFFF;"
+					mode=""></image>
 			</view>
 		</view>
 
 		<view class="" style="display: flex;justify-content: center;margin-top: 64rpx;">
-			<view class="bx_sard" style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 32rpx;border-radius: 12rpx;">
+			<view class="bx_sard"
+				style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 32rpx;border-radius: 12rpx;">
 				<view @click="usericonNext(item)" v-for="(item,index) in usericon" :key="index"
 					style="display: flex;align-items: center;margin-top: 32rpx;">
 					<view class="" style="width: 96rpx;display: flex;justify-content: center;">
@@ -53,9 +56,10 @@
 				</view>
 			</view>
 		</view>
- 
+
 		<view class="" style="display: flex;justify-content: center;margin-top: 32rpx;">
-			<view class="bx_sard" style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 32rpx;border-radius: 12rpx;">
+			<view class="bx_sard"
+				style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 32rpx;border-radius: 12rpx;">
 				<view @click="usericon2Next(item)" v-for="(item,index) in usericon2" :key="index"
 					style="display: flex;align-items: center;margin-top: 32rpx;">
 					<view class="" style="width: 96rpx;display: flex;justify-content: center;">
@@ -88,23 +92,24 @@
 						name: '能量守护',
 						icon: '../../static/user/7124571.png'
 					},
-				{
-					img: '../../static/user/83649.png',
-					name: '能量预存储',
-					icon: '../../static/user/7124571.png'
-				}, {
-					img: '../../static/user/1148901653.png',
-					name: '我的能量',
-					icon: '../../static/user/7124571.png'
-				},  {
-					img: '../../static/user/138458134.png',
-					name: '体力消耗',
-					icon: '../../static/user/7124571.png'
-				}, {
-					img: '../../static/user/2865089.png',
-					name: '我的战队',
-					icon: '../../static/user/7124571.png'
-				}],
+					{
+						img: '../../static/user/83649.png',
+						name: '能量预存储',
+						icon: '../../static/user/7124571.png'
+					}, {
+						img: '../../static/user/1148901653.png',
+						name: '我的能量',
+						icon: '../../static/user/7124571.png'
+					}, {
+						img: '../../static/user/138458134.png',
+						name: '体力消耗',
+						icon: '../../static/user/7124571.png'
+					}, {
+						img: '../../static/user/2865089.png',
+						name: '我的战队',
+						icon: '../../static/user/7124571.png'
+					}
+				],
 
 				usericon2: [{
 					img: '../../static/user/09878234.png',
@@ -121,7 +126,7 @@
 				}],
 
 				userData: {},
-				imgst:'../../static/pzy-images/AppIcon.png'
+				imgst: '../../static/pzy-images/AppIcon.png'
 			}
 		},
 		mounted() {},
@@ -149,7 +154,7 @@
 					})
 				}
 
-				if (e.name ==='体力消耗') {
+				if (e.name === '体力消耗') {
 					uni.navigateTo({
 						url: './destroy'
 					})
@@ -168,7 +173,7 @@
 
 			},
 			usericon2Next(e) {
-				if (e.name ==='个人信息') {
+				if (e.name === '个人信息') {
 					uni.navigateTo({
 						url: './userInfo'
 					})
@@ -178,7 +183,14 @@
 						url: './setUp'
 					})
 				}
-
+				if (e.name === '星际客服') {
+					uni.$u.toast('暂未开放')
+				}
+			},
+			onProfile() {
+				uni.navigateTo({
+					url: './userInfo'
+				})
 			}
 		}
 	}
