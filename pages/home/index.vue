@@ -245,7 +245,7 @@
 					// #endif
 				} else if (e.name == '战队') {
 					uni.navigateTo({
-						url: '../user/myTeam'
+						url: '../user/myTeam',
 					})
 				}
 			},
