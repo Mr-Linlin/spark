@@ -10,7 +10,7 @@
 		</view>
 		<view style="display: block;height: 90rpx;"></view>
 		<view v-if="defaultIndex===0">
-			<spark-data></spark-data>
+			<spark-data ref="data"></spark-data>
 		</view>
 		<view v-if="defaultIndex===1">
 			<spark-buy></spark-buy>
@@ -98,6 +98,28 @@
 
 		},
 		methods: {
+			/* 
+			 
+				 FAIL("异常", -1),
+			     TRADE("区域交易对", 0),
+			     PRICE_FRESH("价格刷新", 1),
+			     USER("用户", 2),
+			     MARKET("行情", 3),
+			     CHECK("心跳检查", 4),
+			     AREA("区域", 5),
+			     SUB("订阅成功", 6),
+			     UNSUB("取消订阅成功", 7),
+			     DEPTH("深度", 8),
+			     TRUST("当前委托", 9),
+			     WALLET("资产", 10),
+			     K("K线", 11),
+			     TRADE_RECORD("交易记录", 12),
+			     TICKER("行情", 13),
+			     LAST("最后10位", 14),
+			     ALL("重启池全网用户购买开关", 15);
+			 
+			 */
+			
 			// 打开侧边栏
 			openPopud() {
 				this.$refs.popup.show();
@@ -122,21 +144,29 @@
 				});
 				uni.onSocketOpen((res) => {
 					console.log("链接打开", res)
-					this.sendSocket({
+					/* this.sendSocket({
 						"method": "kData",
-						"tradeId": 4,
-						"resolution": 4,
-						"from": 1556689555,
-						"to": 1645767955
-					})
+						"tradeId": 9,
+						"resolution": 1,
+						"from": 1645772340,
+						"to": 1645772340
+					}) */
+					this.sendSocket({"method":"symbols","tradeId":1,"tradeId":9})
 				});
 				uni.onSocketError(function(res) {
 					console.log(res)
 					console.log('WebSocket连接打开失败，请检查！');
 				})
-				uni.onSocketMessage(function(res) {
+				uni.onSocketMessage((res) =>{
 					const data = JSON.parse(res.data)
 					console.log(data)
+					const obj = data.obj;
+					switch(data.code){
+						case 11:{
+							this.$refs['data'].handleKLine(obj)
+							break;
+						}
+					}
 				});
 			},
 			sendSocket(data) {
