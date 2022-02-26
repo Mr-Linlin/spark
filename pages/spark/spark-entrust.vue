@@ -1,22 +1,65 @@
 <template>
-	<view class="plr3 theme" :style="theme">
-		<view class="container mt2" :key="index" v-for="(item,index) of [1,2,3,4,5,6]">
-			<view class="p3">
-				<view class="flexC space-between">
-					<view class="flexC">
-						<view class="fz3 fc-c1">买入</view>
-						<view class="fz1 ml1">FNT/GS</view>
-					</view>
-					<my-button background="3A82FE" :width="82" :height="48" :radius="8" title="买入"></my-button>
+	<view class="plr3 theme" >
+		<view class="header">
+			<view class="type">
+				<view class="key">交易类型</view>
+				<view class="val">
+					<switch checked  />
 				</view>
-				<view class="flexC" style="margin-top: 24rpx;">
-					<view style="width: 50%;">
-						<view class="fc-c2 fz-wb2">总量(FNT)</view>
-						<view class="fz-wb2 mt2">207902.43</view>
+			</view>
+			<view class="sub-title">价格</view>
+			<view class="price-box">
+				 <u--input
+					class="price-input"
+				    placeholder="请输入内容"
+				    border="none"
+				    v-model="value"
+				  >
+				  </u--input>
+				<u-number-box class="u-num-box" color="rgba('0,0,0,0')" bgColor="rgba('0,0,0,0')" v-model="value" @change="valChange"></u-number-box>
+			</view>
+			<view class="sub-title-box">
+				<view class="sub-title-key">数量</view>
+				<view class="sub-title-desc">可用28923GS</view>
+			</view>
+			<view class="price-box">
+				 <u--input
+					class="price-input"
+				    placeholder="请输入内容"
+				    border="none"
+				    v-model="value"
+				  >
+				  </u--input>
+				<u-number-box class="u-num-box" color="rgba('0,0,0,0')" bgColor="rgba('0,0,0,0')" v-model="value" @change="valChange"></u-number-box>
+			</view>
+			<view class="sub-title">价格</view>
+			<view class="gs-box">
+				2839230.473934<text>GS</text>
+			</view>
+			<u-button class="sub-btn" type="primary" text="委托买入"></u-button>
+		</view>
+		<view class="title">
+			历史委托
+		</view>
+		<view class="entrust">
+			<view class="e-item">
+				<view class="top">
+					<view class="top-left">
+						<text class="txt1">买入</text>
+						<text class="txt2">FNT/GS</text>
 					</view>
-					<view style="width: 50%;">
-						<view class="fc-c2 fz-wb2 ml2">价格</view>
-						<view class="fz-wb2 ml2 mt2">807902.43</view>
+					<view class="top-right">
+						<u-button border="none" class="top-right-btn" text="撤销"></u-button>
+					</view>
+				</view>
+				<view class="e-content">
+					<view class="c-left">
+						<view class="c-key">总量(FNT)</view>
+						<view class="c-val">287902.43</view>
+					</view>
+					<view class="c-right">
+						<view class="c-key">总量(FNT)</view>
+						<view class="c-val">287902.43</view>
 					</view>
 				</view>
 			</view>
@@ -26,23 +69,196 @@
 
 <script>
 	import myButton from '../../components/my-button/my-button.vue';
+	
 	export default {
 		components: {
 			myButton
 		},
 		data() {
 			return {
-
+				value12:true,
+				value:""
+			}
+		},
+		methods:{
+			valChange(){
+				
 			}
 		}
 	}
 </script>
 
-<style>
-	.container {
-		background-color: #FFFFFF;
-		width: 100%;
+<style lang="scss" scoped>
+	.header{
+		width: 686rpx;
+		background: #FFFFFF;
+		box-shadow: 0px 16px 32px 1px rgba(88,131,204,0.05);
+		border-radius: 12px 12px 12px 12px;
+		margin-top: 20rpx;
+		
+		padding: 32rpx 32rpx 44rpx;
+		opacity: 1;
+		.type{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.key{
+				font-size: 32rpx;
+				font-weight: 500;
+				color: #1A1B1C;
+				font-weight: bold;
+			}
+		}
+		.sub-title{
+			margin-top: 32rpx;
+			margin-bottom: 20rpx;
+			height: 34rpx;
+			font-size: 28rpx;
+			font-weight: bold;
+			color: #1A1B1C;
+			line-height: 34rpx;
+		}
+		.price-box{
+			display: flex;
+			width: 622rpx;
+			height: 88rpx;
+			margin-bottom: 32rpx;
+			background: #F7FAFF;
+			border-radius: 12rpx;
+			.price-input{
+				height: 100%;
+				padding-left: 24rpx !important;
+			}
+			/deep/.u-number-box__minus,.u-number-box__plus{
+				background-color: rgba(0,0,0,0) !important;
+			}
+		}
+		.sub-title-box{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 20rpx;
+			.sub-title-key{
+				height: 34rpx;
+				font-size: 28rpx;
+				font-weight: 500;
+				color: #1A1B1C;
+				line-height: 34rpx;
+				font-weight: bold;
+			}
+			.sub-title-desc{
+				height: 28rpx;
+				font-size: 24rpx;
+				font-family: PingFang SC-Regular, PingFang SC;
+				font-weight: 400;
+				color: rgba(0, 0, 0, 0.66);
+				line-height: 28rpx;
+			}
+		}
+		.gs-box{
+			height: 49rpx;
+			font-size: 54rpx;
+			font-family: DIN-Medium, DIN;
+			font-weight: 500;
+			color: #1A1B1C;
+			font-weight: bold;
+			line-height: 49rpx;
+			text{
+				margin-left: 8rpx;
+				font-size: 32rpx;
+				font-family: PingFang SC-Regular, PingFang SC;
+				font-weight: 400;
+				color: #1A1B1C;
+			}
+		}
+		.sub-btn{
+			margin-top: 52rpx;
+			background: #3A82FE;
+			box-shadow: 0px 20rpx 40rpx 1px rgba(88,130,204,0.17);
+			border-radius: 12rpx;
+			color: #fff;
+		}
+	}
+	.title{
+		height: 40rpx;
+		font-size: 34rpx;
+		font-family: PingFang SC-Medium, PingFang SC;
+		font-weight: 500;
+		color: #1A1B1C;
+		line-height: 40rpx;
+		margin-top: 40rpx;
+		font-weight: bold;
+		margin-bottom: 32rpx;
+	}
+	.e-item{
+		width: 686rpx;
+		background: #FFFFFF;
+		padding: 32rpx;
+		box-shadow: 0px 16rpx 32rpx 1px rgba(88,131,204,0.05);
 		border-radius: 12rpx;
-		height: 209rpx;
+		.top{
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 24rpx;
+			.top-left{
+				.txt1{
+					font-size: 24rpx;
+					font-family: PingFang SC-Regular, PingFang SC;
+					font-weight: 400;
+					color: #3A82FE;
+					margin-right: 12rpx;
+				}
+				.txt2{
+					font-size: 24rpx;
+					font-family: DIN-Medium, DIN;
+					font-weight: bold;
+					color: #1A1B1C;
+					line-height: 22rpx;
+				}
+			}
+			.top-right{
+				.top-right-btn{
+					width: 133rpx;
+					height: 48rpx;
+					background: #F7FAFF !important;
+					border-radius: 8rpx;
+					font-size: 24rpx;
+					font-family: PingFang SC-Regular, PingFang SC;
+					font-weight: 400;
+					color: rgba(0, 0, 0, 0.66);
+					border: none;
+					&::before{
+						display: none;
+					}
+				}
+			}
+		}
+		.e-content{
+			display: flex;
+			justify-content: space-between;
+			&>view{
+				width: 300rpx;
+			}
+			.c-key{
+				height: 28rpx;
+				font-size: 24rpx;
+				font-family: PingFang SC-Regular, PingFang SC;
+				font-weight: 400;
+				color: rgba(0, 0, 0, 0.44);
+				line-height: 28rpx;
+				margin-bottom: 20rpx;
+			}
+			.c-val{
+				height: 25rpx;
+				font-size: 28rpx;
+				font-family: DIN-Medium, DIN;
+				font-weight: bold;
+				color: #1A1B1C;
+				line-height: 25rpx;
+			}
+		}
+	}
+	/deep/ .u-number-box__plus--hover{
+		background-color: rgba(0,0,0,0) !important;
 	}
 </style>
