@@ -12,17 +12,17 @@
 						<view class="time">
 							<view class="time__custom">
 								<text
-									class="time__custom__item">{{ timeData.hours>10?timeData.hours:'0'+timeData.hours}}</text>
+									class="time__custom__item">{{ timeData.hours>9?timeData.hours:'0'+timeData.hours}}</text>
 							</view>
 							<text class="time__doc">:</text>
 							<view class="time__custom">
 								<text
-									class="time__custom__item">{{ timeData.minutes>10?timeData.minutes:'0'+timeData.minutes }}</text>
+									class="time__custom__item">{{ timeData.minutes>9?timeData.minutes:'0'+timeData.minutes }}</text>
 							</view>
 							<text class="time__doc">:</text>
 							<view class="time__custom">
 								<text
-									class="time__custom__item">{{ timeData.seconds>10?timeData.seconds:'0'+timeData.seconds }}</text>
+									class="time__custom__item">{{ timeData.seconds>9?timeData.seconds:'0'+timeData.seconds }}</text>
 							</view>
 						</view>
 					</u-count-down>
