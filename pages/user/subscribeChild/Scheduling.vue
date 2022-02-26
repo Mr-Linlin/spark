@@ -12,7 +12,7 @@
 				<view class="fnt_num">
 					所需体力{{this.FNT}}FNT
 				</view>
-				<text style="margin-right: 10rpx;">所需体力FNT=GS*2%*2倍</text>
+				<text style="margin-right: 10rpx;">所需体力FNT=GS*2%*2倍</text><br>
 				<text style="color:rgba(247, 69, 57, 1) ;">FNT可用{{poolassetData.fnt}}</text>
 			</view>
 		</view>
@@ -119,8 +119,8 @@
 
 			.group_2 {
 				color: rgba(0, 0, 0, 0.66);
-				height: 138rpx;
-				padding: 0 24rpx;
+				padding: 0rpx 24rpx;
+				padding-bottom: 12rpx;
 				// background: red;
 				margin-top: 32rpx;
 				border-radius: 12rpx;

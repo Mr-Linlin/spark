@@ -159,7 +159,7 @@
 		</u-popup>
 
 		<u-popup :show="show" @close="close" @open="open" :round="15">
-			<view>
+			<view style="background-color: #F7FAFF;border-radius: 30rpx;">
 				<view class="" style="">
 					<view class=""
 						style="height: 146rpx;display: flex;align-items: center;margin-left: 60rpx;font-size: 36rpx;text-shadow: 0px 0px #000;">
@@ -170,7 +170,7 @@
 					</view>
 					<view class="" style="display: flex;justify-content: center;margin-top: 20rpx;">
 						<view class=""
-							style="width: 630rpx;height: 88rpx;background: #F7FAFF;display: flex;align-items: center;">
+							style="width: 630rpx;height: 88rpx;display: flex;align-items: center;background: #FFFFFF;border-radius: 12rpx;">
 							<view class="">
 								<u--input v-model="code" style="height: 88rpx;width: 450rpx;text-indent: 1rem;" placeholder="6位验证码"
 									border="none" maxlength="6"></u--input>
@@ -179,7 +179,7 @@
 								<u-toast ref="uToast"></u-toast>
 								<u-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange">
 								</u-code>
-								<text style="color: #3A82FE;" @tap="getCode">{{tips}}</text>
+								<text style="color: #3A82FE;margin-left: 20rpx;" @tap="getCode">{{tips}}</text>
 							</view>
 						</view>
 					</view>
@@ -188,12 +188,12 @@
 							6位资金密码
 						</view>
 						<view class="" style="display: flex;justify-content: center;margin-top: 20rpx;">
-							<u-code-input v-model="tradePwd" :maxlength="6" dot :focus="true" size="48" borderColor="#fff"></u-code-input>
+							<u-code-input v-model="tradePwd" :maxlength="6" dot :focus="true" size="45" borderColor="#fff"></u-code-input>
 						</view>
 					</view>
 					<view class="" style="display: flex;align-items: center;justify-content: center;height: 200rpx;">
-						<u-button @click="close" class=""
-							style="width: 280rpx;height: 88rpx;background-color: #F7FAFF;display: flex;align-items: center;justify-content: center;font-size: 26rpx;border-radius: 12rpx;">
+						<u-button :custom-style="{border:'none'}" :hair-line='false' @click="close" class=""
+							style="width: 280rpx;height: 88rpx;background-color: #fff;display: flex;align-items: center;justify-content: center;font-size: 26rpx;border-radius: 12rpx;">
 							取消转账
 						</u-button>
 

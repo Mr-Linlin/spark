@@ -101,7 +101,7 @@
 						name: '我的能量',
 						icon: '../../static/user/7124571.png'
 					}, {
-						img: '../../static/user/138458134.png',
+						img: '../../static/user/MyIcon.png',
 						name: '体力消耗',
 						icon: '../../static/user/7124571.png'
 					}, {

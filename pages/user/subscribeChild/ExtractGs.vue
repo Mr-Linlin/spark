@@ -18,7 +18,7 @@
 				<text>体力FNT</text>
 				<view class="sched_input">
 					<u--input v-model="FNT" border="none" @change="fntChange" color="rgba(26, 27, 28, 1)"></u--input>
-				</view>
+				</view> 
 				<view class="info-title">
 					<view>体力最多可提出 {{poolassetData.fnt}}</view>
 					<view class="" style="flex: 1;">
@@ -69,10 +69,10 @@
 		},
 		methods: {
 			poolassetDataGs(){//全部提取GS
-				this.GS = this.poolassetData.gs
+				this.GS = this.poolassetData.gs ? this.poolassetData.gs : 0
 			},
 			poolassetDataFnt(){//全部提取Fnt
-				this.FNT = this.poolassetData.fnt
+				this.FNT = this.poolassetData.fnt ? this.poolassetData.fnt : 0
 			},
 			poolassetFun(){//预排金额
 				poolasset().then(res=>{
