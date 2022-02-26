@@ -81,14 +81,14 @@
 
 				<view style="display: flex;height: 88rpx; padding:0 32rpx;">
 					<view class="gs-item" v-for="(item,index) in radios" :key="index"
-						:class="{active:index===currentIndex}" @click="radioClick(index,item.num)">
+						:class="{active:index===currentIndex && orderInfo.statusStr==='进行中'}" @click="radioClick(index,item.num)">
 						{{item.num}}GS
 					</view>
 				</view>
 
 				<view class="flex_j">
 					<view class="Isum">
-						<u--input type="number" style="text-indent: 1rem;" border="none" class="uinput"
+						<u--input type="number" style="text-indent: 1rem;" border="none" class="uinput" :disabled="orderInfo.statusStr==='已结束'"
 							placeholder="自定义数量" v-model="gs" @change="change">
 						</u--input>
 						<view class="">
@@ -104,8 +104,9 @@
 			</view>
 		</view>
 		<view class="flex_j">
-			<view class="btn1 ptn_b" v-if="orderInfo.countDown < 0 || orderInfo.statusStr==='未开始'">
-				{{orderInfo.statusStr}}
+			<view class="btn1 ptn_b"
+				v-if="orderInfo.countDown < 0 || orderInfo.statusStr==='未开始' || this.queryInfo.quantity < 1">
+				{{statusInfo[orderInfo.statusStr]}}
 			</view>
 			<view class="btn ptn_b" @click="onTake" v-else>
 				<view class="">
@@ -150,6 +151,12 @@
 					'进行中': '剩余时间'
 
 				},
+				statusInfo: {
+					'未开始': '充能未开始',
+					'已结束': '充能已结束',
+					'进行中': '请选择充能值'
+				
+				},
 				radios: [{
 						num: 600
 					},
@@ -170,8 +177,8 @@
 			this.queryInfo.resourceId = options.resourceId
 			this.queryInfo.quantity = this.radios[0].num * 0.02
 		},
-		computed:{
-			schedule(){
+		computed: {
+			schedule() {
 				return `${(this.orderInfo.qty/this.orderInfo.total)*100}%`
 			}
 		},
@@ -202,6 +209,7 @@
 				// console.log(qs.stringify(this.queryInfo))
 				this.queryInfo.info = md5(qs.stringify(this.queryInfo))
 				if (this.queryInfo.quantity === 0) return uni.$u.toast('请输入参与金额')
+				if(this.fnt<this.queryInfo.quantity)return uni.$u.toast('FNT体力不足')
 				let {
 					code,
 					msg,
@@ -224,6 +232,7 @@
 					return uni.$u.toast(`参与金额最大为${this.orderInfo.max}GS`)
 				} else if (e < 1) {
 					this.gs = ''
+					this.queryInfo.quantity = 0
 					return uni.$u.toast(`参与金额最小为${this.orderInfo.min}GS`)
 				}
 				this.queryInfo.quantity = e * 0.02

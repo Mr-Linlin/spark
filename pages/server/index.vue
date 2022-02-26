@@ -6,17 +6,17 @@
 				<image src="../../static/sever/msg.png" mode=""></image>
 			</view>
 		</u-navbar>
+		<u-sticky offset-top="88" style="background-color: #FAFCFF;">
+			<lzt-tabs :titles="serves" @currentIndex='currentIndex' />
+		</u-sticky>
 		<!-- 内容 -->
 		<view class="gs-content bx_sard">
-			<!-- 切换Tab --> 
-			<u-sticky offset-top="88" style="background-color: #FAFCFF;">
-				<lzt-tabs :titles="serves" @currentIndex='currentIndex' />
-			</u-sticky>
+			<!-- 切换Tab -->
 
-			<view class="fil" v-if="curent===0" >
+			<view class="fil" v-if="curent===0">
 				<serverfil :list="list" @buyClick="buyClick" />
 			</view>
-			<view class="fnt" v-if="curent===1" >
+			<view class="fnt" v-if="curent===1">
 				<serverfnt />
 			</view>
 		</view>
@@ -83,8 +83,6 @@
 	}
 </style>
 <style scoped lang="scss">
-	
-
 	.gs-server {
 		.slot-left {
 			font-size: 42rpx;
@@ -116,12 +114,16 @@
 
 		.gs-content {
 			margin-top: 88rpx;
- 
+
 			.fil {
 				display: flex;
 				justify-content: center;
 				flex-wrap: wrap;
-				margin-top: 100rpx; 
+				margin-top: 170rpx;
+			}
+			.fnt {
+				
+				margin-top: 170rpx;
 			}
 		}
 	}

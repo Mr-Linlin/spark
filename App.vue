@@ -37,6 +37,7 @@
 	page {
 		box-sizing: border-box;
 		font-size: 28rpx;
+		background-color: #F7FAFF;
 	}
 
 	* {
