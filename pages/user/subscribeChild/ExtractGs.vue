@@ -7,7 +7,7 @@
 					<u--input v-model="GS" border="none" @change="fntChange" ></u--input>
 				</view>
 				<view class="info-title">
-					<text>能量最多可提出 {{poolassetData.gs}}</text>
+					<text>能量最多可提出 {{poolassetData.gs ? poolassetData.gs : 0 }}GS</text>
 					<view class="" style="flex: 1;">
 						
 					</view>
@@ -18,7 +18,7 @@
 				<text>体力FNT</text>
 				<view class="sched_input">
 					<u--input v-model="FNT" border="none" @change="fntChange" color="rgba(26, 27, 28, 1)"></u--input>
-				</view>
+				</view> 
 				<view class="info-title">
 					<view>体力最多可提出 {{poolassetData.fnt}}</view>
 					<view class="" style="flex: 1;">
@@ -33,7 +33,7 @@
 		</view>
 
 		<u-popup :show="show" round="40rpx" mode="bottom" @close="close" @open="open">
-			<view class="trade-box">
+			<view class="trade-box" >
 				<view class="sub-title">
 					请输入资金密码
 				</view>
@@ -69,10 +69,10 @@
 		},
 		methods: {
 			poolassetDataGs(){//全部提取GS
-				this.GS = this.poolassetData.gs
+				this.GS = this.poolassetData.gs ? this.poolassetData.gs : 0
 			},
 			poolassetDataFnt(){//全部提取Fnt
-				this.FNT = this.poolassetData.fnt
+				this.FNT = this.poolassetData.fnt ? this.poolassetData.fnt : 0
 			},
 			poolassetFun(){//预排金额
 				poolasset().then(res=>{
@@ -174,7 +174,8 @@
 		height: 70vh;
 		padding: 80rpx 0rpx 0;
 		font-size: 34rpx;
-
+		border-radius: 30rpx 30rpx 0rpx 0rpx;
+		background-color: #F7FAFF;
 		.sub-title {
 			margin-bottom: 64rpx;
 			padding: 0 75rpx;

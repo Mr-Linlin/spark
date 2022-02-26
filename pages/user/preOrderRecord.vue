@@ -154,7 +154,7 @@
 		<!-- 上拉加载更多组件 -->
 		<u-loadmore :status="loading" />
 	</view>
-</template>
+</template> 
 
 <script>
 	import {
