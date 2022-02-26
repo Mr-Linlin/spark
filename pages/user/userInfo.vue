@@ -1,6 +1,6 @@
 <template>
 	<view class="user-info">
-		<view class="box-card bx_sard">
+		<view class="box-card bx_sard" style="padding-top: 32rpx;padding-bottom: 4rpx;">
 			<view class="group_1">
 				<text>头像</text>
 				<image @click="chooseImageFun" :src="userData.pic"></image>
@@ -24,7 +24,7 @@
 				</view>
 			</view>
 		</view>
-		<view @click="notYetOpen" class="box-card bx_sard">
+	<!-- 	<view @click="notYetOpen" class="box-card bx_sard">
 			<view class="group_1">
 				<text>地址管理</text>
 				<view style="display: flex;align-items: center;">
@@ -32,7 +32,7 @@
 					<image src="../../static/user/right.png" mode="" class="right-img"></image>
 				</view>
 			</view>
-		</view>
+		</view> -->
 		<!-- <view class="box-card">
 			<view class="group_1">
 				<text style="font-weight: 600;font-size: 32rpx;">实名认证</text>
@@ -100,8 +100,9 @@
 						  header: {
 							'token': uni.getStorageSync('token')
 						  },	
-						  success: (uploadFileRes) => {
+						  success: (uploadFileRes) => {								
 							that.userInfoFun()
+							uni.$u.toast('修改头像成功')
 						  }
 						})
 				    }
