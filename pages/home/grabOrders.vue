@@ -4,7 +4,7 @@
 			<view class="" style="display: flex;align-items: center;justify-content: center;flex-direction: column;">
 				<view class=""
 					style="font-size: 24rpx;font-family: PingFang SC-Regular, PingFang SC;margin-top: 60rpx;">
-					倒计时
+					{{statusStr[orderInfo.statusStr]}}
 				</view>
 				<view class="" style="font-family: DIN-Medium, DIN;font-size: 32rpx;margin-top: 10rpx;">
 					<u-count-down :time="orderInfo.countDown*1000" format="HH:mm:ss" autoStart millisecond
@@ -39,11 +39,11 @@
 
 						</view>
 						<view class="" style="margin-right: 32rpx;font-size: 24rpx;color: #F74539;">
-							已充能98%
+							已充能{{schedule}}
 						</view>
 					</view>
 					<view style="display: flex; justify-content: space-between; padding: 0 32rpx;margin-bottom: 24rpx;">
-						<view style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
+						<view style="color: rgba(0, 0, 0, 0.66);font-size: 24rpx;">
 							星体充能
 						</view>
 						<view style="font-size: 24rpx;font-weight: 550;">
@@ -52,7 +52,7 @@
 					</view>
 
 					<view style="display: flex; justify-content: space-between; padding: 0 32rpx;margin-bottom: 32rpx;">
-						<view style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
+						<view style="color: rgba(0, 0, 0, 0.66);font-size: 24rpx;">
 							开始时间
 						</view>
 						<view style="font-size: 24rpx;font-weight: 550;">
@@ -60,7 +60,7 @@
 						</view>
 					</view>
 					<view style="display: flex; justify-content: space-between; padding: 0 32rpx;margin-bottom: 24rpx;">
-						<view style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
+						<view style="color: rgba(0, 0, 0, 0.66);;font-size: 24rpx;">
 							当前星体能量
 						</view>
 						<view style="font-size: 24rpx;font-weight: 550;">
@@ -144,6 +144,12 @@
 					token: '111',
 					key: '3ac94b043f934a67bb4e57c9fa651212'
 				},
+				statusStr: {
+					'未开始': '暂未开始',
+					'已结束': '充能已结束',
+					'进行中': '剩余时间'
+
+				},
 				radios: [{
 						num: 600
 					},
@@ -163,6 +169,11 @@
 			this.getDetail(options.resourceId)
 			this.queryInfo.resourceId = options.resourceId
 			this.queryInfo.quantity = this.radios[0].num * 0.02
+		},
+		computed:{
+			schedule(){
+				return `${(this.orderInfo.qty/this.orderInfo.total)*100}%`
+			}
 		},
 		methods: {
 			// 获取详情数据
@@ -197,6 +208,7 @@
 					obj
 				} = await pddTake(this.queryInfo)
 				if (code !== 0) return uni.$u.toast(msg)
+				delete this.queryInfo.info
 			},
 			radioClick(index, value) {
 				this.currentIndex = index
@@ -257,6 +269,7 @@
 		justify-content: center;
 		color: #FFFFFF;
 		font-size: 30rpx;
+		box-shadow: 0 20rpx 40rpx 1rpx rgba(88, 130, 204, 0.17);
 	}
 
 	.btn1 {
@@ -268,7 +281,7 @@
 		align-items: center;
 		justify-content: center;
 		font-size: 30rpx;
-		box-shadow: 0px 40rpx 80rpx 2rpx rgba(88, 130, 204, 0.17);
+		box-shadow: 0 20rpx 40rpx 1rpx rgba(88, 130, 204, 0.17);
 		color: rgba(0, 0, 0, .22)
 	}
 

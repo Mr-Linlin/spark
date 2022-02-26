@@ -48,10 +48,10 @@
 						<!-- 剩余时间 00:00:01 -->
 					</view>
 				</view>
-				<scroll-view scroll-x="true" >
+				<scroll-view scroll-x="true">
 					<view style="display: flex;width: 680rpx;margin-left: 32rpx;">
 						<view style="" v-for="(item,index) in orders" :key="index" @click="onDetail(item.resourceId)">
-							<view class="order-item">
+							<view class="order-item" >
 								<view class="between">
 									<view style="font-size: 28rpx;">
 										{{item.time}}点场
@@ -62,9 +62,10 @@
 									</view>
 								</view>
 								<view class="countdown">
-									<!-- {{item.countDown}} -->
-									<u-count-down :time="item.countDown*1000" format="HH:mm:ss">
+									<u-count-down :time="item.countDown*1000" format="HH:mm:ss"
+										v-if="item.status!==3 && item.countDown>0">
 									</u-count-down>
+									<view style="font-size: 26rpx;" v-else>{{status[item.status]}}</view>
 								</view>
 								<view class="between fixed">
 									<view style="font-size: 24rpx;color: rgba(255, 255, 255, 0.84);">
@@ -85,7 +86,7 @@
 		<view class="">
 			<!-- <u-notice-bar :text="content.title" bgColor="#FFFFFF" color="#1A1B1C"></u-notice-bar> -->
 			<view class="flex_j">
-				<view @click="announcementNext" class="Notice" >
+				<view @click="announcementNext" class="Notice">
 					<view class="flex_j" style="width: 106rpx;">
 						<view class="NoticeImg" style="margin-left: 24rpx;">
 							<image src="../../static/6394695.png" mode=""></image>
@@ -96,7 +97,7 @@
 						{{content.title}}
 					</view>
 					<view class="" style="flex: 1;">
-						
+
 					</view>
 					<view class="flex_j" style="width: 64rpx;">
 						<view class="Noticeimg2" style="margin-right: 24rpx;">
@@ -109,7 +110,7 @@
 			<view class="flex_j" style="height: 234rpx;">
 				<view @click="NoticeTypeFun(item)" v-for="(item,index) in NoticeType" :key="index" class="homeType">
 					<view class="homeTypeImg">
-						<image :src="item.img" ></image>
+						<image :src="item.img"></image>
 					</view>
 					<view class="homeTypeName">
 						{{item.name}}
@@ -143,7 +144,8 @@
 
 					</view>
 					<view class="">
-						<image class="consultingServiceContentImg" :src="item.thumbnail" mode="heightFix heightFix center" style="border-radius: 8rpx;"></image>
+						<image class="consultingServiceContentImg" :src="item.thumbnail"
+							mode="heightFix heightFix center" style="border-radius: 8rpx;"></image>
 					</view>
 				</view>
 			</view>
@@ -186,7 +188,11 @@
 				content: {}, //公告
 				orders: null,
 				timeData: {},
-				vidoType: true
+				vidoType: true,
+				status:{
+					2:'可参与充能',
+					3:'充能结束'
+				}
 			}
 		},
 		onShow() {
@@ -303,6 +309,7 @@
 		color: #FFFFFF;
 		margin-right: 24rpx;
 		padding: 20rpx;
+
 		.between {
 			display: flex;
 			justify-content: space-between;
@@ -408,6 +415,7 @@
 		border-radius: 12rpx;
 		margin-top: 32rpx;
 		background-color: #F7FAFF;
+
 		.NoticeImg {
 			width: 66rpx;
 			height: 32rpx;
