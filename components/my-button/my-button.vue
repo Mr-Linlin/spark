@@ -1,7 +1,7 @@
 <template>
 	<view class="">
 		<view class="my-button flexCC"
-			:style="'width:'+ width + 'rpx' + ';' + 'height:'+height+'rpx'+';'+'border-radius:'+radius+'rpx'+';'"
+			:style="'width:'+ width + 'rpx' + ';' + 'height:'+height+'rpx'+';'+'border-radius:'+radius+'rpx'+';'+'background-color:#'+background+';'+'color:'+color"
 			@click="click">
 			{{title}}
 		</view>
@@ -22,6 +22,12 @@
 			},
 			title: {
 				type: String
+			},
+			background: {
+				type: String
+			},
+			color: {
+				type: String
 			}
 		},
 		data() {
@@ -39,7 +45,7 @@
 
 <style>
 	.my-button {
-		background-color: #3A82FE;
 		color: #FFFFFF;
+		box-shadow: 0px 20px 40px 1px rgba(88, 130, 204, 0.17);
 	}
 </style>

@@ -173,7 +173,7 @@
 							6位资金密码
 						</view>
 						<view class="" style="display: flex;justify-content: center;margin-top: 20rpx;">
-							<u-code-input v-model="value" :maxlength="6" dot :focus="true" size="45"></u-code-input>
+							<u-code-input  v-model="value" :maxlength="6" dot :focus="true" size="48" borderColor="#fff"></u-code-input>
 						</view>
 					</view>
 					<view class="" style="display: flex;align-items: center;justify-content: center;height: 200rpx;">

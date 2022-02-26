@@ -34,7 +34,7 @@
 						</view>
 					</view>
 					<view class="mt3">
-						<my-button title="买入" :height="68" :radius="8"></my-button>
+						<my-button background="3A82FE" title="买入" :height="68" :radius="8"></my-button>
 					</view>
 				</view>
 			</view>

@@ -45,28 +45,29 @@
     display: flex;
     width: 100%;
     text-align: center;
-    border-bottom: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    border-right: 1px solid #ccc;
+    
   }
 
   .psdTtem {
     flex: 1;
-    height: 80rpx;
-    border-left: 1px solid #ccc;
+    height: 96rpx;
+	width: 96rpx;
     line-height: 1;
+	margin-right: 20rpx;
+	background-color: #FFFFFF;
+	border-radius: 12rpx;
   }
 
   .psdTtemTxt {
     text-align: center;
-    line-height: 80rpx;
+    line-height: 96rpx;
     font-size: 30rpx;
   }
 
   .focus_move {
     color: $theme-color-text-main;
     font-size: 30rpx;
-    line-height: 80rpx;
+    line-height: 96rpx;
     animation: focus 0.8s infinite;
   }
 

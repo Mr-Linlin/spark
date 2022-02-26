@@ -30,7 +30,7 @@
 
 			</view>
 			<view class="">
-				<image :src="userData.pic" style="width: 140rpx;height: 140rpx;border-radius: 50%;box-shadow: 0px 20rpx 40rpx 1rpx rgba(88, 130, 204, 0.17);border: 2rpx solid #FFFFFF;" mode=""></image>
+				<image :src="userData.pic ? userData.pic : imgst" style="width: 140rpx;height: 140rpx;border-radius: 50%;box-shadow: 0px 20rpx 40rpx 1rpx rgba(88, 130, 204, 0.17);border: 2rpx solid #FFFFFF;" mode=""></image>
 			</view>
 		</view>
 
@@ -120,7 +120,8 @@
 					icon: '../../static/user/7124571.png'
 				}],
 
-				userData: {}
+				userData: {},
+				imgst:'../../static/pzy-images/AppIcon.png'
 			}
 		},
 		mounted() {},
