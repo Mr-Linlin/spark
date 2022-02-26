@@ -8,7 +8,7 @@
 					<view style="font-size: 44rpx;" class="fz-wb2">资金密码</view>
 					<view class="mt1 fz1">添加密码可使您的资金更加安全</view>
 					<password-input data-key="value" :numLng='password' style="margin-top: 60rpx;"></password-input>
-					<my-button title="下一步" @myClick="changeSwiper" style="margin-top: 60rpx;" :height="88" :radius="12">
+					<my-button background="3A82FE" title="下一步" @myClick="changeSwiper" style="margin-top: 60rpx;" :height="88" :radius="12">
 					</my-button>
 				</swiper-item>
 				<swiper-item>
@@ -16,7 +16,7 @@
 					<view class="mt1 fz1">添加密码可使您的资金更加安全</view>
 					<password-input :numLng='password_confirm' style="margin-top: 60rpx;">
 					</password-input>
-					<my-button title="完成设置" @myClick="goToCertification" style="margin-top: 60rpx;" :height="88"
+					<my-button background="3A82FE" title="完成设置" @myClick="goToCertification" style="margin-top: 60rpx;" :height="88"
 						:radius="12">
 					</my-button>
 				</swiper-item>

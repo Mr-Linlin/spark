@@ -348,7 +348,7 @@
 		}
 	},
 	"tabBar": {
-		"color": "#7e82a6",
+		"color": "rgba(0, 0, 0, 0.44)",
 		"selectedColor": "#6C56F9",
 		"borderStyle": "black",
 		"backgroundColor": "#FAFAFC",
@@ -362,7 +362,7 @@
 			},
 			{
 				"pagePath": "pages/spark/index",
-				"text": "spark",
+				"text": "交易所",
 				"iconPath": "static/tarbar/spark.png",
 				"selectedIconPath": "static/tarbar/spark_active.png"
 			},

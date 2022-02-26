@@ -37,6 +37,7 @@
 	page {
 		box-sizing: border-box;
 		font-size: 28rpx;
+		background-color: #F7FAFF;
 	}
 
 	* {
@@ -59,5 +60,12 @@
 		height: 100%;
 		position: relative;
 	}
-
+	
+	.bx_main{
+		box-shadow: 0px 20px 40px 1px rgba(88, 130, 204, 0.17);
+	}
+	
+	.bx_sard{
+		box-shadow: 0px 16px 32px 1px rgba(88, 131, 204, 0.05);
+	}
 </style>

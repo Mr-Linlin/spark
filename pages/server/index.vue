@@ -1,22 +1,22 @@
 <template>
 	<view class="gs-server">
-		<u-navbar @rightClick="rightClick" bgColor="#FAFAFC">
+		<u-navbar @rightClick="rightClick" bgColor="#FAFCFF">
 			<view class="slot-left" slot="left">服务器</view>
 			<view class="slot-right" slot='right'>
 				<image src="../../static/sever/msg.png" mode=""></image>
 			</view>
 		</u-navbar>
+		<u-sticky offset-top="88" style="background-color: #FAFCFF;">
+			<lzt-tabs :titles="serves" @currentIndex='currentIndex' />
+		</u-sticky>
 		<!-- 内容 -->
-		<view class="gs-content">
+		<view class="gs-content bx_sard">
 			<!-- 切换Tab -->
-			<u-sticky offset-top="88">
-				<lzt-tabs :titles="serves" @currentIndex='currentIndex' />
-			</u-sticky>
 
 			<view class="fil" v-if="curent===0">
 				<serverfil :list="list" @buyClick="buyClick" />
 			</view>
-			<view class="fnt" v-if="curent===1" style="margin-top: 88rpx;">
+			<view class="fnt" v-if="curent===1">
 				<serverfnt />
 			</view>
 		</view>
@@ -77,23 +77,26 @@
 	}
 </script>
 
-<style scoped lang="scss">
+<style>
 	page {
 		background-color: #F7FAFF;
 	}
-
+</style>
+<style scoped lang="scss">
 	.gs-server {
 		.slot-left {
 			font-size: 42rpx;
 			font-weight: 550;
 			color: #1A1B1C;
 			line-height: 50rpx;
+			margin-left: 10rpx;
 		}
 
 		.slot-right {
 			position: relative;
 			width: 44rpx;
 			height: 44rpx;
+			margin-right: 10rpx;
 		}
 
 		.slot-right::after {
@@ -116,6 +119,11 @@
 				display: flex;
 				justify-content: center;
 				flex-wrap: wrap;
+				margin-top: 170rpx;
+			}
+			.fnt {
+				
+				margin-top: 170rpx;
 			}
 		}
 	}

@@ -1,13 +1,13 @@
 <template>
 	<view>
-		<view class="flex_j">
+		<view class="flex_j bx_sard">
 			<view class="setUptitle">
 				<view class="accountSecurity">
 					账户安全
 				</view>
 				<view class="PheonCont">
 					<view class="PheonName">
-						登录手机号
+						登录账号
 					</view>
 					<view class="flex1">
 
@@ -48,10 +48,10 @@
 		</view>
 
 
-		<view class="flex_j">
+		<view class="flex_j bx_sard">
 			<view class="setUptitle">
 
-				<view class="PheonCont">
+				<view class="PheonCont" @click="aboutUs">
 					<view class="PheonName">
 						关于我们
 					</view>
@@ -77,7 +77,7 @@
 					</view>
 				</view> -->
 
-				<view class="PheonCont">
+				<view class="PheonCont" @click="aboutUs">
 					<view class="PheonName">
 						版本更新
 					</view>
@@ -94,62 +94,83 @@
 			</view>
 		</view>
 		<view class="">
-			<u-button @click="signOut" class="btn">退出登录</u-button>
+			<u-button :custom-style="{border:'none'}" :hair-line='false' @click="signOut" class="btn bx_sard"
+				style="width: 686rpx;height: 78rpx;border-radius: 12rpx;">退出登录</u-button>
 		</view>
 		<!-- 修改密码弹出 -->
 
-		<u-popup round="40rpx" :show="show" @close="show = false" @open="open">
+		<u-popup :round="20" :show="show" @close="show = false" @open="open">
 			<image @click="handleClose" class="close-img" :src="require('../../static/img/close.png')"></image>
 			<view class="password-box">
 				<view class="p-title">修改密码</view>
 				<view class="p-sub-title">修改成功请牢记新密码</view>
-				<u--input class="p-input" placeholderClass="placeholder" placeholder="验证原密码" border="none" 
-					v-model="passwordData.pwd"></u--input>
-				<u--input password class="p-input" placeholderClass="placeholder" placeholder="设置新密码" border="none" 
+				<u--input class="p-input" placeholderClass="placeholder" type="password" placeholder="验证原密码"
+					border="none" v-model="passwordData.pwd"></u--input>
+				<u--input password class="p-input" placeholderClass="placeholder" placeholder="设置新密码" border="none"
 					v-model="passwordData.newPwd"></u--input>
-				<u--input password class="p-input" placeholderClass="placeholder" placeholder="确认新密码" border="none" 
+				<u--input password class="p-input" placeholderClass="placeholder" placeholder="确认新密码" border="none"
 					v-model="passwordData.newPwd2"></u--input>
-				<u-button @click="passwordDataFun" color="#3A82FE" class="btn-shadow" type="primary" text="确认修改"></u-button>
+				<u-button @click="passwordDataFun" color="#3A82FE" class="btn-shadow" type="primary" text="确认修改"
+					style="height: 96rpx;"></u-button>
 			</view>
 		</u-popup>
-		
+
 		<!--    交易密码-->
-		<u-popup :show="show2" round="40rpx" mode="bottom" @close="handleClose" @open="open">
-			<image @click="handleClose" class="close-img" :src="require('../../static/img/close.png')"></image>
-			<view class="trade-box">
-				<view class="sub-title">
-					修改资金密码
+		<u-popup :round="20" :show="show2" @close="handleClose" @open="open">
+			<view class="" style="background-color: #F7FAFF;border-radius: 32rpx;">
+				<image @click="handleClose" class="close-img" :src="require('../../static/img/close.png')"></image>
+				<view class="trade-box">
+					<view class="sub-title">
+						修改资金密码
+					</view>
+					<swiper disable-touch :current="current">
+						<swiper-item class="swiper-item">
+							<view>
+								<view class="title p75">验证当前资金密码</view>
+								<view class="code-box p75">
+									<u-code-input size="48" dot class="code-input" v-model="tradePwd" :maxlength="6"
+										borderColor="#fff"></u-code-input>
+								</view>
+								<u-button @click="handleNext()" class="btn-shadow" color="#3A82FE" type="primary"
+									style="width: 600rpx;height: 96rpx;" text="下一步"></u-button>
+							</view>
+						</swiper-item>
+						<swiper-item>
+							<view>
+								<view class="title p75">设置新的资金密码</view>
+								<view class="code-box p75">
+									<u-code-input size="48" dot class="code-input" v-model="NewtradePwd" :maxlength="6"
+										borderColor="#fff"></u-code-input>
+								</view>
+								<u-button @click="TwotradePwdFun" class="btn-shadow" color="#3A82FE" type="primary"
+									style="width: 600rpx;height: 96rpx;" text="下一步"></u-button>
+							</view>
+						</swiper-item>
+						<swiper-item>
+							<view>
+								<view class="title p75">确认新的资金密码</view>
+								<view class="code-box p75">
+									<u-code-input size="48" dot class="code-input" v-model="TwotradePwd" :maxlength="6"
+										borderColor="#fff"></u-code-input>
+								</view>
+								<u-button @click="NewtradePwdFun()" class="btn-shadow" color="#3A82FE" type="primary"
+									style="width: 600rpx;height: 96rpx;" text="确认修改"></u-button>
+							</view>
+						</swiper-item>
+					</swiper>
 				</view>
-				<swiper disable-touch :current="current">
-					<swiper-item class="swiper-item">
-						<view>
-							<view class="title p75">验证当前资金密码</view>
-							<view class="code-box p75">
-								<u-code-input dot class="code-input" v-model="tradePwd" :maxlength="6"></u-code-input>
-							</view>
-							<u-button @click="handleNext()" class="btn-shadow next-btn" color="#3A82FE" type="primary"
-								text="下一步"></u-button>
-						</view>
-					</swiper-item>
-					<swiper-item>
-						<view>
-							<view class="title p75">确认资金密码</view>
-							<view class="code-box p75">
-								<u-code-input dot class="code-input" v-model="NewtradePwd" :maxlength="6"></u-code-input>
-							</view>
-							<u-button @click="NewtradePwdFun()" class="btn-shadow next-btn" color="#3A82FE" type="primary"
-								text="确认修改"></u-button>
-						</view>
-					</swiper-item>
-				</swiper>
 			</view>
+
 		</u-popup>
 	</view>
 </template>
 
 <script>
 	import {
-		userbaseInfo,modifypwd,modifytradePwd,verifytradePwd
+		userbaseInfo,
+		modifypwd,
+		modifytradePwd,
+		verifytradePwd
 	} from '@/http/common.js'
 	export default {
 		data() {
@@ -159,125 +180,154 @@
 				value: "",
 				value3: "",
 				current: 0,
-				userData:{},
-				tradePwd:'',
-				NewtradePwd:'',
-				passwordData:{}
+				userData: {},
+				tradePwd: '',
+				NewtradePwd: '',
+				TwotradePwd: '',
+				passwordData: {}
 			}
 		},
 		onShow() {
 			this.userInfoFun()
 		},
 		methods: {
-			signOut(){
+			signOut() {
 				uni.showLoading({
 					title: '正在退出'
 				});
 				uni.removeStorageSync('token')
-				setTimeout(function(){
+				setTimeout(function() {
 					uni.hideLoading();
 					uni.reLaunch({
-						url:'../login/index'
+						url: '../login/index'
 					})
-				},2000)
+				}, 2000)
 			},
-			passwordDataFun(){//修改登录密码
-				if(!this.passwordData.pwd || !this.passwordData.newPwd || !this.passwordData.newPwd2){
+			passwordDataFun() { //修改登录密码
+				if (!this.passwordData.pwd || !this.passwordData.newPwd || !this.passwordData.newPwd2) {
 					uni.showToast({
-						title:'请输入密码',
-						icon:'none'
+						title: '请输入密码',
+						icon: 'none'
 					})
+					return
 				}
-				if(this.passwordData.newPwd != this.passwordData.newPwd2){
+				if (this.passwordData.pwd.length < 6 || this.passwordData.newPwd < 6 || this.passwordData.newPwd2 < 6) {
 					uni.showToast({
-						title:'两次密码不一致',
-						icon:'none'
+						title: '密码长度不足',
+						icon: 'none'
 					})
+					return
+				}
+				if (this.passwordData.newPwd != this.passwordData.newPwd2) {
+					uni.showToast({
+						title: '两次密码不一致',
+						icon: 'none'
+					})
+					this.passwordData.newPwd = ''
+					this.passwordData.newPwd2 = ''
+					return
 				}
 				let data = {
-					pwd:this.passwordData.newPwd,
-					oldPwd:this.passwordData.pwd,
+					pwd: this.passwordData.newPwd,
+					oldPwd: this.passwordData.pwd,
 				}
-				modifypwd(data).then(res=>{
-					if(res.code == 0){
+				modifypwd(data).then(res => {
+					if (res.code == 0) {
 						uni.showToast({
-							title:'登录失效',
-							icon:'none',
+							title: '修改成功请重新登录',
+							icon: 'none',
 						})
 						uni.removeStorageSync('token')
-						setTimeout(function(){
+						setTimeout(function() {
 							uni.reLaunch({
-								url:'../login/index'
+								url: '../login/index'
 							})
-						},2000)
-						
-					}else{
+						}, 3000)
+
+					} else {
 						uni.showToast({
-							title:res.msg,
-							icon:'none'
+							title: res.msg,
+							icon: 'none'
 						})
 					}
 				})
 			},
-			userInfoFun(){//用户个人信息
-				userbaseInfo().then(res=>{
+			userInfoFun() { //用户个人信息
+				userbaseInfo().then(res => {
 					this.userData = res.obj
 				})
 			},
 			handleShowPassword() {
 				console.log("asd")
 			},
+			// 进入关于我们
+			aboutUs(){
+				uni.$u.toast('暂未开放')
+			},
 			handleClose() {
 				this.show = false
-				this.show2 = false
+				this.show2 = false,
+					this.NewtradePwd = '',
+					this.TwotradePwd = '',
+					this.tradePwd = '',
+					this.current = 0
 			},
-			handleNext() {//验证资金密码
-				if(!this.tradePwd || this.tradePwd.length!=6){
+			handleNext() { //验证资金密码
+				if (!this.tradePwd || this.tradePwd.length != 6) {
 					uni.showToast({
-						title:'资金密码错误',
-						icon:'none'
+						title: '资金密码错误',
+						icon: 'none'
 					})
 					return;
 				}
 				let data = {
-					tradePwd:this.tradePwd
+					tradePwd: this.tradePwd
 				}
-				verifytradePwd(data).then(res=>{
-					if(res.code != 0){
+				verifytradePwd(data).then(res => {
+					if (res.code != 0) {
 						uni.showToast({
-							title:res.msg,
-							icon:'none'
+							title: res.msg,
+							icon: 'none'
 						})
 						this.tradePwd = ''
-					}else{
+					} else {
 						this.current++
 					}
 				})
 			},
-			NewtradePwdFun(){//修改资金密码
-				if(!this.tradePwd || this.tradePwd.length!=6){
+			TwotradePwdFun() {
+				this.current++
+			},
+			
+			NewtradePwdFun() { //修改资金密码
+				if (!this.tradePwd || this.tradePwd.length != 6) {
 					uni.showToast({
-						title:'资金密码错误',
-						icon:'none'
+						title: '资金密码错误',
+						icon: 'none'
 					})
 					return;
+				} else if (this.NewtradePwd !== this.TwotradePwd) {
+					this.current = 1
+					this.NewtradePwd = ''
+					this.TwotradePwd = ''
+					return uni.$u.toast('两次输入密码不一致')
 				}
 				let data = {
-				    tradePwd : this.NewtradePwd
+					tradePwd: this.NewtradePwd
 				}
-				modifytradePwd(data).then(res=>{
+				modifytradePwd(data).then(res => {
 					uni.showToast({
-						title:res.msg,
-						icon:'none'
+						title: '修改成功',
+						icon: 'none'
 					})
-					if(res.code == 0){
+					if (res.code == 0) {
 						let that = this
-						setTimeout(function(){
+						setTimeout(function() {
 							that.show2 = !that.show2
 							that.current = 0
 							that.tradePwd = ''
 							that.NewtradePwd = ''
-						},1000)
+						}, 1000)
 					}
 				})
 			}
@@ -286,12 +336,17 @@
 </script>
 
 <style lang="scss">
+	.u-hairline-border:after {
+		border-radius: 12rpx;
+		border: none;
+	}
+
 	page {
 		background-color: #F7FAFF;
 	}
 
 	.code-input {
-		justify-content: space-between;
+		margin: 0rpx 8rpx;
 	}
 
 	.flex_j {
@@ -311,16 +366,14 @@
 		text-indent: 1rem;
 	}
 
-	.next-btn {
-		width: 600rpx;
-	}
+	.next-btn {}
 
 	.close-img {
 		width: 44rpx;
 		height: 44rpx;
 		position: absolute;
 		top: 80rpx;
-		right: 32rpx;
+		right: 75rpx;
 	}
 
 	.placeholder {
@@ -330,14 +383,11 @@
 	}
 
 	.btn {
-		width: 263rpx;
-		height: 78rpx;
+		border: 2upx solid #FFFFFF;
 		margin-top: 32rpx;
 		background-color: #FFFFFF;
 		font-size: 26rpx;
 		color: rgba(0, 0, 0, 0.66);
-		border: 2rpx solid #FFFFFF;
-		box-shadow: 0rpx 16rpx 32rpx 1rpx rgba(88, 131, 204, 0.05);
 	}
 
 	.btn-shadow {

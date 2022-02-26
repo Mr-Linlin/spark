@@ -2,13 +2,13 @@
 	<view class="page-warp" :style="theme">
 		<u-navbar @rightClick="rightClick" height="44" bgColor="#F7FAFF">
 			<view class="slot-left" slot="left">
-				<image src="../../static/login/Close.png" mode="" style="width: 44rpx;height: 44rpx;"></image>
+				<!-- <image src="../../static/login/Close.png" mode="" style="width: 44rpx;height: 44rpx;"></image> -->
 			</view>
 		</u-navbar>
 		<view class="login-wrap">
 			<view class="login-box">
 				<view class="logo">
-					<image src="../../static/pzy-images/AppIcon.png" lazy-load class="icon-app"></image>
+					<image src="../../static/pzy-images/AppIcon.png" lazy-load class="icon-app" style="box-shadow: 0 16rpx 32rpx 2rpx rgba(88, 131, 204, 0.05);"></image>
 				</view>
 				<view class="login-title">
 					<view class="login-text">
@@ -31,8 +31,8 @@
 							</u--input>
 						</view>
 					</u-form-item>
-					<u-form-item ref="item3" :borderBottom="false" class="loginBtn">
-						<u-button text="登录" color="#3A82FE" style="border: 0;" @click="onSubmit"></u-button>
+					<u-form-item ref="item3" :borderBottom="false" class="loginBtn" >
+						<u-button  text="登录" color="#3A82FE" style="border: 0;box-shadow: 0px 20rpx 40rpx 1rpx rgba(88, 130, 204, 0.17);height: 88rpx;" @click="onSubmit"></u-button>
 					</u-form-item>
 				</u--form>
 				<view class="forget" @click="forget_passwordNext">
@@ -53,7 +53,7 @@
 		data() {
 			return {
 				loginForm: {
-					account: '13163721922',
+					account: '18675425169',
 					data: '111111',
 					type: 1
 				},

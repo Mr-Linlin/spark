@@ -1,5 +1,6 @@
 <template>
 	<view class="">
+		<!-- <u-sticky offset-top="0"> -->
 		<view class="" style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx;">
 			<view class="" style="display: flex;align-items: center;">
 				<view class="" style="">
@@ -16,10 +17,11 @@
 				</view>
 				<view class=""
 					style="width: 14rpx;height: 14rpx;background-color: red;border-radius: 50%;position: relative;right: 5%;top: 25rpx;">
-
 				</view>
 			</view>
 		</view>
+		<!-- </u-sticky> -->
+		<!-- jj -->
 		<view class="">
 			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
 				<video id="myVideo" :muted="true" :enable-play-gesture="false" :duration="10"
@@ -38,7 +40,7 @@
 			</view>
 			<view class="">
 				<view class=""
-					style="display: flex;align-items: center;margin-left: 32rpx;margin-right: 32rpx;height: 94rpx;">
+					style="display: flex;align-items: center;margin-left: 32rpx;margin-right: 32rpx;height: 84rpx;">
 					<view class="" style="font-size: 32rpx;color: #1A1B1C;text-shadow: 0px 0px #000;">
 						乌拉诺斯的预言
 					</view>
@@ -49,9 +51,9 @@
 					</view>
 				</view>
 				<scroll-view scroll-x="true">
-					<view style="display: flex;">
-						<view v-for="(item,index) in orders" :key="index" @click="onDetail(item.resourceId)">
-							<view class="order-item">
+					<view style="display: flex;width: 680rpx;margin-left: 32rpx;">
+						<view style="" v-for="(item,index) in orders" :key="index" @click="onDetail(item.resourceId)">
+							<view class="order-item" :style="{background:background[index]}">
 								<view class="between">
 									<view style="font-size: 28rpx;">
 										{{item.time}}点场
@@ -62,14 +64,10 @@
 									</view>
 								</view>
 								<view class="countdown">
-									<!-- {{item.countDown}} -->
-									<u-count-down :time="item.countDown*1000" format="HH:mm:ss">
-										<!-- <view class="time">
-											<!-- <text>{{ timeData.hours>10?timeData.hours:'0'+timeData.hours}}:</text>
-											<text>{{ timeData.minutes>10?timeData.minutes:'0'+timeData.minutes }}:</text>
-											<text>{{ timeData.seconds >10?timeData.seconds:'0'+timeData.seconds}}</text> -->
-										<!-- </view> -->
+									<u-count-down :time="item.countDown*1000" format="HH:mm:ss"
+										v-if="item.status!==3 && item.countDown>0">
 									</u-count-down>
+									<view style="font-size: 26rpx;" v-else>{{status[item.status]}}</view>
 								</view>
 								<view class="between fixed">
 									<view style="font-size: 24rpx;color: rgba(255, 255, 255, 0.84);">
@@ -78,8 +76,8 @@
 									<view class="ball">
 										{{item.rate*100}}%
 									</view>
-								</view>
 							</view>
+								</view>
 						</view>
 					</view>
 				</scroll-view>
@@ -92,19 +90,19 @@
 			<view class="flex_j">
 				<view @click="announcementNext" class="Notice">
 					<view class="flex_j" style="width: 106rpx;">
-						<view class="NoticeImg">
+						<view class="NoticeImg" style="margin-left: 24rpx;">
 							<image src="../../static/6394695.png" mode=""></image>
 						</view>
 					</view>
 
-					<view class="NoticeNmae">
+					<view class="NoticeNmae" style="">
 						{{content.title}}
 					</view>
-					<view class="NoticeDeta">
-						{{content.updateTime}}
+					<view class="" style="flex: 1;">
+
 					</view>
 					<view class="flex_j" style="width: 64rpx;">
-						<view class="Noticeimg2">
+						<view class="Noticeimg2" style="margin-right: 24rpx;">
 							<image src="../../static/2581.png" mode=""></image>
 						</view>
 					</view>
@@ -114,7 +112,7 @@
 			<view class="flex_j" style="height: 234rpx;">
 				<view @click="NoticeTypeFun(item)" v-for="(item,index) in NoticeType" :key="index" class="homeType">
 					<view class="homeTypeImg">
-						<image :src="item.img" mode=""></image>
+						<image :src="item.img"></image>
 					</view>
 					<view class="homeTypeName">
 						{{item.name}}
@@ -138,7 +136,7 @@
 				<view class="consultingServiceContent">
 					<view class="">
 						<view class="consultingServiceContentName">
-							{{item.title}}
+							{{item.title.substring(0,28)}}...
 						</view>
 						<view class="consultingServiceContentDate">
 							{{item.publishedAt}}
@@ -148,7 +146,8 @@
 
 					</view>
 					<view class="">
-						<image class="consultingServiceContentImg" :src="item.thumbnail" mode=""></image>
+						<image class="consultingServiceContentImg" :src="item.thumbnail"
+							mode="heightFix heightFix center" style="border-radius: 8rpx;"></image>
 					</view>
 				</view>
 			</view>
@@ -191,7 +190,19 @@
 				content: {}, //公告
 				orders: null,
 				timeData: {},
-				vidoType: true
+				vidoType: true,
+				status: {
+					2: '可参与充能',
+					3: '充能结束'
+				},
+				background: {
+					0: ' linear-gradient(90deg, #F9BE3F 0%, #F19645 100%)',
+					1: ' linear-gradient(90deg, #FF58DC 0%, #FF45B4 100%)',
+					2: ' linear-gradient(90deg, #4BD9F9 0%, #29C5F1 100%)',
+					3: ' linear-gradient(90deg, #FFA58F 0%, #FF7957 100%)',
+					4: ' linear-gradient(90deg, #F4B76D 0%, #EBA147 100%)',
+					5: ' linear-gradient(90deg, #8F9CFF 0%, #7484FF 100%)',
+				}
 			}
 		},
 		onShow() {
@@ -210,27 +221,29 @@
 		onLoad() {
 			this.getMessage()
 			this.getNotice()
-			this.changeColors();
 		},
 		methods: {
 			NoticeTypeFun(e) {
 				if (e.name == '交易所') {
-
+					uni.switchTab({
+						url: '/pages/spark/index'
+					})
 				} else if (e.name == '商城') {
 					uni.showToast({
 						title: '暂未开放',
 						icon: 'none'
 					})
 				} else if (e.name == 'FIL概况') {
-					// uni.showToast({
-					// 	title:'暂未开放',
-					// 	icon:'none'
-					// })
+					uni.showToast({
+						title: '暂未开放',
+						icon: 'none'
+					})
 					// https://fifox.info/en
 					location.href = 'https://fifox.info/en'
-				} else if (e.name == '团队') {
-					uni.navigateTo({
-						url: '../user/myTeam'
+				} else if (e.name == '战队') {
+					uni.showToast({
+						title: '暂未开放',
+						icon: 'none'
 					})
 				}
 			},
@@ -304,10 +317,10 @@
 	.order-item {
 		width: 280rpx;
 		height: 231rpx;
-		background: linear-gradient(90deg, #F9BE3F 0%, #F19645 100%);
+		// background: linear-gradient(90deg, #F9BE3F 0%, #F19645 100%);
 		border-radius: 12rpx;
 		color: #FFFFFF;
-		margin-left: 20rpx;
+		margin-right: 24rpx;
 		padding: 20rpx;
 
 		.between {
@@ -413,7 +426,8 @@
 		height: 72rpx;
 		background-color: #FFFFFF;
 		border-radius: 12rpx;
-		margin-top: 16rpx;
+		margin-top: 32rpx;
+		background-color: #F7FAFF;
 
 		.NoticeImg {
 			width: 66rpx;
@@ -425,6 +439,7 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
+			margin-left: 20rpx;
 		}
 
 		.NoticeDeta {
@@ -439,6 +454,8 @@
 		.Noticeimg2 {
 			width: 24rpx;
 			height: 24rpx;
+			display: flex;
+			align-items: center;
 		}
 	}
 

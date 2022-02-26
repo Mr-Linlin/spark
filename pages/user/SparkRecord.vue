@@ -315,7 +315,7 @@
 			.SparkRecordTitleName {
 				font-size: 34rpx;
 				color: #FFFFFF;
-				margin-left: 220rpx;
+				margin-left: 238rpx;
 			}
 
 			.SparkRecordTitleName2 {
