@@ -7,7 +7,7 @@
 						<view class="fz3 fc-c1">买入</view>
 						<view class="fz1 ml1">FNT/GS</view>
 					</view>
-					<my-button :width="82" :height="48" :radius="8" title="买入"></my-button>
+					<my-button background="3A82FE" :width="82" :height="48" :radius="8" title="买入"></my-button>
 				</view>
 				<view class="flexC" style="margin-top: 24rpx;">
 					<view style="width: 50%;">

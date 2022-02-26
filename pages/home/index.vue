@@ -64,11 +64,6 @@
 								<view class="countdown">
 									<!-- {{item.countDown}} -->
 									<u-count-down :time="item.countDown*1000" format="HH:mm:ss">
-										<!-- <view class="time">
-											<!-- <text>{{ timeData.hours>10?timeData.hours:'0'+timeData.hours}}:</text>
-											<text>{{ timeData.minutes>10?timeData.minutes:'0'+timeData.minutes }}:</text>
-											<text>{{ timeData.seconds >10?timeData.seconds:'0'+timeData.seconds}}</text> -->
-										<!-- </view> -->
 									</u-count-down>
 								</view>
 								<view class="between fixed">

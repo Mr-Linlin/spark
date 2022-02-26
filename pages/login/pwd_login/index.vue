@@ -14,7 +14,7 @@
 					<input type="password" value="" placeholder="登录密码" />
 				</container>
 			</view>
-			<my-button title="登录" :height="88" :radius="12" style="margin-top: 60rpx;"></my-button>
+			<my-button background="3A82FE" title="登录" :height="88" :radius="12" style="margin-top: 60rpx;"></my-button>
 			<view class="forget-password" style="margin-top: 60rpx;" @click="goToRoute">忘记密码</view>
 		</view>
 		<view class="fiexd">

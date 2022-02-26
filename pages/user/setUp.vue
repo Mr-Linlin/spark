@@ -128,7 +128,7 @@
 							<view>
 								<view class="title p75">验证当前资金密码</view>
 								<view class="code-box p75">
-									<u-code-input size="48" dot class="code-input" v-model="tradePwd" :maxlength="6"
+									<u-code-input size="48" borderColor="#fff" dot class="code-input" v-model="tradePwd" :maxlength="6"
 										borderColor="#fff"></u-code-input>
 								</view>
 								<u-button @click="handleNext()" class="btn-shadow" color="#3A82FE" type="primary"
