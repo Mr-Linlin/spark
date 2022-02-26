@@ -23,7 +23,7 @@
 							能量预储(GS)
 						</view>
 						<view class="" style="margin-top: 24rpx;font-size: 38rpx;text-shadow: 0px 0px #000;">
-							{{poolassetData.gs}}
+							{{poolassetData.gs ? poolassetData.gs : 0}}
 						</view>
 					</view>
 				</view>

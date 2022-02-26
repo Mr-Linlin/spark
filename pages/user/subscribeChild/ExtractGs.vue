@@ -7,7 +7,7 @@
 					<u--input v-model="GS" border="none" @change="fntChange" ></u--input>
 				</view>
 				<view class="info-title">
-					<text>能量最多可提出 {{poolassetData.gs}}</text>
+					<text>能量最多可提出 {{poolassetData.gs ? poolassetData.gs : 0 }}GS</text>
 					<view class="" style="flex: 1;">
 						
 					</view>
@@ -33,7 +33,7 @@
 		</view>
 
 		<u-popup :show="show" round="40rpx" mode="bottom" @close="close" @open="open">
-			<view class="trade-box">
+			<view class="trade-box" >
 				<view class="sub-title">
 					请输入资金密码
 				</view>
@@ -174,7 +174,8 @@
 		height: 70vh;
 		padding: 80rpx 0rpx 0;
 		font-size: 34rpx;
-
+		border-radius: 30rpx 30rpx 0rpx 0rpx;
+		background-color: #F7FAFF;
 		.sub-title {
 			margin-bottom: 64rpx;
 			padding: 0 75rpx;
