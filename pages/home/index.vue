@@ -225,22 +225,25 @@
 		methods: {
 			NoticeTypeFun(e) {
 				if (e.name == '交易所') {
-
+					uni.switchTab({
+						url: '/pages/spark/index'
+					})
 				} else if (e.name == '商城') {
 					uni.showToast({
 						title: '暂未开放',
 						icon: 'none'
 					})
 				} else if (e.name == 'FIL概况') {
-					// uni.showToast({
-					// 	title:'暂未开放',
-					// 	icon:'none'
-					// })
+					uni.showToast({
+						title: '暂未开放',
+						icon: 'none'
+					})
 					// https://fifox.info/en
 					location.href = 'https://fifox.info/en'
-				} else if (e.name == '团队') {
-					uni.navigateTo({
-						url: '../user/myTeam'
+				} else if (e.name == '战队') {
+					uni.showToast({
+						title: '暂未开放',
+						icon: 'none'
 					})
 				}
 			},
