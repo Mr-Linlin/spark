@@ -5,15 +5,17 @@
 				<text>预排数量</text>
 				<view class="sched_input">
 					<u--input v-model="GS" border="none" @change="gsChange" type="number"></u--input>
-					<text style="margin-right: 20rpx;">可用GS {{poolassetData.gs}}</text>
+					<text style="margin-right: 20rpx;">可用GS {{poolassetData.gs ? poolassetData.gs : 0}}</text>
+				</view>
+			</view>
+			<view class="fnt_num">
+				<view class="" style="margin-top: 20rpx;margin-bottom: 32rpx;">
+					所需体力{{this.FNT}}FNT
 				</view>
 			</view>
 			<view class="group_2">
-				<view class="fnt_num">
-					所需体力{{this.FNT}}FNT
-				</view>
-				<text style="margin-right: 10rpx;">所需体力FNT=GS*2%*2倍</text><br>
-				<text style="color:rgba(247, 69, 57, 1) ;">FNT可用{{poolassetData.fnt}}</text>
+				<view style="color:rgba(247, 69, 57, 1) ;padding-top: 24rpx;">FNT可用{{poolassetData.fnt ? poolassetData.fnt : 0}}</view>
+				<view style="margin-right: 10rpx;">所需体力FNT=GS*2%*2倍</view><br>
 			</view>
 		</view>
 		<view class="sched-btn">
@@ -119,19 +121,15 @@
 
 			.group_2 {
 				color: rgba(0, 0, 0, 0.66);
-				padding: 0rpx 24rpx;
-				padding-bottom: 12rpx;
-				// background: red;
-				margin-top: 32rpx;
 				border-radius: 12rpx;
 				opacity: 1;
 				border: 2rpx solid #EBF4F5;
-
+				height: 124rpx;
+				padding-left: 24rpx;
 				.fnt_num {
 					font-size: 28rpx;
 					font-weight: 550;
 					color: #1A1B1C;
-					line-height: 34px;
 				}
 			}
 		}

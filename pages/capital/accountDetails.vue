@@ -29,7 +29,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="" style="height: 45rpx;">
+			<view class="" style="height: 50rpx;">
 				
 			</view>
 			
