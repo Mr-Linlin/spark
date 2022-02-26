@@ -1,11 +1,18 @@
 <template>
 	<view :style="theme" class="global-container">
-		<uni-nav-bar fixed title="交易所" color="#1A1B1C" :border="false">
+		<!-- <uni-nav-bar fixed title="交易所" color="#1A1B1C" :border="false">
 			<view slot="right">
 				<view class="currency" @click="openPopud">切换币种</view>
 			</view>
-		</uni-nav-bar>
-		<view style="background-color: #FFFFFF;position: fixed;width: 100%;z-index: 1;">
+		</uni-nav-bar> -->
+		<view class="header-zw"></view>
+		<view class="header">
+			<view class="header-title">交易所</view>
+			<view class="currency" @click="openPopud">切换币种<u-icon class="arrow-down" color="#3A82FE" name="arrow-down"
+					size="12rpx"></u-icon>
+			</view>
+		</view>
+		<view style="background-color: #FAFCFF;position: fixed;width: 100%;z-index: 1;top: 140rpx;z-index: 999;">
 			<liuyuno-tabs :tabData="tabs" :defaultIndex="defaultIndex" @tabClick='tabClick'></liuyuno-tabs>
 		</view>
 		<view style="display: block;height: 90rpx;"></view>
@@ -119,7 +126,7 @@
 			     ALL("重启池全网用户购买开关", 15);
 			 
 			 */
-			
+
 			// 打开侧边栏
 			openPopud() {
 				this.$refs.popup.show();
@@ -151,18 +158,22 @@
 						"from": 1645772340,
 						"to": 1645772340
 					}) */
-					this.sendSocket({"method":"symbols","tradeId":1,"tradeId":9})
+					this.sendSocket({
+						"method": "symbols",
+						"tradeId": 1,
+						"tradeId": 9
+					})
 				});
 				uni.onSocketError(function(res) {
 					console.log(res)
 					console.log('WebSocket连接打开失败，请检查！');
 				})
-				uni.onSocketMessage((res) =>{
+				uni.onSocketMessage((res) => {
 					const data = JSON.parse(res.data)
 					console.log(data)
 					const obj = data.obj;
-					switch(data.code){
-						case 11:{
+					switch (data.code) {
+						case 11: {
 							this.$refs['data'].handleKLine(obj)
 							break;
 						}
@@ -184,15 +195,33 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+	.header {
+		z-index: 9999;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 86rpx 32rpx 0;
+		background: #FAFCFF;
+		.header-title {
+			font-size: 42rpx;
+			font-weight: bold;
+			color: #1A1B1C;
+		}
+	}
+
 	.currency {
-		color: $theme-color-text-colion;
-		background-color: $theme-bg-color-global;
-		padding: 10rpx 20rpx;
+		color: #3A82FE;
+		background: rgba(58, 130, 254, 0.11);
 		border-radius: 30rpx;
-		width: 188rpx;
-		height: 60rpx;
-		font-size: 30rpx;
+		width: 144rpx;
+		height: 44rpx;
+		line-height: 44rpx;
+		font-size: 24rpx;
 		text-align: center;
 	}
 
@@ -208,5 +237,24 @@
 		padding: 20rpx 30rpx;
 		border-radius: 12rpx;
 		color: rgba(255, 255, 255, 1);
+	}
+
+	.arrow-down {
+		display: inline-block;
+		margin-left: 4rpx;
+	}
+
+	/deep/ ._active {
+		color: #3A82FE !important;
+	}
+
+	/deep/ ._underline {
+		background-color: #3A82FE !important;
+	}
+
+	.header-zw {
+		background-color: #FAFCFF;
+		width: 100%;
+		height: 172rpx;
 	}
 </style>
