@@ -64,7 +64,7 @@
 							当前星体能量
 						</view>
 						<view style="font-size: 24rpx;font-weight: 550;">
-							{{orderInfo.total}}
+							{{orderInfo.qty}}
 						</view>
 					</view>
 				</view>
