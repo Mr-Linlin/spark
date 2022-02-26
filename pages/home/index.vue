@@ -1,22 +1,24 @@
 <template>
 	<view class="">
-		<view class="" style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx;">
-			<view class="" style="display: flex;align-items: center;">
-				<view class="" style="">
-					<image src="../../static/home/Title.png"
-						style="width: 346rpx;height: 68rpx;margin-top: 98rpx;margin-left: 32rpx;" mode="">
-					</image>
-				</view>
-				<view class="" style="flex: 1;">
-
-				</view>
-				<view class="" style="margin-right: 32rpx;">
-					<image @click="announcementNext" src="../../static/home/Status.png"
-						style="width: 44rpx;height: 44rpx;margin-top: 98rpx;" mode=""></image>
-				</view>
-				<view class=""
-					style="width: 14rpx;height: 14rpx;background-color: red;border-radius: 50%;position: relative;right: 5%;top: 25rpx;">
-
+		<view class="">
+			<view class="" style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx;">
+				<view class="" style="display: flex;align-items: center;">
+					<view class="" style="">
+						<image src="../../static/home/Title.png"
+							style="width: 346rpx;height: 68rpx;margin-top: 98rpx;margin-left: 32rpx;" mode="">
+						</image>
+					</view>
+					<view class="" style="flex: 1;">
+			
+					</view>
+					<view class="" style="margin-right: 32rpx;">
+						<image @click="announcementNext" src="../../static/home/Status.png"
+							style="width: 44rpx;height: 44rpx;margin-top: 98rpx;" mode=""></image>
+					</view>
+					<view class=""
+						style="width: 14rpx;height: 14rpx;background-color: red;border-radius: 50%;position: relative;right: 5%;top: 25rpx;">
+			
+					</view>
 				</view>
 			</view>
 		</view>
@@ -226,8 +228,9 @@
 					// 	title:'暂未开放',
 					// 	icon:'none'
 					// })
-					// https://fifox.info/en
-					location.href = 'https://fifox.info/en'
+					// #ifdef APP-PLUS
+						plus.runtime.openURL('https://fifox.info/en')
+					// #endif
 				} else if (e.name == '团队') {
 					uni.navigateTo({
 						url: '../user/myTeam'

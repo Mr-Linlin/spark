@@ -50,7 +50,7 @@
 				</view>
 				
 				<view class="" style="margin-left: 24rpx;font-size: 32rpx;text-shadow: 0px 0px #000;">
-					{{item.available}}
+					{{item.available >0 ? item.available.toFixed(4) : item.available}}
 				</view>
 			</view>
 		</view>
@@ -109,9 +109,11 @@
 				assetlistData:[]
 			};
 		},
+		
 		onShow() {
 			statistic().then(res => {
 				this.totalCnyData = res.obj.totalCny
+				
 			})
 			this.assetlistFun()
 		},
@@ -123,6 +125,7 @@
 				assetlist(data).then(res=>{
 					this.assetlistData = res.obj
 				})
+				
 			},
 			currencyType(e){
 				if(e.name == '充币'){

@@ -12,7 +12,7 @@
 				<view class="fnt_num">
 					所需体力{{this.FNT}}FNT
 				</view>
-				<text style="margin-right: 10rpx;">所需体力FNT=GS*4%</text>
+				<text style="margin-right: 10rpx;">所需体力FNT=GS*2%*2倍</text>
 				<text style="color:rgba(247, 69, 57, 1) ;">FNT可用{{poolassetData.fnt}}</text>
 			</view>
 		</view>
@@ -47,7 +47,6 @@
 					quantity:this.GS
 				}
 				poolrecharge(data).then(res=>{
-					console.log('asdf',res)
 					uni.showToast({
 						title:res.msg,
 						icon:'none'
@@ -67,7 +66,7 @@
 				})
 			},
 			gsChange() {
-				this.FNT = this.GS * 0.04
+				this.FNT = (this.GS * 0.02)*2
 				if (this.FNT > this.poolassetData.fnt) {
 					uni.$u.toast('兑换FNT不能超过'+this.poolassetData.fnt)
 				} else if (this.FNT > 0 && this.FNT !== null) {
