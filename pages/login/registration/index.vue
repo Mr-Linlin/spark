@@ -5,13 +5,13 @@
 		<view style="padding: 0 75rpx;margin-top: 80rpx;">
 			<view style="font-size: 44rpx;" class="fz-wb2">新用户注册</view>
 			<view class="" style="width: 600rpx;margin-top: 60rpx;background-color: #FFFFFF;">
-				<u--input  class="text_indnts" type="text" placeholder="手机号/邮箱" border="surround" clearable style="height: 88rpx;"
+				<u--input  type="text" placeholder="手机号/邮箱" border="surround" clearable style="height: 88rpx;padding-left: 32rpx;"
 					:border="'false'" v-model="userInfo.account">
 				</u--input>
 			</view>
 			<view class=""
 				style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;display: flex;align-items: center;">
-				<u--input maxlength="6" class="text_indnts" type="number" placeholder="6位验证码" border="surround" clearable style="height: 88rpx;"
+				<u--input class="text_indnts" type="number" placeholder="6位验证码" border="surround" clearable style="height: 88rpx;padding-left: 32rpx;"
 					:border="'false'" v-model="userInfo.code">
 				</u--input>
 				<view style="margin-right: 32rpx;color: #3A82FE;" class="reg-text">
@@ -21,23 +21,18 @@
 				</view>
 			</view>
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
-				<u--input class="text_indnts" placeholder="设置登录密码" password border="surround" clearable style="height: 88rpx;"
+				<u--input  placeholder="设置登录密码" password border="surround" clearable style="height: 88rpx;padding-left: 32rpx;"
 					:border="'false'" v-model="password"></u--input>
 			</view>
-			
+
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
-				<u--input class="text_indnts" placeholder="确认登录密码" password border="surround" clearable style="height: 88rpx;"
-					:border="'false'" v-model="password2"></u--input>
-			</view>
- 
-			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
-				<u--input class="text_indnts" placeholder="邀请码" password border="surround" clearable style="height: 88rpx; "
+				<u--input  placeholder="邀请码" password border="surround" clearable style="height: 88rpx; padding-left: 32rpx;"
 					:border="'false'" v-model="inviteCode"></u--input>
 			</view>
-			<my-button  background="3A82FE" title="下一步" :height="88" :radius="12" style="margin-top: 60rpx;" @myClick="goToRouter">
+			<my-button title="下一步" :height="88" :radius="12" style="margin-top: 60rpx;" @myClick="goToRouter">
 			</my-button>
 			<view class="ta fz-wb2" style="margin-top: 60rpx;" @click="goBack">返回登录</view>
-		</view> 
+		</view>
 		<view class="fixed">
 			<u-checkbox-group v-model="checkboxValue1" placement="column" @change="checkboxChange">
 				<u-checkbox :customStyle="{marginBottom: '8px'}" v-for="(item, index) in checkboxList1" :key="index"
@@ -66,7 +61,7 @@
 		data() {
 			return {
 				userInfo: {
-					account: '1908878835@qq.com',
+					account: '18675425169',
 					code: '',
 					zone: 86
 				},
@@ -80,15 +75,14 @@
 				// refCode: null,
 				seconds: 60,
 				password: '',
-				inviteCode: '661141',
-				password2:''
+				inviteCode: '661141'
 			}
 		},
 		methods: {
 			// 返回登录页面
 			goBack() {
 				uni.navigateBack({
-					
+					u
 				})
 			},
 			codeChange(text) {
@@ -131,15 +125,9 @@
 				if (flag) {
 					let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
 					if (uni.$u.test.mobile(this.userInfo.account) || reg.test(this.userInfo.account)) {
-						if (this.userInfo.code.length !== 6) return uni.$u.toast('验证码错误')
+						if (this.userInfo.code.length !== 6) return uni.$u.toast('请输入正确的验证码')
 						if (this.password.length < 6) return uni.$u.toast('密码长度不能少于6位')
 						if (this.inviteCode.length < 6) return uni.$u.toast('请输入邀请码')
-						if (this.password2 != this.password){
-							uni.$u.toast('密码不一致')
-							this.password2 = ''
-							this.password = ''
-							return 
-						} 
 					return registerOne(this.userInfo).then(res => {
 							if (res.code !== 0) return uni.$u.toast(res.msg)
 							this.userInfo.uuid=res.obj
@@ -189,6 +177,6 @@
 		}
 	}
 	.text_indnts{
-		padding-left: 200rpx;
+		text-indent: 0.7em;
 	}
 </style>

@@ -76,7 +76,7 @@
 										{{item.minMax}}GS
 									</view>
 									<view class="ball">
-										{{item.rate*100}}%
+										{{Number(item.rate*100).toFixed(2)}}%
 									</view>
 								</view>
 							</view>

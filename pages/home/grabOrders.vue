@@ -81,15 +81,16 @@
 
 				<view style="display: flex;height: 88rpx; padding:0 32rpx;">
 					<view class="gs-item" v-for="(item,index) in radios" :key="index"
-						:class="{active:index===currentIndex && orderInfo.statusStr==='进行中'}" @click="radioClick(index,item.num)">
-						{{item.num}}GS
+						:class="{active:index===currentIndex && orderInfo.statusStr==='进行中'}"
+						@click="radioClick(index,item)">
+						{{item}}GS
 					</view>
 				</view>
 
 				<view class="flex_j">
 					<view class="Isum">
-						<u--input type="number" style="text-indent: 1rem;" border="none" class="uinput" :disabled="orderInfo.statusStr==='已结束'"
-							placeholder="自定义数量" v-model="gs" @change="change">
+						<u--input type="number" style="text-indent: 1rem;" border="none" class="uinput"
+							:disabled="orderInfo.statusStr==='已结束'" placeholder="自定义数量" v-model="gs" @change="change">
 						</u--input>
 						<view class="">
 							GS
@@ -98,8 +99,7 @@
 				</view>
 
 				<view class="FNT">
-					<text
-						style="color:#F74539 ; margin-right: 10rpx;">需要{{queryInfo.quantity}}FNT</text>可使用{{this.fnt}}FNT
+					<text style="color:#F74539 ; margin-right: 10rpx;">需要{{convert || 0}}FNT</text>可使用{{this.fnt}}FNT
 				</view>
 			</view>
 		</view>
@@ -123,7 +123,12 @@
 	} from '@/http/common.js'
 	import {
 		getPddDetail,
-		pddTake
+		pddTake,
+		getPddoPtion,
+		getRate,
+		getPrice,
+		getBalance
+
 	} from '@/http/home.js'
 	import qs from 'qs'
 	import md5 from 'js-md5';
@@ -138,6 +143,8 @@
 				orderInfo: {},
 				fnt: '',
 				gs: '',
+				rate: '',
+				convert: '',
 				currentIndex: 0,
 				queryInfo: {
 					quantity: 0,
@@ -155,31 +162,21 @@
 					'未开始': '充能未开始',
 					'已结束': '充能已结束',
 					'进行中': '请选择充能值'
-				
+
 				},
-				radios: [{
-						num: 600
-					},
-					{
-						num: 450
-					},
-					{
-						num: 300
-					},
-					{
-						num: 150
-					}
+				radios: [
+
 				],
 			}
 		},
 		onLoad(options) {
 			this.getDetail(options.resourceId)
 			this.queryInfo.resourceId = options.resourceId
-			this.queryInfo.quantity = this.radios[0].num * 0.02
+			this.convert = this.radios[0] * this.rate
 		},
 		computed: {
 			schedule() {
-				return `${(this.orderInfo.qty/this.orderInfo.total)*100}%`
+				return `${Number((this.orderInfo.qty/this.orderInfo.total)*100).toFixed(4)}%`
 			}
 		},
 		methods: {
@@ -193,9 +190,31 @@
 					resourceId
 				})
 				if (code !== 0) return uni.$u.toast(msg)
-				console.log(obj)
 				this.orderInfo = obj
 				let res = await poolasset()
+				// 获取拼团金额选项
+				let ption = await getPddoPtion({
+					resourceId
+				})
+				console.log(ption.obj)
+				this.radios = ption.obj
+				this.queryInfo.quantity = this.radios[0]
+				// 拼团销毁FNT比例
+				let rate = await getRate()
+				console.log('拼团销毁FNT比例' + rate.obj)
+				this.rate = rate.obj
+				// 单币种价格
+				let price = await getPrice({
+					currencyName: 'FNT',
+					resourceId: resourceId
+				})
+				console.log('单币种价格' + price.obj)
+				// 单账户资产-常规抓取
+				let balance = await getBalance({
+					currencyName: 'GS',
+					walletType: 1
+				})
+				console.log('单账户资产-常规抓取' + balance.obj)
 				this.fnt = res.obj.fnt
 			},
 			onChange(e) {
@@ -208,8 +227,8 @@
 				this.queryInfo.token = token
 				// console.log(qs.stringify(this.queryInfo))
 				this.queryInfo.info = md5(qs.stringify(this.queryInfo))
-				if (this.queryInfo.quantity === 0) return uni.$u.toast('请输入参与金额')
-				if(this.fnt<this.queryInfo.quantity)return uni.$u.toast('FNT体力不足')
+				if (this.queryInfo.quantity === 0) return uni.$u.toast('请输入充能数量')
+				if (this.fnt < this.queryInfo.quantity*this.rate) return uni.$u.toast('FNT体力不足')
 				let {
 					code,
 					msg,
@@ -217,12 +236,23 @@
 				} = await pddTake(this.queryInfo)
 				if (code !== 0) return uni.$u.toast(msg)
 				delete this.queryInfo.info
+				uni.showLoading({
+					title: '充能成功',
+					success: () => {
+						setTimeout(() => {
+							uni.hideLoading();
+							uni.navigateTo({
+								url: '/pages/user/SparkRecord'
+							})
+						}, 3000)
+					}
+				})
 			},
 			radioClick(index, value) {
 				this.currentIndex = index
 				console.log(this.currentIndex)
 				this.gs = ''
-				this.queryInfo.quantity = value * 0.02
+				this.queryInfo.quantity = value
 				console.log(this.queryInfo)
 			},
 			change(e) {
@@ -235,7 +265,8 @@
 					this.queryInfo.quantity = 0
 					return uni.$u.toast(`参与金额最小为${this.orderInfo.min}GS`)
 				}
-				this.queryInfo.quantity = e * 0.02
+				this.convert=this.queryInfo.quantity*this.rate
+				this.queryInfo.quantity = e
 				// console.log(this.queryInfo.quantity)
 			}
 		}
