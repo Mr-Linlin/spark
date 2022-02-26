@@ -362,7 +362,7 @@
 			},
 			{
 				"pagePath": "pages/spark/index",
-				"text": "spark",
+				"text": "交易所",
 				"iconPath": "static/tarbar/spark.png",
 				"selectedIconPath": "static/tarbar/spark_active.png"
 			},
