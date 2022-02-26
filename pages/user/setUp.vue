@@ -7,7 +7,7 @@
 				</view>
 				<view class="PheonCont">
 					<view class="PheonName">
-						登录手机号
+						登录账号
 					</view>
 					<view class="flex1">
 
@@ -51,7 +51,7 @@
 		<view class="flex_j bx_sard">
 			<view class="setUptitle">
 
-				<view class="PheonCont">
+				<view class="PheonCont" @click="aboutUs">
 					<view class="PheonName">
 						关于我们
 					</view>
@@ -77,7 +77,7 @@
 					</view>
 				</view> -->
 
-				<view class="PheonCont">
+				<view class="PheonCont" @click="aboutUs">
 					<view class="PheonName">
 						版本更新
 					</view>
@@ -260,6 +260,10 @@
 			handleShowPassword() {
 				console.log("asd")
 			},
+			// 进入关于我们
+			aboutUs(){
+				uni.$u.toast('暂未开放')
+			},
 			handleClose() {
 				this.show = false
 				this.show2 = false,
@@ -294,6 +298,7 @@
 			TwotradePwdFun() {
 				this.current++
 			},
+			
 			NewtradePwdFun() { //修改资金密码
 				if (!this.tradePwd || this.tradePwd.length != 6) {
 					uni.showToast({
