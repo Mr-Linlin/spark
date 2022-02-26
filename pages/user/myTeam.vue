@@ -14,7 +14,7 @@
 			<view class="tramCont">
 				<view class="tramNumCount">
 					<view class="tramCountst">
-						{{subinfoData.directCount}}
+						{{subinfoData.directCount ? subinfoData.directCount : 0}}
 					</view>
 					<view class="tramNum">
 						战队成员
@@ -22,7 +22,7 @@
 				</view>
 				<view class="tramNumCount">
 					<view class="tramCountst">
-						{{subinfoData.indirectCount}}
+						{{subinfoData.indirectCount ? subinfoData.indirectCount : 0}}
 					</view>
 					<view class="tramNum">
 						总业绩

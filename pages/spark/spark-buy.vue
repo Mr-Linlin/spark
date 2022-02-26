@@ -12,7 +12,6 @@
 							<view style="width: 32rpx;height: 32rpx;" class="ta fz-wb2">+</view>
 						</view>
 					</view>
-					<!--  -->
 					<view style="text-align: right;" class="fz1 fc-c2">≈10.29CNY±0.66%</view>
 					<view class="mt3 fz4 fz-wb2">数量</view>
 					<!-- 加减 -->
@@ -46,14 +45,17 @@
 					</view>
 					<view style="display: block;height: 10rpx;"></view>
 					<view :key="index" v-for="(item,index) of 4">
-						<view class="flexC space-between" style="font-size: 20rpx;height: 56rpx;">
+						<view class="p-item flexC space-between">
+							<view class="schedule"></view>
 							<view>871.64</view>
 							<view>291.6911</view>
 						</view>
 					</view>
+
 					<view class="ptb1">≈10.29CNY</view>
 					<view :key="item" v-for="(item,index) of [10,11,22,546,789,7]">
-						<view class="flexC space-between" style="font-size: 20rpx;height: 56rpx;">
+						<view class="p-item flexC space-between" style="font-size: 20rpx;height: 56rpx;">
+							<view class="schedule bg2"></view>
 							<view>871.64</view>
 							<view>291.6911</view>
 						</view>
@@ -189,5 +191,30 @@
 	.bg-color2 {
 		background-color: $theme-bg-color-global;
 		border-radius: 12rpx;
+	}
+
+	.p-item {
+		position: relative;
+		height: 56rpx;
+		font-size: 20rpx;
+		font-weight: 400;
+		color: rgba(0, 0, 0, 0.66);
+		background-color: rgba($color: #000, $alpha: 0);
+		z-index: 2;
+
+		.schedule {
+			position: absolute;
+			z-index: -1;
+			left: 0;
+			top: 0;
+			height: 100%;
+			width: 50%;
+			background: #FFE8E5;
+		}
+
+		.bg2 {
+
+			background: #BAFFEB;
+		}
 	}
 </style>

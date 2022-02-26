@@ -1,13 +1,13 @@
 <template>
 	<view style="padding: 20rpx 30rpx 0 30rpx;">
 		<view class="data-bgColor">
-			<view class="plr2" style="padding: 32rpx 32rpx 0 32rpx;">
-				<view class="flexC">
+			<view class="plr2 car-shadow">
+				<view class="flexC FAFCFF p32">
 					<view style="font-size: 54rpx;" class="text-color">4711.89135</view>
 					<view class="fz1 ml2 text-color">≈10.29CNY±0.66%</view>
 				</view>
-				<view style="height: 154rpx;">
-					<view style="padding: 32rpx 0;" class="flexC space-between">
+				<view >
+					<view style="padding: 32rpx 0;" class="flexC bg-white space-between p32">
 						<view>
 							<view class="flexC">
 								<view class="fz1 fz-wb2 text-color-1">24交易量</view>
@@ -37,15 +37,9 @@
 					<!-- 如果需要做跟手tooltip，需要在@getTouchMove事件中调用，注意需要添加防抖，可参考组件内防抖方法，否则会导致逻辑层与视图层频繁通信造成卡顿 -->
 					<!-- <qiun-data-charts type="candle" :opts="optsTooltip" 
 						:chartData="chartData"   :ontouch="true" /> -->
-						<!-- @getIndex="showMyTooltip" :tooltipShow="false" -->
-						 <qiun-data-charts
-						    type="candle"
-						    :chartData="chartData"
-						    :loadingType="3"
-						    background="none"
-						    tooltipFormat="tooltipDemo1"
-						    :ontouch="true"
-						  />
+					<!-- @getIndex="showMyTooltip" :tooltipShow="false" -->
+					<qiun-data-charts type="candle" :chartData="chartData" :loadingType="3" background="none"
+						tooltipFormat="tooltipDemo1" :ontouch="true" />
 				</view>
 			</view>
 		</view>
@@ -57,7 +51,7 @@
 	export default {
 		data() {
 			return {
-				chartData:{
+				chartData: {
 					"categories": [
 						"2020/1/24",
 						"2020/1/25",
@@ -70,82 +64,83 @@
 						"2020/1/31",
 						"2020/1/31",
 					],
-					"series": [
-						{
-							"name": "上证指数",
-							"data": [
-								[
-									2320.26,//  
-									2302.6, // low
-									2287.3, // open
-									2362.94 // close
-								],
-								[
-									2300,
-									2291.3,
-									2288.26,
-									2308.38
-								],
-								[  
-									2295.35,
-									2346.5,
-									2295.35,
-									2346.92
-								],
-								[
-									2347.22,
-									2358.98,
-									2337.35,
-									2363.8
-								],
-								[
-									2360.75,
-									2382.48,
-									2347.89,
-									2383.76
-								],
-								[
-									2383.43,
-									2385.42,
-									2371.23,
-									2391.82
-								],
-								[
-									2383.43,
-									2385.42,
-									2371.23,
-									2391.82
-								],[
-									2383.43,
-									2385.42,
-									2371.23,
-									2391.82
-								],[
-									2383.43,
-									2385.42,
-									2371.23,
-									2391.82
-								],[
-									2383.43,
-									2385.42,
-									2371.23,
-									2391.82
-								]
+					"series": [{
+						"name": "上证指数",
+						"data": [
+							[
+								2320.26, //  
+								2302.6, // low
+								2287.3, // open
+								2362.94 // close
+							],
+							[
+								2300,
+								2291.3,
+								2288.26,
+								2308.38
+							],
+							[
+								2295.35,
+								2346.5,
+								2295.35,
+								2346.92
+							],
+							[
+								2347.22,
+								2358.98,
+								2337.35,
+								2363.8
+							],
+							[
+								2360.75,
+								2382.48,
+								2347.89,
+								2383.76
+							],
+							[
+								2383.43,
+								2385.42,
+								2371.23,
+								2391.82
+							],
+							[
+								2383.43,
+								2385.42,
+								2371.23,
+								2391.82
+							],
+							[
+								2383.43,
+								2385.42,
+								2371.23,
+								2391.82
+							],
+							[
+								2383.43,
+								2385.42,
+								2371.23,
+								2391.82
+							],
+							[
+								2383.43,
+								2385.42,
+								2371.23,
+								2391.82
 							]
-						}
-					]
+						]
+					}]
 				},
-				   
-				      
-				
+
+
+
 				chartsDataLine1: {},
 				errorMessage: "自定义的错误信息，关闭点击重新加载",
 				//在opts中拼接tooltip
 				optsTooltip: {
-					tooltip:{
+					tooltip: {
 						"showCategory": true,
 					},
-					legend:{
+					legend: {
 						"position": "top",
 						"float": "right"
 					}
@@ -170,11 +165,11 @@
 			complete(e) {
 				console.log("渲染完成事件", e);
 				//uCharts.instance[e.id]代表当前的图表实例（除APP端，APP不可在组件外调用uCharts的实例）
-			 // console.log("uCharts实例",uCharts.instance[e.id]);
+				// console.log("uCharts实例",uCharts.instance[e.id]);
 				//uCharts.option[e.id]代表当前的图表的opts（除APP端，APP不可在组件外调用uCharts的实例）
 				// console.log("uCharts的option",uCharts.option[e.id]);
 				//下面展示渲染完成后，通过实例调用uCharts的showToolTip方法，有了uCharts实例，您也可以在其他地方调用图表的方法及数据（除APP端，APP因采用renderjs，无法获取uCharts实例）
-				
+
 			},
 			showMyTooltip(e) {
 				console.log("获取点击索引事件", e);
@@ -215,11 +210,11 @@
 				}
 			},
 			// 处理k线图
-			handleKLine(res){
+			handleKLine(res) {
 				// console.log(res)
-				let times = res.map(e=>{
+				let times = res.map(e => {
 					const date = new Date(e.date)
-					return date.getFullYear() +'/'+(date.getMonth()+1)+'/' + date.getDate()
+					return date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
 				})
 				// this.chartData.categories = times
 			}
@@ -230,8 +225,6 @@
 <style scoped lang="scss">
 	.data-bgColor {
 		width: 100%;
-		height: 267rpx;
-		background-color: $theme-bg-color;
 
 		.text-color {
 			color: $theme-color-text-dark
@@ -241,7 +234,10 @@
 			color: $theme-color-text-colion
 		}
 	}
-
+	.plr2 {
+		padding: 0;
+		margin-bottom: 40rpx;
+	}
 	.charts-box {
 		width: 100%;
 		background: #fff;
@@ -249,5 +245,20 @@
 		border-radius: 16rpx;
 		opacity: 1;
 		margin-top: 40rpx;
+	}
+
+	.FAFCFF {
+		background: #FAFCFF;
+	}
+	.p32{
+		padding: 32rpx !important;
+	}
+	.bg-white{
+		background-color: #fff !important;
+	}
+	.car-shadow{
+		box-shadow: 0px 16rpx 32rpx 1px rgba(88,131,204,0.05);
+		overflow: hidden;
+border-radius: 12rpx;
 	}
 </style>
