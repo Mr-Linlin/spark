@@ -76,7 +76,8 @@
 										{{item.minMax}}GS
 									</view>
 									<view class="ball">
-										{{Number(item.rate*100).toFixed(2)}}%
+										<vus-sphere-progress :anim="true" :percent="Number(item.rate*100).toFixed(1)"
+											font-size="12rpx" :width="78" :color="[background[8],colors[index],colors[index]]"></vus-sphere-progress>
 									</view>
 								</view>
 							</view>
@@ -159,8 +160,9 @@
 </template>
 
 <script>
-	import LoadLine from '../../components/load-line/load-line.vue'
+	import LoadLine from '@/components/load-line/load-line.vue'
 	import conSulting from './consulting.vue';
+	import vusSphereProgress from '@/components/vus-sphere-progress/vus-sphere-progress.vue';
 	import {
 		getMessage,
 		getNotice,
@@ -204,6 +206,15 @@
 					3: ' linear-gradient(90deg, #FFA58F 0%, #FF7957 100%)',
 					4: ' linear-gradient(90deg, #F4B76D 0%, #EBA147 100%)',
 					5: ' linear-gradient(90deg, #8F9CFF 0%, #7484FF 100%)',
+					8: 'radial-gradient(60.75% 50.95% at 54.5% 37.39%, rgba(255, 255, 255, 0) 59.65%, rgba(255, 255, 255, 0.37) 74.25%, rgba(255, 255, 255, 0.37) 83.23%, rgba(255, 255, 255, 0) 100%), radial-gradient(66.25% 66.25% at 25.42% 28.54%, rgba(255, 255, 255, 0.37) 0%, rgba(255, 255, 255, 0) 100%)',
+				},
+				colors:{
+					0: ' linear-gradient(180deg, #F3B42C 0%, #D9980B 100%)',
+					1: ' linear-gradient(180deg, #FE70C5 0%, #FF16A2 100%)',
+					2: ' linear-gradient(90deg, #4BD9F9 0%, #29C5F1 100%)',
+					3: ' linear-gradient(90deg, #FFA58F 0%, #FF7957 100%)',
+					4: ' linear-gradient(180deg, #FE70C5 0%, #FF16A2 100%)',
+					5: ' linear-gradient(90deg, #4BD9F9 0%, #29C5F1 100%)',
 				}
 			}
 		},
@@ -336,9 +347,12 @@
 
 			.ball {
 				position: absolute;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				right: 0;
 				top: -40rpx;
-				background: linear-gradient(100deg, rgba(0, 0, 0, 0.11) 0%, rgba(0, 0, 0, 0) 100%);
+				background: linear-gradient(135deg, rgba(0, 0, 0, 0.11) 0%, rgba(0, 0, 0, 0) 100%);
 				width: 88rpx;
 				height: 89rpx;
 				border-radius: 50%;

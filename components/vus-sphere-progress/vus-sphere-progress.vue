@@ -1,28 +1,23 @@
-<!-- 
- * @Name：vus-sphere-progress v1.0.0 球形进度条组件
- * @Site：http://www.vusui.com | https://vusui.github.io
- * @Author：林攀
- * @License：MIT
- -->
 <template>
 	<!-- 球形波浪 -->
 	<view v-if="type=='sphere'" :class="setSphereType" :style="setWidthHeight">
 		<view class="vus-progress-sphere" :style="setWidthHeight">
 			<view class="vus-progress-sphere-inner" :style="{'background':color[0]}">
 				<!-- 水波纹 -->
-				<view class="vus-progress-sphere-water" :class="assignAnim" :style="setSphereWater"></view>
+				<view class="vus-progress-sphere-water" :class="assignAnim"
+					:style="[setSphereWater,{background:color[2]}]"></view>
 				<!-- 高光 -->
 				<view class="vus-progress-sphere-glare"></view>
 				<!-- 文本 -->
 				<view class="vus-progress-sphere-percent">
 					<text v-if="text" class="vus-progress-sphere-percent-text"
 						:style="{fontSize:fontSize}">{{assignPercent}}%</text>
-					<text v-if="sphere.icon.length" :class="sphere.icon[0]" :style="sphere.icon&&sphere.icon[1]"></text>
+					<!-- <text v-if="sphere.icon.length" :class="sphere.icon[0]" :style="sphere.icon&&sphere.icon[1]"></text> -->
 					<slot name="text"></slot>
 				</view>
 				<!-- 气泡 -->
 				<view v-if="sphere.bubble" v-for="item in sphereBubble" :key="item" class="vus-progress-sphere-bubble"
-					:class="'bubble'+item"></view>
+					:class="'bubble'+item" :style="{background:color[1]}"></view>
 			</view>
 		</view>
 	</view>
@@ -92,13 +87,14 @@
 		computed: {
 			setSphereType() {
 				let percent = this.assignPercent;
+				// console.log(`进度条:${percent}`)
 				let colorType = 100 / 3;
 				if (percent && !isNaN(percent) && percent >= 0) {
 					if (percent < colorType * 1) {
 						return 'vus-progress-sphere-red';
 					} else if (percent < colorType * 2) {
 						return 'vus-progress-sphere-orange';
-					} else {
+					} else if (percent < colorType * 3) {
 						return 'vus-progress-sphere-green';
 					}
 				}
@@ -109,9 +105,9 @@
 				let styles = '';
 				// 自定义颜色
 				if (this.color.length == 3) {
-					styles = `background-image:radial-gradient(${this.color[1]} 15%, ${this.color[2]});`;
+					styles = `background: ${this.color[2]});`;
 				} else if (this.color.length == 2) {
-					styles = `background-image:none;background-color:${this.color[1]};`;
+					styles = `background-image:none;background:${this.color[1]};`;
 				}
 				return `top:${percent}%;${styles}`;
 			},
@@ -154,7 +150,8 @@
 	.vus-progress-sphere-custom,
 	.vus-progress-sphere-green,
 	.vus-progress-sphere-orange,
-	.vus-progress-sphere-red {
+	.vus-progress-sphere-red,
+	.vus-progress-sphere-yellow {
 		width: 200rpx;
 		height: 200rpx;
 		transition: all 1s ease;
@@ -252,20 +249,25 @@
 	/* 绿色水波 */
 	.vus-progress-sphere-green .vus-progress-sphere-water {
 		top: 25%;
-		background-image: radial-gradient(#2a4 15%, #6df736);
+		/* background-image: radial-gradient(#2a4 15%, #6df736); */
 	}
 
 	/* 橙色水波 */
 	.vus-progress-sphere-orange .vus-progress-sphere-water {
 		top: 50%;
-		background-image: radial-gradient(#e83 15%, #f9d534);
+		/* background: linear-gradient(90deg, #FF58DC 0%, #FF45B4 100%); */
 	}
 
 	/* 红色水波 */
 	.vus-progress-sphere-red .vus-progress-sphere-water {
-		top: 75%;
-		background-image: radial-gradient(#c00 15%, #ff5050);
+		top: 80%;
+		/* background-image: radial-gradient(#c00 15%, #ff5050); */
 	}
+
+/* 	.vus-progress-sphere-yellow .vus-progress-sphere-water {
+		top: 25%;
+		background-image: radial-gradient(#c00 15%, #ff5050);
+	} */
 
 	/* 动画 */
 	.vus-progress-sphere .vus-progress-sphere-anim {
@@ -294,7 +296,7 @@
 		bottom: 0;
 		z-index: 4;
 		opacity: 0;
-		background-color: rgba(255, 255, 255, .3);
+		/* background-color: rgba(255, 255, 255, .3); */
 		border-radius: 50%;
 	}
 

@@ -14,6 +14,7 @@ export const getPddDetail = info => http.post('front/pdd/join/detail',info)
 export const pddTake = info => http.post('front/pdd/join/pdd',info)
 // 获取资讯详情
 export const newsDetail = info => http.post('search/message/detail',info)
+
 // 拼团金额选项
 export const getPddoPtion = info => http.post('front/pdd/join/option',info)
 // 拼团销毁FNT比例

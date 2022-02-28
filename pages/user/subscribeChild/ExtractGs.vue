@@ -29,7 +29,7 @@
 			</view>
 		</view>
 		<view class="sched-btn">
-			<u-button text="确定提取" class="btn" @click="show = true"></u-button>
+			<u-button text="确定提取" class="btn" @click="show = true" bgColor="#F7FAFF"></u-button>
 		</view>
 
 		<u-popup :show="show" round="40rpx" mode="bottom" @close="close" @open="open">
@@ -39,7 +39,7 @@
 				</view>
 				<view>
 					<view class="code-box p75">
-						<u-code-input dot class="code-input" v-model="tradePwd" :maxlength="6" size="48" borderColor="#fff"></u-code-input>
+						<u-code-input dot class="code-input" v-model="tradePwd" :maxlength="6" size="40" borderColor="#fff"></u-code-input>
 					</view>
 					<u-button @click="handleNext()" class="btn-shadow next-btn" color="#3A82FE" type="primary"
 						text="提取"></u-button>
