@@ -188,7 +188,7 @@
 			},
 			sendSocket(data) {
 				data.token = uni.getStorageSync('token')
-				// console.log(JSON.stringify(data))
+				console.log(JSON.stringify(data))
 				uni.sendSocketMessage({
 					data: (typeof data === 'string') ? data : JSON.stringify(data),
 					success(e) {
