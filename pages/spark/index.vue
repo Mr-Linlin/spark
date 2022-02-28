@@ -17,7 +17,7 @@
 		</view>
 		<view style="display: block;height: 90rpx;"></view>
 		<view v-if="defaultIndex===0">
-			<spark-data ref="data"></spark-data>
+			<spark-data :flag="flag" @data="handlerData" ref="data"></spark-data>
 		</view>
 		<view v-if="defaultIndex===1">
 			<spark-buy></spark-buy>
@@ -26,7 +26,7 @@
 			<spark-sell></spark-sell>
 		</view>
 		<view v-else-if="defaultIndex===3">
-			<spark-entrust></spark-entrust>
+			<spark-entrust @entrust="handlerEntrust"></spark-entrust>
 		</view>
 		<view v-else-if="defaultIndex===4">
 			<spark-deals></spark-deals>
@@ -61,6 +61,7 @@
 		BASE_URL
 	} from "../../http/request.js"
 	export default {
+		name:"spark",
 		components: {
 			liuyunoTabs,
 			sparkDeals,
@@ -75,6 +76,7 @@
 				sliderTop: 40,
 				tabs: ['数据', '买入', '卖出', '委托', '成交'],
 				defaultIndex: 0,
+				flag:false,
 				slider_tabs: [{
 						text: 'FNT/GS',
 						num: '32.55'
@@ -142,6 +144,9 @@
 			createSocket() {
 				uni.connectSocket({
 					url: 'ws://211.149.135.240:7888/websocket/trade',
+					header:{
+						token:uni.getStorageSync('token')
+					},
 					success(e) {
 						console.log(e)
 					},
@@ -158,6 +163,7 @@
 						"from": 1645772340,
 						"to": 1645772340
 					}) */
+					this.flag = true;
 					this.sendSocket({
 						"method": "symbols",
 						"tradeId": 1,
@@ -181,6 +187,8 @@
 				});
 			},
 			sendSocket(data) {
+				data.token = uni.getStorageSync('token')
+				// console.log(JSON.stringify(data))
 				uni.sendSocketMessage({
 					data: (typeof data === 'string') ? data : JSON.stringify(data),
 					success(e) {
@@ -190,6 +198,15 @@
 						console.log(e)
 					}
 				});
+			},
+			// 委托分发
+			handlerEntrust({data}){
+				this.sendSocket(data)
+			},
+			// 数据分发
+			handlerData({data}){
+				console.log(data)
+				this.sendSocket(data)
 			}
 		}
 	}

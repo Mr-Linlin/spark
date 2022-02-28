@@ -161,6 +161,37 @@
 				} */
 			}
 		},
+		props:{
+			flag:{
+				type:Boolean,
+				default:false
+			}
+		},
+		watch:{
+			flag(r1,r2){
+				if(r1){
+					this.$emit('data',{
+						data:{
+							from:1646034540,
+							to:1646034300,
+							resolution:1,
+							tradeId:9,
+							"method":"kData"
+						}
+					})
+				}
+			}
+		},
+		created() {
+			/* this.$emit('data',{
+				data:{
+					from:1646034540,
+					to:1646034300,
+					resolution:1,
+					tradeId:9
+				}
+			}) */
+		},
 		methods: {
 			complete(e) {
 				console.log("渲染完成事件", e);
