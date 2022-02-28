@@ -104,7 +104,7 @@
 		</view>
 		<view class="flex_j">
 			<view class="btn1 ptn_b"
-				v-if="orderInfo.countDown < 0 || orderInfo.statusStr==='未开始' || this.queryInfo.quantity < 1">
+				v-if="orderInfo.countDown < 0 || orderInfo.statusStr==='未开始' || this.queryInfo.quantity < 1 || orderInfo.statusStr==='已结束'">
 				{{statusInfo[orderInfo.statusStr]}}
 			</view>
 			<view class="btn ptn_b" @click="onTake" v-else>
@@ -220,7 +220,11 @@
 				let rate = await getRate()
 				console.log('拼团销毁FNT比例' + rate.obj)
 				this.rate = rate.obj
-				this.convert = Number(this.radios[0] * this.rate / this.price).toFixed(8)
+				if (this.orderInfo.statusStr === '已结束' || this.orderInfo.statusStr === '未开始') {
+					this.convert = 0
+				} else {
+					this.convert = Number(this.radios[0] * this.rate / this.price).toFixed(8)
+				}
 
 				// 单账户资产-常规抓取
 				let balance = await getBalance({
@@ -265,11 +269,12 @@
 			},
 			radioClick(index, value) {
 				this.currentIndex = index
-				// console.log(this.currentIndex)
 				this.gs = ''
 				this.queryInfo.quantity = value
-				this.convert = value * this.rate
-				// console.log(this.queryInfo)
+				if (this.orderInfo.statusStr === '已结束' || this.orderInfo.statusStr === '未开始') {
+					return this.convert = 0
+				}
+				this.convert = Number(value * this.rate / this.price).toFixed(8)
 			},
 			change(e) {
 				this.currentIndex = -1

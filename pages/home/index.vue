@@ -68,7 +68,7 @@
 								</view>
 								<view class="countdown">
 									<u-count-down :time="item.countDown*1000" format="HH:mm:ss"
-										v-if="item.status!==3 && item.countDown>0">
+										v-if="item.status!==3 && item.countDown > 0">
 									</u-count-down>
 									<view style="font-size: 26rpx;" v-else>{{status[item.status]}}</view>
 								</view>
