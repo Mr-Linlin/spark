@@ -40,9 +40,9 @@
 					</view>
 				</view>
 			</view>
-			<view class="" style="height: 55rpx;">
+			<view class="" style="height: 21%;">
 
-			</view>
+			</view> 
 
 			<view class="" style="display: flex;justify-content: center;">
 				<view @click="schedulOrder" class=""
@@ -66,7 +66,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="" style="display: flex;align-items: center;font-size: 32rpx;">
+		<view class="" style="display: flex;align-items: center;font-size: 32rpx;height: 118rpx;">
 			<view @click="typeFun(0)" :class="type == 0 ? 'asdf' : 'asdf2'" style="margin-left: 32rpx;">
 				预存能量
 			</view>
@@ -76,9 +76,7 @@
 			</view>
 		</view>
 		<view v-for="(item,index) in rechargelistData" :key="index" class="" style="display: flex;justify-content: center;">
-			<view  class=""
-
-				style="width: 686rpx;height: 234rpx;background-color: #FFFFFF;border-radius: 12rpx;margin-top: 40rpx;padding-left: 24rpx;padding-right: 24rpx;">
+			<view  class="" style="width: 686rpx;height: 234rpx;background-color: #FFFFFF;border-radius: 12rpx;margin-bottom: 40rpx;padding-left: 24rpx;padding-right: 24rpx;">
 				<view class=""
 					style="height: 82rpx;display: flex;align-items: center;font-size: 28rpx;text-shadow: 0px 0px #000;">
 					{{type == 0 ? '预约' : '提取'}}成功

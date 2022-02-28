@@ -6,10 +6,10 @@
 				<image @click="chooseImageFun" :src="userData.pic"></image>
 			</view>
 			<view class="group_1">
-				<text>手机号</text>
+				<text>账号</text>
 				<view style="display: flex;align-items: center;">
 					<text>{{userData.name}}</text>
-					<image src="../../static/user/right.png" mode="" class="right-img"></image>
+					<!-- <image src="../../static/user/right.png" mode="" class="right-img"></image> -->
 				</view>
 			</view>
 			<view class="group_1">

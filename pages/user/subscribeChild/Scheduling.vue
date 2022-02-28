@@ -8,7 +8,7 @@
 					<text style="margin-right: 20rpx;">可用GS {{poolassetData.gs ? poolassetData.gs : 0}}</text>
 				</view>
 			</view>
-			<view class="fnt_num">
+			<view class="fnt_num"> 
 				<view class="" style="margin-top: 20rpx;margin-bottom: 32rpx;">
 					所需体力{{this.FNT}}FNT
 				</view>
