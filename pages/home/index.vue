@@ -15,9 +15,8 @@
 						<image @click="announcementNext" src="../../static/home/Status.png"
 							style="width: 44rpx;height: 44rpx;margin-top: 98rpx;" mode=""></image>
 					</view>
-					<view class=""
+					<view
 						style="width: 14rpx;height: 14rpx;background-color: red;border-radius: 50%;position: relative;right: 5%;top: 25rpx;">
-
 					</view>
 				</view>
 			</view>
@@ -55,7 +54,8 @@
 				</view>
 				<scroll-view scroll-x="true">
 					<view style="display: flex;width: 680rpx;margin-left: 32rpx;">
-						<view style="" v-for="(item,index) in orders" :key="index" @click="onDetail(item.resourceId)">
+						<view style="" v-for="(item,index) in orders" :key="index"
+							@click="onDetail(item.resourceId,item.countDown)">
 							<view class="order-item" :style="{background:background[index]}">
 								<view class="between">
 									<view style="font-size: 28rpx;">
@@ -180,12 +180,7 @@
 		},
 		data() {
 			return {
-				texts: [
-					'88',
-					'88',
-					'88',
-					'88',
-				],
+				texts: [],
 				consultingData: [],
 				process: 0,
 				NoticeType: [{
@@ -230,27 +225,25 @@
 			}
 		},
 		onShow() {
-			// this.videoContext = uni.createVideoContext('myVideo')
-			// this.videoContext.play()
-			// if (this.vidoType) {
-			// 	uni.showLoading({
-			// 		title: '加载中'
-			// 	});
-			// }
-			// setTimeout(() => {
-			// 	this.vidoType = false
-			// 	uni.hideLoading();
-			// }, 3000)
-
+			this.getNotice()
 		},
 		onLoad() {
 			this.getMessage()
 			this.getNotice()
-
+			this.getTexts()
 		},
 		methods: {
+			// 测试数据
+			getTexts() {
+				for (let i = 0; i < 100; i++) {
+					this.texts.push(`${i}`)
+				}
+			},
+			// 点击3d球形的标签
 			onTag(item) {
-				console.log(item)
+				uni.navigateTo({
+					url:'/pages/server/childComps/serverMsg'
+				})
 			},
 			NoticeTypeFun(e) {
 				if (e.name == '交易所') {
@@ -308,9 +301,9 @@
 			 * 处理点击事件
 			 * **/
 			// 点击进入抢单详情页面
-			onDetail(resourceId) {
+			onDetail(resourceId, countDown) {
 				uni.navigateTo({
-					url: `./grabOrders?resourceId=${resourceId}`,
+					url: `./grabOrders?resourceId=${resourceId}&countDown=${countDown}`,
 				})
 			},
 			// 进入新闻详情

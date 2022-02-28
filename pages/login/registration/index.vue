@@ -5,7 +5,7 @@
 		<view style="padding: 0 75rpx;margin-top: 80rpx;">
 			<view style="font-size: 44rpx;" class="fz-wb2">新用户注册</view>
 			<view class="" style="width: 600rpx;margin-top: 60rpx;background-color: #FFFFFF;">
-				<u--input  type="text" placeholder="手机号/邮箱" border="surround" clearable style="height: 88rpx;"
+				<u--input  type="text" placeholder="手机号/邮箱" border="surround" clearable style="height: 88rpx;padding-left: 32rpx;"
 					:border="'false'" v-model="userInfo.account">
 				</u--input>
 			</view>
@@ -35,7 +35,7 @@
 				<u--input  placeholder="邀请码"  border="surround" clearable style="height: 88rpx; "
 					:border="'false'" v-model="inviteCode"></u--input>
 			</view>
-			<my-button background="3A82FE" title="下一步" :height="88" :radius="12" style="margin-top: 60rpx;" @myClick="goToRouter">
+			<my-button title="下一步" :height="88" :radius="12" style="margin-top: 60rpx;" @myClick="goToRouter">
 			</my-button>
 			<view class="ta fz-wb2" style="margin-top: 60rpx;" @click="goBack">返回登录</view>
 		</view>
@@ -198,6 +198,6 @@
 		}
 	}
 	.text_indnts{
-		// text-indent: 0.7em;
+		text-indent: 0.7em;
 	}
 </style>

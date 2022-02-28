@@ -7,8 +7,7 @@
 					{{statusStr[orderInfo.statusStr]}}
 				</view>
 				<view class="" style="font-family: DIN-Medium, DIN;font-size: 32rpx;margin-top: 10rpx;">
-					<u-count-down :time="orderInfo.countDown*1000" format="HH:mm:ss" autoStart millisecond
-						@change="onChange">
+					<u-count-down :time="startTime" format="HH:mm:ss" autoStart millisecond @change="onChange">
 						<view class="time">
 							<view class="time__custom">
 								<text
@@ -145,7 +144,9 @@
 				gs: '',
 				rate: '',
 				convert: '',
+				countDown: '',
 				currentIndex: 0,
+				price: '',
 				queryInfo: {
 					quantity: 0,
 					resourceId: '',
@@ -153,7 +154,7 @@
 					key: '3ac94b043f934a67bb4e57c9fa651212'
 				},
 				statusStr: {
-					'未开始': '暂未开始',
+					'未开始': '开始时间',
 					'已结束': '充能已结束',
 					'进行中': '剩余时间'
 
@@ -172,11 +173,20 @@
 		onLoad(options) {
 			this.getDetail(options.resourceId)
 			this.queryInfo.resourceId = options.resourceId
-			this.convert = this.radios[0] * this.rate
+			this.countDown = options.countDown
+			console.log('倒计时', this.countDown)
 		},
 		computed: {
 			schedule() {
 				return `${Number((this.orderInfo.qty/this.orderInfo.total)*100).toFixed(4)}%`
+			},
+			// 计算倒计时的时间
+			startTime() {
+				if (this.orderInfo.statusStr == '未开始') {
+					return this.countDown * 1000
+				} else {
+					return this.orderInfo.countDown * 1000
+				}
 			}
 		},
 		methods: {
@@ -199,23 +209,27 @@
 				console.log(ption.obj)
 				this.radios = ption.obj
 				this.queryInfo.quantity = this.radios[0]
-				// 拼团销毁FNT比例
-				let rate = await getRate()
-				console.log('拼团销毁FNT比例' + rate.obj)
-				this.rate = rate.obj
 				// 单币种价格
 				let price = await getPrice({
 					currencyName: 'FNT',
 					resourceId: resourceId
 				})
 				console.log('单币种价格' + price.obj)
+				this.price = price.obj
+				// 拼团销毁FNT比例
+				let rate = await getRate()
+				console.log('拼团销毁FNT比例' + rate.obj)
+				this.rate = rate.obj
+				this.convert = Number(this.radios[0] * this.rate / this.price).toFixed(8)
+
 				// 单账户资产-常规抓取
 				let balance = await getBalance({
-					currencyName: 'GS',
+					currencyName: 'FNT',
 					walletType: 1
 				})
 				console.log('单账户资产-常规抓取' + balance.obj)
-				this.fnt = res.obj.fnt
+				this.fnt = Number(balance.obj).toFixed(8)
+				console.log('FNT' + this.fnt)
 			},
 			onChange(e) {
 				this.timeData.hours = (e.days * 24) + e.hours
@@ -225,17 +239,18 @@
 			async onTake() {
 				let token = uni.getStorageSync('token')
 				this.queryInfo.token = token
-				// console.log(qs.stringify(this.queryInfo))
+				delete this.queryInfo.info
+				console.log(qs.stringify(this.queryInfo))
 				this.queryInfo.info = md5(qs.stringify(this.queryInfo))
+				// delete this.queryInfo.key
 				if (this.queryInfo.quantity === 0) return uni.$u.toast('请输入充能数量')
-				if (this.fnt < this.queryInfo.quantity*this.rate) return uni.$u.toast('FNT体力不足')
+				if (this.fnt < this.queryInfo.quantity * this.rate) return uni.$u.toast('FNT体力不足')
 				let {
 					code,
 					msg,
 					obj
 				} = await pddTake(this.queryInfo)
 				if (code !== 0) return uni.$u.toast(msg)
-				delete this.queryInfo.info
 				uni.showLoading({
 					title: '充能成功',
 					success: () => {
@@ -250,13 +265,21 @@
 			},
 			radioClick(index, value) {
 				this.currentIndex = index
-				console.log(this.currentIndex)
+				// console.log(this.currentIndex)
 				this.gs = ''
 				this.queryInfo.quantity = value
-				console.log(this.queryInfo)
+				this.convert = value * this.rate
+				// console.log(this.queryInfo)
 			},
 			change(e) {
 				this.currentIndex = -1
+				let len = e.toString().split('.')[1];
+				if (len !== undefined) {
+					if (len.length > 8) {
+						this.gs = ''
+						return uni.$u.toast(`小数位不能超过8位`)
+					}
+				}
 				if (e > this.orderInfo.max) {
 					this.gs = ''
 					return uni.$u.toast(`参与金额最大为${this.orderInfo.max}GS`)
@@ -265,7 +288,7 @@
 					this.queryInfo.quantity = 0
 					return uni.$u.toast(`参与金额最小为${this.orderInfo.min}GS`)
 				}
-				this.convert=this.queryInfo.quantity*this.rate
+				this.convert = Number(e * this.rate / this.price).toFixed(8)
 				this.queryInfo.quantity = e
 				// console.log(this.queryInfo.quantity)
 			}
