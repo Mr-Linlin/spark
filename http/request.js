@@ -36,7 +36,6 @@ uni.$u.http.interceptors.response.use(res => {
 		})
 		return
 	}
-
 	return res.data
 }, res => {
 	return uni.$u.toast('请求超时！')

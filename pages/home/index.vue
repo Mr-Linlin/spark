@@ -26,7 +26,7 @@
 		<!-- jj -->
 		<view class="">
 			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
-				<video id="myVideo" :muted="true" :enable-play-gesture="false" :duration="10"
+				<!-- <video id="myVideo" :muted="true" :enable-play-gesture="false" :duration="10"
 					enable-progress-gesture="false" autoplay controls="false" loop style="width: 750rpx;height: 700rpx;"
 					src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2018cd11-5bff-40a9-9f0f-1202263c2472.mp4">
 					<cover-view
@@ -38,7 +38,8 @@
 					<cover-view v-if="vidoType"
 						style="width: 100%;height: 700rpx;position: absolute;background-color: #FFFFFF;">
 					</cover-view>
-				</video>
+				</video> -->
+				<cuihai-xingqiu :speed="2" :texts="texts" @onTag="onTag" />
 			</view>
 			<view class="">
 				<view class=""
@@ -77,7 +78,8 @@
 									</view>
 									<view class="ball">
 										<vus-sphere-progress :anim="true" :percent="Number(item.rate*100).toFixed(1)"
-											font-size="12rpx" :width="78" :color="[background[8],colors[index],colors[index]]"></vus-sphere-progress>
+											font-size="20rpx" :width="78"
+											:color="[background[8],colors[index],colors[index]]"></vus-sphere-progress>
 									</view>
 								</view>
 							</view>
@@ -163,6 +165,7 @@
 	import LoadLine from '@/components/load-line/load-line.vue'
 	import conSulting from './consulting.vue';
 	import vusSphereProgress from '@/components/vus-sphere-progress/vus-sphere-progress.vue';
+	import cuihaiXingqiu from '@/components/cuihai-xingqiu/cuihai-xingqiu.vue'
 	import {
 		getMessage,
 		getNotice,
@@ -172,9 +175,17 @@
 		components: {
 			conSulting,
 			LoadLine,
+			cuihaiXingqiu,
+			vusSphereProgress
 		},
 		data() {
 			return {
+				texts: [
+					'88',
+					'88',
+					'88',
+					'88',
+				],
 				consultingData: [],
 				process: 0,
 				NoticeType: [{
@@ -208,38 +219,43 @@
 					5: ' linear-gradient(90deg, #8F9CFF 0%, #7484FF 100%)',
 					8: 'radial-gradient(60.75% 50.95% at 54.5% 37.39%, rgba(255, 255, 255, 0) 59.65%, rgba(255, 255, 255, 0.37) 74.25%, rgba(255, 255, 255, 0.37) 83.23%, rgba(255, 255, 255, 0) 100%), radial-gradient(66.25% 66.25% at 25.42% 28.54%, rgba(255, 255, 255, 0.37) 0%, rgba(255, 255, 255, 0) 100%)',
 				},
-				colors:{
-					0: ' linear-gradient(180deg, #F3B42C 0%, #D9980B 100%)',
-					1: ' linear-gradient(180deg, #FE70C5 0%, #FF16A2 100%)',
-					2: ' linear-gradient(90deg, #4BD9F9 0%, #29C5F1 100%)',
-					3: ' linear-gradient(90deg, #FFA58F 0%, #FF7957 100%)',
-					4: ' linear-gradient(180deg, #FE70C5 0%, #FF16A2 100%)',
-					5: ' linear-gradient(90deg, #4BD9F9 0%, #29C5F1 100%)',
+				colors: {
+					0: ' linear-gradient(180deg, #F3B42C 0.33%, #D9980B 100%)',
+					1: ' linear-gradient(180deg, #FE70C5 0.33%, #FF16A2 100%)',
+					2: ' linear-gradient(180deg, #39D2F4 0.33%, #14B6DF 100%)',
+					3: ' linear-gradient(180deg, #FF8567 0.33%, #F15730 100%)',
+					4: ' linear-gradient(180deg, #FCB054 0.33%, #F19524 100%)',
+					5: ' linear-gradient(180deg, #7080FD 0.33%, #3C52FF 100%)',
 				}
 			}
 		},
 		onShow() {
-			this.videoContext = uni.createVideoContext('myVideo')
-			this.videoContext.play()
-			if (this.vidoType) {
-				uni.showLoading({
-					title: '加载中'
-				});
-			}
-			setTimeout(() => {
-				this.vidoType = false
-				uni.hideLoading();
-			}, 3000)
+			// this.videoContext = uni.createVideoContext('myVideo')
+			// this.videoContext.play()
+			// if (this.vidoType) {
+			// 	uni.showLoading({
+			// 		title: '加载中'
+			// 	});
+			// }
+			// setTimeout(() => {
+			// 	this.vidoType = false
+			// 	uni.hideLoading();
+			// }, 3000)
+
 		},
 		onLoad() {
 			this.getMessage()
 			this.getNotice()
+
 		},
 		methods: {
+			onTag(item) {
+				console.log(item)
+			},
 			NoticeTypeFun(e) {
 				if (e.name == '交易所') {
 					uni.switchTab({
-					    url: '/pages/spark/index'
+						url: '/pages/spark/index'
 					});
 				} else if (e.name == '商城') {
 					uni.showToast({

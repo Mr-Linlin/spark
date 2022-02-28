@@ -10,7 +10,7 @@
 			</view>
 			<view class=""
 				style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;display: flex;align-items: center;">
-				<u--input class="text_indnts" type="number" placeholder="6位验证码" border="surround" clearable style="height: 88rpx;"
+				<u--input  class="text_indnts" type="number" placeholder="6位验证码" border="surround" clearable style="height: 88rpx;"
 					:border="'false'" maxlength="6" v-model="userInfo.code">
 				</u--input>
 				<view style="margin-right: 32rpx;color: #3A82FE;" class="reg-text">
