@@ -53,8 +53,8 @@
 		data() {
 			return {
 				loginForm: {
-					account: '18675425169',
-					data: '111111',
+					account: '',
+					data: '',
 					type: 1
 				},
 				rules: {
