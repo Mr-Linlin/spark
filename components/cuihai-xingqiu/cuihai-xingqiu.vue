@@ -3,7 +3,7 @@
 		<!-- @touchmove.stop.prevent="touchmovescene" -->
 		<view class="tagBall">
 			<view class="tag" v-for="(item,index) in texts" :key="index" :style="liviews[index]" @click="onTag(item)">
-				<view :style="{fontSize:fontSize}">{{item}}</view>
+				<view :style="[{fontSize:fontSize},{color:colors[index]}]">+{{item}}</view>
 			</view>
 		</view>
 	</view>
@@ -38,14 +38,28 @@
 				CY: 0,
 				timer: null,
 				clickX: 0,
-				clickY: 0
+				clickY: 0,
+				colors:[]
 			}
+		},
+		created() {
+			this.changeColors()
 		},
 		methods: {
 			// 点击将tag信息发送给父组件进行跳转到对应页面
 			onTag(item) {
-				// console.log(1111)
+				this.clearTimer()
 				this.$emit('onTag', item)
+			},
+			// 随机颜色
+			changeColors() {
+				for (var i = 0; i < this.texts.length; i++) {
+					var r = Math.floor(Math.random() * 256);
+					var g = Math.floor(Math.random() * 256);
+					var b = Math.floor(Math.random() * 256);
+					this.colors.push("rgb(" + r + "," + g + "," + b + ")");
+				}
+				// console.log(this.colors)
 			},
 			clearTimer() {
 				clearInterval(this.timer);

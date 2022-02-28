@@ -176,7 +176,7 @@
 					1: '充能中',
 					2: '已充能'
 				},
-				loading:'nomore',
+				loading: 'nomore',
 				current: 0,
 				title: ['星体充能', "充能结束"],
 				sparks: {
@@ -370,7 +370,7 @@
 	.SparkList {
 		height: 90rpx;
 		display: flex;
-		align-items: center;
+		align-items: flex-end;
 
 		.SparkListTitle {
 			// font-size: 24rpx;
@@ -383,6 +383,7 @@
 		width: 686rpx;
 		background-color: #FFFFFF;
 		border-radius: 12rpx;
+		box-shadow: 0 16rpx 32rpx 1rpx rgba(88, 131, 204, 0.05);
 
 		.SparkListContType {
 			margin-top: 24rpx;
