@@ -4,7 +4,7 @@
 			<view class="group_1">
 				<text>提取能量</text>
 				<view class="sched_input">
-					<u--input v-model="GS" border="none" @change="fntChange" ></u--input>
+					<u--input type="number" v-model="GS" border="none" @change="fntChange" ></u--input>
 				</view>
 				<view class="info-title">
 					<text>能量最多可提出 {{poolassetData.gs ? poolassetData.gs : 0 }}GS</text>
@@ -17,7 +17,7 @@
 			<view class="group_1" style="margin-top: 50rpx;">
 				<text>体力FNT</text>
 				<view class="sched_input">
-					<u--input v-model="FNT" border="none" @change="fntChange" color="rgba(26, 27, 28, 1)"></u--input>
+					<u--input type="number" v-model="FNT" border="none" @change="fntChange" color="rgba(26, 27, 28, 1)"></u--input>
 				</view> 
 				<view class="info-title">
 					<view>体力最多可提出 {{poolassetData.fnt}}</view>
@@ -89,7 +89,6 @@
 				}
 				let data = {
 					tradePwd:this.tradePwd,
-					usdt:this.GS,
 					fnt:this.FNT,
 					gs:this.GS
 				}
