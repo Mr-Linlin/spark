@@ -29,10 +29,10 @@
 					</view>
 				</view>
 			</view>
-			<view class="" style="height: 50rpx;">
+			<view class="" style="height:21%;"> 
 				
 			</view>
-			
+			 
 			<view class="" style="display: flex;justify-content: center;">
 				<view @click="transferAccountsNext" class="" style="display: flex;align-items: center;width: 375rpx;justify-content: center;">
 					<view class="">
@@ -53,7 +53,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="" style="display: flex;align-items: center;">
+		<view class="" style="display: flex;align-items: center;height: 118rpx;">
 			<view class="" style="font-size: 32rpx;text-shadow: 0px 0px #000;margin-left: 32rpx;">
 				财务明细
 			</view>
@@ -64,7 +64,7 @@
 				筛选
 			</view>
 		</view>
-		<view :key="index" v-for="(item,index) in financialgetLogData" class="" style="margin-top: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
+		<view :key="index" v-for="(item,index) in financialgetLogData" class="" style="margin-bottom: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
 			<view class="" style="display: flex;align-items: center;">
 				<view class="" style="font-size: 28rpx;color: rgba(0, 0, 0, 0.66);text-shadow: 0px 0px #000;">
 					{{item.typeStr}}
