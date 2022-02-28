@@ -172,7 +172,7 @@
 		onLoad(options) {
 			this.getDetail(options.resourceId)
 			this.queryInfo.resourceId = options.resourceId
-			this.convert = this.radios[0] * this.rate
+			// console.log('需要'+this.convert)
 		},
 		computed: {
 			schedule() {
@@ -203,6 +203,7 @@
 				let rate = await getRate()
 				console.log('拼团销毁FNT比例' + rate.obj)
 				this.rate = rate.obj
+				this.convert = this.radios[0] * this.rate
 				// 单币种价格
 				let price = await getPrice({
 					currencyName: 'FNT',
@@ -211,11 +212,12 @@
 				console.log('单币种价格' + price.obj)
 				// 单账户资产-常规抓取
 				let balance = await getBalance({
-					currencyName: 'GS',
+					currencyName: 'FNT',
 					walletType: 1
 				})
 				console.log('单账户资产-常规抓取' + balance.obj)
-				this.fnt = res.obj.fnt
+				this.fnt = balance.obj
+				console.log('FNT' + this.fnt)
 			},
 			onChange(e) {
 				this.timeData.hours = (e.days * 24) + e.hours
@@ -228,7 +230,7 @@
 				// console.log(qs.stringify(this.queryInfo))
 				this.queryInfo.info = md5(qs.stringify(this.queryInfo))
 				if (this.queryInfo.quantity === 0) return uni.$u.toast('请输入充能数量')
-				if (this.fnt < this.queryInfo.quantity*this.rate) return uni.$u.toast('FNT体力不足')
+				if (this.fnt < this.queryInfo.quantity * this.rate) return uni.$u.toast('FNT体力不足')
 				let {
 					code,
 					msg,
@@ -250,10 +252,11 @@
 			},
 			radioClick(index, value) {
 				this.currentIndex = index
-				console.log(this.currentIndex)
+				// console.log(this.currentIndex)
 				this.gs = ''
 				this.queryInfo.quantity = value
-				console.log(this.queryInfo)
+				this.convert = value * this.rate
+				// console.log(this.queryInfo)
 			},
 			change(e) {
 				this.currentIndex = -1
@@ -265,7 +268,7 @@
 					this.queryInfo.quantity = 0
 					return uni.$u.toast(`参与金额最小为${this.orderInfo.min}GS`)
 				}
-				this.convert=this.queryInfo.quantity*this.rate
+				this.convert = e * this.rate
 				this.queryInfo.quantity = e
 				// console.log(this.queryInfo.quantity)
 			}
