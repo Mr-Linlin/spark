@@ -49,7 +49,7 @@
 			},
 			clearTimer() {
 				clearInterval(this.timer);
-			},
+			}, 
 			getTags(option) {
 				this.tagEle = option.tagEle;
 				this.CX = option.CX;

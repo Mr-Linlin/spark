@@ -15,9 +15,8 @@
 						<image @click="announcementNext" src="../../static/home/Status.png"
 							style="width: 44rpx;height: 44rpx;margin-top: 98rpx;" mode=""></image>
 					</view>
-					<view class=""
+					<view 
 						style="width: 14rpx;height: 14rpx;background-color: red;border-radius: 50%;position: relative;right: 5%;top: 25rpx;">
-
 					</view>
 				</view>
 			</view>
