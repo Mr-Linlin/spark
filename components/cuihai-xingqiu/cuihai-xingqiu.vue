@@ -48,7 +48,7 @@
 		methods: {
 			// 点击将tag信息发送给父组件进行跳转到对应页面
 			onTag(item) {
-				this.clearTimer()
+				// this.clearTimer()
 				this.$emit('onTag', item)
 			},
 			// 随机颜色
@@ -59,7 +59,6 @@
 					var b = Math.floor(Math.random() * 256);
 					this.colors.push("rgb(" + r + "," + g + "," + b + ")");
 				}
-				// console.log(this.colors)
 			},
 			clearTimer() {
 				clearInterval(this.timer);
