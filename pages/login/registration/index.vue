@@ -11,7 +11,11 @@
 			</view>
 			<view class=""
 				style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;display: flex;align-items: center;">
+<<<<<<< HEAD
 				<u--input class="text_indnts" type="number" placeholder="6位验证码" border="surround" clearable style="height: 88rpx;padding-left: 32rpx;"
+=======
+				<u--input :maxlength="6" class="text_indnts" type="number" placeholder="6位验证码" border="surround" clearable style="height: 88rpx;"
+>>>>>>> 1f72772329fde373c2ad12516adb0f24e3c6d596
 					:border="'false'" v-model="userInfo.code">
 				</u--input>
 				<view style="margin-right: 32rpx;color: #3A82FE;" class="reg-text">
@@ -19,14 +23,27 @@
 					<u-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange"></u-code>
 					<text @tap="getCode">{{tips}}</text>
 				</view>
-			</view>
+			</view> 
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
+<<<<<<< HEAD
 				<u--input  placeholder="设置登录密码" password border="surround" clearable style="height: 88rpx;padding-left: 32rpx;"
+=======
+				<u--input :maxlength="18"  placeholder="设置登录密码(6-18位)" password border="surround" clearable style="height: 88rpx;"
+>>>>>>> 1f72772329fde373c2ad12516adb0f24e3c6d596
 					:border="'false'" v-model="password"></u--input>
 			</view>
 
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
+<<<<<<< HEAD
 				<u--input  placeholder="邀请码" password border="surround" clearable style="height: 88rpx; padding-left: 32rpx;"
+=======
+				<u--input :maxlength="18" placeholder="确认登录密码" password border="surround" clearable style="height: 88rpx;"
+					:border="'false'" v-model="password2"></u--input>
+			</view>
+			
+			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
+				<u--input  placeholder="邀请码"  border="surround" clearable style="height: 88rpx; "
+>>>>>>> 1f72772329fde373c2ad12516adb0f24e3c6d596
 					:border="'false'" v-model="inviteCode"></u--input>
 			</view>
 			<my-button title="下一步" :height="88" :radius="12" style="margin-top: 60rpx;" @myClick="goToRouter">
@@ -126,7 +143,12 @@
 					let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
 					if (uni.$u.test.mobile(this.userInfo.account) || reg.test(this.userInfo.account)) {
 						if (this.userInfo.code.length !== 6) return uni.$u.toast('请输入正确的验证码')
-						if (this.password.length < 6) return uni.$u.toast('密码长度不能少于6位')
+						if (this.password.length < 6 || this.password.length>18) return uni.$u.toast('请输入有效的密码')
+						if (this.password != this.password2){
+							this.password = ""
+							this.password2 = ""
+							return uni.$u.toast('两次密码不一致')
+						} 
 						if (this.inviteCode.length < 6) return uni.$u.toast('请输入邀请码')
 					return registerOne(this.userInfo).then(res => {
 							if (res.code !== 0) return uni.$u.toast(res.msg)
