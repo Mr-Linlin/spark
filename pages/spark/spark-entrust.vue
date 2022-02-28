@@ -19,7 +19,10 @@
 				    v-model="value"
 				  >
 				  </u--input>
-				<u-number-box class="u-num-box" color="rgba('0,0,0,0')" bgColor="rgba('0,0,0,0')" v-model="value" @change="valChange"></u-number-box>
+				  <view class="u-num-box">
+				  	<view>-</view>
+				  	<view>+</view>
+				  </view>
 			</view>
 			<view class="sub-title-box">
 				<view class="sub-title-key">数量</view>
@@ -33,13 +36,16 @@
 				    v-model="value"
 				  >
 				  </u--input>
-				<u-number-box class="u-num-box" color="rgba('0,0,0,0')" bgColor="rgba('0,0,0,0')" v-model="value" @change="valChange"></u-number-box>
+				<view class="u-num-box">
+					<view>-</view>
+					<view>+</view>
+				</view>
 			</view>
 			<view class="sub-title">价格</view>
 			<view class="gs-box">
 				2839230.473934<text>GS</text>
 			</view>
-			<u-button class="sub-btn" type="primary" text="委托买入"></u-button>
+			<u-button class="sub-btn" :class='{"sub-btn2":!value11}' type="primary" :text="value11 ? '委托买入':'委托卖出'"></u-button>
 		</view>
 		<view class="title">
 			历史委托
@@ -52,7 +58,7 @@
 						<text class="txt2">FNT/GS</text>
 					</view>
 					<view class="top-right">
-						<u-button border="none" class="top-right-btn" text="撤销"></u-button>
+						<u-button @click="handlerRepeal" border="none" class="top-right-btn" text="撤销"></u-button>
 					</view>
 				</view>
 				<view class="e-content">
@@ -81,12 +87,21 @@
 			return {
 				value12:true,
 				value:"",
-				value11:false
+				value11:true, // 交易类型
 			}
 		},
 		methods:{
 			valChange(){
 				
+			},
+			// 撤销
+			handlerRepeal(){
+				this.$emit('entrust',{
+					type:1,
+					data:{
+						method:'cancel'
+					}
+				})
 			}
 		}
 	}
@@ -124,6 +139,7 @@
 		}
 		.price-box{
 			display: flex;
+			align-items: center;
 			width: 622rpx;
 			height: 88rpx;
 			margin-bottom: 32rpx;
@@ -133,8 +149,19 @@
 				height: 100%;
 				padding-left: 24rpx !important;
 			}
-			/deep/.u-number-box__minus,.u-number-box__plus{
-				background-color: rgba(0,0,0,0) !important;
+			.u-num-box{
+				display: flex;
+				justify-content: space-between;
+				width: 104rpx;
+				height: 32rpx;
+				view{
+					width: 32rpx;
+					height: 32rpx;
+					line-height: 32rpx;
+					text-align: center;
+					font-weight: bold;
+					font-size: 32rpx;
+				}
 			}
 		}
 		.sub-title-box{
@@ -182,6 +209,11 @@
 			border-radius: 12rpx;
 			color: #fff;
 			height: 88rpx;
+			transition: all .3s;
+		}
+		.sub-btn2{
+			background-color: #3ED7AC;
+			border-color: #3ED7AC;
 		}
 	}
 	.title{
@@ -262,8 +294,5 @@
 				line-height: 25rpx;
 			}
 		}
-	}
-	/deep/ .u-number-box__plus--hover{
-		background-color: rgba(0,0,0,0) !important;
 	}
 </style>

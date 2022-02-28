@@ -147,13 +147,14 @@
 						price: '188.88',
 						count: '999.99'
 					},
-				]
+				],
+				
 			}
 		},
 		methods: {
 			...mapMutations('theme', ['updateTheme']),
 			changeurl() {
-				console.log();
+				
 				if (this.theme['--bg-color-global'] == 'rgba(247, 250, 255, 1)') {
 					this.updateTheme('dark');
 					uni.setTabBarStyle({
