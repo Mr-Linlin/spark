@@ -17,7 +17,8 @@
 				<view style="margin-right: 32rpx;color: #3A82FE;" class="reg-text">
 					<u-toast ref="uToast"></u-toast>
 					<u-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange"></u-code>
-					<text @tap="getCode">{{tips}}</text>
+					<view v-if="isCodeType" @tap="getCode">{{tips}}</view>
+					<view v-else>{{tips}}</view>
 				</view>
 			</view> 
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
@@ -76,25 +77,35 @@
 					name: '我已阅读同意',
 					disabled: false
 				}],
-				tips: '',
+				tips: '', 
 				// refCode: null,
 				seconds: 60,
 				password: '',
-				inviteCode: '661141'
+				inviteCode: '661141',
+				isCodeType:true,
+				password2:''
 			}
 		},
 		methods: {
-			// 返回登录页面
+			// 返回登录页面 
 			goBack() {
 				uni.navigateBack({
-					u
+					
 				})
 			},
 			codeChange(text) {
 				this.tips = text;
 			},
 			getCode() {
+				if(!this.userInfo.account){
+					uni.showToast({
+						title:'请输入手机号或邮箱',
+						icon:'none'
+					})
+					return
+				}
 				if (this.$refs.uCode.canGetCode) {
+					this.isCodeType = !this.isCodeType
 					// 模拟向后端请求验证码
 					uni.showLoading({
 						title: '正在获取验证码'
@@ -111,16 +122,16 @@
 				}
 			},
 			end() {
-				uni.$u.toast('倒计时结束');
+				this.isCodeType = !this.isCodeType
 			},
 			async start() {
 				uni.$u.toast('发送成功');
+				
 				let {
 					code,
 					msg,
 					obj
 				} = await sendCode(this.userInfo)
-				console.log(code)
 			},
 			checkboxChange(n) {
 				this.checkboxList1[0].disabled = !this.checkboxList1[0].disabled

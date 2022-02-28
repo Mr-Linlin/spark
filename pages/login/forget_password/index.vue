@@ -16,7 +16,8 @@
 				<view style="margin-right: 32rpx;color: #3A82FE;" class="reg-text">
 					<u-toast ref="uToast"></u-toast>
 					<u-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange"></u-code>
-					<text @tap="getCode">{{tips}}</text>
+					<text v-if="isCodeType" @tap="getCode">{{tips}}</text>
+					<text v-else>{{tips}}</text>
 				</view>
 			</view>
 			<view class="" style="width: 600rpx;margin-top: 20rpx;background-color: #FFFFFF;">
@@ -56,7 +57,8 @@
 				tips: '',
 				password: '',
 				password_confirm: '',
-				show: false
+				show: false,
+				isCodeType:true
 			}
 		},
 		components: {
@@ -82,6 +84,7 @@
 			},
 			getCode() {
 				if (this.$refs.uCode.canGetCode) {
+					this.isCodeType = !this.isCodeType
 					// 模拟向后端请求验证码
 					uni.showLoading({
 						title: '正在获取验证码'
@@ -98,7 +101,7 @@
 				}
 			},
 			end() {
-				uni.$u.toast('倒计时结束');
+				this.isCodeType = !this.isCodeType
 			},
 			async start() {
 				uni.$u.toast('发送成功');

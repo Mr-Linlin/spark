@@ -202,9 +202,8 @@ import {
 				text-shadow: 0px 0px #000;
 			}
 			.myTeamListContPheon{
-				font-size: 22rpx;
-				color: rgba(0, 0, 0, 0.44);
-				margin-top: 10rpx;
+				font-size: 28rpx;
+				color: #1A1B1C;
 			}
 			.myTeamListContTime{
 				margin-right: 32rpx;

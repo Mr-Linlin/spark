@@ -72,6 +72,13 @@
 						title: '两次密码不一致',
 						icon: 'none'
 					});
+					setTimeout(()=> {
+						this.currentIndex = 0
+						this.$refs.KeyboarHid.open();
+						this.$refs.KeyboarHid1.close();
+						this.$refs.KeyboarHid.reset();
+						this.$refs.KeyboarHid1.reset();
+					},1000)
 					return;
 				};
 				this.registerInfo.tradePwd = this.password

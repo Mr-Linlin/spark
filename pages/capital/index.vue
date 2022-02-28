@@ -12,8 +12,8 @@
 					<view class="" style="font-size: 24rpx;margin-top: 60rpx;">
 						钱包资产（CNY）
 					</view>
-					<view class="" style="font-size: 54rpx;margin-top: 24rpx;">
-						{{totalCnyData}}
+					<view class="" style="margin-top: 24rpx;">
+						<u-count-to fontSize="27" color="#fff" :startVal="0" :endVal="totalCnyData" decimals="4"></u-count-to>
 					</view>
 				</view>
 			</view>

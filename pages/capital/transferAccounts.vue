@@ -50,7 +50,7 @@
 					<view class=""
 						style="width: 622rpx;height: 88rpx;background-color: #F7FAFF;border-radius: 10rpx;display: flex;align-items: center;">
 						<view class="">
-							<input v-model="quantity" type="text" value="" placeholder="请输入转账额度"
+							<input type="number" v-model="quantity"  value="" placeholder="请输入转账额度"
 								style="font-size: 28rpx;width: 500rpx;height: 88rpx;text-indent: 1rem;" />
 						</view>
 					</view>
@@ -77,8 +77,8 @@
 					<view class="" style="flex: 1;">
 
 					</view>
-					<view class="">
-						{{currencyListData.transferFee}}
+					<view class=""> 
+						{{quantity*currencyListData.transferFee}}
 					</view>
 				</view>
 
@@ -159,8 +159,8 @@
 		</u-popup>
 
 		<u-popup :show="show" @close="close" @open="open" :round="15">
-			<view style="background-color: #F7FAFF;border-radius: 30rpx;">
-				<view class="" style="">
+			<view style="background-color: #F7FAFF;border-radius: 30rpx;height: 1000rpx;">
+				<view class="" style=""> 
 					<view class=""
 						style="height: 146rpx;display: flex;align-items: center;margin-left: 60rpx;font-size: 36rpx;text-shadow: 0px 0px #000;">
 						账户验证
@@ -172,14 +172,15 @@
 						<view class=""
 							style="width: 630rpx;height: 88rpx;display: flex;align-items: center;background: #FFFFFF;border-radius: 12rpx;">
 							<view class="">
-								<u--input v-model="code" style="height: 88rpx;width: 450rpx;text-indent: 1rem;" placeholder="6位验证码"
+								<u--input  type="number" v-model="code" style="height: 88rpx;width: 450rpx;text-indent: 1rem;" placeholder="6位验证码"
 									border="none" maxlength="6"></u--input>
 							</view>
 							<view class="wrap">
 								<u-toast ref="uToast"></u-toast>
 								<u-code :seconds="seconds" @end="end" @start="start" ref="uCode" @change="codeChange">
 								</u-code>
-								<text style="color: #3A82FE;margin-left: 20rpx;" @tap="getCode">{{tips}}</text>
+								<text v-if="isCodeType" style="color: #3A82FE;" @tap="getCode">{{tips}}</text>
+								<text v-else style="color: #3A82FE;" >{{tips}}</text>
 							</view>
 						</view>
 					</view>
@@ -188,7 +189,7 @@
 							6位资金密码
 						</view>
 						<view class="" style="display: flex;justify-content: center;margin-top: 20rpx;">
-							<u-code-input v-model="tradePwd" :maxlength="6" dot :focus="true" size="45" borderColor="#fff"></u-code-input>
+							<u-code-input v-model="tradePwd" :maxlength="6" dot size="45" borderColor="#fff"></u-code-input>
 						</view>
 					</view>
 					<view class="" style="display: flex;align-items: center;justify-content: center;height: 200rpx;">
@@ -233,6 +234,7 @@
 				tradePwd:'',
 				quantity:'',
 				code:'',
+				isCodeType:true
 			}
 		},
 		onLoad(e) {
@@ -286,6 +288,7 @@
 			},
 			getCode() {
 				if (this.$refs.uCode.canGetCode) {
+					this.isCodeType = !this.isCodeType
 					// 模拟向后端请求验证码
 					uni.showLoading({
 						title: '正在获取验证码'
@@ -303,10 +306,10 @@
 				}
 			},
 			end() {
-				uni.$u.toast('倒计时结束');
+				this.isCodeType = !this.isCodeType
 			},
 			start() {
-				uni.$u.toast('倒计时开始');
+				// uni.$u.toast('倒计时开始');
 			},
 			userbaseInfoFun() { //获取到当前用的手机号或者邮箱
 				userbaseInfo().then(res => {
@@ -329,6 +332,9 @@
 
 			},
 			close() {
+				this.code = ''
+				this.tradePwd = ''
+				this.isCodeType = !this.isCodeType
 				this.show = false
 			},
 

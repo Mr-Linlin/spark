@@ -38,14 +38,14 @@
 
 		<view class="" style="display: flex;justify-content: center;margin-top: 64rpx;">
 			<view class="bx_sard"
-				style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 32rpx;border-radius: 12rpx;">
-				<view @click="usericonNext(item)" v-for="(item,index) in usericon" :key="index"
-					style="display: flex;align-items: center;margin-top: 32rpx;">
+				style="width: 686rpx;background-color: #FFFFFF;border-radius: 12rpx;">
+				<view :class="index == 0 ? 'pd_8' : index == (usericon.length-1) ? 'mg_8' : ''" @click="usericonNext(item)" v-for="(item,index) in usericon" :key="index"
+					style="display: flex;align-items: center;height: 88rpx;">
 					<view class="" style="width: 96rpx;display: flex;justify-content: center;">
 						<image :src="item.img" style="width: 32rpx;height: 32rpx;" mode=""></image>
 					</view>
 					<view class="">
-						{{item.name}}
+						{{item.name}} 
 					</view>
 					<view class="" style="flex: 1;">
 
@@ -59,9 +59,9 @@
 
 		<view class="" style="display: flex;justify-content: center;margin-top: 32rpx;">
 			<view class="bx_sard"
-				style="width: 686rpx;background-color: #FFFFFF;padding-bottom: 32rpx;border-radius: 12rpx;">
-				<view @click="usericon2Next(item)" v-for="(item,index) in usericon2" :key="index"
-					style="display: flex;align-items: center;margin-top: 32rpx;">
+				style="width: 686rpx;background-color: #FFFFFF;border-radius: 12rpx;">
+				<view :class="index == 0 ? 'pd_8' : index == (usericon2.length-1) ? 'mg_8' : ''" @click="usericon2Next(item)" v-for="(item,index) in usericon2" :key="index"
+					style="display: flex;align-items: center;height: 88rpx;">  
 					<view class="" style="width: 96rpx;display: flex;justify-content: center;">
 						<image :src="item.img" style="width: 32rpx;height: 32rpx;" mode=""></image>
 					</view>
@@ -197,6 +197,12 @@
 </script>
 
 <style lang="scss">
+	.pd_8{
+		margin-top: 8rpx;
+	}
+	.mg_8{
+		margin-bottom: 8rpx;
+	}
 	page {
 		background-color: #F7FAFF;
 		// @include uniPage;

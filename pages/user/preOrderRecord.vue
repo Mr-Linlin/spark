@@ -65,11 +65,11 @@
 						{{statistics.unReturned}}
 					</view>
 				</view>
-			</view>
+			</view> 
 		</view>
 
 		<view class="SparkList">
-			<view class="SparkListTitle" v-for="(item,index) in title" :key="index" :class="{active:current===index}"
+			<view class="SparkListTitle" v-for="(item,index) in title" :key="index" :class="current===index ? 'active' : 'active2'"
 				@click="tabOrder(index)">
 				{{item}}
 			</view>
@@ -270,6 +270,9 @@
 		font-size: 32rpx;
 		font-weight: 550;
 	}
+	.active2{
+		font-size: 28rpx;
+	}
 
 	.between {
 		display: flex;
@@ -371,7 +374,7 @@
 		align-items: center;
 
 		.SparkListTitle {
-			font-size: 32rpx;
+			
 			text-shadow: 0px 0px #000;
 			margin-left: 32rpx;
 		}

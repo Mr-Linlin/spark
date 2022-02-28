@@ -60,8 +60,22 @@
 			<view class="" style="flex: 1;">
 				
 			</view>
-			<view @click="show = true" class="" style="margin-right: 32rpx;font-size: 24rpx;">
-				筛选
+			<view v-if="!showType" class="flex_a" style="">
+				<view @click="showFuns()" class="" style="font-size: 24rpx;margin-right: 10rpx;">
+					全部
+				</view>
+				<view class="flex_a" style="margin-right: 30rpx;">
+					<image src="../../static/Filter2x.png" style="width: 24rpx;height: 24rpx;" mode=""></image>
+				</view>
+			</view>
+			
+			<view v-if="showType" class="flex_a">
+				<view @click="showFuns()" class="" style="font-size: 24rpx;margin-right: 10rpx;color: #3A82FE;">
+					筛选
+				</view>
+				<view class="flex_a" style="margin-right: 30rpx;">
+					<image src="../../static/Filter.png" style="width: 24rpx;height: 24rpx;" mode=""></image>
+				</view>
 			</view>
 		</view>
 		<view :key="index" v-for="(item,index) in financialgetLogData" class="" style="margin-bottom: 40rpx;margin-left: 32rpx;margin-right: 32rpx;">
@@ -72,8 +86,8 @@
 				<view class="" style="flex: 1;">
 					
 				</view>
-				<view class="" style="font-size: 32rpx;color: rgba(0, 0, 0, 0.66);text-shadow: 0px 0px #000;">
-					{{item.money}}
+				<view v-if="item.money" class="" style="font-size: 32rpx;color: rgba(0, 0, 0, 0.66);text-shadow: 0px 0px #000;">
+					{{item.money.toFixed(4)}}
 				</view>
 			</view>
 			<view class="" style="display: flex;align-items: center;margin-top: 20rpx;">
@@ -83,8 +97,8 @@
 				<view class="" style="flex: 1;">
 					
 				</view>
-				<view class="" style="text-shadow: 0px 0px #000;font-size: 24rpx;">
-					≈{{item.cny}}CNY
+				<view v-if="item.cny" class="" style="text-shadow: 0px 0px #000;font-size: 24rpx;">
+					≈{{item.cny.toFixed(4)}}CNY 
 				</view>
 			</view>
 		</view>
@@ -132,15 +146,22 @@
 				status: 'nomore',
 				page: 1,
 				pageType:true,
-				
-				show:false
+				show:false,
+				showCount:1,
+				showType:false
 			}
 		},
 		onLoad(e) {
 			this.ids = e.id
-			this.assetsingleFun(e.id)
-			this.financialgetLogFun(e.id,0)
+		},
+		onShow() {
+			this.financialgetLogData = []
+			this.assetsingleData = {}
+			this.page = 1
+			this.pageType = true,
 			this.financialgetLogTypeFun()
+			this.assetsingleFun(this.ids)
+			this.financialgetLogFun(this.ids,0)
 		},
 		onReachBottom() {
 			if(this.pageType){
@@ -152,7 +173,18 @@
 			}
 		},
 		methods: {
+			showFuns(){
+				if(this.showCount == 1){
+					this.showType = !this.showType
+				} 
+				this.showCount++
+				this.show = !this.show
+			},
 			typeFun(e){//选着类型
+				if(e == 0){//全部
+					this.showCount = 1
+					this.showType = !this.showType
+				}
 				this.typeData = e
 				//重置数据
 				this.status = 'nomore',

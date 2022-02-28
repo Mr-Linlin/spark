@@ -13,7 +13,7 @@
 		</view>
 		<view class="number-box" >
 			<view class="desc">体力消耗(FNT)</view>
-			<view class="num">{{destroytotalData}}</view>
+			<view class="num"><u-count-to color="#fff" :startVal="0" :endVal="destroytotalData" decimals="4"></u-count-to></view>
 		</view>
 		<view class="list-box">
 			<view class="list-header">
@@ -210,8 +210,8 @@
 				}
 
 				.user-phone {
-					color: rgba(0, 0, 0, 0.44);
-					font-size: 22rpx;
+					font-size: 28rpx;
+					color: #1A1B1C;
 				}
 			}
 

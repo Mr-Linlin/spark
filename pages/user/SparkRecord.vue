@@ -212,7 +212,12 @@
 				} = await getRobbery(query)
 				if (code !== 0) return uni.$u.toast(msg)
 				this.sparks[type].pageNum += 1
-				this.sparks[type].list.push(...obj.list)
+				if(obj.list){
+					this.sparks[type].list.push(...obj.list)
+				}else{
+					this.loading = 'nomore'
+				}
+				
 				// console.log(this.sparks)
 			},
 			// 获取预排统计
