@@ -229,7 +229,7 @@
 		},
 		onLoad() {
 			this.getMessage()
-			this.getNotice()
+			// this.getNotice()
 			this.getTexts()
 		},
 		methods: {

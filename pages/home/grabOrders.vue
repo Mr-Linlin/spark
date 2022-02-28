@@ -89,7 +89,7 @@
 				<view class="flex_j">
 					<view class="Isum">
 						<u--input type="number" style="text-indent: 1rem;" border="none" class="uinput"
-							:disabled="orderInfo.statusStr==='已结束'" placeholder="自定义数量" v-model="gs" @change="change">
+							:disabled="orderInfo.statusStr==='已结束' || orderInfo.statusStr==='未开始'" placeholder="自定义数量" v-model="gs" @change="change">
 						</u--input>
 						<view class="">
 							GS
