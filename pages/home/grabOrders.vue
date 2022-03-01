@@ -88,8 +88,9 @@
 
 				<view class="flex_j">
 					<view class="Isum">
-						<u--input type="number" style="text-indent: 1rem;" border="none" class="uinput"
-							:disabled="orderInfo.statusStr==='已结束' || orderInfo.statusStr==='未开始'" placeholder="自定义数量" v-model="gs" @change="change">
+						<u--input type="number" style="text-indent: 1rem;" border="none" class="uinput" maxlength="10"
+							:disabled="orderInfo.statusStr==='已结束' || orderInfo.statusStr==='未开始'" placeholder="自定义数量"
+							v-model="gs" @change="change">
 						</u--input>
 						<view class="">
 							GS
@@ -278,19 +279,23 @@
 			},
 			change(e) {
 				this.currentIndex = -1
-				let len = e.toString().split('.')[1];
-				if (len !== undefined) {
-					if (len.length > 8) {
-						this.gs = ''
-						return uni.$u.toast(`小数位不能超过8位`)
-					}
-				}
+				// let len = e.toString().split('.')[1];
+				// let v = e.toString().split('.')[0];
+				// if (len !== undefined) {
+				// 	if (len.length > 0) {
+				// 		this.gs = ''
+				// 		// console.log(this.gs)
+				// 		this.convert = 0
+				// 		return uni.$u.toast(`请输入整数`)
+				// 	}
+				// }
 				if (e > this.orderInfo.max) {
 					this.gs = ''
 					return uni.$u.toast(`参与金额最大为${this.orderInfo.max}GS`)
 				} else if (e < 1) {
 					this.gs = ''
 					this.queryInfo.quantity = 0
+					this.convert = 0
 					return uni.$u.toast(`参与金额最小为${this.orderInfo.min}GS`)
 				}
 				this.convert = Number(e * this.rate / this.price).toFixed(8)

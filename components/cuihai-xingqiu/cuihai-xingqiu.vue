@@ -20,9 +20,9 @@
 				type: Array,
 				default: null
 			},
-			fontSize:{
-				type:String,
-				default:'16rpx'
+			fontSize: {
+				type: String,
+				default: '16rpx'
 			}
 		},
 		data() {
@@ -39,11 +39,13 @@
 				timer: null,
 				clickX: 0,
 				clickY: 0,
-				colors:[]
+				colors: []
 			}
 		},
+
 		created() {
 			this.changeColors()
+			this.clearTimer()
 		},
 		methods: {
 			// 点击将tag信息发送给父组件进行跳转到对应页面
@@ -62,7 +64,7 @@
 			},
 			clearTimer() {
 				clearInterval(this.timer);
-			}, 
+			},
 			getTags(option) {
 				this.tagEle = option.tagEle;
 				this.CX = option.CX;
@@ -129,6 +131,7 @@
 			animate(x) {
 				_self = this;
 				this.timer = setInterval(function() {
+					// console.log("------------------")
 					_self.rotateX();
 					_self.rotateY();
 					_self.liviews = [];
@@ -139,6 +142,7 @@
 				}, 80)
 			},
 			touchmovescene(e) {
+				this.clearTimer()
 				var fx = this.getDirection(this.clickX, this.clickY, e.touches[0].clientX, e.touches[0].clientY)
 				var x = this.clickX - e.touches[0].clientX - this.CX;
 				var y = this.clickY - e.touches[0].clientY - this.CY;
@@ -164,6 +168,11 @@
 					_self.move(this.tags[i], i);
 				}
 			},
+			// 手指离开停止定时器
+			touchendscene() {
+				this.clearTimer(this.timer)
+				this.animate(this.tags)
+			},
 			getDirection(startx, starty, endx, endy) {
 				var angx = endx - startx;
 				var angy = endy - starty;
@@ -184,6 +193,9 @@
 
 				return result;
 			}
+		},
+		destroyed() {
+			this.clearTimer()
 		}
 	}
 </script>
