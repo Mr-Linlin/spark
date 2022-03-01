@@ -143,6 +143,7 @@
 			// 初始化socked
 			createSocket() {
 				uni.connectSocket({
+					// url: 'ws://211.149.135.240:7888/websocket/trade',
 					url: 'ws://211.149.135.240:7888/websocket/trade',
 					header:{
 						token:uni.getStorageSync('token')
@@ -189,6 +190,7 @@
 			sendSocket(data) {
 				data.token = uni.getStorageSync('token')
 				console.log(JSON.stringify(data))
+				console.log(new Date().getTime())
 				uni.sendSocketMessage({
 					data: (typeof data === 'string') ? data : JSON.stringify(data),
 					success(e) {

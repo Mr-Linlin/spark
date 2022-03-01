@@ -6,7 +6,7 @@
 					<view style="font-size: 54rpx;" class="text-color">4711.89135</view>
 					<view class="fz1 ml2 text-color">≈10.29CNY±0.66%</view>
 				</view>
-				<view >
+				<view>
 					<view style="padding: 32rpx 0;" class="flexC bg-white space-between p32">
 						<view>
 							<view class="flexC">
@@ -35,11 +35,18 @@
 				<view class="charts-box">
 					<!-- 需要关闭组件的tooltip，即:tooltipShow="false"，然后在@getIndex中调用uCharts的showTooltip方法，注意，APP端不能实现，其他端需要引用config-ucharts.js作为实例承载的中间件。 -->
 					<!-- 如果需要做跟手tooltip，需要在@getTouchMove事件中调用，注意需要添加防抖，可参考组件内防抖方法，否则会导致逻辑层与视图层频繁通信造成卡顿 -->
-					<!-- <qiun-data-charts type="candle" :opts="optsTooltip" 
-						:chartData="chartData"   :ontouch="true" /> -->
-					<!-- @getIndex="showMyTooltip" :tooltipShow="false" -->
-					<qiun-data-charts type="candle" :chartData="chartData" :loadingType="3" background="none"
-						tooltipFormat="tooltipDemo1" :ontouch="true" />
+					<view class="times">
+						<view v-for="item in times" :class="{'active':time === item.val}" :key="item.val" @click="handlerTime(item)" >{{item.key}}</view>
+					</view>
+					<!-- <qiun-data-charts type="candle" :chartData="chartData" :loadingType="3" background="none"
+						tooltipFormat="tooltipDemo1" :ontouch="true" /> -->
+						  <qiun-data-charts
+							v-if="chartData.categories.length > 1"
+						    type="candle"
+						    :chartData="chartData"
+						    background="none"
+						    :ontouch="true"
+						  />
 				</view>
 			</view>
 		</view>
@@ -52,87 +59,30 @@
 		data() {
 			return {
 				chartData: {
-					"categories": [
-						"2020/1/24",
-						"2020/1/25",
-						"2020/1/28",
-						"2020/1/29",
-						"2020/1/30",
-						"2020/1/31",
-						"2020/1/31",
-						"2020/1/31",
-						"2020/1/31",
-						"2020/1/31",
-					],
+					"categories": [],
 					"series": [{
-						"name": "上证指数",
-						"data": [
-							[
-								2320.26, //  
-								2302.6, // low
-								2287.3, // open
-								2362.94 // close
-							],
-							[
-								2300,
-								2291.3,
-								2288.26,
-								2308.38
-							],
-							[
-								2295.35,
-								2346.5,
-								2295.35,
-								2346.92
-							],
-							[
-								2347.22,
-								2358.98,
-								2337.35,
-								2363.8
-							],
-							[
-								2360.75,
-								2382.48,
-								2347.89,
-								2383.76
-							],
-							[
-								2383.43,
-								2385.42,
-								2371.23,
-								2391.82
-							],
-							[
-								2383.43,
-								2385.42,
-								2371.23,
-								2391.82
-							],
-							[
-								2383.43,
-								2385.42,
-								2371.23,
-								2391.82
-							],
-							[
-								2383.43,
-								2385.42,
-								2371.23,
-								2391.82
-							],
-							[
-								2383.43,
-								2385.42,
-								2371.23,
-								2391.82
-							]
-						]
+						"data":[]
 					}]
 				},
-
-
-
+				times:[
+					{
+						key:'15m',
+						val:'15'
+					},{
+						key:'30m',
+						val:'30'
+					},{
+						key:'1h',
+						val:'60'
+					},{
+						key:'1day',
+						val:'D'
+					},{
+						key:'1week',
+						val:'W'
+					}
+				],
+				time:'15', //当前选中时间
 				chartsDataLine1: {},
 				errorMessage: "自定义的错误信息，关闭点击重新加载",
 				//在opts中拼接tooltip
@@ -161,38 +111,36 @@
 				} */
 			}
 		},
-		props:{
-			flag:{
-				type:Boolean,
-				default:false
+		props: {
+			flag: {
+				type: Boolean,
+				default: false
 			}
 		},
-		watch:{
-			flag(r1,r2){
-				if(r1){
-					this.$emit('data',{
-						data:{
-							from:1646034540,
-							to:1646034300,
-							resolution:1,
-							tradeId:9,
-							"method":"kData"
-						}
-					})
+		watch: {
+			flag(r1) {
+				if (r1) {
+					this.sendK()
 				}
 			}
 		},
 		created() {
-			/* this.$emit('data',{
-				data:{
-					from:1646034540,
-					to:1646034300,
-					resolution:1,
-					tradeId:9
-				}
-			}) */
+			if(this.flag){
+				this.sendK()
+			}
 		},
 		methods: {
+			sendK(resolution = 1){
+				this.$emit('data', {
+					data: {
+						from: 1646034420000,
+						to: 1646042280000,//(new Date().getTime() / 1000 - (60 * 1)).toFixed(0),
+						resolution,
+						tradeId: 9,
+						"method": "kData"
+					}
+				})
+			},
 			complete(e) {
 				console.log("渲染完成事件", e);
 				//uCharts.instance[e.id]代表当前的图表实例（除APP端，APP不可在组件外调用uCharts的实例）
@@ -240,14 +188,24 @@
 					}
 				}
 			},
+			// 选择时间
+			handlerTime(time){
+				this.sendK(time.val)
+				this.time = time.val
+			},
 			// 处理k线图
 			handleKLine(res) {
-				// console.log(res)
+				let kArray = []
 				let times = res.map(e => {
 					const date = new Date(e.date)
-					return date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
+					kArray.push([e.open, e.close, e.low, e.high])
+					//date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
+					return  date.getHours() + ":" + date.getMinutes()
 				})
-				// this.chartData.categories = times
+			
+				this.chartData['categories'] = times;
+				this.chartData['series'][0]['data'] = kArray;
+
 			}
 		}
 	}
@@ -265,10 +223,12 @@
 			color: $theme-color-text-colion
 		}
 	}
+
 	.plr2 {
 		padding: 0;
 		margin-bottom: 40rpx;
 	}
+
 	.charts-box {
 		width: 100%;
 		background: #fff;
@@ -281,15 +241,34 @@
 	.FAFCFF {
 		background: #FAFCFF;
 	}
-	.p32{
+
+	.p32 {
 		padding: 32rpx !important;
 	}
-	.bg-white{
+
+	.bg-white {
 		background-color: #fff !important;
 	}
-	.car-shadow{
-		box-shadow: 0px 16rpx 32rpx 1px rgba(88,131,204,0.05);
+
+	.car-shadow {
+		box-shadow: 0px 16rpx 32rpx 1px rgba(88, 131, 204, 0.05);
 		overflow: hidden;
-border-radius: 12rpx;
+		border-radius: 12rpx;
+	}
+
+	.times {
+		padding: 32rpx 32rpx 0;
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		font-size: 24rpx;
+		font-weight: 400;
+		color: rgba(0, 0, 0, 0.44);
+		transition: color .3s;
+		line-height: 28rpx;
+
+		.active {
+			color: #3A82FE;
+		}
 	}
 </style>

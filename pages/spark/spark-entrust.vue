@@ -214,6 +214,7 @@
 		.sub-btn2{
 			background-color: #3ED7AC;
 			border-color: #3ED7AC;
+			box-shadow: 0px 20rpx 40rpx 1px rgba(62,215,172,0.17);
 		}
 	}
 	.title{
