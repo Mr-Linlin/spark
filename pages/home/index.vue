@@ -1,150 +1,150 @@
 <template>
 	<view class="">
-		<view class="">
-			<view class="" style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx;">
-				<view class="" style="display: flex;align-items: center;">
-					<view class="" style="">
-						<image src="../../static/home/Title.png"
-							style="width: 346rpx;height: 68rpx;margin-top: 98rpx;margin-left: 32rpx;" mode="">
-						</image>
-					</view>
-					<view class="" style="flex: 1;">
+		<view class=""
+			style="height: 206rpx;background-color: #3A82FE;border-radius: 0rpx 0rpx 32rpx 32rpx; position: fixed;top: 0;left: 0;right: 0;z-index: 999;">
+			<view class="" style="display: flex;align-items: center;">
+				<view class="" style="">
+					<image src="../../static/home/Title.png"
+						style="width: 346rpx;height: 68rpx;margin-top: 98rpx;margin-left: 32rpx;" mode="">
+					</image>
+				</view>
+				<view class="" style="flex: 1;">
 
-					</view>
-					<view class="" style="margin-right: 32rpx;">
-						<image @click="announcementNext" src="../../static/home/Status.png"
-							style="width: 44rpx;height: 44rpx;margin-top: 98rpx;" mode=""></image>
-					</view>
-					<view
-						style="width: 14rpx;height: 14rpx;background-color: red;border-radius: 50%;position: relative;right: 5%;top: 25rpx;">
-					</view>
+				</view>
+				<view class="" style="margin-right: 32rpx;">
+					<image @click="announcementNext" src="../../static/home/Status.png"
+						style="width: 44rpx;height: 44rpx;margin-top: 98rpx;" mode=""></image>
+				</view>
+				<view
+					style="width: 14rpx;height: 14rpx;background-color: red;border-radius: 50%;position: relative;right: 5%;top: 25rpx;">
 				</view>
 			</view>
 		</view>
-		<!-- </u-sticky> -->
-		<!-- jj -->
-		<view class="">
-			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
-				<cuihai-xingqiu :speed="2" :texts="texts" @onTag="onTag" />
-			</view>
+		<view class="" style="position: relative; top: 206rpx;">
 			<view class="">
-				<view class=""
-					style="display: flex;align-items: center;margin-left: 32rpx;margin-right: 32rpx;height: 84rpx;">
-					<view class="" style="font-size: 32rpx;color: #1A1B1C;text-shadow: 0px 0px #000;">
-						乌拉诺斯的预言
-					</view>
-					<view class="" style="flex: 1;">
-					</view>
-					<view class="" style="font-size: 24rpx;">
-						<!-- 剩余时间 00:00:01 -->
-					</view>
+				<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
+					<cuihai-xingqiu :speed="2" :texts="texts" @onTag="onTag" />
 				</view>
-				<scroll-view scroll-x="true">
-					<view style="display: flex;width: 680rpx;margin-left: 32rpx;">
-						<view style="" v-for="(item,index) in orders" :key="index"
-							@click="onDetail(item.resourceId,item.countDown)">
-							<view class="order-item" :style="{background:background[index]}">
-								<view class="between">
-									<view style="font-size: 28rpx;">
-										{{item.time}}点场
+				<view class="">
+					<view class=""
+						style="display: flex;align-items: center;margin-left: 32rpx;margin-right: 32rpx;height: 84rpx;">
+						<view class="" style="font-size: 32rpx;color: #1A1B1C;text-shadow: 0px 0px #000;">
+							乌拉诺斯的预言
+						</view>
+						<view class="" style="flex: 1;">
+						</view>
+						<view class="" style="font-size: 24rpx;">
+							<!-- 剩余时间 00:00:01 -->
+						</view>
+					</view>
+					<scroll-view scroll-x="true">
+						<view style="display: flex;width: 680rpx;margin-left: 32rpx;">
+							<view style="" v-for="(item,index) in orders" :key="index"
+								@click="onDetail(item.resourceId,item.countDown)">
+								<view class="order-item" :style="{background:background[index]}">
+									<view class="between">
+										<view style="font-size: 28rpx;">
+											{{item.time}}点场
+										</view>
+										<view
+											style="padding:0 10rpx; font-size: 22rpx;height: 34rpx;line-height: 34rpx;background: rgba(255, 255, 255, 0.17);">
+											{{item.teamName}}
+										</view>
 									</view>
-									<view
-										style="padding:0 10rpx; font-size: 22rpx;height: 34rpx;line-height: 34rpx;background: rgba(255, 255, 255, 0.17);">
-										{{item.teamName}}
+									<view class="countdown">
+										<u-count-down :time="item.countDown*1000" format="HH:mm:ss"
+											v-if="item.status!==3 && item.countDown > 0">
+										</u-count-down>
+										<view style="font-size: 26rpx;" v-else>{{status[item.status]}}</view>
 									</view>
-								</view>
-								<view class="countdown">
-									<u-count-down :time="item.countDown*1000" format="HH:mm:ss"
-										v-if="item.status!==3 && item.countDown > 0">
-									</u-count-down>
-									<view style="font-size: 26rpx;" v-else>{{status[item.status]}}</view>
-								</view>
-								<view class="between fixed">
-									<view style="font-size: 24rpx;color: rgba(255, 255, 255, 0.84);">
-										{{item.minMax}}GS
-									</view>
-									<view class="ball">
-										<vus-sphere-progress :anim="true" :percent="Number(item.rate*100).toFixed(1)"
-											font-size="20rpx" :width="78"
-											:color="[background[8],colors[index],colors[index]]"></vus-sphere-progress>
+									<view class="between fixed">
+										<view style="font-size: 24rpx;color: rgba(255, 255, 255, 0.84);">
+											{{item.minMax}}GS
+										</view>
+										<view class="ball">
+											<vus-sphere-progress :anim="true"
+												:percent="Number(item.rate*100).toFixed(1)" font-size="20rpx"
+												:width="78" :color="[background[8],colors[index],colors[index]]">
+											</vus-sphere-progress>
+										</view>
 									</view>
 								</view>
 							</view>
 						</view>
-					</view>
-				</scroll-view>
+					</scroll-view>
 
-			</view>
-		</view>
-		<!--  -->
-		<view class="">
-			<!-- <u-notice-bar :text="content.title" bgColor="#FFFFFF" color="#1A1B1C"></u-notice-bar> -->
-			<view class="flex_j">
-				<view @click="announcementNext" class="Notice">
-					<view class="flex_j" style="width: 106rpx;">
-						<view class="NoticeImg" style="margin-left: 24rpx;">
-							<image src="../../static/6394695.png" mode=""></image>
-						</view>
-					</view>
-
-					<view class="NoticeNmae" style="">
-						{{content.title}}
-					</view>
-					<view class="" style="flex: 1;">
-
-					</view>
-					<view class="flex_j" style="width: 64rpx;">
-						<view class="Noticeimg2" style="margin-right: 24rpx;">
-							<image src="../../static/2581.png" mode=""></image>
-						</view>
-					</view>
 				</view>
 			</view>
-
-			<view class="flex_j" style="height: 234rpx;">
-				<view @click="NoticeTypeFun(item)" v-for="(item,index) in NoticeType" :key="index" class="homeType">
-					<view class="homeTypeImg">
-						<image :src="item.img"></image>
-					</view>
-					<view class="homeTypeName">
-						{{item.name}}
-					</view>
-				</view>
-			</view>
-
-			<view class="consultingService">
-				<view class="consultingServiceName">
-					快捷资讯
-				</view>
-				<view class="flex1">
-
-				</view>
-				<view @click="InformationNext" class="consultingServiceMore">
-					查看更多
-				</view>
-			</view>
-
-			<view v-for="(item,index) in messageList" :key="item.id" class="flex_j" @click="onNewsDetail(item.aid)">
-				<view class="consultingServiceContent">
-					<view class="">
-						<view class="consultingServiceContentName">
-							{{item.title.substring(0,28)}}...
+			<!--  -->
+			<view class="">
+				<!-- <u-notice-bar :text="content.title" bgColor="#FFFFFF" color="#1A1B1C"></u-notice-bar> -->
+				<view class="flex_j">
+					<view @click="announcementNext" class="Notice">
+						<view class="flex_j" style="width: 106rpx;">
+							<view class="NoticeImg" style="margin-left: 24rpx;">
+								<image src="../../static/6394695.png" mode=""></image>
+							</view>
 						</view>
-						<view class="consultingServiceContentDate">
-							{{item.publishedAt}}
+
+						<view class="NoticeNmae" style="">
+							{{content.title}}
 						</view>
+						<view class="" style="flex: 1;">
+
+						</view>
+						<view class="flex_j" style="width: 64rpx;">
+							<view class="Noticeimg2" style="margin-right: 24rpx;">
+								<image src="../../static/2581.png" mode=""></image>
+							</view>
+						</view>
+					</view>
+				</view>
+
+				<view class="flex_j" style="height: 234rpx;">
+					<view @click="NoticeTypeFun(item)" v-for="(item,index) in NoticeType" :key="index" class="homeType">
+						<view class="homeTypeImg">
+							<image :src="item.img"></image>
+						</view>
+						<view class="homeTypeName">
+							{{item.name}}
+						</view>
+					</view>
+				</view>
+
+				<view class="consultingService">
+					<view class="consultingServiceName">
+						快捷资讯
 					</view>
 					<view class="flex1">
 
 					</view>
-					<view class="">
-						<image class="consultingServiceContentImg" :src="item.thumbnail"
-							mode="heightFix heightFix center" style="border-radius: 8rpx;"></image>
+					<view @click="InformationNext" class="consultingServiceMore">
+						查看更多
+					</view>
+				</view>
+
+				<view v-for="(item,index) in messageList" :key="item.id" class="flex_j" @click="onNewsDetail(item.aid)">
+					<view class="consultingServiceContent">
+						<view class="">
+							<view class="consultingServiceContentName">
+								{{item.title.substring(0,28)}}...
+							</view>
+							<view class="consultingServiceContentDate">
+								{{item.publishedAt}}
+							</view>
+						</view>
+						<view class="flex1">
+
+						</view>
+						<view class="">
+							<image class="consultingServiceContentImg" :src="item.thumbnail"
+								mode="heightFix heightFix center" style="border-radius: 8rpx;"></image>
+						</view>
 					</view>
 				</view>
 			</view>
-		</view>
 
+		</view>
 	</view>
 </template>
 
@@ -219,7 +219,7 @@
 		onLoad() {
 			this.getMessage()
 			this.getTexts()
-			this.getNotice()
+			// this.getNotice()
 		},
 		methods: {
 			// 测试数据
@@ -230,9 +230,9 @@
 			},
 			// 点击3d球形的标签
 			onTag(item) {
-				uni.navigateTo({
-					url: '/pages/server/childComps/serverMsg'
-				})
+				// uni.navigateTo({
+				// 	url: '/pages/server/childComps/serverMsg'
+				// })
 			},
 			NoticeTypeFun(e) {
 				if (e.name == '交易所') {

@@ -66,9 +66,10 @@
 				clearInterval(this.timer);
 			},
 			getTags(option) {
-				this.tagEle = option.tagEle;
-				this.CX = option.CX;
-				this.CY = option.CY;
+				// console.log(option)
+				this.tagEle = option.tagEle;//拿到所有的tag标签
+				this.CX = option.CX;//156
+				this.CY = option.CY;//156
 				this.innit();
 			},
 			rotateX() {

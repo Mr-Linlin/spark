@@ -88,14 +88,30 @@
 			setSphereType() {
 				let percent = this.assignPercent;
 				// console.log(`进度条:${percent}`)
-				let colorType = 100 / 3;
+				let colorType = 100 / 10;
 				if (percent && !isNaN(percent) && percent >= 0) {
-					if (percent < colorType * 1) {
-						return 'vus-progress-sphere-red';
-					} else if (percent < colorType * 2) {
-						return 'vus-progress-sphere-orange';
-					} else if (percent < colorType * 3) {
-						return 'vus-progress-sphere-green';
+					if (percent == 0) {
+						return 'vus-progress-sphere-y0';
+					} else if (percent <= colorType * 1) {
+						return 'vus-progress-sphere-y1';
+					} else if (percent <= colorType * 2) {
+						return 'vus-progress-sphere-y2';
+					} else if (percent <= colorType * 3) {
+						return 'vus-progress-sphere-y3';
+					} else if (percent <= colorType * 4) {
+						return 'vus-progress-sphere-y4';
+					} else if (percent <= colorType * 5) {
+						return 'vus-progress-sphere-y5';
+					} else if (percent <= colorType * 6) {
+						return 'vus-progress-sphere-y6';
+					} else if (percent <= colorType * 7) {
+						return 'vus-progress-sphere-y7';
+					} else if (percent <= colorType * 8) {
+						return 'vus-progress-sphere-y8';
+					} else if (percent <= colorType * 9) {
+						return 'vus-progress-sphere-y9';
+					} else if (percent <= colorType * 10) {
+						return 'vus-progress-sphere-y10';
 					}
 				}
 			},
@@ -148,10 +164,18 @@
 <style scoped>
 	/* 球形波浪:sphere */
 	.vus-progress-sphere-custom,
-	.vus-progress-sphere-green,
-	.vus-progress-sphere-orange,
-	.vus-progress-sphere-red,
-	.vus-progress-sphere-yellow {
+	.vus-progress-sphere-y0,
+	.vus-progress-sphere-y1,
+	.vus-progress-sphere-y2,
+	.vus-progress-sphere-y3,
+	.vus-progress-sphere-y4,
+	.vus-progress-sphere-y5,
+	.vus-progress-sphere-y6,
+	.vus-progress-sphere-y7,
+	.vus-progress-sphere-y8,
+	.vus-progress-sphere-y9,
+	.vus-progress-sphere-y10,
+		{
 		width: 200rpx;
 		height: 200rpx;
 		transition: all 1s ease;
@@ -246,28 +270,61 @@
 
 	.vus-progress-sphere .vus-progress-sphere-percent-icon {}
 
-	/* 绿色水波 */
-	.vus-progress-sphere-green .vus-progress-sphere-water {
-		top: 25%;
-		/* background-image: radial-gradient(#2a4 15%, #6df736); */
-	}
 
-	/* 橙色水波 */
-	.vus-progress-sphere-orange .vus-progress-sphere-water {
-		top: 50%;
-		/* background: linear-gradient(90deg, #FF58DC 0%, #FF45B4 100%); */
+.vus-progress-sphere-y0 .vus-progress-sphere-water {
+		top: 100%;
+		/* background-image: radial-gradient(#c00 15%, #ff5050); */
 	}
-
 	/* 红色水波 */
-	.vus-progress-sphere-red .vus-progress-sphere-water {
-		top: 80%;
+	.vus-progress-sphere-y1 .vus-progress-sphere-water {
+		top: 90%;
 		/* background-image: radial-gradient(#c00 15%, #ff5050); */
 	}
 
-/* 	.vus-progress-sphere-yellow .vus-progress-sphere-water {
-		top: 25%;
+	.vus-progress-sphere-y2 .vus-progress-sphere-water {
+		top: 80%;
 		background-image: radial-gradient(#c00 15%, #ff5050);
-	} */
+	}
+
+	.vus-progress-sphere-y3 .vus-progress-sphere-water {
+		top: 70%;
+		background-image: radial-gradient(#c00 15%, #ff5050);
+	}
+
+	.vus-progress-sphere-y4 .vus-progress-sphere-water {
+		top: 60%;
+		background-image: radial-gradient(#c00 15%, #ff5050);
+	}
+
+	.vus-progress-sphere-y5 .vus-progress-sphere-water {
+		top: 50%;
+		background-image: radial-gradient(#c00 15%, #ff5050);
+	}
+
+	.vus-progress-sphere-y6 .vus-progress-sphere-water {
+		top: 40%;
+		background-image: radial-gradient(#c00 15%, #ff5050);
+	}
+
+	.vus-progress-sphere-y7 .vus-progress-sphere-water {
+		top: 30%;
+		background-image: radial-gradient(#c00 15%, #ff5050);
+	}
+
+	.vus-progress-sphere-y8 .vus-progress-sphere-water {
+		top: 20%;
+		background-image: radial-gradient(#c00 15%, #ff5050);
+	}
+
+	.vus-progress-sphere-y9 .vus-progress-sphere-water {
+		top: 10%;
+		background-image: radial-gradient(#c00 15%, #ff5050);
+	}
+
+	.vus-progress-sphere-y10 .vus-progress-sphere-water {
+		top: 0%;
+		background-image: radial-gradient(#c00 15%, #ff5050);
+	}
 
 	/* 动画 */
 	.vus-progress-sphere .vus-progress-sphere-anim {

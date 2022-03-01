@@ -27,6 +27,7 @@
 			//首页
 			"path": "pages/home/index",
 			"style": {
+				"navigationBarTextStyle":"white",
 				"app-plus": {
 					"titleNView": false
 				}

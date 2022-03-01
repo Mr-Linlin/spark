@@ -13,7 +13,7 @@
 		data() {
 			return {
 				// 当前进度百分比：0-100
-				percent: 100,
+				percent: 0,
 
 				background: {
 					1: 'linear-gradient(135deg, rgba(0, 0, 0, 0.11) 0%, rgba(0, 0, 0, 0) 100%)',

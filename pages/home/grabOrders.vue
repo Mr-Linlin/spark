@@ -11,7 +11,7 @@
 						<view class="time">
 							<view class="time__custom">
 								<text
-									class="time__custom__item">{{ timeData.hours>9?timeData.hours:'0'+timeData.hours}}</text>
+									class="time__custom__item">{{ timeData.hours>9?timeData.hours:'0'+timeData.hours }}</text>
 							</view>
 							<text class="time__doc">:</text>
 							<view class="time__custom">
@@ -78,7 +78,7 @@
 					您参与的充能
 				</view>
 
-				<view style="display: flex;height: 88rpx; padding:0 32rpx;">
+				<view style="display: flex;height: 88rpx; padding:0 32rpx;justify-content: space-between;">
 					<view class="gs-item" v-for="(item,index) in radios" :key="index"
 						:class="{active:index===currentIndex && orderInfo.statusStr==='进行中'}"
 						@click="radioClick(index,item)">
@@ -324,7 +324,7 @@
 		border-radius: 12rpx;
 		line-height: 88rpx;
 		text-align: center;
-		margin-right: 20rpx;
+		// margin-right: 20rpx;
 	}
 
 	.active {
