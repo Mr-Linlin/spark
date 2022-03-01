@@ -78,7 +78,7 @@
 
 					</view>
 					<view class=""> 
-						{{quantity*currencyListData.transferFee}}
+						{{(quantity*currencyListData.transferFee).toFixed(4)}}
 					</view>
 				</view>
 
@@ -91,7 +91,7 @@
 
 					</view>
 					<view class="">
-						{{quantity - (quantity*currencyListData.transferFee)}}
+						{{(quantity - (quantity*currencyListData.transferFee)).toFixed(4)}}
 					</view>
 				</view>
 			</view>

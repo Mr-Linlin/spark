@@ -95,3 +95,6 @@ export const modify = user => http.post('/front/user/modify/pic', user)
 
 // 公告
 export const searchgetContent= user => http.post('/front/search/getContent', user)
+
+// 单账户资产
+export const getbalance= user => http.post('/front/financial/get/balance', user)
