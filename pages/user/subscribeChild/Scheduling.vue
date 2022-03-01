@@ -44,7 +44,7 @@
 				getRateData:'',
 				getPriceData:'',
 				fntDatava:'',
-				gsDatava:''
+				gsDatava:'' 
 			}
 		},
 		onShow() {
