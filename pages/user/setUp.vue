@@ -104,16 +104,16 @@
 			<view class="password-box">
 				<view class="p-title">修改密码</view>
 				<view class="p-sub-title">修改成功请牢记新密码</view>
-				<u--input class="p-input" placeholderClass="placeholder" type="password" placeholder="验证原密码"
+				<u--input :maxlength="18" class="p-input" placeholderClass="placeholder" type="password" placeholder="验证原密码"
 					border="none" v-model="passwordData.pwd"></u--input>
-				<u--input password class="p-input" placeholderClass="placeholder" placeholder="设置新密码" border="none"
+				<u--input :maxlength="18" password class="p-input" placeholderClass="placeholder" placeholder="设置新密码(6-18位)" border="none"
 					v-model="passwordData.newPwd"></u--input>
-				<u--input password class="p-input" placeholderClass="placeholder" placeholder="确认新密码" border="none"
+				<u--input :maxlength="18" password class="p-input" placeholderClass="placeholder" placeholder="确认新密码(6-18位)" border="none"
 					v-model="passwordData.newPwd2"></u--input>
 				<u-button @click="passwordDataFun" color="#3A82FE" class="btn-shadow" type="primary" text="确认修改"
 					style="height: 96rpx;"></u-button>
 			</view>
-		</u-popup>
+		</u-popup> 
 
 		<!--    资金密码-->
 		<u-popup :round="20" :show="show2" @close="handleClose" @open="open">
@@ -128,7 +128,7 @@
 							<view>
 								<view class="title p75">验证当前资金密码</view>
 								<view class="code-box p75">
-									<u-code-input size="45" dot class="code-input" v-model="tradePwd" :maxlength="6"
+									<u-code-input size="43" dot class="code-input" v-model="tradePwd" :maxlength="6"
 										borderColor="#fff"></u-code-input>
 								</view>
 								<u-button @click="handleNext()" class="btn-shadow" color="#3A82FE" type="primary"
@@ -139,7 +139,7 @@
 							<view>
 								<view class="title p75">设置新的资金密码</view>
 								<view class="code-box p75">
-									<u-code-input size="45" dot class="code-input" v-model="NewtradePwd" :maxlength="6"
+									<u-code-input size="43" dot class="code-input" v-model="NewtradePwd" :maxlength="6"
 										borderColor="#fff"></u-code-input>
 								</view>
 								<u-button @click="TwotradePwdFun" class="btn-shadow" color="#3A82FE" type="primary"
@@ -150,7 +150,7 @@
 							<view>
 								<view class="title p75">确认新的资金密码</view>
 								<view class="code-box p75">
-									<u-code-input size="48" dot class="code-input" v-model="TwotradePwd" :maxlength="6"
+									<u-code-input size="43" dot class="code-input" v-model="TwotradePwd" :maxlength="6"
 										borderColor="#fff"></u-code-input>
 								</view>
 								<u-button @click="NewtradePwdFun()" class="btn-shadow" color="#3A82FE" type="primary"

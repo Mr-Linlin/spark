@@ -4,22 +4,22 @@
 			<view class="group_1">
 				<text>预排数量</text>
 				<view class="sched_input">
-					<u--input v-model="GS" border="none" @change="gsChange" type="number"></u--input>
-					<text style="margin-right: 20rpx;">可用GS {{poolassetData.gs ? poolassetData.gs : 0}}</text>
+					<u--input :maxlength="8" v-model="GS" border="none" @change="gsChange" type="number"></u--input>
+					<text style="margin-right: 20rpx;">可用GS {{gsDatava ? gsDatava : 0}}</text>
 				</view>
 			</view>
 			<view class="fnt_num"> 
 				<view class="" style="margin-top: 20rpx;margin-bottom: 32rpx;">
-					所需体力{{this.FNT}}FNT
+					所需体力{{this.FNT == 0 ? this.FNT : this.FNT.toFixed(8)}}FNT
 				</view>
 			</view>
 			<view class="group_2">
-				<view style="color:rgba(247, 69, 57, 1) ;padding-top: 24rpx;">FNT可用{{poolassetData.fnt ? poolassetData.fnt : 0}}</view>
-				<view style="margin-right: 10rpx;">所需体力FNT=GS*2%*2倍</view><br>
+				<view style="color:rgba(247, 69, 57, 1) ;padding-top: 24rpx;">FNT可用{{fntDatava ? fntDatava : 0}}</view>
+				<view style="margin-right: 10rpx;">所需体力FNT=GS*{{getRateData*100}}%*2倍</view><br>
 			</view>
 		</view>
 		<view class="sched-btn">
-			<u-button text="确定预存" class="btn" @click="poolrechargeFun" v-if="FNT > 0 && FNT!==null && FNT < poolassetData.fnt">
+			<u-button text="确定预存" class="btn" @click="poolrechargeFun" v-if="FNT > 0 && FNT!==null && FNT < fntDatava">
 			</u-button>
 			<u-button text="确定预存" class="btn1" @click="poolrechargeFun" :disabled="true" v-else>
 			</u-button>
@@ -30,20 +30,42 @@
 
 <script>
 	import {
-		poolasset,poolrecharge
+		poolasset,poolrecharge,getbalance
 	} from '@/http/common.js'
+	
+	import {
+		getRate,getPrice
+	} from '@/http/home.js'
 	export default {
 		data() {
 			return {
 				GS: 0,
 				FNT: 0,
-				poolassetData:{}
+				getRateData:'',
+				getPriceData:'',
+				fntDatava:'',
+				gsDatava:'' 
 			}
 		},
 		onShow() {
-			this.poolassetFun()
+			this.getbalanceFun()
+			this.getRateFun()
+			this.getPriceFun()
 		},
 		methods: {
+			getRateFun(){//比例
+				getRate().then(res=>{
+					this.getRateData = res.obj
+				})
+			},
+			getPriceFun(){
+				let data = {
+					currencyName:'FNT',
+				}
+				getPrice(data).then(res=>{
+					this.getPriceData = res.obj
+				})
+			},
 			poolrechargeFun(){//预排【预约池充值】
 				let data = {
 					quantity:this.GS
@@ -62,15 +84,27 @@
 					}
 				})
 			},
-			poolassetFun(){//预排金额
-				poolasset().then(res=>{
-					this.poolassetData = res.obj
+			getbalanceFun(){//获取gs/fnt资产
+				let data = {
+					currencyName:'fnt',
+					walletType:'1'
+				}
+				getbalance(data).then(res=>{
+					this.fntDatava = res.obj
+				})
+				
+				let data2 = {
+					currencyName:'gs',
+					walletType:'1'
+				}
+				getbalance(data2).then(res=>{
+					this.gsDatava = res.obj
 				})
 			},
 			gsChange() {
-				this.FNT = (this.GS * 0.02)*2
-				if (this.FNT > this.poolassetData.fnt) {
-					uni.$u.toast('兑换FNT不能超过'+this.poolassetData.fnt)
+				this.FNT = ((this.GS * this.getRateData)*2)/this.getPriceData
+				if (this.FNT > this.fntDatava) {
+					uni.$u.toast('兑换FNT不能超过'+this.fntDatava)
 				} else if (this.FNT > 0 && this.FNT !== null) {
 					this.disabled = false
 				}

@@ -25,19 +25,6 @@
 		<!-- jj -->
 		<view class="">
 			<view class="" style="display: flex;justify-content: center;margin-top: 50rpx;margin-bottom: 50rpx;">
-				<!-- <video id="myVideo" :muted="true" :enable-play-gesture="false" :duration="10"
-					enable-progress-gesture="false" autoplay controls="false" loop style="width: 750rpx;height: 700rpx;"
-					src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e6e04433-f508-4eb8-9f21-5802fec2209f/2018cd11-5bff-40a9-9f0f-1202263c2472.mp4">
-					<cover-view
-						style="width: 100rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;">
-					</cover-view>
-					<cover-view
-						style="width: 50rpx;height: 700rpx;background-color: #FFFFFF;position: absolute;border: 2rpx;right: 0;">
-					</cover-view>
-					<cover-view v-if="vidoType"
-						style="width: 100%;height: 700rpx;position: absolute;background-color: #FFFFFF;">
-					</cover-view>
-				</video> -->
 				<cuihai-xingqiu :speed="2" :texts="texts" @onTag="onTag" />
 			</view>
 			<view class="">
@@ -201,6 +188,7 @@
 				orders: null,
 				timeData: {},
 				vidoType: true,
+				flag: true,
 				status: {
 					2: '可参与充能',
 					3: '充能结束'
@@ -226,11 +214,12 @@
 		},
 		onShow() {
 			this.getNotice()
+			// this.flag = true
 		},
 		onLoad() {
 			this.getMessage()
-			this.getNotice()
 			this.getTexts()
+			this.getNotice()
 		},
 		methods: {
 			// 测试数据
@@ -242,7 +231,7 @@
 			// 点击3d球形的标签
 			onTag(item) {
 				uni.navigateTo({
-					url:'/pages/server/childComps/serverMsg'
+					url: '/pages/server/childComps/serverMsg'
 				})
 			},
 			NoticeTypeFun(e) {
@@ -322,6 +311,10 @@
 					url: './Information'
 				})
 			}
+		},
+		onHide() {
+			// console.log('销毁组件')
+			// this.flag = false
 		}
 	}
 </script>
