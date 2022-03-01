@@ -163,9 +163,13 @@
 				rechargelistData: [] //预存记录
 			}
 		},
-		onLoad() {
+		onShow() {
+			this.poolassetData={}
+			this.rechargelistData = []
 			this.poolassetFun()
 			this.rechargelistFun()
+		},
+		onLoad() {
 		},
 		onReachBottom() {
 			if (this.pageType) {

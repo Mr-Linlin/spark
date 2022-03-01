@@ -4,13 +4,13 @@
 			<view class="group_1">
 				<text>预排数量</text>
 				<view class="sched_input">
-					<u--input v-model="GS" border="none" @change="gsChange" type="number"></u--input>
+					<u--input :maxlength="8" v-model="GS" border="none" @change="gsChange" type="number"></u--input>
 					<text style="margin-right: 20rpx;">可用GS {{poolassetData.gs ? poolassetData.gs : 0}}</text>
 				</view>
 			</view>
 			<view class="fnt_num"> 
 				<view class="" style="margin-top: 20rpx;margin-bottom: 32rpx;">
-					所需体力{{this.FNT.toFixed(8)}}FNT
+					所需体力{{this.FNT == 0 ? this.FNT : this.FNT.toFixed(8)}}FNT
 				</view>
 			</view>
 			<view class="group_2">
@@ -30,7 +30,7 @@
 
 <script>
 	import {
-		poolasset,poolrecharge
+		poolasset,poolrecharge,getbalance
 	} from '@/http/common.js'
 	
 	import {
@@ -47,7 +47,7 @@
 			}
 		},
 		onShow() {
-			this.poolassetFun()
+			this.getbalanceFun()
 			this.getRateFun()
 			this.getPriceFun()
 		},
@@ -83,9 +83,21 @@
 					}
 				})
 			},
-			poolassetFun(){//预排金额
-				poolasset().then(res=>{
-					this.poolassetData = res.obj
+			getbalanceFun(){//获取gs/fnt资产
+				let data = {
+					currencyName:'fnt',
+					walletType:'1'
+				}
+				getbalance(data).then(res=>{
+					this.poolassetData.fnt = res.obj
+				})
+				
+				let data2 = {
+					currencyName:'gs',
+					walletType:'1'
+				}
+				getbalance(data2).then(res=>{
+					this.poolassetData.gs = res.obj
 				})
 			},
 			gsChange() {
