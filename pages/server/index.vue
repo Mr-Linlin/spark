@@ -1,14 +1,25 @@
 <template>
 	<view class="gs-server">
+		
 		<u-navbar @rightClick="rightClick" bgColor="#FAFCFF">
 			<view class="slot-left" slot="left">服务器</view>
 			<view class="slot-right" slot='right'>
 				<image src="../../static/sever/msg.png" mode=""></image>
 			</view>
 		</u-navbar>
+		
+		<!-- #ifdef APP-PLUS -->
 		<u-sticky offset-top="88" style="background-color: #FAFCFF;">
 			<lzt-tabs :titles="serves" @currentIndex='currentIndex' />
 		</u-sticky>
+		<!-- #endif -->
+		
+		<!-- #ifdef H5 -->
+		<view class="" style="width: 750rpx;margin-top: 88rpx;position: fixed;z-index: 1000;">
+			<lzt-tabs :titles="serves" @currentIndex='currentIndex' />
+		</view>
+		<!-- #endif -->
+		
 		<!-- 内容 -->
 		<view class="gs-content bx_sard">
 			<!-- 切换Tab -->
@@ -61,9 +72,9 @@
 		methods: {
 			// 点击查看消息内容
 			rightClick() {
-				uni.navigateTo({
-					url: './childComps/serverMsg'
-				})
+				// uni.navigateTo({
+				// 	url: './childComps/serverMsg'
+				// })
 			},
 			// 切换tabs
 			currentIndex(index) {
