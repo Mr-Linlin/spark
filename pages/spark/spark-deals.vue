@@ -9,12 +9,13 @@
 						</view>
 					</view>
 				</view>
-				<view v-for="(item,index) of deales_data" :key="index" style="height: 68rpx;font-size: 28rpx;"
+				<view v-for="(item,index) of deales_data" :key="item.id" style="height: 68rpx;font-size: 28rpx;"
 					class="flexC space-between plr2" :style="index%2!=0?'background-color:#FAFCFF':''">
-					<view style="width:25%">{{item.timer}}</view>
-					<view style="width:25%;text-align: center;">{{item.buy}}</view>
+					<view style="width:25%;  white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+						{{item.updateTime}}</view>
+					<view style="width:25%;text-align: center;">{{item.tradeTypeStr}}</view>
 					<view style="width:25%;text-align: center;">{{item.price}}</view>
-					<view style="width:25%;text-align: right;">{{item.deales}}</view>
+					<view style="width:25%;text-align: right;">{{item.quantity}}</view>
 				</view>
 			</view>
 		</view>
@@ -23,23 +24,33 @@
 </template>
 
 <script>
+	import {
+		knockdownList
+	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
 				titleArr: ['时间', '买入', '价格', '数量'],
-				deales_data: [{
-						timer: '23:35:42',
-						buy: '买入',
-						price: '239.32',
-						deales: '70.28',
-					},
-					{
-						timer: '22:35:42',
-						buy: '卖出',
-						price: '222.32',
-						deales: '59.28'
-					},
-				]
+				deales_data: [],
+				queryInfo: {
+					type: 1,
+					pageNum: 1,
+					pageSize: 20
+				}
+			}
+		},
+		created() {
+			this.knockdownList()
+		},
+		methods: {
+			async knockdownList() {
+				let {
+					code,
+					msg,
+					obj
+				} = await knockdownList(this.queryInfo)
+				console.log(obj)
+				this.deales_data = obj.list
 			}
 		}
 	}

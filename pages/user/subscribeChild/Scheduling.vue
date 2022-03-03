@@ -109,7 +109,7 @@
 				})
 
 				let data2 = {
-					currencyName: 'gs',
+					currencyName: 'GS',
 					walletType: '1'
 				}
 				getbalance(data2).then(res => {
