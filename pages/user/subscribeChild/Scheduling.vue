@@ -4,7 +4,7 @@
 			<view class="group_1">
 				<text>预排数量</text>
 				<view class="sched_input">
-					<u--input :maxlength="8" v-model="GS" border="none" @change="gsChange" type="number"></u--input>
+					<u--input placeholder="0" :maxlength="8" v-model="GS" border="none" @change="gsChange" type="number"></u--input>
 					<text style="margin-right: 20rpx;">可用GS {{gsDatava ? gsDatava : 0}}</text>
 				</view>
 			</view>
@@ -42,7 +42,7 @@
 	export default {
 		data() {
 			return {
-				GS: 0,
+				GS: '',
 				FNT: 0,
 				getRateData: '',
 				getPriceData: '',
@@ -87,9 +87,9 @@
 					if (res.code == 0) {
 						setTimeout(() => {
 							this.isdisable = false
-				// 			uni.navigateBack({
+							uni.navigateBack({
 				
-				// 			})
+							})
 						}, 2000)
 					}else{
 						setTimeout(() => {

@@ -12,7 +12,7 @@
 							{{assetsingleData.currencyName}}资产
 						</view>
 						<view class="" style="margin-top: 24rpx;font-size: 38rpx;text-shadow: 0px 0px #000;">
-							{{assetsingleData.available}}
+							{{assetsingleData.available >0 ? assetsingleData.available.toFixed(4) : assetsingleData.available}}
 						</view>
 					</view>
 				</view>
@@ -24,7 +24,7 @@
 							CNY≈
 						</view>
 						<view class="" style="margin-top: 24rpx;font-size: 38rpx;text-shadow: 0px 0px #000;">
-							{{assetsingleData.cnyQty}}
+							{{assetsingleData.cnyQty >0 ? assetsingleData.cnyQty.toFixed(4) : assetsingleData.cnyQty}}
 						</view>
 					</view>
 				</view>

@@ -87,7 +87,7 @@
 						</view>
 
 						<view class="NoticeNmae" style="">
-							{{content.title}}
+							<u-notice-bar icon="" mode="" speed="80" :text="content" bgColor="#F7FAFF" color="#1A1B1C"></u-notice-bar>
 						</view>
 						<view class="" style="flex: 1;">
 
@@ -188,7 +188,7 @@
 					name: '战队'
 				}],
 				messageList: null, //资讯
-				content: {}, //公告
+				content: '', //公告
 				orders: null,
 				timeData: {},
 				vidoType: true,
@@ -285,7 +285,7 @@
 					obj
 				} = await getNotice()
 				if (code !== 0) return uni.$u.toast(msg)
-				this.content = obj.contentList[0]
+				this.content = obj.contentList[0].title
 				let res = await getPddList()
 				this.orders = res.obj
 				console.log(this.orders)
@@ -446,7 +446,6 @@
 		align-items: center;
 		width: 686rpx;
 		height: 72rpx;
-		background-color: #FFFFFF;
 		border-radius: 12rpx;
 		margin-top: 32rpx;
 		background-color: #F7FAFF;
