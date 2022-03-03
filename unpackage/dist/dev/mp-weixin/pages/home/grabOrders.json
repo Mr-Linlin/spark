@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "参与乌拉诺斯的诺言",
-  "enablePullDownRefresh": false,
-  "navigationBarBackgroundColor": "#FAFCFF",
-  "usingComponents": {
-    "u-count-down": "/node-modules/uview-ui/components/u-count-down/u-count-down",
-    "u--input": "/node-modules/uview-ui/components/u--input/u--input"
-  }
-}

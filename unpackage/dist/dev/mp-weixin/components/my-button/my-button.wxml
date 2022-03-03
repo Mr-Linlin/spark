@@ -1,1 +1,0 @@
-<view><view data-event-opts="{{[['tap',[['click',['$event']]]]]}}" class="my-button flexCC" style="{{('width:'+width+'rpx'+';'+'height:'+height+'rpx'+';'+'border-radius:'+radius+'rpx'+';'+'background-color:#'+background+';'+'color:'+color)}}" bindtap="__e">{{''+title+''}}</view></view>

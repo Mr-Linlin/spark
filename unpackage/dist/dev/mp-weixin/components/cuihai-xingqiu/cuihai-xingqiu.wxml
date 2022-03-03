@@ -1,1 +1,0 @@
-<view><view class="tagBall"><block wx:for="{{texts}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view data-event-opts="{{[['tap',[['onTag',['$0'],[[['texts','',index]]]]]]]}}" class="tag" style="{{(liviews[index])}}" bindtap="__e"><view style="{{'font-size:'+(fontSize)+';'+('color:'+(colors[index])+';')}}">{{"+"+item}}</view></view></block></view></view>

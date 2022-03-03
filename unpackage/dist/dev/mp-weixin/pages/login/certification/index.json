@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "u-navbar": "/node-modules/uview-ui/components/u-navbar/u-navbar",
-    "u--input": "/node-modules/uview-ui/components/u--input/u--input",
-    "my-button": "/components/my-button/my-button"
-  }
-}
