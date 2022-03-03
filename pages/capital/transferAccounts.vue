@@ -38,7 +38,9 @@
 							<input v-model="account" type="text" value="" placeholder="请输入收款账号"
 								style="font-size: 28rpx;width: 500rpx;height: 88rpx;text-indent: 1rem;" />
 						</view>
-						
+						<view @click="paste" class="" style="margin-left: 25rpx;">
+							粘贴
+						</view>
 					</view>
 				</view>
 
@@ -136,9 +138,9 @@
 					</view>
 					<view @click="AllcurrencyListDataNext(item)" v-for="(item,index) in AllcurrencyListData"
 						:key="index" class="">
-						<view @click="close2" class="" style="display: flex;justify-content: center;">
-							<view class=""
-								style="width: 630rpx;height: 96rpx;background-color: #F7FAFF;border-radius: 8rpx;margin-top: 20rpx;display: flex;align-items: center;">
+						<view @click="rechargePeriodFun(index)" class="" style="display: flex;justify-content: center;">
+							<view :class="rechargePeriod == index ? 'asdf2' : 'bdr'"
+								style="width: 630rpx;height: 103rpx;border-radius: 8rpx;margin-bottom: 20rpx;display: flex;align-items: center;">
 								<view class="" style="margin-left: 33rpx;">
 									<image :src="item.currencyLogo" mode="" style="width: 30rpx;height: 30rpx;"></image>
 								</view>
@@ -148,8 +150,8 @@
 								<view class="" style="flex: 1;">
 
 								</view>
-								<view class="" style="font-size: 26rpx;margin-right: 32rpx;color: rgba(0, 0, 0, 0.44);">
-									选择此币种
+								<view :class="rechargePeriod == index ? 'clr_3A82FE' : 'clr_age'" style="font-size: 26rpx;margin-right: 32rpx;">
+									{{rechargePeriod == index ? '已选' : '选择'}}
 								</view>
 							</view>
 						</view>
@@ -203,7 +205,6 @@
 							确认转账
 						</u-button>
 					</view>
-
 				</view>
 			</view>
 		</u-popup>
@@ -234,7 +235,8 @@
 				tradePwd:'',
 				quantity:'',
 				code:'',
-				isCodeType:true
+				isCodeType:true,
+				rechargePeriod:''
 			}
 		},
 		onLoad(e) {
@@ -244,6 +246,19 @@
 			this.userbaseInfoFun()
 		},
 		methods: {
+			paste(){//粘贴
+				let that = this
+				uni.getClipboardData({
+					success: function (res) {
+						console.log(res.data);
+						that.account = res.data
+					},
+				});
+			}, 
+			rechargePeriodFun(e){
+				this.rechargePeriod = e
+				this.close2()
+			},
 			allProposed(){//全部提出
 				this.quantity = this.currencyListData.available
 			},
@@ -351,5 +366,18 @@
 <style>
 	page {
 		background-color: #F7FAFF;
+	}
+	.asdf2{
+		box-shadow: 0rpx 20rpx 40rpx 1rpx rgba(88, 130, 204, 0.17);
+		background: #FFFFFF;
+	}
+	.clr_3A82FE{
+		color: #3A82FE;
+	}
+	.clr_age{
+		color: rgba(0, 0, 0, 0.66);
+	}
+	.bdr{
+		border: 1px solid #E1EAEB;
 	}
 </style>

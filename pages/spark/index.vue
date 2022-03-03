@@ -15,16 +15,16 @@
 			<spark-data :flag="flag" @data="handlerData" ref="data"></spark-data>
 		</view>
 		<view v-if="defaultIndex===1">
-			<spark-buy @data="handlerData" ref='buy'></spark-buy>
+			<spark-buy :flag="flag" @data="handlerData" ref='buy'></spark-buy>
 		</view>
 		<view v-else-if="defaultIndex===2">
-			<spark-sell></spark-sell>
+			<spark-sell :flag="flag"></spark-sell>
 		</view>
 		<view v-else-if="defaultIndex===3">
 			<spark-entrust :flag="flag" @data="handlerData" ></spark-entrust>
 		</view>
 		<view v-else-if="defaultIndex===4">
-			<spark-deals></spark-deals>
+			<spark-deals :flag="flag"></spark-deals>
 		</view>
 		<!-- 侧边栏 -->
 		<wyb-popup ref="popup" type="left" width="500" radius="6">
@@ -40,6 +40,7 @@
 				</view>
 			</view>
 		</wyb-popup>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
@@ -50,7 +51,8 @@
 	import sparkEntrust from './spark-entrust.vue';
 	import sparkBuy from './spark-buy.vue';
 	import sparkSell from './spark-sell.vue';
-	import sparkData from './spark-data.vue'
+	import sparkData from './spark-data.vue';
+	import {trusteeList} from '../../http/common.js';
 	import {
 		BASE_URL
 	} from "../../http/request.js"
@@ -70,7 +72,6 @@
 				sliderTop: 40,
 				tabs: ['数据', '买入', '卖出', '委托', '成交'],
 				areaList: [],
-
 				defaultIndex: 0,
 				flag: false,
 				slider_tabs: [{
@@ -90,6 +91,9 @@
 			}
 		},
 		onLoad() {
+			/* trusteeList({type:0}).then(e=>{
+				console.log(e)
+			}) */
 			uni.getSystemInfo({
 				success: (r) => {
 					let statusBarHeight = r.statusBarHeight + 45;
@@ -157,7 +161,6 @@
 					}) */
 					this.flag = true;
 					
-					this.handleSubscribe();
 					this.getGSList()
 				});
 				uni.onSocketError(function(res) {
@@ -166,16 +169,32 @@
 				})
 				uni.onSocketMessage((res) => {
 					const data = JSON.parse(res.data)
-					console.log('👇👇👇👇👇👇👇👇')
-					console.dir(data)
+					console.log('👇👇👇👇👇👇👇👇👇')
+					console.log(data)
 					const obj = data.obj;
 					switch (data.code) {
+						case -1:{
+							this.$refs.uToast.show({
+								message:data.obj,
+								type:'error'
+							})
+							break;
+						}
 						case 0: { // 币种列表
 							this.areaList = obj
 							break;
 						}
-						
-						case 10: {
+						case 9:{ // 实时交易
+							this.$refs['buy'].setBuyList(obj)
+							break;
+						}
+						case 8:{ // 买入 卖出列表
+							// if(  ){
+								
+							// }
+							break;
+						}
+						case 10: { // 钱包
 							this.$refs['buy'].setWallet(obj)
 							break;
 						}
@@ -183,9 +202,9 @@
 							this.$refs['data'].handleKLine(obj)
 							break;
 						}
-						case 13:{ // 行情
+						case 13:{ // 行情  
 							
-							// this.$refs['data'].handleKLine(obj)
+							this.$refs['buy'].setBuyList(obj)
 							break
 						}
 					}
@@ -224,15 +243,7 @@
 				console.log(data)
 				this.sendSocket(data)
 			},
-			// 发起订阅
-				// 2 行情  9 订阅委托
-			handleSubscribe() {
-				this.sendSocket({
-					"method": "sub",
-					"tradeId": "9",
-					"type": "2"
-				})
-			}
+			
 		}
 	}
 </script>

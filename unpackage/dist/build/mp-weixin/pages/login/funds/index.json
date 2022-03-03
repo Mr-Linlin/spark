@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "uni-nav-bar": "/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar",
-    "password-input": "/components/password-input/password-input",
-    "my-button": "/components/my-button/my-button",
-    "number-keyboard": "/components/number-keyboard/number-keyboard"
-  }
-}

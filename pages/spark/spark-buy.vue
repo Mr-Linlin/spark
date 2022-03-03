@@ -6,20 +6,26 @@
 					<view class="fz4 fz-wb2">价格</view>
 					<!-- 加减 -->
 					<view class="mt1 bg-color2 flexC space-between" style="height: 88rpx;width: 100%;">
-						<u--input type="number" clearable placeholder="价格" border="none" v-model="buyData.price"></u--input>
+						<u--input type="number" clearable placeholder="价格" border="none" v-model="buyData.price">
+						</u--input>
 						<view class="flexC pr2">
-							<view @click="handlePriceCount(false)" style="width: 32rpx;height: 32rpx;" class="mr2 ta fz-wb2">-</view>
-							<view @click="handlePriceCount(true)" style="width: 32rpx;height: 32rpx;" class="ta fz-wb2">+</view>
+							<view @click="handlePriceCount(false)" style="width: 32rpx;height: 32rpx;"
+								class="mr2 ta fz-wb2">-</view>
+							<view @click="handlePriceCount(true)" style="width: 32rpx;height: 32rpx;" class="ta fz-wb2">
+								+</view>
 						</view>
 					</view>
-					<view style="text-align: right;" class="fz1 fc-c2">≈10.29CNY±0.66%</view>
+					<!-- <view style="text-align: right;" class="fz1 fc-c2">≈10.29CNY±0.66%</view> -->
 					<view class="mt3 fz4 fz-wb2">数量</view>
 					<!-- 加减 -->
 					<view class="mt1 bg-color2 flexC space-between" style="height: 88rpx;width: 100%;">
-						<u--input type="number" clearable placeholder="数量" border="none" v-model="buyData.quantity"></u--input>
+						<u--input type="number" clearable placeholder="数量" border="none" v-model="buyData.quantity">
+						</u--input>
 						<view class="flexC pr2">
-							<view @click="handleNumberCount(false)" style="width: 32rpx;height: 32rpx;" class="mr2 ta fz-wb2">-</view>
-							<view @click="handleNumberCount(true)" style="width: 32rpx;height: 32rpx;" class="ta fz-wb2">+</view>
+							<view @click="handleNumberCount(false)" style="width: 32rpx;height: 32rpx;"
+								class="mr2 ta fz-wb2">-</view>
+							<view @click="handleNumberCount(true)" style="width: 32rpx;height: 32rpx;"
+								class="ta fz-wb2">+</view>
 						</view>
 					</view>
 					<view class="mt1 bg-color2" style="width: 340rpx;height: 133rpx;border-radius: 12rpx;">
@@ -33,7 +39,7 @@
 						</view>
 					</view>
 					<view class="mt3">
-						<my-button background="3A82FE" title="买入" :height="68" :radius="8"></my-button>
+						<u-button @click="handleBuy" color="#3A82FE" text="买入" :height="68" :radius="8"></u-button>
 					</view>
 				</view>
 			</view>
@@ -44,10 +50,10 @@
 						<view>数量</view>
 					</view>
 					<view style="display: block;height: 10rpx;"></view>
-					<view :key="index" v-for="(item,index) of 4">
+					<view :key="index" v-for="(item,index) of quotation">
 						<view class="p-item flexC space-between">
 							<view class="schedule"></view>
-							<view>871.64</view>
+							<view>{{item.currentPrice}}</view>
 							<view>291.6911</view>
 						</view>
 					</view>
@@ -64,8 +70,8 @@
 			</view>
 		</view>
 		<!--  -->
-		<view class="mt3 fz-wb2" style="font-size: 32rpx;" @click="changeurl">实时交易</view>
-		<view style="background-color: #FFFFFF;padding: 20rpx 30rpx 10rpx 30rpx;border-radius: ;" class="mt2">
+		<view class="mt3 fz-wb2" style="font-size: 32rpx;margin-bottom: 32rpx;">实时交易</view>
+		<!-- <view style="background-color: #FFFFFF;padding: 20rpx 30rpx 10rpx 30rpx;border-radius: ;" class="mt2">
 			<view class="flexC space-between" style="width: 100%;">
 				<view style="width: 33.3%;" :style="index==1 || index == 2?'text-align:right':''"
 					v-for="(item,index) of dealsTitle" :key="index">{{item}}</view>
@@ -74,7 +80,30 @@
 				:key="index">
 				<view style="width:33.3%">{{item.timer}}</view>
 				<view style="width:33.3%;text-align: right;">{{item.price}}</view>
-				<view style="width:33.3%;text-align: right;">{{item.count}}</view>
+				<view style="width:33.3%;text-align: right;">{{item.quantity}}</view>
+			</view>
+		</view> -->
+		<view class="entrust">
+			<view class="e-item" v-for="(item,index) of dealsData" :key="index">
+				<view class="top">
+					<view class="top-left">
+						<text class="txt1">{{item.tradeType === 0 ? '买入' : '卖出'}}</text>
+						<text class="txt2">{{item.currencyName}}/GS</text>
+					</view>
+					<view class="top-right">
+						<u-button @click="handlerRepeal(item)" border="none" class="top-right-btn" text="撤销"></u-button>
+					</view>
+				</view>
+				<view class="e-content">
+					<view class="c-left">
+						<view class="c-key">总量({{item.currencyName}})</view>
+						<view class="c-val">{{item.quantity}}</view>
+					</view>
+					<view class="c-right">
+						<view class="c-key">价格(GS)</view>
+						<view class="c-val">{{item.price}}</view>
+					</view>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -82,7 +111,12 @@
 
 <script>
 	import myButton from '../../components/my-button/my-button.vue';
-	import {format} from '../../static/js/math.js'
+	import {
+		trusteeCancel
+	} from '../../http/common.js'
+	import {
+		format
+	} from '../../static/js/math.js'
 	import {
 		mapMutations
 	} from 'vuex'
@@ -95,11 +129,10 @@
 				sliderVal: 0,
 				buyData: {
 					"method": "publish",
-					"token": "",
-					"tradeId": "",
-					"quantity": "0",
-					"type": "",
-					"price": "0",
+					"tradeId": "9",
+					"quantity": "10",
+					"type": "0", // 1 卖 0：买
+					"price": "",
 					"lang": ""
 				},
 				dealsTitle: ['时间', '价格(GS)', '数量'],
@@ -107,61 +140,8 @@
 					buy: 0,
 					sell: 0
 				},
-				dealsData: [{
-						timer: '07:47:23',
-						price: '188.88',
-						count: '999.99'
-					},
-					{
-						timer: '07:47:23',
-						price: '188.88',
-						count: '999.99'
-					},
-					{
-						timer: '07:47:23',
-						price: '188.88',
-						count: '999.99'
-					},
-					{
-						timer: '07:47:23',
-						price: '188.88',
-						count: '999.99'
-					},
-					{
-						timer: '07:47:23',
-						price: '188.88',
-						count: '999.99'
-					},
-					{
-						timer: '07:47:23',
-						price: '188.88',
-						count: '999.99'
-					},
-					{
-						timer: '07:47:23',
-						price: '188.88',
-						count: '999.99'
-					},
-					{
-						timer: '07:47:23',
-						price: '188.88',
-						count: '999.99'
-					}, {
-						timer: '07:47:23',
-						price: '188.88',
-						count: '999.99'
-					},
-					{
-						timer: '07:47:23',
-						price: '188.88',
-						count: '999.99'
-					},
-					{
-						timer: '07:47:23',
-						price: '188.88',
-						count: '999.99'
-					},
-				],
+				dealsData: [],
+				quotation: [], // 行情列表
 
 			}
 		},
@@ -169,12 +149,21 @@
 			flag(r1) {
 				if (r1) {
 					this.getWallet()
+					this.handleSubscribe(2);
 				}
 			}
 		},
 		created() {
 			// format((0.1+0.2), {precision: 14})
-			this.getWallet()
+			if (this.flag) {
+				// this.getWallet()
+				// this.handleSubscribe(2);
+				// this.getTrustList()
+				console.log('----------')
+				this.$emit('data',{ 
+					data:{"method":"sub","tradeId":9,"token":"c5f88022342ee6cb72993b9e76e28a14","type":8}
+				})
+			}
 		},
 		props: {
 			flag: {
@@ -183,6 +172,22 @@
 			}
 		},
 		methods: {
+			// 撤销单子
+			handlerRepeal({
+				id
+			}) {
+				trusteeCancel({
+					id
+				}).then(e => {
+					this.getTrustList()
+				})
+			},
+			// 买入
+			handleBuy() {
+				this.$emit('data', {
+					data: this.buyData
+				})
+			},
 			...mapMutations('theme', ['updateTheme']),
 			changeurl() {
 				if (this.theme['--bg-color-global'] == 'rgba(247, 250, 255, 1)') {
@@ -213,32 +218,66 @@
 				this.walletData = data
 			},
 			// 计算价格
-			handlePriceCount(flag){
+			handlePriceCount(flag) {
 				let price = this.buyData.price
-				const n = Number(JSON.parse( format( (  flag ? (this.buyData.price + 0.0001) : (this.buyData.price - 0.0001)  ),{precision: 14} )  ))
-				if(n<0)return;
+				const n = Number(JSON.parse(format((flag ? (this.buyData.price + 0.0001) : (this.buyData.price -
+					0.0001)), {
+					precision: 14
+				})))
+				if (n < 0) return;
 				this.buyData.price = n
 			},
 			// 计算数量
-			handleNumberCount(flag){
+			handleNumberCount(flag) {
 				let quantity = this.buyData.quantity
-				const n = Number(JSON.parse( format( (  flag ? (this.buyData.quantity + 0.0001) : (this.buyData.quantity - 0.0001)  ),{precision: 14} )  ))
-				if(n<0)return;
+				const n = Number(JSON.parse(format((flag ? (this.buyData.quantity + 0.0001) : (this.buyData.quantity -
+					0.0001)), {
+					precision: 14
+				})))
+				if (n < 0) return;
 				this.buyData.quantity = n
+			},
+			// 发起订阅
+			// 2 行情  9 订阅委托
+			handleSubscribe(type = '') {
+				this.$emit('data', {
+					data: {
+						"method": "sub",
+						"tradeId": "9",
+						type
+					}
+				})
+			},
+			// 设置实时交易列表
+			setBuyList(list) {
+				console.log('这里。。。。。。。。。。。。。。。。')
+				console.log(list)
+				this.dealsData = list.map(e => {
+					e.timer = new Date(e.createTime).Format("hh:mm:ss")
+					return e
+				});
+			},
+			// 获取实时交易列表
+			getTrustList() {
+				this.$emit('data', {
+					data: {
+						method: 'trust'
+					}
+				})
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-	.top-left {
+	.mt2 .top-left {
 		width: 380rpx;
 		height: 686rpx;
 		background-color: rgba(255, 255, 255, 1);
 		border-radius: 12rpx;
 	}
 
-	.top-right {
+	.mt2 .top-right {
 		width: 286rpx;
 		height: 686rpx;
 		background-color: rgba(255, 255, 255, 1);
@@ -274,11 +313,92 @@
 			background: #BAFFEB;
 		}
 	}
-	/deep/ .uni-input-wrapper{
+
+	/deep/ .uni-input-wrapper {
 		padding-left: 20rpx;
 	}
-	/deep/ .uni-input-placeholder{
+
+	/deep/ .uni-input-placeholder {
 		left: 20rpx !important;
 		color: rgba(0, 0, 0, 0.22);
+	}
+
+	.e-item {
+		width: 686rpx;
+		background: #FFFFFF;
+		padding: 24rpx 32rpx 32rpx;
+		box-shadow: 0px 16rpx 32rpx 1px rgba(88, 131, 204, 0.05);
+		margin-bottom: 32rpx;
+		border-radius: 12rpx;
+
+		.top {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 24rpx;
+
+			.top-left {
+				.txt1 {
+					font-size: 24rpx;
+					font-family: PingFang SC-Regular, PingFang SC;
+					font-weight: 400;
+					color: #3A82FE;
+					margin-right: 12rpx;
+				}
+
+				.txt2 {
+					font-size: 24rpx;
+					font-family: DIN-Medium, DIN;
+					font-weight: bold;
+					color: #1A1B1C;
+					line-height: 22rpx;
+				}
+			}
+
+			.top-right {
+				.top-right-btn {
+					width: 96rpx;
+					height: 48rpx;
+					background: #F7FAFF !important;
+					border-radius: 8rpx;
+					font-size: 24rpx;
+					font-family: PingFang SC-Regular, PingFang SC;
+					font-weight: 400;
+					color: rgba(0, 0, 0, 0.66);
+					border: none;
+
+					&::before {
+						display: none;
+					}
+				}
+			}
+		}
+
+		.e-content {
+			display: flex;
+			justify-content: space-between;
+
+			&>view {
+				width: 300rpx;
+			}
+
+			.c-key {
+				height: 28rpx;
+				font-size: 24rpx;
+				font-family: PingFang SC-Regular, PingFang SC;
+				font-weight: 400;
+				color: rgba(0, 0, 0, 0.44);
+				line-height: 28rpx;
+				margin-bottom: 20rpx;
+			}
+
+			.c-val {
+				height: 25rpx;
+				font-size: 28rpx;
+				font-family: DIN-Medium, DIN;
+				font-weight: bold;
+				color: #1A1B1C;
+				line-height: 25rpx;
+			}
+		}
 	}
 </style>

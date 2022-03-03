@@ -1,1 +1,0 @@
-<view class="top-warp header-tow"><view class="{{['back',showLine?'bottomLine':'']}}"><view class="title">{{''+title+''}}</view><view class="right _div"><slot name="right"></slot></view></view></view>

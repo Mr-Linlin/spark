@@ -127,8 +127,8 @@
 		getPddoPtion,
 		getRate,
 		getPrice,
-		getBalance
-
+		getBalance,
+		pddtest
 	} from '@/http/home.js'
 	import qs from 'qs'
 	import md5 from 'js-md5';
@@ -250,11 +250,17 @@
 				// delete this.queryInfo.key
 				if (this.queryInfo.quantity === 0) return uni.$u.toast('请输入充能数量')
 				if (this.fnt < this.queryInfo.quantity * this.rate) return uni.$u.toast('FNT体力不足')
+				// let {
+				// 	code,
+				// 	msg,
+				// 	obj
+				// } = await pddTake(this.queryInfo)
+				
 				let {
 					code,
 					msg,
 					obj
-				} = await pddTake(this.queryInfo)
+				} = await pddtest(this.queryInfo)
 				if (code !== 0) return uni.$u.toast(msg)
 				uni.showLoading({
 					title: '充能成功',

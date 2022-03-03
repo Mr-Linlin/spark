@@ -106,7 +106,7 @@
 		created() {
 			console.log('-----' + this.flag)
 			if(this.flag){
-				this.handlerWeiTuo()
+				// this.handlerWeiTuo()
 			}
 		},
 		methods:{
@@ -129,6 +129,9 @@
 						type:'9'
 					}
 				})
+			},
+			setBuyList(list){
+				console.log(listt)
 			}
 		}
 	}

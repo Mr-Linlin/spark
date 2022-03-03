@@ -98,3 +98,9 @@ export const searchgetContent= user => http.post('/front/search/getContent', use
 
 // 单账户资产
 export const getbalance= user => http.post('/front/financial/get/balance', user)
+
+// 委托
+export const trusteeList= user => http.post('/front/trade/trustee/list', user)
+
+// 撤单
+export const trusteeCancel = user => http.post('/front/trade/trustee/cancel', user)

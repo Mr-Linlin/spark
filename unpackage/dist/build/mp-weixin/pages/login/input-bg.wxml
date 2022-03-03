@@ -1,1 +1,0 @@
-<view class="flexC space-between continer plr3"><slot></slot></view>
