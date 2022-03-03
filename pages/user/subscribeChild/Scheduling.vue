@@ -8,7 +8,7 @@
 					<text style="margin-right: 20rpx;">可用GS {{gsDatava ? gsDatava : 0}}</text>
 				</view>
 			</view>
-			<view class="fnt_num"> 
+			<view class="fnt_num">
 				<view class="" style="margin-top: 20rpx;margin-bottom: 32rpx;">
 					所需体力{{this.FNT == 0 ? this.FNT : this.FNT.toFixed(8)}}FNT
 				</view>
@@ -19,7 +19,7 @@
 			</view>
 		</view>
 		<view class="sched-btn">
-			<u-button text="确定预存" class="btn" @click="poolrechargeFun" v-if="FNT > 0 && FNT!==null && FNT < fntDatava">
+			<u-button text="确定预存" class="btn" :disabled="isdisable" @click="poolrechargeFun" v-if="FNT > 0 && FNT!==null && FNT < fntDatava">
 			</u-button>
 			<u-button text="确定预存" class="btn1" @click="poolrechargeFun" :disabled="true" v-else>
 			</u-button>
@@ -30,21 +30,25 @@
 
 <script>
 	import {
-		poolasset,poolrecharge,getbalance
+		poolasset,
+		poolrecharge,
+		getbalance
 	} from '@/http/common.js'
-	
+
 	import {
-		getRate,getPrice
+		getRate,
+		getPrice
 	} from '@/http/home.js'
 	export default {
 		data() {
 			return {
 				GS: 0,
 				FNT: 0,
-				getRateData:'',
-				getPriceData:'',
-				fntDatava:'',
-				gsDatava:'' 
+				getRateData: '',
+				getPriceData: '',
+				fntDatava: '',
+				gsDatava: '',
+				isdisable:false,  
 			}
 		},
 		onShow() {
@@ -52,59 +56,70 @@
 			this.getRateFun()
 			this.getPriceFun()
 		},
+		
 		methods: {
-			getRateFun(){//比例
-				getRate().then(res=>{
+			sub(){
+			  
+			},
+			getRateFun() { //比例
+				getRate().then(res => {
 					this.getRateData = res.obj
 				})
 			},
-			getPriceFun(){
+			getPriceFun() {
 				let data = {
-					currencyName:'FNT',
+					currencyName: 'FNT',
 				}
-				getPrice(data).then(res=>{
+				getPrice(data).then(res => {
 					this.getPriceData = res.obj
 				})
 			},
-			poolrechargeFun(){//预排【预约池充值】
+			poolrechargeFun() { //预排【预约池充值】
+				this.isdisable = true
 				let data = {
-					quantity:this.GS
+					quantity: this.GS
 				}
-				poolrecharge(data).then(res=>{
+				poolrecharge(data).then(res => {
 					uni.showToast({
-						title:res.msg,
-						icon:'none'
+						title: res.msg,
+						icon: 'none'
 					})
-					if(res.code == 0){
-						setTimeout(function(){
-							uni.navigateBack({
-								
-							})
-						},2000)
+					if (res.code == 0) {
+						setTimeout(() => {
+							this.isdisable = false
+				// 			uni.navigateBack({
+				
+				// 			})
+						}, 2000)
+					}else{
+						setTimeout(() => {
+							this.isdisable = false
+						}, 2000)
 					}
 				})
+				
 			},
-			getbalanceFun(){//获取gs/fnt资产
+			getbalanceFun() { //获取gs/fnt资产
 				let data = {
-					currencyName:'fnt',
-					walletType:'1'
+					currencyName: 'fnt',
+					walletType: '1'
 				}
-				getbalance(data).then(res=>{
+				getbalance(data).then(res => {
 					this.fntDatava = res.obj
 				})
-				
+
 				let data2 = {
-					currencyName:'gs',
-					walletType:'1'
+					currencyName: 'gs',
+					walletType: '1'
 				}
-				getbalance(data2).then(res=>{
+				getbalance(data2).then(res => {
 					this.gsDatava = res.obj
 				})
 			},
 			gsChange() {
-				this.FNT = ((this.GS * this.getRateData)*2)/this.getPriceData
+				this.FNT = ((this.GS * this.getRateData) * 2) / this.getPriceData
 				if (this.FNT > this.fntDatava) {
-					uni.$u.toast('兑换FNT不能超过'+this.fntDatava)
+					uni.$u.toast('兑换FNT不能超过' + this.fntDatava)
 				} else if (this.FNT > 0 && this.FNT !== null) {
 					this.disabled = false
 				}
@@ -112,7 +127,7 @@
 			// 点击确定预约
 			subscribe() {
 				// 使用防抖限制用户点击的次数
-				uni.$u.debounce(()=>{
+				uni.$u.debounce(() => {
 					console.log('点击')
 				}, 500)
 			}
@@ -139,6 +154,7 @@
 			.group_1 {
 				color: rgba(0, 0, 0, 0.66);
 				height: 138rpx;
+
 				// padding: 0 24rpx;
 				.sched_input {
 					display: flex;
@@ -160,6 +176,7 @@
 				border: 2rpx solid #EBF4F5;
 				height: 124rpx;
 				padding-left: 24rpx;
+
 				.fnt_num {
 					font-size: 28rpx;
 					font-weight: 550;

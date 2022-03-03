@@ -2,8 +2,8 @@
     "name" : "spark",
     "appid" : "__UNI__EC939B4",
     "description" : "",
-    "versionName" : "1.0.2",
-    "versionCode" : 101,
+    "versionName" : "1.0.0",
+    "versionCode" : 100,
     "transformPx" : false,
     "networkTimeout" : {
         "request" : 15000
@@ -125,7 +125,8 @@
         "title" : "spark",
         "domain" : "7623efa6-3938-4dd1-b9c6-6da1a34048a1.bspapp.com",
         "router" : {
-            "base" : ""
+            "base" : "",
+            "mode" : "history"
         },
         "devServer" : {
             "port" : "",
