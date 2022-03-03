@@ -1,0 +1,1 @@
+<view class="setMsg data-v-e71b594c"><view class="circle data-v-e71b594c" style="{{'background:'+(background[1])+';'}}"><vus-sphere-progress vue-id="01d898ec-1" anim="{{true}}" percent="{{percent}}" color="{{[background[3],background[2],background[4]]}}" font-size="32rpx" width="{{100}}" class="data-v-e71b594c" bind:__l="__l"></vus-sphere-progress></view></view>

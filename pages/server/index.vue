@@ -72,9 +72,9 @@
 		methods: {
 			// 点击查看消息内容
 			rightClick() {
-				// uni.navigateTo({
-				// 	url: './childComps/serverMsg'
-				// })
+				uni.navigateTo({
+					url: './childComps/serverMsg'
+				})
 			},
 			// 切换tabs
 			currentIndex(index) {

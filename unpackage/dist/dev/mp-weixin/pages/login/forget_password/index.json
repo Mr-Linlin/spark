@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "uni-nav-bar": "/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar",
+    "u--input": "/node-modules/uview-ui/components/u--input/u--input",
+    "u-toast": "/node-modules/uview-ui/components/u-toast/u-toast",
+    "u-code": "/node-modules/uview-ui/components/u-code/u-code",
+    "u-button": "/node-modules/uview-ui/components/u-button/u-button",
+    "container": "/pages/login/input-bg",
+    "my-button": "/components/my-button/my-button"
+  }
+}

@@ -1,0 +1,446 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+.u-line-1.data-v-6e20bb40 {
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical !important;
+}
+.u-line-2.data-v-6e20bb40 {
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical !important;
+}
+.u-line-3.data-v-6e20bb40 {
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical !important;
+}
+.u-line-4.data-v-6e20bb40 {
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical !important;
+}
+.u-line-5.data-v-6e20bb40 {
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical !important;
+}
+.u-border.data-v-6e20bb40 {
+  border-width: 0.5px !important;
+  border-color: #dadbde !important;
+  border-style: solid;
+}
+.u-border-top.data-v-6e20bb40 {
+  border-top-width: 0.5px !important;
+  border-color: #dadbde !important;
+  border-top-style: solid;
+}
+.u-border-left.data-v-6e20bb40 {
+  border-left-width: 0.5px !important;
+  border-color: #dadbde !important;
+  border-left-style: solid;
+}
+.u-border-right.data-v-6e20bb40 {
+  border-right-width: 0.5px !important;
+  border-color: #dadbde !important;
+  border-right-style: solid;
+}
+.u-border-bottom.data-v-6e20bb40 {
+  border-bottom-width: 0.5px !important;
+  border-color: #dadbde !important;
+  border-bottom-style: solid;
+}
+.u-border-top-bottom.data-v-6e20bb40 {
+  border-top-width: 0.5px !important;
+  border-bottom-width: 0.5px !important;
+  border-color: #dadbde !important;
+  border-top-style: solid;
+  border-bottom-style: solid;
+}
+.u-reset-button.data-v-6e20bb40 {
+  padding: 0;
+  background-color: transparent;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+.u-reset-button.data-v-6e20bb40::after {
+  border: none;
+}
+.u-hover-class.data-v-6e20bb40 {
+  opacity: 0.7;
+}
+.u-primary-light.data-v-6e20bb40 {
+  color: #ecf5ff;
+}
+.u-warning-light.data-v-6e20bb40 {
+  color: #fdf6ec;
+}
+.u-success-light.data-v-6e20bb40 {
+  color: #f5fff0;
+}
+.u-error-light.data-v-6e20bb40 {
+  color: #fef0f0;
+}
+.u-info-light.data-v-6e20bb40 {
+  color: #f4f4f5;
+}
+.u-primary-light-bg.data-v-6e20bb40 {
+  background-color: #ecf5ff;
+}
+.u-warning-light-bg.data-v-6e20bb40 {
+  background-color: #fdf6ec;
+}
+.u-success-light-bg.data-v-6e20bb40 {
+  background-color: #f5fff0;
+}
+.u-error-light-bg.data-v-6e20bb40 {
+  background-color: #fef0f0;
+}
+.u-info-light-bg.data-v-6e20bb40 {
+  background-color: #f4f4f5;
+}
+.u-primary-dark.data-v-6e20bb40 {
+  color: #398ade;
+}
+.u-warning-dark.data-v-6e20bb40 {
+  color: #f1a532;
+}
+.u-success-dark.data-v-6e20bb40 {
+  color: #53c21d;
+}
+.u-error-dark.data-v-6e20bb40 {
+  color: #e45656;
+}
+.u-info-dark.data-v-6e20bb40 {
+  color: #767a82;
+}
+.u-primary-dark-bg.data-v-6e20bb40 {
+  background-color: #398ade;
+}
+.u-warning-dark-bg.data-v-6e20bb40 {
+  background-color: #f1a532;
+}
+.u-success-dark-bg.data-v-6e20bb40 {
+  background-color: #53c21d;
+}
+.u-error-dark-bg.data-v-6e20bb40 {
+  background-color: #e45656;
+}
+.u-info-dark-bg.data-v-6e20bb40 {
+  background-color: #767a82;
+}
+.u-primary-disabled.data-v-6e20bb40 {
+  color: #9acafc;
+}
+.u-warning-disabled.data-v-6e20bb40 {
+  color: #f9d39b;
+}
+.u-success-disabled.data-v-6e20bb40 {
+  color: #a9e08f;
+}
+.u-error-disabled.data-v-6e20bb40 {
+  color: #f7b2b2;
+}
+.u-info-disabled.data-v-6e20bb40 {
+  color: #c4c6c9;
+}
+.u-primary.data-v-6e20bb40 {
+  color: #3c9cff;
+}
+.u-warning.data-v-6e20bb40 {
+  color: #f9ae3d;
+}
+.u-success.data-v-6e20bb40 {
+  color: #5ac725;
+}
+.u-error.data-v-6e20bb40 {
+  color: #f56c6c;
+}
+.u-info.data-v-6e20bb40 {
+  color: #909399;
+}
+.u-primary-bg.data-v-6e20bb40 {
+  background-color: #3c9cff;
+}
+.u-warning-bg.data-v-6e20bb40 {
+  background-color: #f9ae3d;
+}
+.u-success-bg.data-v-6e20bb40 {
+  background-color: #5ac725;
+}
+.u-error-bg.data-v-6e20bb40 {
+  background-color: #f56c6c;
+}
+.u-info-bg.data-v-6e20bb40 {
+  background-color: #909399;
+}
+.u-main-color.data-v-6e20bb40 {
+  color: #303133;
+}
+.u-content-color.data-v-6e20bb40 {
+  color: #606266;
+}
+.u-tips-color.data-v-6e20bb40 {
+  color: #909193;
+}
+.u-light-color.data-v-6e20bb40 {
+  color: #c0c4cc;
+}
+.u-safe-area-inset-top.data-v-6e20bb40 {
+  padding-top: 0;
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+}
+.u-safe-area-inset-right.data-v-6e20bb40 {
+  padding-right: 0;
+  padding-right: constant(safe-area-inset-right);
+  padding-right: env(safe-area-inset-right);
+}
+.u-safe-area-inset-bottom.data-v-6e20bb40 {
+  padding-bottom: 0;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.u-safe-area-inset-left.data-v-6e20bb40 {
+  padding-left: 0;
+  padding-left: constant(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left);
+}
+.data-v-6e20bb40::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+  height: 0 !important;
+  -webkit-appearance: none;
+  background: transparent;
+}
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/* 文字尺寸 */
+/* 配置颜色 */
+/**
+ * 全局样式
+ */
+.flexRow.data-v-6e20bb40 {
+  display: flex;
+  flex-direction: row;
+}
+.global-container.data-v-6e20bb40 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: var(--bg-color-global);
+  height: calc(100%-20rpx);
+  overflow: scroll;
+  padding-bottom: 70px;
+}
+.flexCol.data-v-6e20bb40 {
+  display: flex;
+  flex-direction: column;
+}
+.flexWrap.data-v-6e20bb40 {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 1;
+}
+.flexAlignCenter.data-v-6e20bb40 {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+.flexJustifyCenter.data-v-6e20bb40 {
+  display: flex;
+  justify-content: center;
+  line-height: 1;
+}
+.flexCenter.data-v-6e20bb40 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flexSb.data-v-6e20bb40 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1;
+}
+.list-tj .mescroll-empty.data-v-6e20bb40 {
+  padding: 0 !important;
+}
+.uni-sample-toast.data-v-6e20bb40 {
+  width: 100% !important;
+}
+.color1Top.data-v-6e20bb40 {
+  border-top: 12rpx solid #ebebeb;
+}
+.color2Top.data-v-6e20bb40 {
+  border-top: 12rpx solid #1E2E3E;
+}
+.borderTop.data-v-6e20bb40 {
+  border-top: 16rpx solid #F6F7F9;
+}
+.borderBottom.data-v-6e20bb40 {
+  border-bottom: 16rpx solid #F6F7F9;
+}
+.mr20.data-v-6e20bb40 {
+  margin-right: 20rpx;
+}
+.ml20.data-v-6e20bb40 {
+  margin-left: 20rpx;
+}
+.mescroll-bottombar.data-v-6e20bb40 {
+  display: none;
+}
+/**
+ * 自定义公式
+ */
+/**
+ * 动画
+ */
+.rotate.data-v-6e20bb40 {
+  -webkit-animation: rotate-data-v-6e20bb40 1s linear forwards;
+          animation: rotate-data-v-6e20bb40 1s linear forwards;
+}
+@-webkit-keyframes rotate-data-v-6e20bb40 {
+0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+@keyframes rotate-data-v-6e20bb40 {
+0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+.marketBuy .uni-numbox__minus.data-v-6e20bb40, .marketBuy .uni-numbox__value.data-v-6e20bb40, .marketBuy .uni-numbox__plus.data-v-6e20bb40 {
+  border-color: #D32D25;
+  background-color: transparent;
+}
+.marketBuy .uni-numbox__minus.data-v-6e20bb40 {
+  border: 0.5px solid #D32D25;
+}
+.marketBuy .uni-numbox__plus.data-v-6e20bb40 {
+  border: 0.5px solid #D32D25;
+}
+.marketBuy .uni-numbox__value.data-v-6e20bb40 {
+  border-top: 0.5px solid #D32D25;
+  border-bottom: 0.5px solid #D32D25;
+}
+.marketBuy .checklist-box.data-v-6e20bb40 {
+  margin-right: 10rpx !important;
+}
+.register .checklist-box.data-v-6e20bb40 {
+  margin-right: 0 !important;
+}
+view.data-v-6e20bb40, scroll-view.data-v-6e20bb40, swiper-item.data-v-6e20bb40 {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  align-items: stretch;
+  align-content: flex-start;
+}
+@font-face {
+  font-family: 'uicon-iconfont';
+  src: url("https://at.alicdn.com/t/font_2225171_8kdcwk4po24.ttf") format("truetype");
+}
+.u-icon.data-v-6e20bb40 {
+  display: flex;
+  align-items: center;
+}
+.u-icon--left.data-v-6e20bb40 {
+  flex-direction: row-reverse;
+  align-items: center;
+}
+.u-icon--right.data-v-6e20bb40 {
+  flex-direction: row;
+  align-items: center;
+}
+.u-icon--top.data-v-6e20bb40 {
+  flex-direction: column-reverse;
+  justify-content: center;
+}
+.u-icon--bottom.data-v-6e20bb40 {
+  flex-direction: column;
+  justify-content: center;
+}
+.u-icon__icon.data-v-6e20bb40 {
+  font-family: uicon-iconfont;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.u-icon__icon--primary.data-v-6e20bb40 {
+  color: #3c9cff;
+}
+.u-icon__icon--success.data-v-6e20bb40 {
+  color: #5ac725;
+}
+.u-icon__icon--error.data-v-6e20bb40 {
+  color: #f56c6c;
+}
+.u-icon__icon--warning.data-v-6e20bb40 {
+  color: #f9ae3d;
+}
+.u-icon__icon--info.data-v-6e20bb40 {
+  color: #909399;
+}
+.u-icon__img.data-v-6e20bb40 {
+  height: auto;
+  will-change: transform;
+}
+.u-icon__label.data-v-6e20bb40 {
+  line-height: 1;
+}
+

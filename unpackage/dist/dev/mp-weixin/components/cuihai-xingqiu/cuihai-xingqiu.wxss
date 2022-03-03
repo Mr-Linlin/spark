@@ -1,0 +1,19 @@
+
+.tagBall {
+	width: 600rpx;
+	height: 600rpx;
+	margin: 0 auto;
+	position: relative;
+	/* background-color: red; */
+}
+.tag {
+	width: 150rpx;
+	position: absolute;
+	color: #000000;
+	font-size: 15rpx;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* background-color: red; */
+}
+
