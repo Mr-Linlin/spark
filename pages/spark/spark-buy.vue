@@ -50,22 +50,23 @@
 						<view>数量</view>
 					</view>
 					<view style="display: block;height: 10rpx;"></view>
-					<view :key="index" v-for="(item,index) of quotation">
-						<view class="p-item flexC space-between">
-							<view class="schedule"></view>
-							<view>{{item.currentPrice}}</view>
-							<view>291.6911</view>
+					<scroll-view class="scroll-box" scroll-y>
+						<view :key="index" v-for="(item,index) of quotation">
+							<view @click="handlerSelect(item)" class="p-item flexC space-between">
+								<view class="schedule"></view>
+								<view>{{item.price}}</view>
+								<view>{{item.nums}}</view>
+							</view>
 						</view>
-					</view>
-
-					<view class="ptb1">≈10.29CNY</view>
+					</scroll-view>
+					<!-- <view class="ptb1">≈10.29CNY</view>
 					<view :key="item" v-for="(item,index) of [10,11,22,546,789,7]">
 						<view class="p-item flexC space-between" style="font-size: 20rpx;height: 56rpx;">
 							<view class="schedule bg2"></view>
 							<view>871.64</view>
 							<view>291.6911</view>
 						</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</view>
@@ -130,7 +131,7 @@
 				buyData: {
 					"method": "publish",
 					"tradeId": "9",
-					"quantity": "10",
+					"quantity": "",
 					"type": "0", // 1 卖 0：买
 					"price": "",
 					"lang": ""
@@ -156,12 +157,17 @@
 		created() {
 			// format((0.1+0.2), {precision: 14})
 			if (this.flag) {
-				// this.getWallet()
-				// this.handleSubscribe(2);
-				// this.getTrustList()
+				this.getWallet()
+				this.handleSubscribe(9);
+				this.getTrustList()
 				console.log('----------')
-				this.$emit('data',{ 
-					data:{"method":"sub","tradeId":9,"token":"c5f88022342ee6cb72993b9e76e28a14","type":8}
+				this.$emit('data', {
+					data: {
+						"method": "sub",
+						"tradeId": 9,
+						"token": "c5f88022342ee6cb72993b9e76e28a14",
+						"type": 8
+					}
 				})
 			}
 		},
@@ -173,9 +179,7 @@
 		},
 		methods: {
 			// 撤销单子
-			handlerRepeal({
-				id
-			}) {
+			handlerRepeal({id}) {
 				trusteeCancel({
 					id
 				}).then(e => {
@@ -187,6 +191,14 @@
 				this.$emit('data', {
 					data: this.buyData
 				})
+			},
+			// 选择数据
+			handlerSelect({price,nums}){
+				
+				this.buyData = {
+					...this.buyData,
+					price
+				}
 			},
 			...mapMutations('theme', ['updateTheme']),
 			changeurl() {
@@ -203,7 +215,16 @@
 				}
 			},
 			changing(e) {
+				if( !this.buyData.price )return
+				const n = Number(JSON.parse(format((  this.walletData.buy * (e/100)   ), {
+					precision: 14
+				})))
 				this.sliderVal = e;
+				this.buyData = {
+					...this.buyData,
+					quantity:n/this.buyData.price
+				}
+				// this.sliderVal = e;
 			},
 			// 获取钱包
 			getWallet() {
@@ -230,7 +251,7 @@
 			// 计算数量
 			handleNumberCount(flag) {
 				let quantity = this.buyData.quantity
-				const n = Number(JSON.parse(format((flag ? (this.buyData.quantity + 0.0001) : (this.buyData.quantity -
+				const n = Number(JSON.parse(format((flag ? (this.buyData.quantity + 1) : (this.buyData.quantity -
 					0.0001)), {
 					precision: 14
 				})))
@@ -264,6 +285,10 @@
 						method: 'trust'
 					}
 				})
+			},
+			// 买入委托列表
+			getEntrustList(list) {
+				this.quotation = list.buyList
 			}
 		}
 	}
@@ -400,5 +425,8 @@
 				line-height: 25rpx;
 			}
 		}
+	}
+	.scroll-box{
+		height: 600rpx;
 	}
 </style>
