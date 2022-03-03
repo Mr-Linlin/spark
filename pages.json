@@ -3,15 +3,15 @@
 		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 	},
 	"pages": [
-		// {
-		// 	//引导页
-		// 	"path": "pages/lead",
-		// 	"style": {
-		// 		"app-plus": {
-		// 			"titleNView": false
-		// 		}
-		// 	}
-		// },
+		{
+			//引导页
+			"path": "pages/lead",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
 		{
 			//登陆页
 			"path": "pages/login/index",
@@ -188,7 +188,7 @@
 		}, { //参与抢单
 			"path": "pages/home/grabOrders",
 			"style": {
-				"navigationBarTitleText": "参与乌拉诺斯的诺言",
+				"navigationBarTitleText": "参与乌拉诺斯的预言",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#FAFCFF"
 			}
@@ -338,7 +338,34 @@
 				"enablePullDownRefresh": false
 			}
 		}
-	],
+	    ,{//收益提现
+            "path" : "pages/capital/withdrawals/profit",
+            "style" : {
+                "app-plus": {
+                	"titleNView": false
+                }
+            }
+            
+        }
+        ,{//本金提现
+            "path" : "pages/capital/withdrawals/principal",
+            "style" : {
+                "app-plus": {
+                	"titleNView": false
+                }
+            }
+        }
+        ,{//提现记录
+            "path" : "pages/capital/withdrawals/record",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "提现记录",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#FAFCFF"
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -363,7 +390,7 @@
 			},
 			{
 				"pagePath": "pages/spark/index",
-				"text": "交易所",
+				"text": "能量",
 				"iconPath": "static/tarbar/spark.png",
 				"selectedIconPath": "static/tarbar/spark_active.png"
 			},

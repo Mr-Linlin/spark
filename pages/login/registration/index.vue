@@ -81,7 +81,7 @@
 				// refCode: null,
 				seconds: 60,
 				password: '',
-				inviteCode: '661141',
+				inviteCode: '',
 				isCodeType:true,
 				password2:''
 			}
