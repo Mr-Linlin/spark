@@ -1,13 +1,8 @@
 <template>
 	<view :style="theme" class="global-container">
-		<!-- <uni-nav-bar fixed title="交易所" color="#1A1B1C" :border="false">
-			<view slot="right">
-				<view class="currency" @click="openPopud">切换币种</view>
-			</view>
-		</uni-nav-bar> -->
 		<view class="header-zw"></view>
 		<view class="header">
-			<view class="header-title">交易所</view>
+			<view class="header-title">能量交换</view>
 			<view class="currency" @click="openPopud">切换币种<u-icon class="arrow-down" color="#3A82FE" name="arrow-down"
 					size="12rpx"></u-icon>
 			</view>
@@ -20,13 +15,13 @@
 			<spark-data :flag="flag" @data="handlerData" ref="data"></spark-data>
 		</view>
 		<view v-if="defaultIndex===1">
-			<spark-buy></spark-buy>
+			<spark-buy @data="handlerData" ref='buy'></spark-buy>
 		</view>
 		<view v-else-if="defaultIndex===2">
 			<spark-sell></spark-sell>
 		</view>
 		<view v-else-if="defaultIndex===3">
-			<spark-entrust @entrust="handlerEntrust"></spark-entrust>
+			<spark-entrust :flag="flag" @data="handlerData" ></spark-entrust>
 		</view>
 		<view v-else-if="defaultIndex===4">
 			<spark-deals></spark-deals>
@@ -35,18 +30,17 @@
 		<wyb-popup ref="popup" type="left" width="500" radius="6">
 			<view class="popup-content">
 				<view class="plr3 fz-wb2" :style="'margin-top:'+sliderTop+'px'">GS</view>
-				<view class="plr3" v-for="(item,index) of slider_tabs" :key="index">
+				<view class="plr3" v-for="(item,index) of areaList" :key="index">
 					<view class="slider-tabs-bgcolor mt2 flexC space-between"
 						:class="index === sliderIndex?'slider-tabs-bgcolor-activer':'slider-tabs-bgcolor'"
 						@click="changeSliderIndex(index)">
-						<view>{{item.text}}</view>
-						<view>{{item.num}}</view>
+						<view>{{item.areaName}}/GS</view>
+						<view>{{item.currentPrice}}</view>
 					</view>
 				</view>
 			</view>
 		</wyb-popup>
 	</view>
-
 </template>
 
 <script>
@@ -61,7 +55,7 @@
 		BASE_URL
 	} from "../../http/request.js"
 	export default {
-		name:"spark",
+		name: "spark",
 		components: {
 			liuyunoTabs,
 			sparkDeals,
@@ -75,8 +69,10 @@
 			return {
 				sliderTop: 40,
 				tabs: ['数据', '买入', '卖出', '委托', '成交'],
+				areaList: [],
+
 				defaultIndex: 0,
-				flag:false,
+				flag: false,
 				slider_tabs: [{
 						text: 'FNT/GS',
 						num: '32.55'
@@ -100,11 +96,8 @@
 					this.sliderTop = statusBarHeight;
 				}
 			})
-
 			var socketOpen = false;
-
 			this.createSocket()
-
 		},
 		methods: {
 			/* 
@@ -126,7 +119,6 @@
 			     TICKER("行情", 13),
 			     LAST("最后10位", 14),
 			     ALL("重启池全网用户购买开关", 15);
-			 
 			 */
 
 			// 打开侧边栏
@@ -143,10 +135,9 @@
 			// 初始化socked
 			createSocket() {
 				uni.connectSocket({
-					// url: 'ws://211.149.135.240:7888/websocket/trade',
 					url: 'ws://211.149.135.240:7888/websocket/trade',
-					header:{
-						token:uni.getStorageSync('token')
+					header: {
+						token: uni.getStorageSync('token')
 					},
 					success(e) {
 						console.log(e)
@@ -165,11 +156,9 @@
 						"to": 1645772340
 					}) */
 					this.flag = true;
-					this.sendSocket({
-						"method": "symbols",
-						"tradeId": 1,
-						"tradeId": 9
-					})
+					
+					this.handleSubscribe();
+					this.getGSList()
 				});
 				uni.onSocketError(function(res) {
 					console.log(res)
@@ -177,20 +166,35 @@
 				})
 				uni.onSocketMessage((res) => {
 					const data = JSON.parse(res.data)
-					console.log(data)
+					console.log('👇👇👇👇👇👇👇👇')
+					console.dir(data)
 					const obj = data.obj;
 					switch (data.code) {
-						case 11: {
+						case 0: { // 币种列表
+							this.areaList = obj
+							break;
+						}
+						
+						case 10: {
+							this.$refs['buy'].setWallet(obj)
+							break;
+						}
+						case 11: { // K线图
 							this.$refs['data'].handleKLine(obj)
 							break;
+						}
+						case 13:{ // 行情
+							
+							// this.$refs['data'].handleKLine(obj)
+							break
 						}
 					}
 				});
 			},
 			sendSocket(data) {
+				console.log(data)
 				data.token = uni.getStorageSync('token')
 				console.log(JSON.stringify(data))
-				console.log(new Date().getTime())
 				uni.sendSocketMessage({
 					data: (typeof data === 'string') ? data : JSON.stringify(data),
 					success(e) {
@@ -201,14 +205,33 @@
 					}
 				});
 			},
+			// 币种列表
+			getGSList() {
+				this.sendSocket({
+					"method": "getAreaTrade"
+				})
+			},
 			// 委托分发
-			handlerEntrust({data}){
+			handlerEntrust({
+				data
+			}) {
 				this.sendSocket(data)
 			},
 			// 数据分发
-			handlerData({data}){
+			handlerData({
+				data
+			}) {
 				console.log(data)
 				this.sendSocket(data)
+			},
+			// 发起订阅
+				// 2 行情  9 订阅委托
+			handleSubscribe() {
+				this.sendSocket({
+					"method": "sub",
+					"tradeId": "9",
+					"type": "2"
+				})
 			}
 		}
 	}
@@ -226,6 +249,7 @@
 		justify-content: space-between;
 		padding: 86rpx 32rpx 0;
 		background: #FAFCFF;
+
 		.header-title {
 			font-size: 42rpx;
 			font-weight: bold;

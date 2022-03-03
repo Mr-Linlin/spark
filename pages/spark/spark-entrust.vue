@@ -90,16 +90,43 @@
 				value11:true, // 交易类型
 			}
 		},
+		props: {
+			flag: {
+				type: Boolean,
+				default: false
+			}
+		},
+		watch: {
+			flag(r1) {
+				if (r1) {
+					this.handlerWeiTuo()
+				}
+			}
+		},
+		created() {
+			console.log('-----' + this.flag)
+			if(this.flag){
+				this.handlerWeiTuo()
+			}
+		},
 		methods:{
 			valChange(){
 				
 			},
 			// 撤销
 			handlerRepeal(){
-				this.$emit('entrust',{
-					type:1,
+				this.$emit('data',{
 					data:{
 						method:'cancel'
+					}
+				})
+			},
+			// 获取当前委托
+			handlerWeiTuo(){
+				this.$emit('data',{
+					data:{
+						method:'trust',
+						type:'9'
 					}
 				})
 			}
