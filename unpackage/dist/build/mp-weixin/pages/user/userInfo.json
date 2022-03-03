@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "个人信息",
-  "enablePullDownRefresh": false,
-  "navigationBarBackgroundColor": "#FAFCFF",
-  "usingComponents": {
-    "approve": "/pages/user/childCimps/Approve"
-  }
-}

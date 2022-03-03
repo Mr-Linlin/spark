@@ -1,1 +1,0 @@
-<view class="top-warp"><view class="{{['back','flexSb',showLine?'bottomLine':'']}}"><view><text>Hi~</text><text>{{userLink}}</text></view><view></view></view></view>

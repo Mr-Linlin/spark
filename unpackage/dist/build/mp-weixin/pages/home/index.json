@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "con-sulting": "/pages/home/consulting",
-    "load-line": "/components/load-line/load-line"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "pp-slider": "/uni_modules/pp-slider/components/pp-slider/pp-slider",
-    "my-button": "/components/my-button/my-button"
-  }
-}
