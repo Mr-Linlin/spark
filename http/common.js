@@ -104,3 +104,6 @@ export const trusteeList= user => http.post('/front/trade/trustee/list', user)
 
 // 撤单
 export const trusteeCancel = user => http.post('/front/trade/trustee/cancel', user)
+
+// 成交委托
+export const knockdownList= user => http.post('/front/trade/trustee/list', user)

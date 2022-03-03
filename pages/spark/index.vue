@@ -23,7 +23,7 @@
 		<view v-else-if="defaultIndex===3">
 			<spark-entrust :flag="flag" @data="handlerData" ></spark-entrust>
 		</view>
-		<view v-else-if="defaultIndex===4">
+		<view v-else-if="defaultIndex===4" @data="handlerEntrust">
 			<spark-deals :flag="flag"></spark-deals>
 		</view>
 		<!-- 侧边栏 -->
@@ -151,26 +151,19 @@
 					}
 				});
 				uni.onSocketOpen((res) => {
-					console.log("链接打开", res)
-					/* this.sendSocket({
-						"method": "kData",
-						"tradeId": 9,
-						"resolution": 1,
-						"from": 1645772340,
-						"to": 1645772340
-					}) */
+					// console.log("链接打开", res)
 					this.flag = true;
 					
 					this.getGSList()
 				});
 				uni.onSocketError(function(res) {
-					console.log(res)
-					console.log('WebSocket连接打开失败，请检查！');
+					// console.log(res)
+					// console.log('WebSocket连接打开失败，请检查！');
 				})
 				uni.onSocketMessage((res) => {
 					const data = JSON.parse(res.data)
-					console.log('👇👇👇👇👇👇👇👇👇')
-					console.log(data)
+					// console.log('👇👇👇👇👇👇👇👇👇')
+					// console.log(data)
 					const obj = data.obj;
 					switch (data.code) {
 						case -1:{
@@ -209,16 +202,16 @@
 				});
 			},
 			sendSocket(data) {
-				console.log(data)
+				// console.log(data)
 				data.token = uni.getStorageSync('token')
-				console.log(JSON.stringify(data))
+				// console.log(JSON.stringify(data))
 				uni.sendSocketMessage({
 					data: (typeof data === 'string') ? data : JSON.stringify(data),
 					success(e) {
-						console.log(e)
+						// console.log(e)
 					},
 					fail(e) {
-						console.log(e)
+						// console.log(e)
 					}
 				});
 			},
@@ -238,7 +231,7 @@
 			handlerData({
 				data
 			}) {
-				console.log(data)
+				// console.log(data)
 				this.sendSocket(data)
 			},
 			
