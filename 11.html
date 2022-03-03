@@ -7,12 +7,40 @@
         .tagBall{width:800px;height:800px;margin:50px auto;position:relative;}
         .tag{display:block;position:absolute;left:0px;top:0px;color:#000;text-decoration:none;font-size:15px;font-family:"微软雅黑";font-weight:bold;}
         .tag:hover{border:1px solid #666;}
+		
+		@font-face {
+		    font-family: "spark"; /* Project id 3213744 */
+		    src: url('//at.alicdn.com/t/font_3213744_oy5n766h1c.woff2?t=1646192519443') format('woff2'),
+		    url('//at.alicdn.com/t/font_3213744_oy5n766h1c.woff?t=1646192519443') format('woff'),
+		    url('//at.alicdn.com/t/font_3213744_oy5n766h1c.ttf?t=1646192519443') format('truetype');
+		}
+		.search-ipt{
+		    position: relative;
+		    padding-left: 36px;
+		}
+		.search-ipt:before{
+		    display: block;
+		    position: absolute;
+		    top: 50%;
+		    left: 0;
+		    transform: translateY(-50%);
+		    content: '这里';
+		    font-family: "spark" !important;
+		    font-size: 80px;
+		    font-style: normal;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+		    color: red;
+		    z-index: 999999;
+		}
+		
+		
     </style>
 
 </head>
 <body>
 
-<div class="tagBall">
+<!-- <div class="tagBall">
     <a class="tag" target="_blank" href="#">java</a>
     <a class="tag" target="_blank" href="#">Spring</a>
     <a class="tag" target="_blank" href="#">javascript</a>
@@ -54,7 +82,9 @@
     <a class="tag" target="_blank" href="#">Python</a>
     <a class="tag" target="_blank" href="#">后半夜</a>
 
-</div>
+</div> -->
+<div class="search-ipt">asdasd</div>
+<input type="" name="" id="" class="search-ipt" value="" />
 
 <script type="text/javascript">
     var tagEle = "querySelectorAll" in document ? document.querySelectorAll(".tag") : getClass("tag"),

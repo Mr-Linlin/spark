@@ -127,6 +127,7 @@
 		created() {
 			if(this.flag){
 				this.sendK()
+				
 			}
 		},
 		methods: {

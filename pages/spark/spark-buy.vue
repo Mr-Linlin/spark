@@ -6,20 +6,20 @@
 					<view class="fz4 fz-wb2">价格</view>
 					<!-- 加减 -->
 					<view class="mt1 bg-color2 flexC space-between" style="height: 88rpx;width: 100%;">
-						<view class="pl2">870.9585</view>
+						<u--input type="number" clearable placeholder="价格" border="none" v-model="buyData.price"></u--input>
 						<view class="flexC pr2">
-							<view style="width: 32rpx;height: 32rpx;" class="mr2 ta fz-wb2">-</view>
-							<view style="width: 32rpx;height: 32rpx;" class="ta fz-wb2">+</view>
+							<view @click="handlePriceCount(false)" style="width: 32rpx;height: 32rpx;" class="mr2 ta fz-wb2">-</view>
+							<view @click="handlePriceCount(true)" style="width: 32rpx;height: 32rpx;" class="ta fz-wb2">+</view>
 						</view>
 					</view>
 					<view style="text-align: right;" class="fz1 fc-c2">≈10.29CNY±0.66%</view>
 					<view class="mt3 fz4 fz-wb2">数量</view>
 					<!-- 加减 -->
 					<view class="mt1 bg-color2 flexC space-between" style="height: 88rpx;width: 100%;">
-						<view class="pl2 fz-wb2" style="color: rgba(0, 0, 0, 0.22);">数量</view>
+						<u--input type="number" clearable placeholder="数量" border="none" v-model="buyData.quantity"></u--input>
 						<view class="flexC pr2">
-							<view style="width: 32rpx;height: 32rpx;" class="mr2 ta fz-wb2">-</view>
-							<view style="width: 32rpx;height: 32rpx;" class="ta fz-wb2">+</view>
+							<view @click="handleNumberCount(false)" style="width: 32rpx;height: 32rpx;" class="mr2 ta fz-wb2">-</view>
+							<view @click="handleNumberCount(true)" style="width: 32rpx;height: 32rpx;" class="ta fz-wb2">+</view>
 						</view>
 					</view>
 					<view class="mt1 bg-color2" style="width: 340rpx;height: 133rpx;border-radius: 12rpx;">
@@ -82,6 +82,7 @@
 
 <script>
 	import myButton from '../../components/my-button/my-button.vue';
+	import {format} from '../../static/js/math.js'
 	import {
 		mapMutations
 	} from 'vuex'
@@ -92,7 +93,20 @@
 		data() {
 			return {
 				sliderVal: 0,
+				buyData: {
+					"method": "publish",
+					"token": "",
+					"tradeId": "",
+					"quantity": "0",
+					"type": "",
+					"price": "0",
+					"lang": ""
+				},
 				dealsTitle: ['时间', '价格(GS)', '数量'],
+				walletData: {
+					buy: 0,
+					sell: 0
+				},
 				dealsData: [{
 						timer: '07:47:23',
 						price: '188.88',
@@ -148,13 +162,29 @@
 						count: '999.99'
 					},
 				],
-				
+
+			}
+		},
+		watch: {
+			flag(r1) {
+				if (r1) {
+					this.getWallet()
+				}
+			}
+		},
+		created() {
+			// format((0.1+0.2), {precision: 14})
+			this.getWallet()
+		},
+		props: {
+			flag: {
+				type: Boolean,
+				default: false
 			}
 		},
 		methods: {
 			...mapMutations('theme', ['updateTheme']),
 			changeurl() {
-				
 				if (this.theme['--bg-color-global'] == 'rgba(247, 250, 255, 1)') {
 					this.updateTheme('dark');
 					uni.setTabBarStyle({
@@ -169,6 +199,32 @@
 			},
 			changing(e) {
 				this.sliderVal = e;
+			},
+			// 获取钱包
+			getWallet() {
+				this.$emit('data', {
+					data: {
+						"method": "wallet",
+						"tradeId": '9'
+					}
+				})
+			},
+			setWallet(data) {
+				this.walletData = data
+			},
+			// 计算价格
+			handlePriceCount(flag){
+				let price = this.buyData.price
+				const n = Number(JSON.parse( format( (  flag ? (this.buyData.price + 0.0001) : (this.buyData.price - 0.0001)  ),{precision: 14} )  ))
+				if(n<0)return;
+				this.buyData.price = n
+			},
+			// 计算数量
+			handleNumberCount(flag){
+				let quantity = this.buyData.quantity
+				const n = Number(JSON.parse( format( (  flag ? (this.buyData.quantity + 0.0001) : (this.buyData.quantity - 0.0001)  ),{precision: 14} )  ))
+				if(n<0)return;
+				this.buyData.quantity = n
 			}
 		}
 	}
@@ -217,5 +273,12 @@
 
 			background: #BAFFEB;
 		}
+	}
+	/deep/ .uni-input-wrapper{
+		padding-left: 20rpx;
+	}
+	/deep/ .uni-input-placeholder{
+		left: 20rpx !important;
+		color: rgba(0, 0, 0, 0.22);
 	}
 </style>
