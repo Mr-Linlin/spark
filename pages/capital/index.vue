@@ -118,7 +118,6 @@
 			      		第四阶段：入账时间在90天以上(不含90天)
 			      	</view>
 			      </view>
-				  
 			    </u-collapse-item>
 			  </u-collapse>
 		</view>
