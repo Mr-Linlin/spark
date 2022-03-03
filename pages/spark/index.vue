@@ -18,7 +18,7 @@
 			<spark-buy :flag="flag" @data="handlerData" ref='buy'></spark-buy>
 		</view>
 		<view v-else-if="defaultIndex===2">
-			<spark-sell :flag="flag"></spark-sell>
+			<spark-sell :flag="flag"  @data="handlerData" ref='sell' ></spark-sell>
 		</view>
 		<view v-else-if="defaultIndex===3">
 			<spark-entrust :flag="flag" @data="handlerData" ></spark-entrust>
@@ -185,17 +185,15 @@
 							break;
 						}
 						case 9:{ // 实时交易
-							this.$refs['buy'].setBuyList(obj)
+							this.$refs[ this.defaultIndex === 1 ? 'buy' : 'sell'  ].setBuyList(obj)
 							break;
 						}
 						case 8:{ // 买入 卖出列表
-							// if(  ){
-								
-							// }
+							this.$refs[ this.defaultIndex === 1 ? 'buy' : 'sell'  ].getEntrustList(obj)
 							break;
 						}
 						case 10: { // 钱包
-							this.$refs['buy'].setWallet(obj)
+							this.$refs[ this.defaultIndex === 1 ? 'buy' : 'sell'  ].setWallet(obj)
 							break;
 						}
 						case 11: { // K线图
@@ -204,7 +202,7 @@
 						}
 						case 13:{ // 行情  
 							
-							this.$refs['buy'].setBuyList(obj)
+							this.$refs[ this.defaultIndex === 1 ? 'buy' : 'sell'  ].setBuyList(obj)
 							break
 						}
 					}
