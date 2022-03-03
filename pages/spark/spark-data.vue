@@ -155,7 +155,6 @@
 				console.log("获取点击索引事件", e);
 				//先拿到点击索引，您可以根据索引拼接一下textList
 				let currentIndex = e.currentIndex.index;
-				console.log(currentIndex)
 				if (currentIndex > -1) {
 					let textList = [{
 							text: "我是一个自定义标题",
@@ -203,7 +202,6 @@
 					//date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
 					return  date.getHours() + ":" + date.getMinutes()
 				})
-			
 				this.chartData['categories'] = times;
 				this.chartData['series'][0]['data'] = kArray;
 
