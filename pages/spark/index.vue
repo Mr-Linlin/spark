@@ -91,9 +91,9 @@
 			}
 		},
 		onLoad() {
-			trusteeList({type:0}).then(e=>{
+			/* trusteeList({type:0}).then(e=>{
 				console.log(e)
-			})
+			}) */
 			uni.getSystemInfo({
 				success: (r) => {
 					let statusBarHeight = r.statusBarHeight + 45;
@@ -169,7 +169,7 @@
 				})
 				uni.onSocketMessage((res) => {
 					const data = JSON.parse(res.data)
-					console.log('👇👇👇👇👇👇👇👇')
+					console.log('👇👇👇👇👇👇👇👇👇')
 					console.log(data)
 					const obj = data.obj;
 					switch (data.code) {
@@ -189,7 +189,9 @@
 							break;
 						}
 						case 8:{ // 买入 卖出列表
-							
+							// if(  ){
+								
+							// }
 							break;
 						}
 						case 10: { // 钱包

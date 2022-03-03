@@ -1,9 +1,0 @@
-{
-  "usingComponents": {
-    "uni-nav-bar": "/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar",
-    "u--input": "/node-modules/uview-ui/components/u--input/u--input",
-    "u-button": "/node-modules/uview-ui/components/u-button/u-button",
-    "container": "/pages/login/input-bg",
-    "my-button": "/components/my-button/my-button"
-  }
-}

@@ -1,1 +1,0 @@
-<view class="{{['u-checkbox-group','data-v-02050908',bemClass]}}"><slot></slot></view>
