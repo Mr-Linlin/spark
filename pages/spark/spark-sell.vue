@@ -11,8 +11,7 @@
 						<view class="flexC pr2">
 							<view @click="handlePriceCount(false)" style="width: 32rpx;height: 32rpx;"
 								class="mr2 ta fz-wb2">-</view>
-							<view @click="handlePriceCount(true)" style="width: 32rpx;height: 32rpx;" class="ta fz-wb2">
-								+</view>
+							<view @click="handlePriceCount(true)" style="width: 32rpx;height: 32rpx;" class="ta fz-wb2">+</view>
 						</view>
 					</view>
 					<!-- <view style="text-align: right;" class="fz1 fc-c2">≈10.29CNY±0.66%</view> -->
