@@ -271,7 +271,7 @@
 			// 获取钱包
 			setWallet(data) {
 				this.walletData = data
-				console.log(this.walletData)
+				// console.log(this.walletData)
 			},
 		}
 	}

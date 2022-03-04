@@ -119,7 +119,7 @@
 			}
 		},
 		watch: {
-			flag(r1) {
+			flag(r1,r2) {
 				if (r1) {
 					this.sendK()
 					this.handlerGetData()
