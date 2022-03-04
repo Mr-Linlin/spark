@@ -3,7 +3,7 @@
 		<view class="flexC space-between mt2">
 			<view class="top-left">
 				<view style="padding: 20rpx 20rpx 0 20rpx;">
-					<view class="fz4 fz-wb2">价格</view> 
+					<view class="fz4 fz-wb2">价格</view>
 					<!-- 加减 -->
 					<view class="mt1 bg-color2 flexC space-between" style="height: 88rpx;width: 100%;">
 						<u--input type="number" clearable placeholder="价格" border="none" v-model="buyData.price">
@@ -11,7 +11,8 @@
 						<view class="flexC pr2">
 							<view @click="handlePriceCount(false)" style="width: 32rpx;height: 32rpx;"
 								class="mr2 ta fz-wb2">-</view>
-							<view @click="handlePriceCount(true)" style="width: 32rpx;height: 32rpx;" class="ta fz-wb2">+</view>
+							<view @click="handlePriceCount(true)" style="width: 32rpx;height: 32rpx;" class="ta fz-wb2">
+								+</view>
 						</view>
 					</view>
 					<!-- <view style="text-align: right;" class="fz1 fc-c2">≈10.29CNY±0.66%</view> -->
@@ -29,8 +30,9 @@
 					</view>
 					<view class="mt1 bg-color2" style="width: 340rpx;height: 133rpx;border-radius: 12rpx;">
 						<view style="width: 340rpx;" class="pt3">
-							<pp-slider :lineSize='4' blockColor="#3A82FE" :value="0" :disabled="false"
-								@changing="changing" :blockSize="16" />
+							<pp-slider :lineSize='4'
+								blockColor="linear-gradient(89.11deg, #48EF72 0.76%, #34C759 99.23%)" :value="0"
+								:disabled="false" @changing="changing" :blockSize="16" />
 						</view>
 						<view class="flexC space-between plr2 mt1">
 							<view class="fc-c2">{{sliderVal}}</view>
@@ -42,7 +44,7 @@
 						<view>{{ buyData.quantity * buyData.price  }}FNT</view>
 					</view>
 					<view class="mt3">
-						<u-button @click="handleBuy" color="#BAFFEB" text="卖出(FNT)" :height="68" :radius="8"></u-button>
+						<u-button @click="handleBuy" color="#34C759" text="卖出(FNT)" :height="68" :radius="8"></u-button>
 					</view>
 				</view>
 			</view>
@@ -80,23 +82,24 @@
 			<view class="e-item" v-for="(item,index) of dealsData" :key="index">
 				<view class="top">
 					<view class="top-left">
-						<text :class="{color2: item.tradeType === 1  }" class="txt1 color1">{{item.tradeType === 0 ? '买入' : '卖出'}}</text>
+						<text :class="{color2: item.tradeType === 1  }"
+							class="txt1 color1">{{item.tradeType === 0 ? '买入' : '卖出'}}</text>
 						<text class="txt2">{{item.tradeCurrencyName}}/GS</text>
 					</view>
 					<view class="top-right">
 						<u-button @click="handlerRepeal(item)" border="none" class="top-right-btn" text="撤销"></u-button>
 					</view>
-				</view>                                                                                                                                           
+				</view>
 				<view class="e-content">
 					<view class="c-left">
-						<view class="c-key">总量({{item.currencyName}})</view>  
+						<view class="c-key">总量({{item.currencyName}})</view>
 						<view class="c-val">{{item.quantity}}</view>
 					</view>
 					<view class="c-right">
 						<view class="c-key">价格(GS)</view>
 						<view class="c-val">{{item.price}}</view>
 					</view>
-					
+
 				</view>
 			</view>
 		</view>
@@ -171,7 +174,9 @@
 		},
 		methods: {
 			// 撤销单子
-			handlerRepeal({id}) {
+			handlerRepeal({
+				id
+			}) {
 				trusteeCancel({
 					id
 				}).then(e => {
@@ -185,7 +190,10 @@
 				})
 			},
 			// 选择数据
-			handlerSelect({price,nums}){
+			handlerSelect({
+				price,
+				nums
+			}) {
 				this.buyData = {
 					...this.buyData,
 					price
@@ -206,14 +214,14 @@
 				}
 			},
 			changing(e) {
-				if( !this.buyData.price )return
-				const n = Number(JSON.parse(format((  this.walletData.buy * (e/100)   ), {
+				if (!this.buyData.price) return
+				const n = Number(JSON.parse(format((this.walletData.buy * (e / 100)), {
 					precision: 14
 				})))
 				this.sliderVal = e;
 				this.buyData = {
 					...this.buyData,
-					quantity:n/this.buyData.price
+					quantity: n / this.buyData.price
 				}
 				// this.sliderVal = e;
 			},
@@ -279,10 +287,10 @@
 			getEntrustList(list) {
 				console.log('----------------------------------------')
 				console.log(list)
-				const num = list.sellList.reduce((total, currentValue)=>{
-					 return (total > currentValue.nums) ?  total : currentValue.nums
-				},list.sellList[0].nums)
-				this.quotation = list.sellList.map(e=>{
+				const num = list.sellList.reduce((total, currentValue) => {
+					return (total > currentValue.nums) ? total : currentValue.nums
+				}, list.sellList[0].nums)
+				this.quotation = list.sellList.map(e => {
 					e.price = (e.price).toFixed(5)
 					e.width = e.nums / num * 100
 					return e
@@ -293,6 +301,17 @@
 </script>
 
 <style lang="scss">
+	::v-deep .movable-view[data-v-2fe2d1ba] {
+		box-shadow: 0px 8rpx 16rpx rgba(88, 204, 117, 0.17);
+	}
+
+	::v-deep .block[data-v-2fe2d1ba],
+		{}
+
+	::v-deep .active[data-v-2fe2d1ba] {
+		background: linear-gradient(89.11deg, #48EF72 0.76%, #34C759 99.23%) !important;
+	}
+
 	.mt2 .top-left {
 		width: 380rpx;
 		height: 686rpx;
@@ -306,13 +325,15 @@
 		background-color: rgba(255, 255, 255, 1);
 		border-radius: 12rpx;
 	}
-	.nums-box{
+
+	.nums-box {
 		display: flex;
 		justify-content: space-between;
 		font-size: 20rpx;
 		color: rgba(0, 0, 0, 0.66);
 		margin-top: 12rpx;
 	}
+
 	.bg-color2 {
 		background-color: $theme-bg-color-global;
 		border-radius: 12rpx;
@@ -326,7 +347,8 @@
 		color: rgba(0, 0, 0, 0.66);
 		background-color: rgba($color: #000, $alpha: 0);
 		z-index: 2;
-		.bg{
+
+		.bg {
 			position: absolute;
 			right: 0;
 			top: 0;
@@ -335,6 +357,7 @@
 			z-index: -1;
 			transition: width .8s;
 		}
+
 		.schedule {
 			position: absolute;
 			z-index: -1;
@@ -343,6 +366,7 @@
 			height: 100%;
 			width: 50%;
 		}
+
 		.bg2 {
 			background: #BAFFEB;
 		}
@@ -375,9 +399,10 @@
 					font-size: 24rpx;
 					font-family: PingFang SC-Regular, PingFang SC;
 					font-weight: 400;
-					
+
 					margin-right: 12rpx;
 				}
+
 				.txt2 {
 					font-size: 24rpx;
 					font-family: DIN-Medium, DIN;
@@ -385,11 +410,19 @@
 					color: #1A1B1C;
 					line-height: 22rpx;
 				}
-				.color1{
+
+				.color1 {
 					color: #3A82FE;
+					background: rgba(#3A82FE, .11) ;
+					padding:0 8rpx;
+					line-height: 22rpx;
 				}
-				.color2{
-					color: rgb(186, 255, 235);
+
+				.color2 {
+						color: rgb(52, 199, 89);
+						background: rgba(52, 199, 89, .11) ;
+						padding:0 8rpx;
+						line-height: 22rpx;
 				}
 			}
 
@@ -440,7 +473,8 @@
 			}
 		}
 	}
-	.scroll-box{
+
+	.scroll-box {
 		height: 600rpx;
 	}
 </style>
