@@ -95,13 +95,13 @@
 					<view class="between" style="margin-top: 37rpx;">
 						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">星体充能</view>
 						<view style="font-size: 28rpx;font-weight: 550;">
-							{{item.joinFnt/0.02 || 0}}
+							{{item.joinGs/0.02 || 0}}
 						</view>
 					</view>
 					<view class="between">
 						<view style="font-size: 24rpx;color:rgba(0, 0, 0, 0.44)">充能额度</view>
 						<view style="font-size: 28rpx;font-weight: 550;">
-							{{item.profit || 0}}
+							{{item.useGs || 0}}
 						</view>
 					</view>
 					<view class="between">

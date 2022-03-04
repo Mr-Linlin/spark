@@ -24,8 +24,8 @@
 						<view class="" style="margin-right: 40rpx;">
 							<u-button @click="withdrawalsFun(0)" class="swiperBtn" text="提币"></u-button>
 						</view>
-					</view>
-				</swiper-item>
+					</view> 
+				</swiper-item> 
 				<swiper-item >
 					<view class="bg" style="background-image: url(../../static/Ca2.png) ;">
 						<view class="" style="padding-left: 40rpx;">

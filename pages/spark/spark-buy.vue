@@ -38,8 +38,12 @@
 							<view class="fc-c2">100%</view>
 						</view>
 					</view>
+					<view class="nums-box">
+						<view>交易额</view>
+						<view>{{ buyData.quantity * buyData.price  }}GS</view>
+					</view>
 					<view class="mt3">
-						<u-button @click="handleBuy" color="#3A82FE" text="买入" :height="68" :radius="8"></u-button>
+						<u-button @click="handleBuy" color="#3A82FE" text="买入(FNT)" :height="68" :radius="8"></u-button>
 					</view>
 				</view>
 			</view>
@@ -89,8 +93,8 @@
 			<view class="e-item" v-for="(item,index) of dealsData" :key="index">
 				<view class="top">
 					<view class="top-left">
-						<text class="txt1">{{item.tradeType === 0 ? '买入' : '卖出'}}</text>
-						<text class="txt2">{{item.currencyName}}/GS</text>
+						<text :class="{color2: item.tradeType === 1  }" class="txt1 color1">{{item.tradeType === 0 ? '买入' : '卖出'}}</text>
+						<text class="txt2">{{item.tradeCurrencyName}}/GS</text>
 					</view>
 					<view class="top-right">
 						<u-button @click="handlerRepeal(item)" border="none" class="top-right-btn" text="撤销"></u-button>
@@ -102,7 +106,7 @@
 						<view class="c-val">{{item.quantity}}</view>
 					</view>
 					<view class="c-right">
-						<view class="c-key">价格(GS)</view>
+						<view class="c-key">价格(FNT)</view>
 						<view class="c-val">{{item.price}}</view>
 					</view>
 				</view>
@@ -300,9 +304,25 @@
 				
 				
 				this.quotation = list.buyList.map(e=>{
+					e.price = (e.price).toFixed(5)
 					e.width = e.nums / num * 100
 					return e
 				})
+			},
+			// js补0
+			handler0(num){
+				num = String(num)
+				let [s1,s2] = num.split('.');
+				
+				if( s2 ){// 小数情况
+					
+					
+					
+				}else{// 整数
+					
+				}
+				
+				return num
 			}
 		}
 	}
@@ -370,7 +390,13 @@
 		left: 20rpx !important;
 		color: rgba(0, 0, 0, 0.22);
 	}
-
+	.nums-box{
+		display: flex;
+		justify-content: space-between;
+		font-size: 20rpx;
+		color: rgba(0, 0, 0, 0.66);
+		margin-top: 12rpx;
+	}
 	.e-item {
 		width: 686rpx;
 		background: #FFFFFF;
@@ -389,7 +415,6 @@
 					font-size: 24rpx;
 					font-family: PingFang SC-Regular, PingFang SC;
 					font-weight: 400;
-					color: #3A82FE;
 					margin-right: 12rpx;
 				}
 
@@ -399,6 +424,12 @@
 					font-weight: bold;
 					color: #1A1B1C;
 					line-height: 22rpx;
+				}
+				.color1{
+					color: #3A82FE;
+				}
+				.color2{
+					color: rgb(186, 255, 235);
 				}
 			}
 
