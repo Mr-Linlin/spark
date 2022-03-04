@@ -20,7 +20,7 @@
 			</view>
 			<view class="sub-title-box">
 				<view class="sub-title-key">数量</view>
-				<view class="sub-title-desc">可用28923GS</view>
+				<view class="sub-title-desc">可用{{walletData.buy}}GS</view>
 			</view>
 			<view class="price-box">
 				<u--input class="price-input" placeholder="请输入数量" border="none" v-model="buyData.quantity">
@@ -30,7 +30,7 @@
 					<view @click="changeNum(true)">+</view>
 				</view>
 			</view>
-			<view class="sub-title">价格</view>
+			<view class="sub-title">交易</view>
 			<view class="gs-box">
 				{{buyData.price * buyData.quantity}}<text>GS</text>
 			</view>
@@ -101,10 +101,15 @@
 						<view class="c-val">{{item.quantity}}</view>
 					</view>
 					<view class="c-right">
-						<view class="c-key">价格(GS)</view>
+						<view class="c-key">价格(FNT)</view>
 						<view class="c-val">{{item.price}}</view>
 					</view>
+					<view class="c-right" style="text-align: right;">
+						<view class="c-key">实际成交(FNT)</view>
+						<view class="c-val">{{item.tradeQuantity}}</view>
+					</view>
 				</view>
+				<view class="time-box">2022-02-27 02:00</view>
 			</view>
 		</view>
 	</view>
@@ -156,7 +161,10 @@
 					0: 'rgba(58, 130, 254, 0.11)',
 					1: 'rgba(52, 199, 89, 0.11)'
 				},
-				walletData: null,
+				walletData: {
+					buy: 0,
+					sell: 0
+				},
 				entrustList: []
 			}
 		},
@@ -170,6 +178,8 @@
 			flag(r1) {
 				if (r1) {
 					this.handlerWeiTuo()
+					this.getWallet()
+					this.trusteeList()
 				}
 			}
 		},
@@ -177,7 +187,7 @@
 			// console.log('-----' + this.flag)
 			if (this.flag) {
 				this.handlerWeiTuo()
-				this.setWallet()
+				this.getWallet()
 				// this.handlerWeiTuo()
 				this.trusteeList()
 			}
@@ -218,6 +228,18 @@
 				if (code !== 0) return uni.$u.toast(msg)
 				this.trustee = obj.list
 				// console.log(this.trustee)
+			},
+			// 获取钱包
+			getWallet() {
+				this.$emit('data', {
+					data: {
+						"method": "wallet",
+						"tradeId": '9'
+					}
+				})
+			},
+			setWallet(data) {
+				this.walletData = data
 			},
 			// 切换委托
 			switchIndex(index) {
@@ -267,12 +289,7 @@
 					e.timer = new Date(e.createTime).Format("hh:mm:ss")
 					return e
 				});
-			},
-			// 获取钱包
-			setWallet(data) {
-				this.walletData = data
-				// console.log(this.walletData)
-			},
+			}
 		}
 	}
 </script>
@@ -404,7 +421,6 @@
 
 	.title {
 		display: flex;
-		height: 40rpx;
 		font-size: 34rpx;
 		font-family: PingFang SC-Medium, PingFang SC;
 		// font-weight: 500;
@@ -415,12 +431,23 @@
 		margin-bottom: 32rpx;
 
 		.title-item {
+			width: 168rpx;
+			height: 68rpx;
+			text-align: center;
+			line-height: 68rpx;
+			background: #FFFFFF;
+			border-radius: 40rpx;
 			margin-right: 40rpx;
+			font-size: 26rpx;
+			font-weight: 400;
+			color: rgba(0, 0, 0, 0.66);
+			transition: all .3s;
 		}
-	}
-
-	.active {
-		font-weight: bold;
+		.active{
+			background-color: #3A82FE;
+			color: #fff;
+			box-shadow: 0px 8px 16px 1px rgba(88,130,204,0.17);
+		}
 	}
 
 	.e-item {
@@ -502,6 +529,14 @@
 				color: #1A1B1C;
 				line-height: 25rpx;
 			}
+		}
+
+		.time-box {
+			font-size: 24rpx;
+			color: rgba(0, 0, 0, 0.44);
+			padding-top: 20rpx;
+			margin-top: 24rpx;
+			border-top: 1px solid #EBF4F5;
 		}
 	}
 

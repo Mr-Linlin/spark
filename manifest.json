@@ -131,21 +131,21 @@
             "base" : "",
             "mode" : "history"
         },
-        "devServer" : {
-        	"port" : 8080, //端口号
-        	"disableHostCheck" : true,
-        	"proxy" : {
-        		"/" : {
-        			"target" : "http://192.168.0.121:7799/",
-        			"changeOrigin" : true, //是否跨域`
-        			"secure" : false, // 设置支持https协议的代理
-        			"pathRewrite" : {
-        				"^/" : ""
-        			}
-        		}
-        	},
-        	"https" : false
-        },
+        // "devServer" : {
+        // 	"port" : 8080, //端口号
+        // 	"disableHostCheck" : true,
+        // 	"proxy" : {
+        // 		"/" : {
+        // 			"target" : "http://192.168.0.121:7799/",
+        // 			"changeOrigin" : true, //是否跨域`
+        // 			"secure" : false, // 设置支持https协议的代理
+        // 			"pathRewrite" : {
+        // 				"^/" : ""
+        // 			}
+        // 		}
+        // 	},
+        // 	"https" : false
+        // },
         "sdkConfigs" : {
             "maps" : {}
         }

@@ -1,6 +1,6 @@
 
-// export const BASE_URL = "http://211.149.135.240:7799/"
-export const BASE_URL = "http://192.168.0.121:7799/"
+export const BASE_URL = "http://211.149.135.240:7799/"
+// export const BASE_URL = "http://192.168.0.121:7799/"
 
 
 uni.$u.http.setConfig(config => {

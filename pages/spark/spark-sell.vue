@@ -37,8 +37,12 @@
 							<view class="fc-c2">100%</view>
 						</view>
 					</view>
+					<view class="nums-box">
+						<view>交易额</view>
+						<view>{{ buyData.quantity * buyData.price  }}FNT</view>
+					</view>
 					<view class="mt3">
-						<u-button @click="handleBuy" color="#BAFFEB" text="卖出" :height="68" :radius="8"></u-button>
+						<u-button @click="handleBuy" color="#BAFFEB" text="卖出(FNT)" :height="68" :radius="8"></u-button>
 					</view>
 				</view>
 			</view>
@@ -72,38 +76,27 @@
 		</view>
 		<!--  -->
 		<view class="mt3 fz-wb2" style="font-size: 32rpx;margin-bottom: 32rpx;">实时交易</view>
-		<!-- <view style="background-color: #FFFFFF;padding: 20rpx 30rpx 10rpx 30rpx;border-radius: ;" class="mt2">
-			<view class="flexC space-between" style="width: 100%;">
-				<view style="width: 33.3%;" :style="index==1 || index == 2?'text-align:right':''"
-					v-for="(item,index) of dealsTitle" :key="index">{{item}}</view>
-			</view>
-			<view class="flexC space-between" style="width: 100%;height: 68rpx;" v-for="(item,index) of dealsData"
-				:key="index">
-				<view style="width:33.3%">{{item.timer}}</view>
-				<view style="width:33.3%;text-align: right;">{{item.price}}</view>
-				<view style="width:33.3%;text-align: right;">{{item.quantity}}</view>
-			</view>
-		</view> -->
 		<view class="entrust">
 			<view class="e-item" v-for="(item,index) of dealsData" :key="index">
 				<view class="top">
 					<view class="top-left">
-						<text class="txt1">{{item.tradeType === 0 ? '买入' : '卖出'}}</text>
-						<text class="txt2">{{item.currencyName}}/GS</text>
+						<text :class="{color2: item.tradeType === 1  }" class="txt1 color1">{{item.tradeType === 0 ? '买入' : '卖出'}}</text>
+						<text class="txt2">{{item.tradeCurrencyName}}/GS</text>
 					</view>
 					<view class="top-right">
 						<u-button @click="handlerRepeal(item)" border="none" class="top-right-btn" text="撤销"></u-button>
 					</view>
-				</view>
+				</view>                                                                                                                                           
 				<view class="e-content">
 					<view class="c-left">
-						<view class="c-key">总量({{item.currencyName}})</view>
+						<view class="c-key">总量({{item.currencyName}})</view>  
 						<view class="c-val">{{item.quantity}}</view>
 					</view>
 					<view class="c-right">
 						<view class="c-key">价格(GS)</view>
 						<view class="c-val">{{item.price}}</view>
 					</view>
+					
 				</view>
 			</view>
 		</view>
@@ -290,6 +283,7 @@
 					 return (total > currentValue.nums) ?  total : currentValue.nums
 				},list.sellList[0].nums)
 				this.quotation = list.sellList.map(e=>{
+					e.price = (e.price).toFixed(5)
 					e.width = e.nums / num * 100
 					return e
 				})
@@ -312,7 +306,13 @@
 		background-color: rgba(255, 255, 255, 1);
 		border-radius: 12rpx;
 	}
-
+	.nums-box{
+		display: flex;
+		justify-content: space-between;
+		font-size: 20rpx;
+		color: rgba(0, 0, 0, 0.66);
+		margin-top: 12rpx;
+	}
 	.bg-color2 {
 		background-color: $theme-bg-color-global;
 		border-radius: 12rpx;
@@ -375,16 +375,21 @@
 					font-size: 24rpx;
 					font-family: PingFang SC-Regular, PingFang SC;
 					font-weight: 400;
-					color: #3A82FE;
+					
 					margin-right: 12rpx;
 				}
-
 				.txt2 {
 					font-size: 24rpx;
 					font-family: DIN-Medium, DIN;
 					font-weight: bold;
 					color: #1A1B1C;
 					line-height: 22rpx;
+				}
+				.color1{
+					color: #3A82FE;
+				}
+				.color2{
+					color: rgb(186, 255, 235);
 				}
 			}
 

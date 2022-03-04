@@ -34,7 +34,7 @@
 					<view class="slider-tabs-bgcolor mt2 flexC space-between"
 						:class="index === sliderIndex?'slider-tabs-bgcolor-activer':'slider-tabs-bgcolor'"
 						@click="changeSliderIndex(index)">
-						<view>{{item.areaName}}/GS</view>
+						<view>{{item.tradeCurrencyName}}/GS</view>
 						<view>{{item.currentPrice}}</view>
 					</view>
 				</view>
@@ -157,10 +157,10 @@
 					},
 					success:(e)=> {
 						console.log('开始发送')
-						console.log(e)
+						
 						
 						this.handlerHeartbeat(); //开启心跳
-						this.getGSList()
+						
 					},
 					fail(e) {
 						console.log("链接失败" + e)
@@ -168,6 +168,7 @@
 				});
 				uni.onSocketOpen((res) => {
 					console.log("链接打开", res)
+					this.getGSList()
 					this.flag = true;
 				});
 				uni.onSocketError(function(res) {
