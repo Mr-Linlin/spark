@@ -83,143 +83,177 @@
     <a class="tag" target="_blank" href="#">后半夜</a>
 
 </div> -->
-<div class="search-ipt">asdasd</div>
-<input type="" name="" id="" class="search-ipt" value="" />
+<video name="videoElement" class="centeredVideo" controls autoplay>
+                    Your browser is too old which doesn't support HTML5 video.
+</video>
 
+
+
+
+<script src="http://bilibili.github.io/flv.js/dist/flv.js" type="text/javascript"></script>
 <script type="text/javascript">
-    var tagEle = "querySelectorAll" in document ? document.querySelectorAll(".tag") : getClass("tag"),
-        paper = "querySelectorAll" in document ? document.querySelector(".tagBall") : getClass("tagBall")[0];
-    RADIUS =400,
-        fallLength = 500,
-        tags=[],
-        angleX = Math.PI/500,
-        angleY = Math.PI/500,
-        CX = paper.offsetWidth/2,
-        CY = paper.offsetHeight/2,
-        EX = paper.offsetLeft + document.body.scrollLeft + document.documentElement.scrollLeft,
-        EY = paper.offsetTop + document.body.scrollTop + document.documentElement.scrollTop;
-
-    function getClass(className){
-        var ele = document.getElementsByTagName("*");
-        var classEle = [];
-        for(var i=0;i<ele.length;i++){
-            var cn = ele[i].className;
-            if(cn === className){
-                classEle.push(ele[i]);
-            }
-        }
-        return classEle;
-    }
-
-    function innit(){
-        for(var i=0;i<tagEle.length;i++){
-            var a , b;
-            var k = (2*(i+1)-1)/tagEle.length - 1;
-            var a = Math.acos(k);
-            var b = a*Math.sqrt(tagEle.length*Math.PI);
-            // var a = Math.random()*2*Math.PI;
-            // var b = Math.random()*2*Math.PI;
-            var x = RADIUS * Math.sin(a) * Math.cos(b);
-            var y = RADIUS * Math.sin(a) * Math.sin(b);
-            var z = RADIUS * Math.cos(a);
-            var t = new tag(tagEle[i] , x , y , z);
-            tagEle[i].style.color = "rgb("+parseInt(Math.random()*255)+","+parseInt(Math.random()*255)+","+parseInt(Math.random()*255)+")";
-            tags.push(t);
-            t.move();
-        }
-    }
-
-    Array.prototype.forEach = function(callback){
-        for(var i=0;i<this.length;i++){
-            callback.call(this[i]);
-        }
-    }
-    function animate(){
-        setInterval(function(){
-            rotateX();
-            rotateY();
-            tags.forEach(function(){
-                this.move();
-            })
-        } , 17)
-    }
-
-    if("addEventListener" in window){
-        paper.addEventListener("mousemove" , function(event){
-            var x = event.clientX - EX - CX;
-            var y = event.clientY - EY - CY;
-            // angleY = -x* (Math.sqrt(Math.pow(x , 2) + Math.pow(y , 2)) > RADIUS/4 ? 0.0002 : 0.0001);
-            // angleX = -y* (Math.sqrt(Math.pow(x , 2) + Math.pow(y , 2)) > RADIUS/4 ? 0.0002 : 0.0001);
-            angleY = x*0.0001;
-            angleX = y*0.0001;
-        });
-    }
-    else {
-        paper.attachEvent("onmousemove" , function(event){
-            var x = event.clientX - EX - CX;
-            var y = event.clientY - EY - CY;
-            angleY = x*0.0001;
-            angleX = y*0.0001;
-        });
-    }
-
-    function rotateX(){
-        var cos = Math.cos(angleX);
-        var sin = Math.sin(angleX);
-        tags.forEach(function(){
-            var y1 = this.y * cos - this.z * sin;
-            var z1 = this.z * cos + this.y * sin;
-            this.y = y1;
-            this.z = z1;
-        })
-    }
-    function rotateY(){
-        var cos = Math.cos(angleY);
-        var sin = Math.sin(angleY);
-        tags.forEach(function(){
-            var x1 = this.x * cos - this.z * sin;
-            var z1 = this.z * cos + this.x * sin;
-            this.x = x1;
-            this.z = z1;
-        })
-    }
-
-    var tag = function(ele , x , y , z){
-        this.ele = ele;
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-
-    tag.prototype = {
-        move:function(){
-            var scale = fallLength/(fallLength-this.z);
-            var alpha = (this.z+RADIUS)/(2*RADIUS);
-            this.ele.style.fontSize = 15 * scale + "px";
-            this.ele.style.opacity = alpha+0.5;
-            this.ele.style.filter = "alpha(opacity = "+(alpha+0.5)*100+")";
-            this.ele.style.zIndex = parseInt(scale*100);
-            this.ele.style.left = this.x + CX - this.ele.offsetWidth/2 +"px";
-            this.ele.style.top = this.y + CY - this.ele.offsetHeight/2 +"px";
-        }
-    }
-    innit();
-    animate();
-
-    let a = {}
-    let fn = function () {
-        console.log(this)
-    }
-    const c = fn.bind().bind(a)()
-
-
-    let fn2 = function fn1() {
-        return function() {
-            return fn.apply()
-        }.apply(a)
-    }
-    fn2()
-
+	var checkBoxFields = ['isLive', 'withCredentials', 'hasAudio', 'hasVideo'];
+	        var streamURL, mediaSourceURL;
+	
+	        function flv_load() {
+	            console.log('isSupported: ' + flvjs.isSupported());
+	            if (mediaSourceURL.className === '') {
+	                var url = document.getElementById('msURL').value;
+	    
+	                var xhr = new XMLHttpRequest();
+	                xhr.open('GET', url, true);
+	                xhr.onload = function (e) {
+	                    var mediaDataSource = JSON.parse(xhr.response);
+	                    flv_load_mds(mediaDataSource);
+	                }
+	                xhr.send();
+	            } else {
+	                var i;
+	                var mediaDataSource = {
+	                    type: 'flv'
+	                };
+	                for (i = 0; i < checkBoxFields.length; i++) {
+	                    var field = checkBoxFields[i];
+	                    /** @type {HTMLInputElement} */
+	                    var checkbox = document.getElementById(field);
+	                    mediaDataSource[field] = checkbox.checked;
+	                }
+	                mediaDataSource['url'] = document.getElementById('sURL').value;
+	                console.log('MediaDataSource', mediaDataSource);
+	                flv_load_mds(mediaDataSource);
+	            }
+	        }
+	
+	        function flv_load_mds(mediaDataSource) {
+	            var element = document.getElementsByName('videoElement')[0];
+	            if (typeof player !== "undefined") {
+	                if (player != null) {
+	                    player.unload();
+	                    player.detachMediaElement();
+	                    player.destroy();
+	                    player = null;
+	                }
+	            }
+	            player = flvjs.createPlayer(mediaDataSource, {
+	                enableWorker: false,
+	                lazyLoadMaxDuration: 3 * 60,
+	                seekType: 'range',
+	            });
+	            player.attachMediaElement(element);
+	            player.load();
+	        }
+	
+	        function flv_start() {
+	            player.play();
+	        }
+	
+	        function flv_pause() {
+	            player.pause();
+	        }
+	
+	        function flv_destroy() {
+	            player.pause();
+	            player.unload();
+	            player.detachMediaElement();
+	            player.destroy();
+	            player = null;
+	        }
+	
+	        function flv_seekto() {
+	            var input = document.getElementsByName('seekpoint')[0];
+	            player.currentTime = parseFloat(input.value);
+	        }
+	
+	        function switch_url() {
+	            streamURL.className = '';
+	            mediaSourceURL.className = 'hidden';
+	            saveSettings();
+	        }
+	
+	        function switch_mds() {
+	            streamURL.className = 'hidden';
+	            mediaSourceURL.className = '';
+	            saveSettings();
+	        }
+	
+	        function ls_get(key, def) {
+	            try {
+	                var ret = localStorage.getItem('flvjs_demo.' + key);
+	                if (ret === null) {
+	                    ret = def;
+	                }
+	                return ret;
+	            } catch (e) {}
+	            return def;
+	        }
+	
+	        function ls_set(key, value) {
+	            try {
+	                localStorage.setItem('flvjs_demo.' + key, value);
+	            } catch (e) {}
+	        }
+	
+	        function saveSettings() {
+	            if (mediaSourceURL.className === '') {
+	                ls_set('inputMode', 'MediaDataSource');
+	            } else {
+	                ls_set('inputMode', 'StreamURL');
+	            }
+	            var i;
+	            for (i = 0; i < checkBoxFields.length; i++) {
+	                var field = checkBoxFields[i];
+	                /** @type {HTMLInputElement} */
+	                var checkbox = document.getElementById(field);
+	                ls_set(field, checkbox.checked ? '1' : '0');
+	            }
+	            var msURL = document.getElementById('msURL');
+	            var sURL = document.getElementById('sURL');
+	            ls_set('msURL', msURL.value);
+	            ls_set('sURL', sURL.value);
+	            console.log('save');
+	        }
+	
+	        function loadSettings() {
+	            var i;
+	            for (i = 0; i < checkBoxFields.length; i++) {
+	                var field = checkBoxFields[i];
+	                /** @type {HTMLInputElement} */
+	                var checkbox = document.getElementById(field);
+	                var c = ls_get(field, checkbox.checked ? '1' : '0');
+	                checkbox.checked = c === '1' ? true : false;
+	            }
+	
+	            var msURL = document.getElementById('msURL');
+	            var sURL = document.getElementById('sURL');
+	            msURL.value = ls_get('msURL', msURL.value);
+	            sURL.value = ls_get('sURL', sURL.value);
+	            if (ls_get('inputMode', 'StreamURL') === 'StreamURL') {
+	                switch_url();
+	            } else {
+	                switch_mds();
+	            }
+	        }
+	
+	        function showVersion() {
+	            var version = flvjs.version;
+	            document.title = document.title + " (v" + version + ")";
+	        }
+	
+	        var logcatbox = document.getElementsByName('logcatbox')[0];
+	        flvjs.LoggingControl.addLogListener(function(type, str) {
+	            logcatbox.value = logcatbox.value + str + '\n';
+	            logcatbox.scrollTop = logcatbox.scrollHeight;
+	        });
+	
+	        document.addEventListener('DOMContentLoaded', function () {
+	            streamURL = document.getElementById('streamURL');
+	            mediaSourceURL = document.getElementById('mediaSourceURL');
+	            loadSettings();
+	            showVersion();
+	            flv_load();
+	        });
+	
+	
 </script>
 
 </body>
