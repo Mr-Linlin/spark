@@ -250,7 +250,7 @@
 
 <script>
 	import {
-		ajaxsendMyCode,getbalance,rechargetimeAndPrice
+		ajaxsendMyCode,getbalance,rechargetimeAndPrice,rechargeConfirmTopUpMoney
 	} from '@/http/common.js'
 	export default {
 		data() {
@@ -292,6 +292,24 @@
 					})
 					return
 				}
+				let data = {
+					id:this.rechargetimeAndPriceDataSt.id,
+					quantity:this.principalData.moeny,
+					address:this.principalData.adds,
+					tradePwd:this.principalData.password,
+					code:this.principalData.code
+				}
+				rechargeConfirmTopUpMoney(data).then(res=>{
+					uni.showToast({
+						title:res.msg,
+						icon:'none'
+					})
+					if(res.code == 0){
+						setTimeout(() => {
+							uni.navigateBack({})
+						},2000)
+					}
+				})
 			},
 			paste(){//粘贴
 				let that = this

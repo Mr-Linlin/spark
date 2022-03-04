@@ -15,7 +15,7 @@
 								收益钱包(CNY)
 							</view>
 							<view class="" style="margin-top: 24rpx;">
-								<u-count-to fontSize="25" color="#fff" :startVal="0" :endVal="totalCnyData" decimals="4"></u-count-to>
+								<u-count-to fontSize="22" color="#fff" :startVal="0" :endVal="totalCnyData" decimals="4"></u-count-to>
 							</view>
 						</view>
 						<view class="" style="flex: 1;">
@@ -33,7 +33,7 @@
 								本金钱包
 							</view>
 							<view class="" style="margin-top: 24rpx;">
-								<u-count-to fontSize="25" color="#fff" :startVal="0" :endVal="availableData" decimals="4"></u-count-to>
+								<u-count-to fontSize="22" color="#fff" :startVal="0" :endVal="availableData" decimals="4"></u-count-to>
 							</view>
 						</view>
 						<view class="" style="flex: 1;">
