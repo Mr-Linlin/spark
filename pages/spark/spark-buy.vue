@@ -53,6 +53,7 @@
 					<scroll-view class="scroll-box" scroll-y>
 						<view :key="index" v-for="(item,index) of quotation">
 							<view @click="handlerSelect(item)" class="p-item flexC space-between">
+								<view :style="`width:${item.width}%`" class="bg"></view>
 								<view class="schedule"></view>
 								<view>{{item.price}}</view>
 								<view>{{item.nums}}</view>
@@ -179,7 +180,9 @@
 		},
 		methods: {
 			// 撤销单子
-			handlerRepeal({id}) {
+			handlerRepeal({
+				id
+			}) {
 				trusteeCancel({
 					id
 				}).then(e => {
@@ -193,8 +196,11 @@
 				})
 			},
 			// 选择数据
-			handlerSelect({price,nums}){
-				
+			handlerSelect({
+				price,
+				nums
+			}) {
+
 				this.buyData = {
 					...this.buyData,
 					price
@@ -215,14 +221,14 @@
 				}
 			},
 			changing(e) {
-				if( !this.buyData.price )return
-				const n = Number(JSON.parse(format((  this.walletData.buy * (e/100)   ), {
+				if (!this.buyData.price) return
+				const n = Number(JSON.parse(format((this.walletData.buy * (e / 100)), {
 					precision: 14
 				})))
 				this.sliderVal = e;
 				this.buyData = {
 					...this.buyData,
-					quantity:n/this.buyData.price
+					quantity: n / this.buyData.price
 				}
 				// this.sliderVal = e;
 			},
@@ -288,7 +294,15 @@
 			},
 			// 买入委托列表
 			getEntrustList(list) {
-				this.quotation = list.buyList
+				const num = list.buyList.reduce((total, currentValue)=>{
+					 return (total > currentValue.nums) ?  total : currentValue.nums
+				},list.buyList[0].nums)
+				
+				
+				this.quotation = list.buyList.map(e=>{
+					e.width = e.nums / num * 100
+					return e
+				})
 			}
 		}
 	}
@@ -323,6 +337,16 @@
 		background-color: rgba($color: #000, $alpha: 0);
 		z-index: 2;
 
+		.bg {
+			position: absolute;
+			right: 0;
+			top: 0;
+			height: 100%;
+			background-color: #FFE8E5;
+			z-index: -1;
+			transition: width .8s;
+		}
+
 		.schedule {
 			position: absolute;
 			z-index: -1;
@@ -330,7 +354,6 @@
 			top: 0;
 			height: 100%;
 			width: 50%;
-			background: #FFE8E5;
 		}
 
 		.bg2 {
@@ -426,7 +449,8 @@
 			}
 		}
 	}
-	.scroll-box{
+
+	.scroll-box {
 		height: 600rpx;
 	}
 </style>
