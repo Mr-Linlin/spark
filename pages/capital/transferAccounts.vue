@@ -8,7 +8,7 @@
 						{{currencyListData.currencyName}}资产
 					</view>
 					<view class="" style="font-size: 38rpx;margin-top: 10rpx;text-shadow: 0px 0px #000;">
-						{{currencyListData.available}}
+						{{currencyListData.available >0 ? currencyListData.available.toFixed(4) : currencyListData.available}}
 					</view>
 				</view>
 				<view class="" style="flex: 1;">

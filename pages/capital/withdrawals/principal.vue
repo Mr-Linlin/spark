@@ -19,10 +19,10 @@
 			<view @click="open3" class="asdf" style="width: 686rpx;height: 162rpx;background: #FFFFFF;border-radius: 12rpx;display: flex;align-items: center;">
 				<view class="" style="margin-left: 40rpx;">
 					<view class="" style="font-size: 24rpx;color: #1A1B1C;">
-						30日内
+						{{rechargetimeAndPriceDataSt.timeLong}}
 					</view>
 					<view class="" style="font-size: 38rpx;text-shadow: 0px 0px #000;margin-top: 12rpx;">
-						2892.2
+						{{rechargetimeAndPriceDataSt.money}}
 					</view>
 				</view> 
 				<view class="" style="flex: 1;">
@@ -73,7 +73,7 @@
 		
 				<view class="" style="display: flex;align-items: center;height: 80rpx;font-size: 24rpx;">
 					<view class="" style="margin-left: 32rpx;">
-						最多可提出890(GS)
+						最多可提出{{rechargetimeAndPriceDataSt.money}}(GS)
 					</view>
 					<view @click="allProfit" class="" style="color: #3A82FE;margin-left: 10rpx;">
 						全部提出
@@ -90,7 +90,7 @@
 							手续费
 						</view>
 						<view class="" style="color: rgba(0, 0, 0, 0.44);margin-top: 8rpx;">
-							手续费=提现额度 x 3%
+							手续费=提现额度 x {{rechargetimeAndPriceDataSt.profit*100}}%
 						</view>
 					</view>
 					
@@ -98,7 +98,7 @@
 		
 					</view>
 					<view class=""> 
-						0
+						{{principalData.moeny*rechargetimeAndPriceDataSt.profit}}
 					</view>
 				</view>
 		
@@ -111,7 +111,7 @@
 		
 					</view>
 					<view class="">
-						0
+						{{principalData.moeny - (principalData.moeny*rechargetimeAndPriceDataSt.profit)}}
 					</view>
 				</view>
 			</view>
@@ -174,7 +174,7 @@
 							取消提现
 						</u-button>
 		
-						<u-button @click="" class=""
+						<u-button @click="Withdrawal" class=""
 							style="color: #FFFFFF;width: 280rpx;height: 88rpx;background-color: #3A82FE;display: flex;align-items: center;justify-content: center;font-size: 26rpx;border-radius: 12rpx;">
 							确认提现
 						</u-button>
@@ -217,21 +217,21 @@
 		<u-popup :show="show3" @close="close3" @open="open3" :round="15">
 			<view style="background-color: #fff;border-radius: 30rpx;">
 				<view class="" style="font-size: 36rpx;color: #1A1B1C;margin: 60rpx 0rpx 40rpx 62rpx;text-shadow: 0px 0px #000;">
-					充值时间段
+					充值时间段 
 				</view>
 				
-				<view @click="rechargePeriodFun(index)" v-for="(item,index) in 5" class="" style="display: flex;justify-content: center;margin-bottom: 20rpx;">
+				<view @click="rechargePeriodFun(index,item)" v-for="(item,index) in rechargetimeAndPriceData" :key="index" class="" style="display: flex;justify-content: center;margin-bottom: 20rpx;">
 					<view  :class="rechargePeriod == index ?  'asdf2' : 'bdr_E1EAEB'" style="width: 630rpx;height: 122rpx;border-radius: 12rpx;display: flex;align-items: center;">
 						<view class="" style="margin-left: 40rpx;width: 30%;">
 							<view class="" style="font-size: 24rpx;color: #1A1B1C;">
-								30日内
+								{{item.timeLong}}
 							</view>
 							<view class="" style="font-size: 38rpx;text-shadow: 0px 0px #000;margin-top: 12rpx;">
-								2892.2
+								{{item.money}}
 							</view>
 						</view> 
 						<view class="" style="color: rgba(0, 0, 0, 0.44);font-size: 24rpx;">
-							收取30%手续费
+							收取{{item.profit*100}}%手续费
 						</view>
 						<view class="" style="flex: 1;">
 							
@@ -249,6 +249,9 @@
 </template>
 
 <script>
+	import {
+		ajaxsendMyCode,getbalance,rechargetimeAndPrice
+	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
@@ -259,26 +262,48 @@
 				principalData:{
 					code:'',
 					password:'',
-					adds:''
+					adds:'',
+					moeny:''
 				},
 				
 				show2:false,
 				show3:false,
-				rechargePeriod:0//充值时间段选中 - 选中
+				rechargePeriod:0,//充值时间段选中 - 选中
+				gsDatava:'',
+				rechargetimeAndPriceData:[],
+				rechargetimeAndPriceDataSt:{},//时间段单个数据
 			}
 		},
+		onShow() {
+			this.rechargetimeAndPriceFun()
+		},
 		methods: {
+			rechargetimeAndPriceFun(){//充值时间段
+				rechargetimeAndPrice().then(res=>{
+					this.rechargetimeAndPriceData = res.obj
+					this.rechargetimeAndPriceDataSt = res.obj[0]
+				})
+			},
+			Withdrawal(){//提现
+				if(!this.principalData.adds || !this.principalData.moeny || !this.principalData.code || !this.principalData.password){
+					uni.showToast({
+						title:'请先完善提现信息',
+						icon:'none'
+					})
+					return
+				}
+			},
 			paste(){//粘贴
 				let that = this
 				uni.getClipboardData({
 					success: function (res) {
-						console.log(res.data);
 						that.principalData.adds = res.data
 					},
 				});
 			}, 
-			rechargePeriodFun(e){//充值时间段选中
+			rechargePeriodFun(e,item){//充值时间段选中
 				this.rechargePeriod = e
+				this.rechargetimeAndPriceDataSt = item
 				this.close3()
 			},
 			recordNext(){//提现记录
@@ -287,9 +312,10 @@
 				})
 			},
 			allProfit(){//全部提现
-				
+				this.principalData.moeny = this.rechargetimeAndPriceDataSt.money
 			},
 			retn(){
+				
 				uni.navigateBack({
 					
 				})
@@ -298,6 +324,7 @@
 				this.show = false
 				this.principalData.code = ''
 				this.principalData.password = ''
+				this.isCodeType = !this.isCodeType
 			},
 			open(){//开启弹窗 - 提现
 				this.show = true
@@ -317,6 +344,11 @@
 			codeChange(text) {
 				this.tips = text;
 			},
+			ajaxsendMyCodeFun(){//发送验证码
+				ajaxsendMyCode().then(res=>{
+					
+				})
+			},
 			getCode() {
 				if (this.$refs.uCode.canGetCode) {
 					this.isCodeType = !this.isCodeType
@@ -330,6 +362,7 @@
 						uni.$u.toast('验证码已发送');
 						// 通知验证码组件内部开始倒计时
 						this.$refs.uCode.start();
+						this.ajaxsendMyCodeFun()
 					}, 2000);
 				} else {
 					uni.$u.toast('倒计时结束后再发送');
