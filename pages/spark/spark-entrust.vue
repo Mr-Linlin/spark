@@ -37,14 +37,14 @@
 			</u-button>
 		</view>
 		<view class="title">
-			<!-- <view class="title-item" v-for="(item,index) in title" :key="index" :class="{active:index===currentIndex}"
+			<view class="title-item" v-for="(item,index) in title" :key="index" :class="{active:index===currentIndex}"
 				@click="switchIndex(index)">
 				{{item}}
-			</view> -->
-			历史委托
+			</view>
+			<!-- 历史委托 -->
 		</view>
 		<!-- 实时委托 -->
-		<view class="statrtrust entrust" v-if="currentIndex===3">
+		<view class="statrtrust entrust" v-if="currentIndex===0">
 			<view class="e-item" v-for="(item,index) in 3" :key="index">
 				<view class="top">
 					<view class="top-left">
@@ -68,11 +68,11 @@
 			</view>
 		</view>
 		<!-- 历史 -->
-		<view class="entrust" v-if="currentIndex===0">
+		<view class="entrust" v-if="currentIndex===1">
 			<view class="e-item" v-for="(item,index) in trustee" :key="item.id">
 				<view class="top">
 					<view class="top-left">
-						<text class="txt1">{{tradeType[item.tradeType]}}</text>
+						<text class="txt1" :style="[{color:buyColor[item.tradeTypeStr]},{background:buyColor[item.tradeType]}]">{{tradeType[item.tradeType]}}</text>
 						<text class="txt2">FNT/GS</text>
 					</view>
 					<view class="top-right">
@@ -82,11 +82,11 @@
 				<view class="e-content">
 					<view class="c-left">
 						<view class="c-key">总量({{item.currencyName}})</view>
-						<view class="c-val">{{item.price}}</view>
+						<view class="c-val">{{item.quantity}}</view>
 					</view>
 					<view class="c-right">
-						<view class="c-key">总量(GS)</view>
-						<view class="c-val">{{item.quantity}}</view>
+						<view class="c-key">价格(GS)</view>
+						<view class="c-val">{{item.price}}</view>
 					</view>
 				</view>
 			</view>
@@ -120,6 +120,12 @@
 				tradeType: {
 					0: '买入',
 					1: '卖出'
+				},
+				buyColor: {
+					'买': '#3ED7AC',
+					'卖': '#34C759',
+					0: 'rgba(58, 130, 254, 0.11)',
+					1: 'rgba(52, 199, 89, 0.11)'
 				}
 			}
 		},
@@ -140,43 +146,15 @@
 			// console.log('-----' + this.flag)
 			if (this.flag) {
 				// this.handlerWeiTuo()
+				this.trusteeList()
 			}
-			this.trusteeList()
-			// this.createSocket()
+			
+			
+
+
 		},
 		methods: {
-			// 实时获取实时委托
-			/* createSocket() {
-				uni.connectSocket({
-					url: 'ws://211.149.135.240:7888/websocket/trade',
-					header: {
-						token: uni.getStorageSync('token')
-					},
-					success(e) {
-						console.log(e)
-					},
-					fail(e) {
-						console.log("链接失败" + e)
-					}
-				});
-				uni.onSocketOpen(function (res) {
-					console.log('-------------------------------')
-				  console.log('WebSocket连接已打开！');
-					// this.getGSList()
-				});
-				uni.onSocketError(function(res) {
-					console.log(res)
-					console.log('WebSocket连接打开失败，请检查！');
-				})
-				uni.onSocketMessage((res) => {
-					const data = JSON.parse(res.data)
-					console.log(data)
-					console.log(111)
-				})
-			}, */
-			getGSList(){
-				console.log(545454)
-			},
+
 			// 获取历史委托数据
 			async trusteeList() {
 				let {
@@ -353,7 +331,7 @@
 		color: #1A1B1C;
 		line-height: 40rpx;
 		margin-top: 40rpx;
-		font-weight: bold;
+		// font-weight: bold;
 		margin-bottom: 32rpx;
 
 		.title-item {
@@ -380,6 +358,9 @@
 
 			.top-left {
 				.txt1 {
+					height: 28px;
+					border-radius: 2rpx;
+					padding: 0 10rpx;
 					font-size: 24rpx;
 					font-family: PingFang SC-Regular, PingFang SC;
 					font-weight: 400;
