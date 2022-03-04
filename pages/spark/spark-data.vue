@@ -3,29 +3,29 @@
 		<view class="data-bgColor">
 			<view class="plr2 car-shadow">
 				<view class="flexC FAFCFF p32">
-					<view style="font-size: 54rpx;" class="text-color">4711.89135</view>
-					<view class="fz1 ml2 text-color">≈10.29CNY±0.66%</view>
+					<view style="font-size: 54rpx;" class="text-color">{{market.currentPrice}}</view>
+					<view class="fz1 ml2 text-color">≈{{market.currentPrice * 6.32 }}CNY±0.66%</view>
 				</view>
 				<view>
 					<view style="padding: 32rpx 0;" class="flexC bg-white space-between p32">
 						<view>
 							<view class="flexC">
 								<view class="fz1 fz-wb2 text-color-1">24交易量</view>
-								<view class="ml2 fz5 fz-wb2 text-color-1">100.13</view>
+								<view class="ml2 fz5 fz-wb2 text-color-1">{{market.tradeNums}}</view>
 							</view>
 							<view class="flexC mt3">
 								<view class="fz1 fz-wb2 text-color-1">涨跌幅</view>
-								<view class="ml2 fz5 fz-wb2" style="color: red;">+29%</view>
+								<view class="ml2 fz5 fz-wb2" style="color: red;">+{{market.rise}}%</view>
 							</view>
 						</view>
 						<view>
 							<view class="flexC">
 								<view class="fz-wb2  text-color-1">最高价</view>
-								<view class="ml2 fz5 fz-wb2 text-color-1">100.13</view>
+								<view class="ml2 fz5 fz-wb2 text-color-1">{{market.tradeMaxPrice}}</view>
 							</view>
 							<view class="flexC mt3">
 								<view class="fz-wb2 text-color-1">最低价</view>
-								<view class="ml2 fz5 fz-wb2 text-color-1">100.13</view>
+								<view class="ml2 fz5 fz-wb2 text-color-1">{{market.tradeMinPrice}}</view>
 							</view>
 						</view>
 					</view>
@@ -58,6 +58,7 @@
 	export default {
 		data() {
 			return {
+				market:{}, // 行情数据
 				chartData: {
 					"categories": [],
 					"series": [{
@@ -121,13 +122,14 @@
 			flag(r1) {
 				if (r1) {
 					this.sendK()
+					this.handlerGetData()
 				}
 			}
 		},
 		created() {
 			if(this.flag){
 				this.sendK()
-				
+				this.handlerGetData()
 			}
 		},
 		methods: {
@@ -135,7 +137,7 @@
 				this.$emit('data', {
 					data: {
 						from: 1646034420000,
-						to: 1646042280000,//(new Date().getTime() / 1000 - (60 * 1)).toFixed(0),
+						to: 1646042280000,//(new Date().getTime() / 1000 - (60 * 1)).toFixed(0),//1646042280000
 						resolution,
 						tradeId: 9,
 						"method": "kData"
@@ -205,6 +207,20 @@
 				this.chartData['categories'] = times;
 				this.chartData['series'][0]['data'] = kArray;
 
+			},
+			// 获取数据 type 传2  tradeId传空
+			handlerGetData() {
+				this.$emit('data', {
+					data: {	
+						"method": "sub",
+						tradeId:'',
+						type:'2'
+					}
+				})
+			},
+			// 设置行情
+			setMarket(data){
+				this.market = data[0]
 			}
 		}
 	}

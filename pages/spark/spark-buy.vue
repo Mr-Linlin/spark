@@ -161,7 +161,6 @@
 				this.getWallet()
 				this.handleSubscribe(9);
 				this.getTrustList()
-				console.log('----------')
 				this.$emit('data', {
 					data: {
 						"method": "sub",
@@ -266,7 +265,7 @@
 			},
 			// 发起订阅
 			// 2 行情  9 订阅委托
-			handleSubscribe(type = '') {
+			handleSubscribe(type = '',) {
 				this.$emit('data', {
 					data: {
 						"method": "sub",

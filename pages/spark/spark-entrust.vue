@@ -142,7 +142,7 @@
 				// this.handlerWeiTuo()
 			}
 			this.trusteeList()
-			this.createSocket()
+			// this.createSocket()
 		},
 		methods: {
 			// 实时获取实时委托

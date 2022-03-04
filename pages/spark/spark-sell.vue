@@ -331,7 +331,7 @@
 			height: 100%;
 			background-color: #BAFFEB;
 			z-index: -1;
-			transition: width .8s; 
+			transition: width .8s;
 		}
 		.schedule {
 			position: absolute;
