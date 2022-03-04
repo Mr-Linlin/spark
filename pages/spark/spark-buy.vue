@@ -276,8 +276,9 @@
 			},
 			// 设置实时交易列表
 			setBuyList(list) {
-				console.log('这里。。。。。。。。。。。。。。。。')
+				console.log('买入')
 				console.log(list)
+				console.log('.............')
 				this.dealsData = list.map(e => {
 					e.timer = new Date(e.createTime).Format("hh:mm:ss")
 					return e

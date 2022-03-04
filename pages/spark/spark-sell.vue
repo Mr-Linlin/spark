@@ -282,8 +282,10 @@
 					}
 				})
 			},
-			// 买入委托列表
+			// 卖出委托列表
 			getEntrustList(list) {
+				console.log('----------------------------------------')
+				console.log(list)
 				const num = list.sellList.reduce((total, currentValue)=>{
 					 return (total > currentValue.nums) ?  total : currentValue.nums
 				},list.sellList[0].nums)
