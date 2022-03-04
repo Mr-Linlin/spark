@@ -50,7 +50,7 @@
 		
 				<view class="" style="display: flex;align-items: center;height: 80rpx;font-size: 24rpx;">
 					<view class="" style="margin-left: 32rpx;">
-						最多可提出890(GS)
+						最多可提出{{gsDatava}}(GS)
 					</view>
 					<view @click="allProfit" class="" style="color: #3A82FE;margin-left: 10rpx;">
 						全部提出
@@ -67,7 +67,7 @@
 							手续费
 						</view>
 						<view class="" style="color: rgba(0, 0, 0, 0.44);margin-top: 8rpx;">
-							手续费=提现额度 x 3%
+							手续费=提现额度 x {{rechargeEarningsProfitData*100}}%
 						</view>
 					</view>
 					
@@ -75,7 +75,7 @@
 		
 					</view>
 					<view class="" style="color: rgba(0, 0, 0, 0.66);"> 
-						0
+						{{profitData.moeny*rechargeEarningsProfitData}}
 					</view>
 				</view>
 		
@@ -88,7 +88,7 @@
 		
 					</view>
 					<view class="" style="color: rgba(0, 0, 0, 0.66);">
-						0
+						{{profitData.moeny - (profitData.moeny*rechargeEarningsProfitData)}}
 					</view>
 				</view>
 			</view>
@@ -141,7 +141,7 @@
 							取消提现
 						</u-button>
 		
-						<u-button @click="" class=""
+						<u-button @click="Withdrawal" class=""
 							style="color: #FFFFFF;width: 280rpx;height: 88rpx;background-color: #3A82FE;display: flex;align-items: center;justify-content: center;font-size: 26rpx;border-radius: 12rpx;">
 							确认提现
 						</u-button>
@@ -153,6 +153,9 @@
 </template>
 
 <script>
+	import {
+		ajaxsendMyCode,getbalance,rechargeEarningsProfit,rechargeEarningsTopUpMoney
+	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
@@ -163,16 +166,65 @@
 				profitData:{
 					code:'',
 					password:'',
-					adds:''
-				}
+					adds:'',
+					moeny:''
+				},
+				gsDatava:'',
+				rechargeEarningsProfitData:''
 			}
 		},
+		onShow() {
+			this.getbalanceFun()
+			this.rechargeEarningsProfit()
+		},
 		methods: {
+			rechargeEarningsProfit(){//手续费
+				rechargeEarningsProfit().then(res=>{
+					this.rechargeEarningsProfitData = res.obj
+				})
+			},
+			getbalanceFun() { //获取gs资产
+				let data2 = {
+					currencyName: 'GS',
+					walletType: '1'
+				}
+				getbalance(data2).then(res => {
+					this.gsDatava = res.obj
+				})
+			},
+			Withdrawal(){//提现
+				if(!this.profitData.adds || !this.profitData.moeny || !this.profitData.code || !this.profitData.password){
+					uni.showToast({
+						title:'请先完善提现信息',
+						icon:'none'
+					})
+					return
+				}
+				
+				let data = {
+					quantity:this.profitData.moeny,
+					address:this.profitData.adds,
+					tradePwd:this.profitData.password,
+					code:this.profitData.code,
+				}
+				
+				rechargeEarningsTopUpMoney(data).then(res=>{
+					console.log('是否提现成功',res)
+					uni.showToast({
+						title:res.msg,
+						icon:'none'
+					})
+					if(res.code == 0){
+						setTimeout(() => {
+							uni.navigateBack({})
+						},2000)
+					}
+				})
+			},
 			paste(){//粘贴
 				let that = this
 				uni.getClipboardData({
 					success: function (res) {
-						console.log(res.data);
 						that.profitData.adds = res.data
 					},
 				});
@@ -183,7 +235,7 @@
 				})
 			},
 			allProfit(){//全部提现
-				
+				this.profitData.moeny = this.gsDatava
 			},
 			retn(){
 				uni.navigateBack({
@@ -194,9 +246,15 @@
 				this.show = false
 				this.profitData.code = ''
 				this.profitData.password = ''
+				this.isCodeType = !this.isCodeType
 			},
 			open(){//开启弹窗
 				this.show = true
+			},
+			ajaxsendMyCodeFun(){//发送验证码
+				ajaxsendMyCode().then(res=>{
+					
+				})
 			},
 			codeChange(text) {
 				this.tips = text;
@@ -214,6 +272,7 @@
 						uni.$u.toast('验证码已发送');
 						// 通知验证码组件内部开始倒计时
 						this.$refs.uCode.start();
+						this.ajaxsendMyCodeFun()
 					}, 2000);
 				} else {
 					uni.$u.toast('倒计时结束后再发送');

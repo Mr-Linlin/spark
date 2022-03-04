@@ -4,17 +4,18 @@
 			<view class="type">
 				<view class="key">交易类型</view>
 				<view class="val">
-					<u-switch space="2" v-model="value11" activeColor="#3A82FE" inactiveColor="#3ED7AC">
+					<u-switch space="2" activeValue="0" inactiveValue="1" v-model="buyData.type" activeColor="#3A82FE"
+						inactiveColor="#3ED7AC">
 					</u-switch>
 				</view>
 			</view>
 			<view class="sub-title">价格</view>
 			<view class="price-box">
-				<u--input class="price-input" placeholder="请输入价格" border="none" v-model="value">
+				<u--input class="price-input" placeholder="请输入价格" border="none" v-model="buyData.price">
 				</u--input>
 				<view class="u-num-box">
-					<view>-</view>
-					<view>+</view>
+					<view @click="changePrice(false)">-</view>
+					<view @click="changePrice(true)">+</view>
 				</view>
 			</view>
 			<view class="sub-title-box">
@@ -22,18 +23,19 @@
 				<view class="sub-title-desc">可用28923GS</view>
 			</view>
 			<view class="price-box">
-				<u--input class="price-input" placeholder="请输入数量" border="none" v-model="value">
+				<u--input class="price-input" placeholder="请输入数量" border="none" v-model="buyData.quantity">
 				</u--input>
 				<view class="u-num-box">
-					<view>-</view>
-					<view>+</view>
+					<view @click="changeNum(false)">-</view>
+					<view @click="changeNum(true)">+</view>
 				</view>
 			</view>
 			<view class="sub-title">价格</view>
 			<view class="gs-box">
-				2839230.473934<text>GS</text>
+				{{buyData.price * buyData.quantity}}<text>GS</text>
 			</view>
-			<u-button class="sub-btn" :class='{"sub-btn2":!value11}' type="primary" :text="value11 ? '委托买入':'委托卖出'">
+			<u-button class="sub-btn" @click="handlerBuy" :class='{"sub-btn2":buyData.type === "1"   }' type="primary"
+				:text="(buyData.type === '0') ? '委托买入':'委托卖出'">
 			</u-button>
 		</view>
 		<view class="title">
@@ -109,6 +111,9 @@
 </template>
 
 <script>
+	import {
+		format
+	} from '../../static/js/math.js'
 	import myButton from '../../components/my-button/my-button.vue';
 	import {
 		trusteeList,
@@ -121,10 +126,17 @@
 		},
 		data() {
 			return {
+				buyData: {
+					"method": "publish",
+					"tradeId": "9",
+					"quantity": "",
+					"type": '0', // 1 卖 0：买
+					"price": "",
+					"lang": ""
+				},
 				value12: true,
 				value: "",
 				show: false,
-				value11: true, // 交易类型,
 				queryInfo: {
 					type: 1,
 					pageNum: 1,
@@ -170,11 +182,28 @@
 				this.trusteeList()
 			}
 
-
-
-
 		},
 		methods: {
+			changePrice(flag) {
+				let price = this.buyData.price
+				price = flag ? ++price : --price
+				if (price >= 0) {
+					this.buyData = {
+						...this.buyData,
+						price
+					}
+				}
+			},
+			changeNum(flag) {
+				let quantity = this.buyData.quantity
+				quantity = flag ? ++quantity : --quantity
+				if (quantity >= 0) {
+					this.buyData = {
+						...this.buyData,
+						quantity
+					}
+				}
+			},
 			open(id) {
 				this.show = true
 				this.iid = id
@@ -192,10 +221,19 @@
 			},
 			// 切换委托
 			switchIndex(index) {
+				if (index === 1) {
+					this.trusteeList()
+				}
 				this.currentIndex = index
 			},
 			valChange() {
 
+			},
+			// 卖出 买入
+			handlerBuy() {
+				this.$emit('data', {
+					data: this.buyData
+				})
 			},
 			// 撤销
 			async handlerRepeal() {
