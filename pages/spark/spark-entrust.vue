@@ -142,41 +142,9 @@
 				// this.handlerWeiTuo()
 			}
 			this.trusteeList()
-			this.createSocket()
 		},
 		methods: {
-			// 实时获取实时委托
-			/* createSocket() {
-				uni.connectSocket({
-					url: 'ws://211.149.135.240:7888/websocket/trade',
-					header: {
-						token: uni.getStorageSync('token')
-					},
-					success(e) {
-						console.log(e)
-					},
-					fail(e) {
-						console.log("链接失败" + e)
-					}
-				});
-				uni.onSocketOpen(function (res) {
-					console.log('-------------------------------')
-				  console.log('WebSocket连接已打开！');
-					// this.getGSList()
-				});
-				uni.onSocketError(function(res) {
-					console.log(res)
-					console.log('WebSocket连接打开失败，请检查！');
-				})
-				uni.onSocketMessage((res) => {
-					const data = JSON.parse(res.data)
-					console.log(data)
-					console.log(111)
-				})
-			}, */
-			getGSList(){
-				console.log(545454)
-			},
+			
 			// 获取历史委托数据
 			async trusteeList() {
 				let {
