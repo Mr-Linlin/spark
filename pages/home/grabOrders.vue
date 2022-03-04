@@ -80,7 +80,7 @@
 
 				<view style="display: flex;height: 88rpx; padding:0 32rpx;justify-content: space-between;">
 					<view class="gs-item" v-for="(item,index) in radios" :key="index"
-						:class="{active:index===currentIndex && orderInfo.statusStr==='进行中'}"
+						:class="{active:index===currentIndex && orderInfo.statusStr==='进行中' }"
 						@click="radioClick(index,item)">
 						{{item}}GS
 					</view>
@@ -89,8 +89,8 @@
 				<view class="flex_j">
 					<view class="Isum">
 						<u--input type="number" style="text-indent: 1rem;" border="none" class="uinput" maxlength="10"
-							:disabled="orderInfo.statusStr==='已结束' || orderInfo.statusStr==='未开始'" placeholder="自定义数量"
-							v-model="gs" @change="change">
+							:disabled="orderInfo.statusStr==='已结束' || orderInfo.statusStr==='未开始' || orderInfo.countDown < 0"
+							placeholder="自定义数量" v-model="gs" @change="change">
 						</u--input>
 						<view class="">
 							GS

@@ -3,18 +3,22 @@
 		<view class="plr3">
 			<view class="mt2 ptb2 deals-data-bgcolor">
 				<view class="flexC plr2">
-					<view v-for="(item,index) of titleArr" :key="index" style="width: 25%;font-size: 28rpx;">
-						<view :style="index===3?'text-align:right':index===2 || index===1?'text-align:center':''">
+					<view v-for="(item,index) of titleArr" :key="index" style="width: 20%;font-size: 28rpx;">
+						<view
+							:style="index===4?'text-align:right':index===3 || index===2 || index===1?'text-align:center':''">
 							{{item}}
 						</view>
 					</view>
 				</view>
-				<view v-for="(item,index) of deales_data" :key="index" style="height: 68rpx;font-size: 28rpx;"
+				<view v-for="(item,index) of deales_data" :key="item.id" style="height: 68rpx;font-size: 28rpx;"
 					class="flexC space-between plr2" :style="index%2!=0?'background-color:#FAFCFF':''">
-					<view style="width:25%">{{item.timer}}</view>
-					<view style="width:25%;text-align: center;">{{item.buy}}</view>
-					<view style="width:25%;text-align: center;">{{item.price}}</view>
-					<view style="width:25%;text-align: right;">{{item.deales}}</view>
+					<view style="width:20%;  white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+						{{item.updateTime}}
+					</view>
+					<view style="width:20%;text-align: center;" :style="{color:buyColor[item.tradeTypeStr]}">{{buyStatus[item.tradeTypeStr]}}</view>
+					<view style="width:20%;text-align: center;">{{item.price}}</view>
+					<view style="width:20%;text-align: right;">{{item.quantity}}</view>
+					<view style="width:20%;text-align: right;">{{item.tradeQuantity}}</view>
 				</view>
 			</view>
 		</view>
@@ -23,23 +27,46 @@
 </template>
 
 <script>
+	import {
+		knockdownList
+	} from '@/http/common.js'
 	export default {
 		data() {
 			return {
-				titleArr: ['时间', '买入', '价格', '数量'],
-				deales_data: [{
-						timer: '23:35:42',
-						buy: '买入',
-						price: '239.32',
-						deales: '70.28',
-					},
-					{
-						timer: '22:35:42',
-						buy: '卖出',
-						price: '222.32',
-						deales: '59.28'
-					},
-				]
+				titleArr: ['时间', '买入', '价格', '数量', '成交量'],
+				deales_data: [],
+				queryInfo: {
+					type: 1,
+					pageNum: 1,
+					pageSize: 50
+				},
+				buyStatus: {
+					'买': '买入',
+					'卖': '卖出'
+				},
+				buyColor: {
+					'买': '#3ED7AC',
+					'卖': '#34C759'
+				}
+			}
+		},
+		created() {
+			this.knockdownList()
+		},
+		methods: {
+			async knockdownList() {
+				let {
+					code,
+					msg,
+					obj
+				} = await knockdownList(this.queryInfo)
+				let list = []
+				obj.list.forEach(item => {
+					if (item.status === 1) {
+						list.push(item)
+					}
+				})
+				this.deales_data = list
 			}
 		}
 	}

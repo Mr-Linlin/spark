@@ -18,12 +18,12 @@
 			<spark-buy :flag="flag" @data="handlerData" ref='buy'></spark-buy>
 		</view>
 		<view v-else-if="defaultIndex===2">
-			<spark-sell :flag="flag"></spark-sell>
+			<spark-sell :flag="flag" @data="handlerData" ref='sell'></spark-sell>
 		</view>
 		<view v-else-if="defaultIndex===3">
-			<spark-entrust :flag="flag" @data="handlerData" ></spark-entrust>
+			<spark-entrust :flag="flag" @data="handlerData" ref='entrust'></spark-entrust>
 		</view>
-		<view v-else-if="defaultIndex===4">
+		<view v-else-if="defaultIndex===4" @data="handlerEntrust">
 			<spark-deals :flag="flag"></spark-deals>
 		</view>
 		<!-- 侧边栏 -->
@@ -52,7 +52,9 @@
 	import sparkBuy from './spark-buy.vue';
 	import sparkSell from './spark-sell.vue';
 	import sparkData from './spark-data.vue';
-	import {trusteeList} from '../../http/common.js';
+	import {
+		trusteeList
+	} from '../../http/common.js';
 	import {
 		BASE_URL
 	} from "../../http/request.js"
@@ -69,6 +71,7 @@
 		},
 		data() {
 			return {
+				timer: null,
 				sliderTop: 40,
 				tabs: ['数据', '买入', '卖出', '委托', '成交'],
 				areaList: [],
@@ -103,9 +106,11 @@
 			var socketOpen = false;
 			this.createSocket()
 		},
+		onUnload() {
+			clearInterval(this.timer)
+		},
 		methods: {
 			/* 
-			 
 				 FAIL("异常", -1),
 			     TRADE("区域交易对", 0),
 			     PRICE_FRESH("价格刷新", 1),
@@ -144,6 +149,7 @@
 						token: uni.getStorageSync('token')
 					},
 					success(e) {
+						console.log('开始发送')
 						console.log(e)
 					},
 					fail(e) {
@@ -152,20 +158,13 @@
 				});
 				uni.onSocketOpen((res) => {
 					console.log("链接打开", res)
-					/* this.sendSocket({
-						"method": "kData",
-						"tradeId": 9,
-						"resolution": 1,
-						"from": 1645772340,
-						"to": 1645772340
-					}) */
 					this.flag = true;
-					
+					this.handlerHeartbeat(); //开启心跳
 					this.getGSList()
 				});
 				uni.onSocketError(function(res) {
-					console.log(res)
-					console.log('WebSocket连接打开失败，请检查！');
+					// console.log(res)
+					// console.log('WebSocket连接打开失败，请检查！');
 				})
 				uni.onSocketMessage((res) => {
 					const data = JSON.parse(res.data)
@@ -173,10 +172,10 @@
 					console.log(data)
 					const obj = data.obj;
 					switch (data.code) {
-						case -1:{
+						case -1: {
 							this.$refs.uToast.show({
-								message:data.obj,
-								type:'error'
+								message: data.obj,
+								type: 'error'
 							})
 							break;
 						}
@@ -184,43 +183,67 @@
 							this.areaList = obj
 							break;
 						}
-						case 9:{ // 实时交易
-							this.$refs['buy'].setBuyList(obj)
+						case 9: { // 实时交易
+
+							if (this.defaultIndex === 1) {
+								this.$refs['buy'].setBuyList(obj)
+							} else if (this.defaultIndex === 3) {
+								this.$refs['entrust'].setBuyList(obj)
+							} else if (this.defaultIndex === 2) {
+								this.$refs['sell'].setBuyList(obj)
+							}
 							break;
 						}
-						case 8:{ // 买入 卖出列表
-							// if(  ){
-								
-							// }
+						case 8: { // 买入 卖出列表
+							if (this.defaultIndex === 1 || this.defaultIndex === 2) {
+								this.$refs[this.defaultIndex === 1 ? 'buy' : 'sell'].getEntrustList(obj)
+							}
 							break;
 						}
 						case 10: { // 钱包
-							this.$refs['buy'].setWallet(obj)
+							if (this.defaultIndex === 1 || this.defaultIndex === 2) {
+								this.$refs[this.defaultIndex === 1 ? 'buy' : 'sell'].setWallet(obj)
+								return
+							} else if (this.defaultIndex === 3) {
+								this.$refs['entrust'].setWallet(obj)
+							}
 							break;
 						}
 						case 11: { // K线图
-							this.$refs['data'].handleKLine(obj)
+							if( this.$refs['data'] ){
+								this.$refs['data'].handleKLine(obj)
+							}
+							
 							break;
 						}
-						case 13:{ // 行情  
-							
-							this.$refs['buy'].setBuyList(obj)
+						case 12: {
+							console.log("交易记录")
+							console.log(obj)
+							break;
+						}
+						case 13: { // 行情  
+							if (this.$refs['data']) {
+								this.$refs['data'].setMarket(obj)
+							}
+							if (this.$refs['buy'] || this.$refs['sell']) {
+								this.$refs[this.defaultIndex === 1 ? 'buy' : 'sell'].setBuyList(obj)
+							}
 							break
 						}
 					}
 				});
 			},
 			sendSocket(data) {
-				console.log(data)
+				// console.log(data)
 				data.token = uni.getStorageSync('token')
-				console.log(JSON.stringify(data))
+				// console.log(JSON.stringify(data))
 				uni.sendSocketMessage({
 					data: (typeof data === 'string') ? data : JSON.stringify(data),
 					success(e) {
-						console.log(e)
+						// console.log(e)
 					},
 					fail(e) {
-						console.log(e)
+						// console.log(e)
 					}
 				});
 			},
@@ -240,10 +263,26 @@
 			handlerData({
 				data
 			}) {
-				console.log(data)
+				// console.log(data)
 				this.sendSocket(data)
 			},
-			
+			// 开启心跳
+			handlerHeartbeat() {
+				this.timer = setInterval(() => {
+					if(uni.getStorageSync('token')){
+						this.sendSocket({
+							from: 1646034420000,
+							to: 1646042280000, //(new Date().getTime() / 1000 - (60 * 1)).toFixed(0),//1646042280000
+							resolution:'1',
+							tradeId: 9,
+							"method": "kData"
+						})
+					}else{
+						clearInterval(this.timer)
+					}
+					
+				}, 5000)
+			}
 		}
 	}
 </script>
