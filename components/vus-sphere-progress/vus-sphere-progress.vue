@@ -179,6 +179,7 @@
 		width: 200rpx;
 		height: 200rpx;
 		transition: all 1s ease;
+		/* border-radius: 50%; */
 	}
 
 	.vus-progress-sphere {

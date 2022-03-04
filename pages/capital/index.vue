@@ -15,7 +15,7 @@
 								收益钱包(CNY)
 							</view>
 							<view class="" style="margin-top: 24rpx;">
-								<u-count-to fontSize="25" color="#fff" :startVal="0" :endVal="totalCnyData" decimals="4"></u-count-to>
+								<u-count-to fontSize="22" color="#fff" :startVal="0" :endVal="totalCnyData" decimals="4"></u-count-to>
 							</view>
 						</view>
 						<view class="" style="flex: 1;">
@@ -24,8 +24,8 @@
 						<view class="" style="margin-right: 40rpx;">
 							<u-button @click="withdrawalsFun(0)" class="swiperBtn" text="提币"></u-button>
 						</view>
-					</view>
-				</swiper-item>
+					</view> 
+				</swiper-item> 
 				<swiper-item >
 					<view class="bg" style="background-image: url(../../static/Ca2.png) ;">
 						<view class="" style="padding-left: 40rpx;">
@@ -33,7 +33,7 @@
 								本金钱包
 							</view>
 							<view class="" style="margin-top: 24rpx;">
-								<u-count-to fontSize="25" color="#fff" :startVal="0" :endVal="availableData" decimals="4"></u-count-to>
+								<u-count-to fontSize="22" color="#fff" :startVal="0" :endVal="availableData" decimals="4"></u-count-to>
 							</view>
 						</view>
 						<view class="" style="flex: 1;">

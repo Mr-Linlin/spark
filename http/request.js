@@ -12,7 +12,7 @@ uni.$u.http.setConfig(config => {
 	}
 	return config
 })
-uni.$u.http.interceptors.request.use(config => {
+uni.$u.http.interceptors.request.use(config => { 
 	config.data = config.data || {}
 	config.header.token = uni.getStorageSync('token')
 	// console.log(config.header)

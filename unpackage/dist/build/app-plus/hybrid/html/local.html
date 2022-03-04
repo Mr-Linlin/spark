@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/kline.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css" />
+	</head>
+	<body>
+		<div ref="imageWrapper" @click="bodyClick" id="app" :class="isLandscape?'page-landscape':'page'"
+			:style="{'height':isLandscape?windowWidth+'px':'100vh'}" v-cloak>
+			<div class="landscape" v-if="isLandscape">
+				<div class="landscape-top">
+					<div v-if="showNavBar=='show'" class="navbar"></div>
+					<div class="landscape-nav">
+						<div class="landscape-nav-left">
+							<span class="lnl-name">{{tokenName}}/USDT</span>
+							<span class="lnl-price" :class="{'lnl-price-red':topInfo.c>0}">{{topInfo.u}}</span>
+							<span class="lnl-rate"
+								:class="{'lnl-rate-red':topInfo.c>0}">{{ topInfo.c > 0 ? '+' :  '' }}{{topInfo.c}}%</span>
+						</div>
+						<div class="landscape-nav-right">
+							<div class="lnr-item">
+								<span class="lnr-item-label">{{curLan['text2']}}</span>
+								<span class="lnr-item-value">{{topInfo.h}}</span>
+							</div>
+							<div class="lnr-item">
+								<span class="lnr-item-label">{{curLan['text3']}}</span>
+								<span class="lnr-item-value">{{topInfo.l}}</span>
+							</div>
+							<div class="lnr-item">
+								<span class="lnr-item-label">{{curLan['text4']}}</span>
+								<span class="lnr-item-value">{{ Number((topInfo.v / 1e3).toFixed(0)) + 'k' }}</span>
+							</div>
+						</div>
+						<img @click="toggleLandscape(false)" class="landscape-nav-close" src="img/close.png" />
+					</div>
+				</div>
+				<div class="landscape-chart">
+					<div class="landscape-chart-wrap">
+						<chart ref="chart" :list="dataList" :land="isLandscape" :labels="curLan['tooltipLabels']">
+						</chart>
+					</div>
+					<div class="chart-tab">
+						<div class="chart-tab-item">
+							<span class="cti-label">{{curLan['text6']}}</span>
+							<span @click="switchMainSub('mainActive',item.value)" class="cti-value"
+								:class="{'cti-value-active':mainActive==item.value}" v-for="(item,index) in mainList"
+								:key="index">{{item.label}}</span>
+							<span @click="removeMainSub('mainActive')" class="cti-value"
+								:class="{'cti-value-active':!mainActive}">{{curLan['text8']}}</span>
+						</div>
+						<div class="chart-tab-item">
+							<span class="cti-label">{{curLan['text7']}}</span>
+							<span @click="switchMainSub('subActive',item.value)" class="cti-value"
+								:class="{'cti-value-active':subActive==item.value}" v-for="(item,index) in subList"
+								:key="index">{{item.label}}</span>
+							<span @click="removeMainSub('subActive')" class="cti-value"
+								:class="{'cti-value-active':!subActive}">{{curLan['text8']}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="landscape-footer">
+					<div @click="switchTab(item)" class="landscape-footer-item" v-for="(item,index) in chartTimes"
+						:key="index">
+						<span class="lfi-text" :class="{'lfi-text-active':timeActive==item.value}">{{item.label}}</span>
+						<span class="lfi-line" :class="{'lfi-line-active':timeActive==item.value}"></span>
+					</div>
+				</div>
+			</div>
+			<block v-else>
+				<!-- <div class="top">
+					<div v-if="showNavBar=='show'" class="navbar"></div>
+					<div class="nav">
+						<div @click="back" class="nav-back">
+							<img class="nav-back-icon" src="./img/back.png">
+						</div>
+						<span class="nav-title">{{tokenName}}/USDT</span>
+						<div class="nav-right">
+							<img @click="collect" class="nav-right-icon"
+								:src="isCollect?'./img/collected.png':'./img/collect.png'">
+							<img @click="toggleLandscape(true)" class="nav-right-icon" src="./img/fullScreen.png">
+							<img @click="openShareDialog" class="nav-right-icon" src="./img/share.png">
+						</div>
+					</div>
+				</div> -->
+				<div class="head">
+					<div class="head-left">
+						<div class="head-left-price" :class="{'head-left-price-red':topInfo.c>0}">
+							{{topInfo.u}}
+						</div>
+						<div class="head-left-rate" :class="{'head-left-rate-red':topInfo.c>0}">
+							{{ topInfo.c > 0 ? '+' :  '' }}{{topInfo.c}}%
+						</div>
+					</div>
+					<div class="head-right">
+						<div class="head-right-item">
+							<span class="head-right-item-label">{{curLan['text2']}}</span>
+							<span class="head-right-item-value">{{topInfo.h}}</span>
+						</div>
+						<div class="head-right-item">
+							<span class="head-right-item-label">{{curLan['text3']}}</span>
+							<span class="head-right-item-value">{{topInfo.l}}</span>
+						</div>
+						<div class="head-right-item">
+							<span class="head-right-item-label">{{curLan['text4']}}</span>
+							<span class="head-right-item-value">{{ Number((topInfo.v / 1e3).toFixed(0)) + 'k' }}</span>
+						</div>
+					</div>
+				</div>
+				<div class="timewrap">
+					<div class="timetab">
+						<div class="timetab-item" @click="switchTab(item)" v-for="(item,index) in times" :key="index">
+							<span class="timetab-item-label"
+								:class="{'timetab-item-label-active':item.value==timeActive}">{{item.label}}</span>
+							<span class="timetab-item-line"
+								:class="{'timetab-item-line-active':item.value==timeActive}"></span>
+						</div>
+					</div>
+					<div class="timeother">
+						<div @click.stop="showHideMore" class="timeother-more">
+							<span class="timeother-more-text"
+								:class="{'timeother-more-text-active':spec}">{{spec?moreList[spec-1]['label']:curLan['text5']}}</span>
+							<img class="timeother-more-icon" src="./img/more.png">
+						</div>
+						<div @click.stop="showHideMainSub" class="timeother-utils">
+							<img class="timeother-utils-icon" src="./img/utils.png">
+						</div>
+					</div>
+
+					<!-- 更多 -->
+					<div v-if="showMore" class="morelist">
+						<div @click="switchTab(item)" class="morelist-item"
+							:class="{'morelist-item-active':item.value==timeActive}" v-for="(item,index) in moreList"
+							:key="index">
+							{{item.label}}
+						</div>
+					</div>
+					<!-- 工具 -->
+					<div v-if="showMainSub" class="utils">
+						<div class="utils-row">
+							<div class="utils-row-label">{{curLan['text6']}}</div>
+							<div class="utils-row-line"></div>
+							<div class="utils-row-tabs">
+								<span @click="switchMainSub('mainActive',item.value)" class="utils-row-tabs-item"
+									:class="{'utils-row-tabs-item-active':mainActive==item.value}"
+									v-for="(item,index) in mainList" :key="index">{{item.label}}</span>
+							</div>
+							<div @click="removeMainSub('mainActive')" class="utils-row-showhide"
+								:class="{'utils-row-showhide-active':!mainActive}">{{curLan['text8']}}</div>
+						</div>
+						<div class="utils-row">
+							<div class="utils-row-label">{{curLan['text7']}}</div>
+							<div class="utils-row-line"></div>
+							<div class="utils-row-tabs">
+								<span @click="switchMainSub('subActive',item.value)" class="utils-row-tabs-item"
+									:class="{'utils-row-tabs-item-active':subActive==item.value}"
+									v-for="(item,index) in subList" :key="index">{{item.label}}</span>
+							</div>
+							<div @click="removeMainSub('subActive')" class="utils-row-showhide"
+								:class="{'utils-row-showhide-active':!subActive}">{{curLan['text8']}}</div>
+						</div>
+					</div>
+				</div>
+				<div class="chart-wrap">
+					<div class="chart">
+						<chart ref="chart" :list="dataList" :land="isLandscape" :labels="curLan['tooltipLabels']">
+						</chart>
+					</div>
+					<div class="chart-shade"></div>
+				</div>
+				<!-- <div class="tab" :style="{'top':showNavBar=='show'?'64px':'44px'}">
+					<div @click="switchDT(index)" class="tab-item" v-for="(item,index) in tabList" :key="index">
+						<span class="tab-item-label" :class="{'tab-item-label-active':tabActive==index}">{{item}}</span>
+					</div>
+				</div>
+				<div v-if="tabActive==0" class="depth">
+					<div class="depth-head">
+						<span class="depth-head-label">{{curLan['text9']}}</span>
+						<span class="depth-head-label">{{curLan['text10']}}</span>
+						<span class="depth-head-label">{{curLan['text9']}}</span>
+					</div>
+					<div class="depth-list">
+						<div class="depth-list-item">
+							<div class="dli-cell" v-for="(item,index) in buyList" :key="index">
+								<span class="dli-cell-num">{{item.num || '--'}}</span>
+								<span class="dli-cell-price dli-cell-price-green">{{item.price || '--'}}</span>
+							</div>
+						</div>
+						<div class="depth-list-item">
+							<div class="dli-cell" v-for="(item,index) in sellList" :key="index">
+								<span class="dli-cell-price dli-cell-price-red">{{item.price || '--'}}</span>
+								<span class="dli-cell-num">{{item.num || '--'}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div v-if="tabActive==1" class="transaction">
+					<div class="transaction-head">
+						<span class="transaction-head-label">{{curLan['text11']}}</span>
+						<span class="transaction-head-label">{{curLan['text10']}}</span>
+						<span class="transaction-head-label">{{curLan['text9']}}</span>
+					</div>
+					<div class="transaction-list">
+						<div class="transaction-list-item" v-for="(item,index) in transactionList" :key="index">
+							<span class="tli-label">{{item.time}}</span>
+							<span class="tli-label"
+								:class="item.type==0?'tli-label-green':'tli-label-red'">{{item.price}}</span>
+							<span class="tli-label">{{item.num}}</span>
+						</div>
+					</div>
+				</div> -->
+				<div ref="share" class="shareresult">
+					<img class="shareresult-img" :src="pageImg" />
+					<div class="shareresult-banner">
+						<img class="shareresult-banner-logo" src="img/logo.png" />
+						<div class="shareresult-banner-main">
+							<span class="sbm-title">{{curLan['share']['text1']}}</span>
+							<span class="sbm-text">{{curLan['share']['text2']}}</span>
+						</div>
+						<img class="shareresult-banner-qrcode" src="img/qrcode.png" />
+					</div>
+				</div>
+				<van-popup v-model="sharePopup" :style="{ width:'80%' }">
+					<div class="sharePopup">
+						<div class="sharePopup-main">
+							<img class="sharePopup-main-img" :src="pageImg" />
+							<div class="sharePopup-main-banner">
+								<img class="smb-logo" src="img/logo.png" />
+								<div class="smb-main">
+									<span class="smb-main-title">{{curLan['share']['text1']}}</span>
+									<span class="smb-main-text">{{curLan['share']['text2']}}</span>
+								</div>
+								<img class="smb-qrcode" src="img/qrcode.png" />
+							</div>
+						</div>
+						<div class="sharePopup-footer">
+							<img @click="sharePopup=false" class="sharePopup-footer-close" src="img/close.png" />
+							<div class="sharePopup-footer-btn">
+								<div @click="savePicture" class="sharePopup-footer-btn-save">{{curLan['text12']}}</div>
+								<div @click="share" class="sharePopup-footer-btn-share">{{curLan['text13']}}</div>
+							</div>
+						</div>
+					</div>
+				</van-popup>
+				<!-- <div style="height:80px"></div> -->
+				<!-- <div class="btns">
+					<div @click="toTrade('buy')" class="btns-item">
+						{{curLan['text14']}} {{tokenName}}
+					</div>
+					<div @click="toTrade('sell')" class="btns-item">
+						{{curLan['text15']}} {{tokenName}}
+					</div>
+				</div> -->
+
+			</block>
+		</div>
+
+		<script type="text/javascript" src="js/vue.js"></script>
+		<script type="text/javascript" src="js/qs.js"></script>
+		<script type="text/javascript" src="js/axios.js"></script>
+		<script type="text/javascript" src="js/html2canvas.min.js"></script>
+		<script type="text/javascript" src="js/vant.min.js"></script>
+		<script type="text/javascript" src="js/klinecharts.min.js"></script>
+		<script type="text/javascript" src="js/httpVueLoader.js"></script>
+		<script type="text/javascript" src="js/lan.js"></script>
+		<script type="text/javascript" src="js/kline.js"></script>
+	</body>
+</html>

@@ -116,6 +116,9 @@ export const rechargeEarningsProfit = user => http.post('/front/recharge/Earning
 
 // 确认收益提现接口
 export const rechargeEarningsTopUpMoney = user => http.post('/front/recharge/EarningsTopUpMoney', user)
-// 成交委托
 
+// 成交委托
 export const knockdownList= user => http.post('/front/trade/trustee/list', user)
+
+// 本金提现
+export const rechargeConfirmTopUpMoney = user => http.post('/front/recharge/ConfirmTopUpMoney', user)

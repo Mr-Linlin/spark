@@ -75,6 +75,9 @@
 				let list = []
 				obj.list.forEach(item => {
 					if (item.status === 1) {
+						let data = new Date(item.updateTime).getTime()
+						let time = uni.$u.timeFormat(data, 'yyyy-mm-dd hh:MM:ss')
+						item.updateTime=time
 						list.push(item)
 					}
 				})
