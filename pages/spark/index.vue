@@ -233,8 +233,7 @@
 			}) {
 				// console.log(data)
 				this.sendSocket(data)
-			},
-			
+			}
 		}
 	}
 </script>

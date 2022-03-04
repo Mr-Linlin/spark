@@ -38,7 +38,7 @@
 						</view>
 					</view>
 					<view class="mt3">
-						<u-button @click="handleBuy" color="#3A82FE" text="买入" :height="68" :radius="8"></u-button>
+						<u-button @click="handleBuy" color="#BAFFEB" text="卖出" :height="68" :radius="8"></u-button>
 					</view>
 				</view>
 			</view>
@@ -52,6 +52,7 @@
 					<scroll-view class="scroll-box" scroll-y>
 						<view :key="index" v-for="(item,index) of quotation">
 							<view @click="handlerSelect(item)" class="p-item flexC space-between">
+								<view :style="`width:${item.width}%`" class="bg"></view>
 								<view class="schedule"></view>
 								<view>{{item.price}}</view>
 								<view>{{item.nums}}</view>
@@ -131,7 +132,7 @@
 					"method": "publish",
 					"tradeId": "9",
 					"quantity": "",
-					"type": "0", // 1 卖 0：买
+					"type": "1", // 1 卖 0：买
 					"price": "",
 					"lang": ""
 				},
@@ -159,7 +160,6 @@
 				this.getWallet()
 				this.handleSubscribe(9);
 				this.getTrustList()
-				console.log('----------')
 				this.$emit('data', {
 					data: {
 						"method": "sub",
@@ -193,7 +193,6 @@
 			},
 			// 选择数据
 			handlerSelect({price,nums}){
-				
 				this.buyData = {
 					...this.buyData,
 					price
@@ -270,8 +269,6 @@
 			},
 			// 设置实时交易列表
 			setBuyList(list) {
-				console.log('这里。。。。。。。。。。。。。。。。')
-				console.log(list)
 				this.dealsData = list.map(e => {
 					e.timer = new Date(e.createTime).Format("hh:mm:ss")
 					return e
@@ -287,7 +284,13 @@
 			},
 			// 买入委托列表
 			getEntrustList(list) {
-				this.quotation = list.buyList
+				const num = list.sellList.reduce((total, currentValue)=>{
+					 return (total > currentValue.nums) ?  total : currentValue.nums
+				},list.sellList[0].nums)
+				this.quotation = list.sellList.map(e=>{
+					e.width = e.nums / num * 100
+					return e
+				})
 			}
 		}
 	}
@@ -321,7 +324,15 @@
 		color: rgba(0, 0, 0, 0.66);
 		background-color: rgba($color: #000, $alpha: 0);
 		z-index: 2;
-
+		.bg{
+			position: absolute;
+			right: 0;
+			top: 0;
+			height: 100%;
+			background-color: #BAFFEB;
+			z-index: -1;
+			transition: width .8s; 
+		}
 		.schedule {
 			position: absolute;
 			z-index: -1;
@@ -329,11 +340,8 @@
 			top: 0;
 			height: 100%;
 			width: 50%;
-			background: #FFE8E5;
 		}
-
 		.bg2 {
-
 			background: #BAFFEB;
 		}
 	}
