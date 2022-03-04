@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view v-for="(item,index) in 5" class="record">
+		<view v-for="(item,index) in 5" :key="index" class="record">
 			<view class="recordLeft">
 				<view class="recordLeftTitle">
 					本金提现

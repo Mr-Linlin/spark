@@ -105,5 +105,17 @@ export const trusteeList= user => http.post('/front/trade/trustee/list', user)
 // 撤单
 export const trusteeCancel = user => http.post('/front/trade/trustee/cancel', user)
 
+// 本金钱包接口
+export const rechargeuserAllWallet = user => http.post('/front/recharge/userAllWallet', user)
+
+// 充值时间段
+export const rechargetimeAndPrice = user => http.post('/front/recharge/timeAndPrice', user)
+
+// 收益提现手续费
+export const rechargeEarningsProfit = user => http.post('/front/recharge/EarningsProfit', user)
+
+// 确认收益提现接口
+export const rechargeEarningsTopUpMoney = user => http.post('/front/recharge/EarningsTopUpMoney', user)
 // 成交委托
+
 export const knockdownList= user => http.post('/front/trade/trustee/list', user)

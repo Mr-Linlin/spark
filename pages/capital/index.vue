@@ -33,7 +33,7 @@
 								本金钱包
 							</view>
 							<view class="" style="margin-top: 24rpx;">
-								<u-count-to fontSize="25" color="#fff" :startVal="0" :endVal="totalCnyData" decimals="4"></u-count-to>
+								<u-count-to fontSize="25" color="#fff" :startVal="0" :endVal="availableData" decimals="4"></u-count-to>
 							</view>
 						</view>
 						<view class="" style="flex: 1;">
@@ -83,25 +83,24 @@
 					</view>
 				</view>
 			</view>
-		</view>
+		</view> 
 		
 		<view v-if="currentst == 1" class="">
 			<view class="" style="height: 110rpx;display: flex;align-items: center;font-size: 32rpx;color: #1A1B1C;margin-left: 32rpx;text-shadow: 0px 0px #000;">
 				充值时间段
 			</view>
-			<view class="" style="overflow:auto;">
-				<view v-for="(item,index) in 4" :class="(index==2 || index == 3) ? 'mt_20' : ''" style="width: 333rpx;height: 140rpx;border-radius: 8rpx;background-color: #FFFFFF;float: left;margin-left: 20rpx;">
+			<view class="" style="overflow:auto;"> 
+				<view v-for="(item,index) in rechargetimeAndPriceData" :key="index" :class="(index==2 || index == 3) ? 'mt_20' : ''" style="width: 333rpx;height: 140rpx;border-radius: 8rpx;background-color: #FFFFFF;float: left;margin-left: 20rpx;">
 					<view class="" style="padding-left: 24rpx;">
 						<view class="" style="padding-top: 24rpx;">
-							30天以内
+							{{item.timeLong}}
 						</view>
 						<view class="" style="padding-top: 20rpx;text-shadow: 0px 0px #000;">
-							2892.2
+							{{item.money}}
 						</view>
 					</view>
 				</view>
 			</view>
-			
 			<u-collapse :border="false" @change="changest" @close="closest" @open="openst" >
 			    <u-collapse-item style="padding-right: 18rpx;" :border="false" title="阶段说明" >
 			      <view style="font-size: 24rpx;" class="">
@@ -126,7 +125,7 @@
 
 <script>
 	import {
-		statistic,assetlist
+		statistic,assetlist,rechargeuserAllWallet,rechargetimeAndPrice,
 	} from '@/http/common.js'
 	export default {
 		data() {
@@ -175,7 +174,9 @@
 				assetlistData:[],
 				mg:'',
 				currentst:'',
-				typefunst:0
+				typefunst:0,
+				availableData:'',
+				rechargetimeAndPriceData:{}
 			};
 		},
 		
@@ -184,9 +185,25 @@
 				this.totalCnyData = res.obj.totalCny
 				
 			})
+			this.assetlistData = []
+			this.totalCnyData = ''
+			this.availableData = ''			this.rechargetimeAndPriceData = {}
+	
 			this.assetlistFun()
+			this.rechargeuserAllWallet()
+			this.rechargetimeAndPriceFun()
 		},
 		methods: {
+			rechargetimeAndPriceFun(){//充值时间段
+				rechargetimeAndPrice().then(res=>{
+					this.rechargetimeAndPriceData = res.obj
+				})
+			},
+			rechargeuserAllWallet(){//本金钱包
+				rechargeuserAllWallet().then(res=>{
+					this.availableData = res.obj.available
+				})
+			},
 			openst(e) {
 			  // console.log('open', e)
 			},

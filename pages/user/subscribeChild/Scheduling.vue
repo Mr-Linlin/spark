@@ -5,7 +5,7 @@
 				<text>预排数量</text>
 				<view class="sched_input">
 					<u--input placeholder="0" :maxlength="8" v-model="GS" border="none" @change="gsChange" type="number"></u--input>
-					<text style="margin-right: 20rpx;">可用GS {{gsDatava ? gsDatava : 0}}</text>
+					<text style="margin-right: 20rpx;">可用GS {{gsDatava >0 ? gsDatava.toFixed(4) : gsDatava}}</text>
 				</view>
 			</view>
 			<view class="fnt_num">
@@ -14,7 +14,7 @@
 				</view>
 			</view>
 			<view class="group_2">
-				<view style="color:rgba(247, 69, 57, 1) ;padding-top: 24rpx;">FNT可用{{fntDatava ? fntDatava : 0}}</view>
+				<view style="color:rgba(247, 69, 57, 1) ;padding-top: 24rpx;">FNT可用{{fntDatava >0 ? fntDatava.toFixed(4) : fntDatava}}</view>
 				<view style="margin-right: 10rpx;">所需体力FNT=GS*{{getRateData*100}}%*2倍</view><br>
 			</view>
 		</view>
