@@ -21,8 +21,8 @@
 							2022/5/19
 						</view> -->
 					</view>
-					<view style="width:13%;text-align: left;" :style="{color:buyColor[item.tradeTypeStr]}">
-						<text style="padding:3rpx;height: 22rpx;line-height: 22rpx;font-size: 22rpx;background: rgba(52, 199, 89, 0.11);border-radius: 2rpx;">{{buyStatus[item.tradeTypeStr]}}</text>
+					<view style="width:13%;text-align: left;" :style="[{color:buyColor[item.tradeType]}]">
+						<text :style="{background:bgColor[item.tradeType]}"  style="padding:3rpx;height: 22rpx;line-height: 22rpx;font-size: 22rpx;border-radius: 2rpx;">{{buyStatus[item.tradeTypeStr]}}</text>
 					</view>
 					<view style="width:21%;text-align: right;">{{item.price}}</view>
 					<view style="width:21%;text-align: right;">{{item.quantity}}</view>
@@ -53,8 +53,12 @@
 					'卖': '卖出'
 				},
 				buyColor: {
-					'买': '#3ED7AC',
-					'卖': '#34C759',
+					0: '#3A82FE',
+					1: '#34C759',
+				},
+				bgColor:{
+					0:'rgba(58, 130, 254, 0.11)',
+					1:'rgba(52, 199, 89, 0.12)'
 				}
 			}
 		},
@@ -74,6 +78,7 @@
 						list.push(item)
 					}
 				})
+				console.log(list)
 				this.deales_data = list
 			}
 		}

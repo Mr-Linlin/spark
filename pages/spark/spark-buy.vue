@@ -137,7 +137,7 @@
 					"method": "publish",
 					"tradeId": "9",
 					"quantity": "",
-					"type": "0", // 1 卖 0：买
+					"type": "0", // 1 卖  0买
 					"price": "",
 					"lang": ""
 				},

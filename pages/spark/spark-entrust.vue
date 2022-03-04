@@ -347,7 +347,6 @@
 				justify-content: space-between;
 				width: 104rpx;
 				height: 32rpx;
-
 				view {
 					width: 32rpx;
 					height: 32rpx;
@@ -358,13 +357,11 @@
 				}
 			}
 		}
-
 		.sub-title-box {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
 			margin-bottom: 20rpx;
-
 			.sub-title-key {
 				height: 34rpx;
 				font-size: 28rpx;
@@ -373,7 +370,6 @@
 				line-height: 34rpx;
 				font-weight: bold;
 			}
-
 			.sub-title-desc {
 				height: 28rpx;
 				font-size: 24rpx;
