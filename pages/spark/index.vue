@@ -18,10 +18,10 @@
 			<spark-buy :flag="flag" @data="handlerData" ref='buy'></spark-buy>
 		</view>
 		<view v-else-if="defaultIndex===2">
-			<spark-sell :flag="flag"  @data="handlerData" ref='sell' ></spark-sell>
+			<spark-sell :flag="flag" @data="handlerData" ref='sell'></spark-sell>
 		</view>
 		<view v-else-if="defaultIndex===3">
-			<spark-entrust :flag="flag" @data="handlerData" ></spark-entrust>
+			<spark-entrust :flag="flag" @data="handlerData" ref='entrust'></spark-entrust>
 		</view>
 		<view v-else-if="defaultIndex===4" @data="handlerEntrust">
 			<spark-deals :flag="flag"></spark-deals>
@@ -52,7 +52,9 @@
 	import sparkBuy from './spark-buy.vue';
 	import sparkSell from './spark-sell.vue';
 	import sparkData from './spark-data.vue';
-	import {trusteeList} from '../../http/common.js';
+	import {
+		trusteeList
+	} from '../../http/common.js';
 	import {
 		BASE_URL
 	} from "../../http/request.js"
@@ -154,7 +156,7 @@
 				uni.onSocketOpen((res) => {
 					console.log("链接打开", res)
 					this.flag = true;
-					
+
 					this.getGSList()
 				});
 				uni.onSocketError(function(res) {
@@ -168,10 +170,10 @@
 					// console.log(data)
 					const obj = data.obj;
 					switch (data.code) {
-						case -1:{
+						case -1: {
 							this.$refs.uToast.show({
-								message:data.obj,
-								type:'error'
+								message: data.obj,
+								type: 'error'
 							})
 							break;
 						}
@@ -179,25 +181,38 @@
 							this.areaList = obj
 							break;
 						}
-						case 9:{ // 实时交易
-							this.$refs[ this.defaultIndex === 1 ? 'buy' : 'sell'  ].setBuyList(obj)
+						case 9: { // 实时交易
+							if (this.defaultIndex === 1) {
+								this.$refs[this.defaultIndex === 1 ? 'buy' : 'sell'].setBuyList(obj)
+								return
+							} else if (this.defaultIndex === 3) {
+								this.$refs['entrust'].setBuyList(obj)
+							}
 							break;
 						}
-						case 8:{ // 买入 卖出列表
-							this.$refs[ this.defaultIndex === 1 ? 'buy' : 'sell'  ].getEntrustList(obj)
+						case 8: { // 买入 卖出列表
+							if (this.defaultIndex === 1) {
+								this.$refs[this.defaultIndex === 1 ? 'buy' : 'sell'].getEntrustList(obj)
+
+							}
 							break;
 						}
 						case 10: { // 钱包
-							this.$refs[ this.defaultIndex === 1 ? 'buy' : 'sell'  ].setWallet(obj)
+							if (this.defaultIndex === 1) {
+								this.$refs[this.defaultIndex === 1 ? 'buy' : 'sell'].setWallet(obj)
+								return
+							} else if (this.defaultIndex === 3) {
+								this.$refs['entrust'].setWallet(obj)
+							}
 							break;
 						}
 						case 11: { // K线图
 							this.$refs['data'].handleKLine(obj)
 							break;
 						}
-						case 13:{ // 行情  
-							
-							this.$refs[ this.defaultIndex === 1 ? 'buy' : 'sell'  ].setBuyList(obj)
+						case 13: { // 行情  
+
+							this.$refs[this.defaultIndex === 1 ? 'buy' : 'sell'].setBuyList(obj)
 							break
 						}
 					}

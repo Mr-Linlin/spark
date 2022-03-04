@@ -45,35 +45,49 @@
 		</view>
 		<!-- 实时委托 -->
 		<view class="statrtrust entrust" v-if="currentIndex===0">
-			<view class="e-item" v-for="(item,index) in 3" :key="index">
+			<view class="e-item" v-for="(item,index) in entrustList" :key="item.id">
 				<view class="top">
 					<view class="top-left">
-						<text class="txt1">买入</text>
-						<text class="txt2">FNT/GS</text>
+						<text class="txt1"
+							:style="[{color:buyColor[item.tradeTypeStr]},{background:buyColor[item.tradeType]}]">{{tradeType[item.tradeType]}}</text>
+						<text class="txt2">{{item.currencyName}}/GS</text>
 					</view>
 					<view class="top-right">
-						<u-button @click="handlerRepeal" border="none" class="top-right-btn" text="撤销"></u-button>
+						<u-button @click="open(item.id)" border="none" class="top-right-btn" text="撤销">
+						</u-button>
 					</view>
 				</view>
 				<view class="e-content">
 					<view class="c-left">
-						<view class="c-key">总量(FNT)</view>
-						<view class="c-val">287902.43</view>
+						<view class="c-key">总量({{item.currencyName}})</view>
+						<view class="c-val">{{item.quantity}}</view>
 					</view>
 					<view class="c-right">
-						<view class="c-key">总量(FNT)</view>
-						<view class="c-val">287902.43</view>
+						<view class="c-key">价格(GS)</view>
+						<view class="c-val">{{item.price}}</view>
 					</view>
 				</view>
 			</view>
 		</view>
+		<u-popup :show="show" round=" 32rpx">
+			<view class="popup">
+				<view class="u-title">
+					确定撤销该委托
+				</view>
+				<view class="btns">
+					<u-button class="btn btn1" @click="show= false">放弃撤销</u-button>
+					<u-button class="btn btn2" @click="handlerRepeal">立即撤销</u-button>
+				</view>
+			</view>
+		</u-popup>
 		<!-- 历史 -->
 		<view class="entrust" v-if="currentIndex===1">
 			<view class="e-item" v-for="(item,index) in trustee" :key="item.id">
 				<view class="top">
 					<view class="top-left">
-						<text class="txt1" :style="[{color:buyColor[item.tradeTypeStr]},{background:buyColor[item.tradeType]}]">{{tradeType[item.tradeType]}}</text>
-						<text class="txt2">FNT/GS</text>
+						<text class="txt1"
+							:style="[{color:buyColor[item.tradeTypeStr]},{background:buyColor[item.tradeType]}]">{{tradeType[item.tradeType]}}</text>
+						<text class="txt2">{{item.currencyName}}/GS</text>
 					</view>
 					<view class="top-right">
 						{{item.statusStr}}
@@ -97,7 +111,8 @@
 <script>
 	import myButton from '../../components/my-button/my-button.vue';
 	import {
-		trusteeList
+		trusteeList,
+		trusteeCancel
 	} from '@/http/common.js'
 
 	export default {
@@ -108,12 +123,14 @@
 			return {
 				value12: true,
 				value: "",
+				show: false,
 				value11: true, // 交易类型,
 				queryInfo: {
 					type: 1,
 					pageNum: 1,
 					pageSize: 20
 				},
+				iid: '',
 				title: ['实时委托', '历史委托'],
 				trustee: [],
 				currentIndex: 0,
@@ -126,7 +143,9 @@
 					'卖': '#34C759',
 					0: 'rgba(58, 130, 254, 0.11)',
 					1: 'rgba(52, 199, 89, 0.11)'
-				}
+				},
+				walletData: null,
+				entrustList: []
 			}
 		},
 		props: {
@@ -145,12 +164,16 @@
 		created() {
 			// console.log('-----' + this.flag)
 			if (this.flag) {
-				// this.handlerWeiTuo()
+				this.handlerWeiTuo()
+				this.setWallet()
 			}
 			this.trusteeList()
 		},
 		methods: {
-
+			open(id) {
+				this.show = true
+				this.iid = id
+			},
 			// 获取历史委托数据
 			async trusteeList() {
 				let {
@@ -170,12 +193,21 @@
 
 			},
 			// 撤销
-			handlerRepeal() {
+			async handlerRepeal() {
+				let {
+					code,
+					msg
+				} = await trusteeCancel({
+					id: this.iid
+				})
+				if (code !== 0) return uni.$u.toast(msg)
+				uni.$u.toast('撤销成功')
 				this.$emit('data', {
 					data: {
-						method: 'cancel'
+						method: 'trust'
 					}
 				})
+				this.show = false
 			},
 			// 获取当前委托
 			handlerWeiTuo() {
@@ -187,8 +219,17 @@
 				})
 			},
 			setBuyList(list) {
-				console.log(listt)
-			}
+				this.entrustList = list
+				this.dealsData = list.map(e => {
+					e.timer = new Date(e.createTime).Format("hh:mm:ss")
+					return e
+				});
+			},
+			// 获取钱包
+			setWallet(data) {
+				this.walletData = data
+				console.log(this.walletData)
+			},
 		}
 	}
 </script>
@@ -417,6 +458,41 @@
 				font-weight: bold;
 				color: #1A1B1C;
 				line-height: 25rpx;
+			}
+		}
+	}
+
+	.popup {
+		height: 338rpx;
+		margin-bottom: 88rpx;
+
+		.u-title {
+			height: 154rpx;
+			text-align: center;
+			line-height: 154rpx;
+			font-weight: 550;
+			font-size: 28rpx;
+		}
+
+		.btns {
+			display: flex;
+
+			.btn {
+				width: 295rpx;
+				height: 88rpx;
+				background: rgba(247, 69, 57, 0.17);
+				border-radius: 12rpx;
+				border: 0;
+			}
+
+			.btn1 {
+				color: rgba(0, 0, 0, 0.66);
+				background: #F7FAFF;
+			}
+
+			.btn2 {
+				background: rgba(247, 69, 57, 0.17);
+				color: #F74539;
 			}
 		}
 	}

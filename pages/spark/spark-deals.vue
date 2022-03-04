@@ -38,7 +38,7 @@
 				queryInfo: {
 					type: 1,
 					pageNum: 1,
-					pageSize: 20
+					pageSize: 50
 				},
 				buyStatus: {
 					'买': '买入',
