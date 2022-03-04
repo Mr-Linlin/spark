@@ -109,6 +109,12 @@
 		onUnload() {
 			clearInterval(this.timer)
 		},
+		onShow() {
+			// this.createSocket()
+		},
+		onHide() {
+			clearInterval(this.timer)
+		},
 		methods: {
 			/* 
 				 FAIL("异常", -1),
@@ -143,14 +149,18 @@
 			},
 			// 初始化socked
 			createSocket() {
+				console.log(uni.getStorageSync('token'))
 				uni.connectSocket({
 					url: 'ws://211.149.135.240:7888/websocket/trade',
 					header: {
 						token: uni.getStorageSync('token')
 					},
-					success(e) {
+					success:(e)=> {
 						console.log('开始发送')
 						console.log(e)
+						
+						this.handlerHeartbeat(); //开启心跳
+						this.getGSList()
 					},
 					fail(e) {
 						console.log("链接失败" + e)
@@ -159,12 +169,10 @@
 				uni.onSocketOpen((res) => {
 					console.log("链接打开", res)
 					this.flag = true;
-					this.handlerHeartbeat(); //开启心跳
-					this.getGSList()
 				});
 				uni.onSocketError(function(res) {
-					// console.log(res)
-					// console.log('WebSocket连接打开失败，请检查！');
+					console.log(res)
+					console.log('WebSocket连接打开失败，请检查！');
 				})
 				uni.onSocketMessage((res) => {
 					const data = JSON.parse(res.data)
@@ -279,6 +287,7 @@
 						})
 					}else{
 						clearInterval(this.timer)
+						uni.closeSocket();
 					}
 					
 				}, 5000)
