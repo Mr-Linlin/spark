@@ -3,20 +3,22 @@
 		<view class="plr3">
 			<view class="mt2 ptb2 deals-data-bgcolor">
 				<view class="flexC plr2">
-					<view v-for="(item,index) of titleArr" :key="index" style="width: 25%;font-size: 28rpx;">
-						<view :style="index===3?'text-align:right':index===2 || index===1?'text-align:center':''">
+					<view v-for="(item,index) of titleArr" :key="index" style="width: 20%;font-size: 28rpx;">
+						<view
+							:style="index===4?'text-align:right':index===3 || index===2 || index===1?'text-align:center':''">
 							{{item}}
 						</view>
 					</view>
 				</view>
 				<view v-for="(item,index) of deales_data" :key="item.id" style="height: 68rpx;font-size: 28rpx;"
 					class="flexC space-between plr2" :style="index%2!=0?'background-color:#FAFCFF':''">
-					<view style="width:25%;  white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+					<view style="width:20%;  white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
 						{{item.updateTime}}
 					</view>
-					<view style="width:25%;text-align: center;">{{item.tradeTypeStr}}</view>
-					<view style="width:25%;text-align: center;">{{item.price}}</view>
-					<view style="width:25%;text-align: right;">{{item.quantity}}</view>
+					<view style="width:20%;text-align: center;">{{buyStatus[item.tradeTypeStr]}}</view>
+					<view style="width:20%;text-align: center;">{{item.price}}</view>
+					<view style="width:20%;text-align: right;">{{item.quantity}}</view>
+					<view style="width:20%;text-align: right;">{{item.tradeQuantity}}</view>
 				</view>
 			</view>
 		</view>
@@ -31,12 +33,16 @@
 	export default {
 		data() {
 			return {
-				titleArr: ['时间', '买入', '价格', '数量'],
+				titleArr: ['时间', '买入', '价格', '数量', '成交量'],
 				deales_data: [],
 				queryInfo: {
 					type: 1,
 					pageNum: 1,
 					pageSize: 20
+				},
+				buyStatus: {
+					'买': '买入',
+					'卖': '卖出'
 				}
 			}
 		},

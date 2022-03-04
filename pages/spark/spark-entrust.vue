@@ -37,14 +37,14 @@
 			</u-button>
 		</view>
 		<view class="title">
-			<!-- <view class="title-item" v-for="(item,index) in title" :key="index" :class="{active:index===currentIndex}"
+			<view class="title-item" v-for="(item,index) in title" :key="index" :class="{active:index===currentIndex}"
 				@click="switchIndex(index)">
 				{{item}}
-			</view> -->
-			历史委托
+			</view>
+			<!-- 历史委托 -->
 		</view>
 		<!-- 实时委托 -->
-		<view class="statrtrust entrust" v-if="currentIndex===3">
+		<view class="statrtrust entrust" v-if="currentIndex===0">
 			<view class="e-item" v-for="(item,index) in 3" :key="index">
 				<view class="top">
 					<view class="top-left">
@@ -68,7 +68,7 @@
 			</view>
 		</view>
 		<!-- 历史 -->
-		<view class="entrust" v-if="currentIndex===0">
+		<view class="entrust" v-if="currentIndex===1">
 			<view class="e-item" v-for="(item,index) in trustee" :key="item.id">
 				<view class="top">
 					<view class="top-left">
@@ -321,7 +321,7 @@
 		color: #1A1B1C;
 		line-height: 40rpx;
 		margin-top: 40rpx;
-		font-weight: bold;
+		// font-weight: bold;
 		margin-bottom: 32rpx;
 
 		.title-item {
