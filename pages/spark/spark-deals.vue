@@ -12,7 +12,8 @@
 				<view v-for="(item,index) of deales_data" :key="item.id" style="height: 68rpx;font-size: 28rpx;"
 					class="flexC space-between plr2" :style="index%2!=0?'background-color:#FAFCFF':''">
 					<view style="width:25%;  white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
-						{{item.updateTime}}</view>
+						{{item.updateTime}}
+					</view>
 					<view style="width:25%;text-align: center;">{{item.tradeTypeStr}}</view>
 					<view style="width:25%;text-align: center;">{{item.price}}</view>
 					<view style="width:25%;text-align: right;">{{item.quantity}}</view>
@@ -49,8 +50,13 @@
 					msg,
 					obj
 				} = await knockdownList(this.queryInfo)
-				console.log(obj)
-				this.deales_data = obj.list
+				let list = []
+				obj.list.forEach(item => {
+					if (item.status === 1) {
+						list.push(item)
+					}
+				})
+				this.deales_data = list
 			}
 		}
 	}

@@ -37,13 +37,14 @@
 			</u-button>
 		</view>
 		<view class="title">
-			<view class="title-item" v-for="(item,index) in title" :key="index" :class="{active:index===currentIndex}"
+			<!-- <view class="title-item" v-for="(item,index) in title" :key="index" :class="{active:index===currentIndex}"
 				@click="switchIndex(index)">
 				{{item}}
-			</view>
+			</view> -->
+			历史委托
 		</view>
 		<!-- 实时委托 -->
-		<view class="statrtrust entrust" v-if="currentIndex===0">
+		<view class="statrtrust entrust" v-if="currentIndex===3">
 			<view class="e-item" v-for="(item,index) in 3" :key="index">
 				<view class="top">
 					<view class="top-left">
@@ -67,25 +68,25 @@
 			</view>
 		</view>
 		<!-- 历史 -->
-		<view class="entrust" v-if="currentIndex===1">
+		<view class="entrust" v-if="currentIndex===0">
 			<view class="e-item" v-for="(item,index) in trustee" :key="item.id">
 				<view class="top">
 					<view class="top-left">
-						<text class="txt1">买入</text>
+						<text class="txt1">{{tradeType[item.tradeType]}}</text>
 						<text class="txt2">FNT/GS</text>
 					</view>
 					<view class="top-right">
-						<u-button @click="handlerRepeal" border="none" class="top-right-btn" text="撤销"></u-button>
+						{{item.statusStr}}
 					</view>
 				</view>
 				<view class="e-content">
 					<view class="c-left">
-						<view class="c-key">总量(FNT)</view>
-						<view class="c-val">287902.43</view>
+						<view class="c-key">总量({{item.currencyName}})</view>
+						<view class="c-val">{{item.price}}</view>
 					</view>
 					<view class="c-right">
 						<view class="c-key">总量(GS)</view>
-						<view class="c-val">287902.43</view>
+						<view class="c-val">{{item.quantity}}</view>
 					</view>
 				</view>
 			</view>
@@ -115,7 +116,11 @@
 				},
 				title: ['实时委托', '历史委托'],
 				trustee: [],
-				currentIndex: 0
+				currentIndex: 0,
+				tradeType: {
+					0: '买入',
+					1: '卖出'
+				}
 			}
 		},
 		props: {
@@ -137,11 +142,11 @@
 				// this.handlerWeiTuo()
 			}
 			this.trusteeList()
-			// this.createSocket()
+			this.createSocket()
 		},
 		methods: {
 			// 实时获取实时委托
-			createSocket() {
+			/* createSocket() {
 				uni.connectSocket({
 					url: 'ws://211.149.135.240:7888/websocket/trade',
 					header: {
@@ -154,14 +159,23 @@
 						console.log("链接失败" + e)
 					}
 				});
-				uni.onSocketOpen((res) => {
-					console.log("链接打开", res)
+				uni.onSocketOpen(function (res) {
+					console.log('-------------------------------')
+				  console.log('WebSocket连接已打开！');
 					// this.getGSList()
 				});
 				uni.onSocketError(function(res) {
 					console.log(res)
 					console.log('WebSocket连接打开失败，请检查！');
 				})
+				uni.onSocketMessage((res) => {
+					const data = JSON.parse(res.data)
+					console.log(data)
+					console.log(111)
+				})
+			}, */
+			getGSList(){
+				console.log(545454)
 			},
 			// 获取历史委托数据
 			async trusteeList() {
@@ -172,7 +186,7 @@
 				} = await trusteeList(this.queryInfo)
 				if (code !== 0) return uni.$u.toast(msg)
 				this.trustee = obj.list
-				console.log(this.trustee)
+				// console.log(this.trustee)
 			},
 			// 切换委托
 			switchIndex(index) {
@@ -339,7 +353,7 @@
 		color: #1A1B1C;
 		line-height: 40rpx;
 		margin-top: 40rpx;
-		// font-weight: bold;
+		font-weight: bold;
 		margin-bottom: 32rpx;
 
 		.title-item {

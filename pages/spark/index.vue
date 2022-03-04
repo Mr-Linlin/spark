@@ -144,6 +144,7 @@
 						token: uni.getStorageSync('token')
 					},
 					success(e) {
+						console.log('开始发送')
 						console.log(e)
 					},
 					fail(e) {
@@ -151,7 +152,7 @@
 					}
 				});
 				uni.onSocketOpen((res) => {
-					// console.log("链接打开", res)
+					console.log("链接打开", res)
 					this.flag = true;
 					
 					this.getGSList()
@@ -162,6 +163,7 @@
 				})
 				uni.onSocketMessage((res) => {
 					const data = JSON.parse(res.data)
+					console.log(data)
 					// console.log('👇👇👇👇👇👇👇👇👇')
 					// console.log(data)
 					const obj = data.obj;
