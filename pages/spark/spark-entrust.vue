@@ -156,7 +156,7 @@
 					1: '卖出'
 				},
 				buyColor: {
-					'买': '#3ED7AC',
+					'买': '#3A82FE',
 					'卖': '#34C759',
 					0: 'rgba(58, 130, 254, 0.11)',
 					1: 'rgba(52, 199, 89, 0.11)'
@@ -537,8 +537,8 @@
 	}
 
 	.popup {
-		height: 338rpx;
-		margin-bottom: 88rpx;
+		height: 300rpx;
+		// margin-bottom: 88rpx;
 
 		.u-title {
 			height: 154rpx;

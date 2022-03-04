@@ -272,9 +272,11 @@
 	}
 
 	.active {
-		color: #3A82FE;
-		font-size: 32rpx;
+		color: #FFFFFF;
+		font-size: 26rpx;
 		font-weight: 550;
+		background-color:#3A82FE !important;
+		box-shadow: 0px 8rpx 16rpx 1rpx rgba(88, 130, 204, 0.17);
 	}
 
 	.between {
@@ -373,7 +375,10 @@
 	}
 
 	.SparkList {
-		height: 90rpx;
+		height: 68rpx;
+		font-size: 26rpx;
+		// line-height: 68rpx;
+		margin-top: 40rpx;
 		display: flex;
 		align-items: flex-end;
 
@@ -381,6 +386,10 @@
 			// font-size: 24rpx;
 			text-shadow: 0px 0px #000;
 			margin-left: 32rpx;
+			background-color: #FFFFFF;
+			border-radius: 8rpx;
+			padding: 19rpx 32rpx;
+			// box-shadow: 0px 8rpx 16rpx 1rpx rgba(88, 130, 204, 0.17);
 		}
 	}
 
