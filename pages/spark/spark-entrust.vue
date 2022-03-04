@@ -166,8 +166,13 @@
 			if (this.flag) {
 				this.handlerWeiTuo()
 				this.setWallet()
+				// this.handlerWeiTuo()
+				this.trusteeList()
 			}
-			this.trusteeList()
+
+
+
+
 		},
 		methods: {
 			open(id) {

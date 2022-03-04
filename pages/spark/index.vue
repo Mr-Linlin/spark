@@ -165,9 +165,8 @@
 				})
 				uni.onSocketMessage((res) => {
 					const data = JSON.parse(res.data)
+					console.log('👇👇👇👇👇👇👇👇👇')
 					console.log(data)
-					// console.log('👇👇👇👇👇👇👇👇👇')
-					// console.log(data)
 					const obj = data.obj;
 					switch (data.code) {
 						case -1: {
@@ -210,9 +209,13 @@
 							this.$refs['data'].handleKLine(obj)
 							break;
 						}
-						case 13: { // 行情  
-
-							this.$refs[this.defaultIndex === 1 ? 'buy' : 'sell'].setBuyList(obj)
+						case 13:{ // 行情  
+							if( this.$refs['data'] ){
+								this.$refs['data'].setMarket(obj)
+							}
+							if( this.$refs['buy'] || this.$refs['sell'] ){
+								this.$refs[ this.defaultIndex === 1 ? 'buy' : 'sell'  ].setBuyList(obj)
+							}
 							break
 						}
 					}
