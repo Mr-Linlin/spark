@@ -72,7 +72,7 @@
 			<view class="e-item" v-for="(item,index) in trustee" :key="item.id">
 				<view class="top">
 					<view class="top-left">
-						<text class="txt1">{{tradeType[item.tradeType]}}</text>
+						<text class="txt1" :style="[{color:buyColor[item.tradeTypeStr]},{background:buyColor[item.tradeType]}]">{{tradeType[item.tradeType]}}</text>
 						<text class="txt2">FNT/GS</text>
 					</view>
 					<view class="top-right">
@@ -82,11 +82,11 @@
 				<view class="e-content">
 					<view class="c-left">
 						<view class="c-key">总量({{item.currencyName}})</view>
-						<view class="c-val">{{item.price}}</view>
+						<view class="c-val">{{item.quantity}}</view>
 					</view>
 					<view class="c-right">
-						<view class="c-key">总量(GS)</view>
-						<view class="c-val">{{item.quantity}}</view>
+						<view class="c-key">价格(GS)</view>
+						<view class="c-val">{{item.price}}</view>
 					</view>
 				</view>
 			</view>
@@ -120,6 +120,12 @@
 				tradeType: {
 					0: '买入',
 					1: '卖出'
+				},
+				buyColor: {
+					'买': '#3ED7AC',
+					'卖': '#34C759',
+					0: 'rgba(58, 130, 254, 0.11)',
+					1: 'rgba(52, 199, 89, 0.11)'
 				}
 			}
 		},
@@ -144,7 +150,7 @@
 			this.trusteeList()
 		},
 		methods: {
-			
+
 			// 获取历史委托数据
 			async trusteeList() {
 				let {
@@ -348,6 +354,9 @@
 
 			.top-left {
 				.txt1 {
+					height: 28px;
+					border-radius: 2rpx;
+					padding: 0 10rpx;
 					font-size: 24rpx;
 					font-family: PingFang SC-Regular, PingFang SC;
 					font-weight: 400;

@@ -15,7 +15,7 @@
 					<view style="width:20%;  white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
 						{{item.updateTime}}
 					</view>
-					<view style="width:20%;text-align: center;">{{buyStatus[item.tradeTypeStr]}}</view>
+					<view style="width:20%;text-align: center;" :style="{color:buyColor[item.tradeTypeStr]}">{{buyStatus[item.tradeTypeStr]}}</view>
 					<view style="width:20%;text-align: center;">{{item.price}}</view>
 					<view style="width:20%;text-align: right;">{{item.quantity}}</view>
 					<view style="width:20%;text-align: right;">{{item.tradeQuantity}}</view>
@@ -43,6 +43,10 @@
 				buyStatus: {
 					'买': '买入',
 					'卖': '卖出'
+				},
+				buyColor: {
+					'买': '#3ED7AC',
+					'卖': '#34C759'
 				}
 			}
 		},
