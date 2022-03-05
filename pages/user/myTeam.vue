@@ -1,35 +1,38 @@
 <template>
 	<view>
-		
-		<view class="bgd">
-			<view class="teamImg">
-				<image :src="userData.pic" mode=""></image>
-			</view>
-			<view class="">
-				{{userData.name}}
-			</view>
-		</view>
-		
 		<view class="flex_j">
-			<view class="tramCont">
-				<view class="tramNumCount">
-					<view class="tramCountst">
-						{{subinfoData.directCount ? subinfoData.directCount : 0}}
-					</view>
-					<view class="tramNum">
-						战队成员
-					</view>
+			<view class="bgd">
+				<view class="teamImg">
+					<image :src="userData.pic" mode=""></image>
 				</view>
-				<view class="tramNumCount">
-					<view class="tramCountst">
-						{{subinfoData.indirectCount ? subinfoData.indirectCount : 0}}
+				<view class="teamFont">
+					{{userData.name}}
+				</view>
+				<view class="teamImg2">
+					<image :src="userData.teamPic" mode=""></image>
+				</view>
+				
+				<view class="tramCont">
+					<view class="tramNumCount">
+						<view class="tramCountst">
+							{{subinfoData.directCount ? subinfoData.directCount : 0}}
+						</view>
+						<view class="tramNum">
+							战队成员
+						</view>
 					</view>
-					<view class="tramNum">
-						总业绩
+					<view class="tramNumCount">
+						<view class="tramCountst">
+							{{subinfoData.indirectCount ? subinfoData.indirectCount : 0}}
+						</view>
+						<view class="tramNum">
+							战队总业绩
+						</view>
 					</view>
 				</view>
 			</view>
 		</view>
+		
 		
 		<view class="myTeamList">
 			<view class="myTeamListTitle">
@@ -135,26 +138,35 @@ import {
 		justify-content: center;
 	}
 	.bgd{
-		background-image: url(../../static/Intersect.png);
-		background-repeat: no-repeat;
-		background-size: 100% 100%;
-		width: 750rpx;
-		height: 240rpx;
+		width: 686rpx;
+		height: 420rpx;
 		display: flex;
 		align-items: center;
-		justify-content: center;
 		flex-direction: column;
+		background-color: #FFFFFF;
+		box-shadow: 0rpx 16rpx 32rpx 1rpx rgba(58, 130, 254, 0.04);
+		margin-top: 32rpx;
 		.teamImg image{
-			width: 88rpx;
-			height: 88rpx;
+			width: 156rpx;
+			height: 156rpx;
 			border-radius: 50%;
 			margin-bottom: 20rpx;
+			margin-top: 36rpx;
+		}
+		.teamFont{
+			font-size: 32rpx;
+		}
+		.teamImg2 image{
+			position: absolute;
+			left: 42%;
+			top: 15%;
+			width: 126rpx;
+			height: 42rpx;
 		}
 	}
 	.tramCont{
 		width: 686rpx;
 		height: 154rpx;
-		margin-top: 20rpx;
 		background-color: #FFFFFF;
 		border-radius: 12rpx;
 		display: flex;
