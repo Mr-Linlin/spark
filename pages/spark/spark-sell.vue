@@ -16,7 +16,10 @@
 						</view>
 					</view>
 					<!-- <view style="text-align: right;" class="fz1 fc-c2">≈10.29CNY±0.66%</view> -->
-					<view class="mt3 fz4 fz-wb2">数量</view>
+					<view class="mt3 num-box fz4 fz-wb2">
+						<view>数量</view>
+						<view class="gs-box">可用{{(walletData.buy).toFixed(5)}}GS</view>
+					</view>
 					<!-- 加减 -->
 					<view class="mt1 bg-color2 flexC space-between" style="height: 88rpx;width: 100%;">
 						<u--input type="number" clearable placeholder="数量" border="none" v-model="buyData.quantity">
@@ -476,5 +479,17 @@
 
 	.scroll-box {
 		height: 600rpx;
+	}
+	.num-box {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.gs-box {
+			color: rgba(0, 0, 0, 0.66);
+			font-weight: 400;
+			line-height: 24rpx;
+			height: 24rpx;
+			font-size: 20rpx;
+		}
 	}
 </style>
