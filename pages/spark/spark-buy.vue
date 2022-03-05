@@ -16,7 +16,10 @@
 						</view>
 					</view>
 					<!-- <view style="text-align: right;" class="fz1 fc-c2">≈10.29CNY±0.66%</view> -->
-					<view class="mt3 fz4 fz-wb2">数量</view>
+					<view class="mt3 num-box fz4 fz-wb2">
+						<view>数量</view>
+						<view class="gs-box">可用{{(walletData.buy).toFixed(5)}}GS</view>
+					</view>
 					<!-- 加减 -->
 					<view class="mt1 bg-color2 flexC space-between" style="height: 88rpx;width: 100%;">
 						<u--input type="number" clearable placeholder="数量" border="none" v-model="buyData.quantity">
@@ -93,7 +96,8 @@
 			<view class="e-item" v-for="(item,index) of dealsData" :key="index">
 				<view class="top">
 					<view class="top-left">
-						<text :class="{color2: item.tradeType === 1  }" class="txt1 color1">{{item.tradeType === 0 ? '买入' : '卖出'}}</text>
+						<text :class="{color2: item.tradeType === 1  }"
+							class="txt1 color1">{{item.tradeType === 0 ? '买入' : '卖出'}}</text>
 						<text class="txt2">{{item.tradeCurrencyName}}/GS</text>
 					</view>
 					<view class="top-right">
@@ -269,7 +273,7 @@
 			},
 			// 发起订阅
 			// 2 行情  9 订阅委托
-			handleSubscribe(type = '',) {
+			handleSubscribe(type = '', ) {
 				this.$emit('data', {
 					data: {
 						"method": "sub",
@@ -298,30 +302,30 @@
 			},
 			// 买入委托列表
 			getEntrustList(list) {
-				const num = list.buyList.reduce((total, currentValue)=>{
-					 return (total > currentValue.nums) ?  total : currentValue.nums
-				},list.buyList[0].nums)
-				
-				
-				this.quotation = list.buyList.map(e=>{
+				const num = list.buyList.reduce((total, currentValue) => {
+					return (total > currentValue.nums) ? total : currentValue.nums
+				}, list.buyList[0].nums)
+
+
+				this.quotation = list.buyList.map(e => {
 					e.price = (e.price).toFixed(5)
 					e.width = e.nums / num * 100
 					return e
 				})
 			},
 			// js补0
-			handler0(num){
+			handler0(num) {
 				num = String(num)
-				let [s1,s2] = num.split('.');
-				
-				if( s2 ){// 小数情况
-					
-					
-					
-				}else{// 整数
-					
+				let [s1, s2] = num.split('.');
+
+				if (s2) { // 小数情况
+
+
+
+				} else { // 整数
+
 				}
-				
+
 				return num
 			}
 		}
@@ -332,13 +336,14 @@
 	::v-deep .movable-view[data-v-2fe2d1ba] {
 		box-shadow: 0px 8rpx 16rpx rgba(88, 130, 204, 0.17);
 	}
-	
+
 	::v-deep .block[data-v-2fe2d1ba],
 		{}
-	
+
 	::v-deep .active[data-v-2fe2d1ba] {
 		background: linear-gradient(89.11deg, #54AFFE 0.76%, #3A82FE 99.23%) !important;
 	}
+
 	.mt2 .top-left {
 		width: 380rpx;
 		height: 686rpx;
@@ -400,13 +405,15 @@
 		left: 20rpx !important;
 		color: rgba(0, 0, 0, 0.22);
 	}
-	.nums-box{
+
+	.nums-box {
 		display: flex;
 		justify-content: space-between;
 		font-size: 20rpx;
 		color: rgba(0, 0, 0, 0.66);
 		margin-top: 12rpx;
 	}
+
 	.e-item {
 		width: 686rpx;
 		background: #FFFFFF;
@@ -435,16 +442,18 @@
 					color: #1A1B1C;
 					line-height: 22rpx;
 				}
-				.color1{
+
+				.color1 {
 					color: #3A82FE;
-					background: rgba(#3A82FE, .11) ;
-					padding:0 8rpx;
+					background: rgba(#3A82FE, .11);
+					padding: 0 8rpx;
 					line-height: 22rpx;
 				}
-				.color2{
+
+				.color2 {
 					color: rgb(52, 199, 89);
-					background: rgba(52, 199, 89, .11) ;
-					padding:0 8rpx;
+					background: rgba(52, 199, 89, .11);
+					padding: 0 8rpx;
 					line-height: 22rpx;
 				}
 			}
@@ -499,5 +508,18 @@
 
 	.scroll-box {
 		height: 600rpx;
+	}
+
+	.num-box {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.gs-box {
+			color: rgba(0, 0, 0, 0.66);
+			font-weight: 400;
+			line-height: 24rpx;
+			height: 24rpx;
+			font-size: 20rpx;
+		}
 	}
 </style>

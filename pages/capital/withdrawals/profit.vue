@@ -37,7 +37,6 @@
 				<view class="" style="height: 80rpx;display: flex;align-items: center;margin-left: 32rpx;">
 					提现金额
 				</view>
-		
 				<view class="" style="display: flex;justify-content: center;">
 					<view class=""
 						style="width: 622rpx;height: 88rpx;background-color: #F7FAFF;border-radius: 10rpx;display: flex;align-items: center;">

@@ -131,7 +131,7 @@
             "base" : "",
             "mode" : "hash"
         },
-        "devServer" : {
+        /* "devServer" : {
             "port" : 8080, //端口号
             "disableHostCheck" : true,
             "proxy" : {
@@ -145,7 +145,7 @@
                 }
             },
             "https" : false
-        },
+        }, */
         "sdkConfigs" : {
             "maps" : {}
         }
