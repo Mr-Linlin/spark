@@ -69,7 +69,7 @@
 			</view>
 		</view>
 
-		<view class="" style="display: flex;justify-content: center;margin-top: 32rpx;">
+		<!-- <view class="" style="display: flex;justify-content: center;margin-top: 32rpx;">
 			<view class="" style="width: 686rpx;height: 164rpx;background-color: #FFFFFF;border-radius: 12rpx;">
 				<view class=""
 					style="display: flex;align-items: center;margin-left: 32rpx;margin-right: 32rpx;font-size: 24rpx;margin-top: 32rpx;">
@@ -97,7 +97,7 @@
 					</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 
 		<view class="" style="margin-top: 60rpx;">
 			<u-button @click="show = true"

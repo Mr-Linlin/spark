@@ -93,15 +93,15 @@
 				</view>
 			</view>
 		</view>
-		
+		{{showst}}
 		<view class="" style="margin-top: 60rpx;">
-			<u-button @click="open"
+			<u-button @click="confirmWithdrawal"
 				style="background-color: #3A82FE;width: 685rpx;height: 88rpx;color: #FFFFFF;border-radius: 12rpx;">
 				确定提现
 			</u-button>
 		</view>
 		
-		<u-popup :show="show" @close="close" @open="open" :round="15">
+		<!-- <u-popup :show="show" @close="close" @open="open" :round="15">
 			<view style="background-color: #F7FAFF;border-radius: 30rpx;height: 1000rpx;">
 				<view class="" style=""> 
 					<view class=""
@@ -109,7 +109,7 @@
 						账户验证
 					</view>
 					<view class="" style="margin-left: 60rpx;font-size: 24rpx;color: rgba(0, 0, 0, 0.66);">
-						验证码已发送至您的账号18948337509
+						验证码已发送至您的账号{{userInfo}}
 					</view>
 					<view class="" style="display: flex;justify-content: center;margin-top: 20rpx;">
 						<view class=""
@@ -148,15 +148,22 @@
 					</view>
 				</view>
 			</view>
-		</u-popup>
+		</u-popup> -->
+		
+		<!-- 资金密码 -->
+		<fundPassword :showst="showst"></fundPassword>
 	</view>
 </template>
 
 <script>
 	import {
-		ajaxsendMyCode,getbalance,rechargeEarningsProfit,rechargeEarningsTopUpMoney
+		ajaxsendMyCode,getbalance,rechargeEarningsProfit,rechargeEarningsTopUpMoney,userbaseInfo
 	} from '@/http/common.js'
+	import fundPassword from '@/components/fundPassword/index'
 	export default {
+		components:{
+			fundPassword
+		},
 		data() {
 			return {
 				seconds: 60,//秒
@@ -170,14 +177,28 @@
 					moeny:''
 				},
 				gsDatava:'',
-				rechargeEarningsProfitData:''
+				rechargeEarningsProfitData:'',
+				userInfo:'',
+				
+				showst:false
 			}
 		},
 		onShow() {
 			this.getbalanceFun()
 			this.rechargeEarningsProfit()
+			this.userbaseInfoFun()
 		},
 		methods: {
+			confirmWithdrawal(){//确认提现
+				console.log('reseesrsw')
+				this.showst = true
+			},
+			userbaseInfoFun(){//用户信息
+				userbaseInfo().then(res=>{
+					console.log(res)
+					this.userInfo = res.obj.name
+				})
+			},
 			rechargeEarningsProfit(){//手续费
 				rechargeEarningsProfit().then(res=>{
 					this.rechargeEarningsProfitData = res.obj
