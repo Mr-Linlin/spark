@@ -21,12 +21,10 @@
 			// #endif
 		},
 		onShow: function() {
-			console.log('App Show')
-			// this.$store.commit('appShow', true);
+			
 		},
 		onHide: function() {
-			console.log('App Hide')
-			// this.$store.commit('appShow', false);
+			
 		}
 	}
 </script>
