@@ -156,7 +156,7 @@
 					1: '卖出'
 				},
 				buyColor: {
-					'买': '#3ED7AC',
+					'买': '#3A82FE',
 					'卖': '#34C759',
 					0: 'rgba(58, 130, 254, 0.11)',
 					1: 'rgba(52, 199, 89, 0.11)'
@@ -347,7 +347,6 @@
 				justify-content: space-between;
 				width: 104rpx;
 				height: 32rpx;
-
 				view {
 					width: 32rpx;
 					height: 32rpx;
@@ -358,13 +357,11 @@
 				}
 			}
 		}
-
 		.sub-title-box {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
 			margin-bottom: 20rpx;
-
 			.sub-title-key {
 				height: 34rpx;
 				font-size: 28rpx;
@@ -373,7 +370,6 @@
 				line-height: 34rpx;
 				font-weight: bold;
 			}
-
 			.sub-title-desc {
 				height: 28rpx;
 				font-size: 24rpx;
@@ -541,8 +537,8 @@
 	}
 
 	.popup {
-		height: 338rpx;
-		margin-bottom: 88rpx;
+		height: 300rpx;
+		// margin-bottom: 88rpx;
 
 		.u-title {
 			height: 154rpx;

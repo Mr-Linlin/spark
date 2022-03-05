@@ -150,27 +150,24 @@
 			// 初始化socked
 			createSocket() {
 				console.log(uni.getStorageSync('token'))
-				uni.connectSocket({
+				const socket = uni.connectSocket({
 					url: 'ws://211.149.135.240:7888/websocket/trade',
 					header: {
 						token: uni.getStorageSync('token')
 					},
 					success:(e)=> {
 						console.log('开始发送')
-						
-						
-						this.handlerHeartbeat(); //开启心跳
-						
 					},
 					fail(e) {
 						console.log("链接失败" + e)
 					}
 				});
-				uni.onSocketOpen((res) => {
-					console.log("链接打开", res)
+				socket.onOpen(e=>{
+					this.handlerHeartbeat(); //开启心跳
 					this.getGSList()
 					this.flag = true;
-				});
+				})
+				
 				uni.onSocketError(function(res) {
 					console.log(res)
 					console.log('WebSocket连接打开失败，请检查！');
@@ -289,6 +286,9 @@
 					}else{
 						clearInterval(this.timer)
 						uni.closeSocket();
+						uni.redirectTo({
+							url:'/pages/login/index'
+						})
 					}
 					
 				}, 5000)

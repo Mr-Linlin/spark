@@ -137,7 +137,7 @@
 					"method": "publish",
 					"tradeId": "9",
 					"quantity": "",
-					"type": "0", // 1 卖 0：买
+					"type": "0", // 1 卖  0买
 					"price": "",
 					"lang": ""
 				},
@@ -329,6 +329,16 @@
 </script>
 
 <style lang="scss">
+	::v-deep .movable-view[data-v-2fe2d1ba] {
+		box-shadow: 0px 8rpx 16rpx rgba(88, 130, 204, 0.17);
+	}
+	
+	::v-deep .block[data-v-2fe2d1ba],
+		{}
+	
+	::v-deep .active[data-v-2fe2d1ba] {
+		background: linear-gradient(89.11deg, #54AFFE 0.76%, #3A82FE 99.23%) !important;
+	}
 	.mt2 .top-left {
 		width: 380rpx;
 		height: 686rpx;
@@ -427,9 +437,15 @@
 				}
 				.color1{
 					color: #3A82FE;
+					background: rgba(#3A82FE, .11) ;
+					padding:0 8rpx;
+					line-height: 22rpx;
 				}
 				.color2{
-					color: rgb(186, 255, 235);
+					color: rgb(52, 199, 89);
+					background: rgba(52, 199, 89, .11) ;
+					padding:0 8rpx;
+					line-height: 22rpx;
 				}
 			}
 
