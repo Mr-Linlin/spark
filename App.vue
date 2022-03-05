@@ -18,7 +18,7 @@
 			document.addEventListener("gesturestart", function(event) {
 				event.preventDefault();
 			});
-			// #endif
+			// #endif   
 		},
 		onShow: function() {
 			
