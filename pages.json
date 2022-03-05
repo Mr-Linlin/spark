@@ -365,6 +365,15 @@
             }
             
         }
+        ,{
+            "path" : "components/fundPassword/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

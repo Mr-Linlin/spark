@@ -196,12 +196,12 @@
 		methods: {
 			rechargetimeAndPriceFun(){//充值时间段
 				rechargetimeAndPrice().then(res=>{
-					this.rechargetimeAndPriceData = res.obj
+					this.rechargetimeAndPriceData = res.obj.obj
 				})
 			},
 			rechargeuserAllWallet(){//本金钱包
 				rechargeuserAllWallet().then(res=>{
-					this.availableData = res.obj.available
+					this.availableData = res.obj
 				})
 			},
 			openst(e) {

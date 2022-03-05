@@ -12,7 +12,7 @@
 			</view>
 			<view @click="recordNext" class="profitTitleRig">
 				提现记录
-			</view>
+			</view> 
 		</view>
 		
 		<view class="" style="display: flex;justify-content: center;margin-top: 32rpx;">
@@ -142,7 +142,7 @@
 						账户验证
 					</view>
 					<view class="" style="margin-left: 60rpx;font-size: 24rpx;color: rgba(0, 0, 0, 0.66);">
-						验证码已发送至您的账号18948337509
+						验证码已发送至您的账号{{userInfo}}
 					</view>
 					<view class="" style="display: flex;justify-content: center;margin-top: 20rpx;">
 						<view class=""
@@ -250,8 +250,9 @@
 
 <script>
 	import {
-		ajaxsendMyCode,getbalance,rechargetimeAndPrice,rechargeConfirmTopUpMoney
+		ajaxsendMyCode,getbalance,rechargetimeAndPrice,rechargeConfirmTopUpMoney,userbaseInfo
 	} from '@/http/common.js'
+	import fundPassword from '@/components/fundPassword/index'
 	export default {
 		data() {
 			return {
@@ -272,16 +273,24 @@
 				gsDatava:'',
 				rechargetimeAndPriceData:[],
 				rechargetimeAndPriceDataSt:{},//时间段单个数据
+				userInfo:''
 			}
 		},
 		onShow() {
 			this.rechargetimeAndPriceFun()
+			this.userbaseInfoFun()
 		},
 		methods: {
+			userbaseInfoFun(){//用户信息
+				userbaseInfo().then(res=>{
+					console.log(res)
+					this.userInfo = res.obj.name
+				})
+			},
 			rechargetimeAndPriceFun(){//充值时间段
 				rechargetimeAndPrice().then(res=>{
-					this.rechargetimeAndPriceData = res.obj
-					this.rechargetimeAndPriceDataSt = res.obj[0]
+					this.rechargetimeAndPriceData = res.obj.obj
+					this.rechargetimeAndPriceDataSt = res.obj.obj[0]
 				})
 			},
 			Withdrawal(){//提现
