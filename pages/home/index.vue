@@ -232,7 +232,7 @@
 			//第一步要获取本地的wgt版本号；这是异步方法;
 			plus.runtime.getProperty( plus.runtime.appid, function ( wgtinfo ) {
 				that.wgtver=wgtinfo.version;	
-			});		
+			});
 			//（5+ API中可以通过plus.runtime.version获取当前apk/ipa的版本号，注意打包方生效）这是获取app的整包版本号;	
 			this.appver=plus.runtime.version;
 			
