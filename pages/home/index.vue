@@ -329,7 +329,7 @@
 				}
 			},
 			clickTagItem(tag) {
-				console.log(tag)
+				// console.log(tag)
 			},
 			/**处理网络请求，获取数据**/
 			// 获取首页资讯
@@ -354,7 +354,7 @@
 				this.content = obj.contentList[0].title
 				let res = await getPddList()
 				this.orders = res.obj
-				console.log(this.orders)
+				// console.log(this.orders)
 			},
 			/**
 			 * 处理点击事件

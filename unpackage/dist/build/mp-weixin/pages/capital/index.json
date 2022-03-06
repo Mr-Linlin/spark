@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "u-count-to": "/node-modules/uview-ui/components/u-count-to/u-count-to",
+    "u-button": "/node-modules/uview-ui/components/u-button/u-button",
+    "u-collapse": "/node-modules/uview-ui/components/u-collapse/u-collapse",
+    "u-collapse-item": "/node-modules/uview-ui/components/u-collapse-item/u-collapse-item"
+  }
+}

@@ -308,8 +308,8 @@
 		box-shadow: 0px 8rpx 16rpx rgba(88, 204, 117, 0.17);
 	}
 
-	::v-deep .block[data-v-2fe2d1ba],
-		{}
+	// ::v-deep .block[data-v-2fe2d1ba],
+	// 	{}
 
 	::v-deep .active[data-v-2fe2d1ba] {
 		background: linear-gradient(89.11deg, #48EF72 0.76%, #34C759 99.23%) !important;

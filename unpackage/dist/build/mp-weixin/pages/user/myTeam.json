@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的战队",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#FAFCFF",
+  "usingComponents": {
+    "u-loadmore": "/node-modules/uview-ui/components/u-loadmore/u-loadmore"
+  }
+}

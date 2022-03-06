@@ -1,0 +1,1 @@
+<view class="popup data-v-51920ac8"><view class="lzt-title data-v-51920ac8">账号验证</view><text style="font-size:24rpx;color:rgba(0, 0, 0, 0.66);" class="data-v-51920ac8">验证码已发送至您的账号lovaoing@gj.cn</text><view class="send-code data-v-51920ac8"><slot></slot></view></view>
