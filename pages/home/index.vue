@@ -264,7 +264,7 @@
 							downMsgTip: "资源下载中，请稍后...", //可选
 							updateBtnText: "升级", //可选 升级按钮文字,
 							topImgBg: topIconPath, //可选 除非需要自定义头部logo，否则不需要传;
-						}
+						} 
 						//第一步创建文件下载路径，并创建文件;
 						plus.io.requestFileSystem(plus.io.PUBLIC_DOWNLOADS, function(fobject) {
 							//设置文件下载根路径;	
