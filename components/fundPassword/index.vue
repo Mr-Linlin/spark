@@ -1,7 +1,6 @@
 <template>
 	<view>
-		{{showtst}}
-		<!-- <u-popup :show="showtst" @close="close" @open="open" :round="15">
+		<u-popup :show="flag2" @close="close" @open="open" :round="15">
 			<view style="background-color: #F7FAFF;border-radius: 30rpx;height: 1000rpx;">
 				<view class="" style=""> 
 					<view class=""
@@ -48,7 +47,7 @@
 					</view>
 				</view>
 			</view>
-		</u-popup> -->
+		</u-popup>
 	</view>
 </template>
 
@@ -57,35 +56,37 @@
 	export default {
 		name:'fundPassword',
 		props:{
-			showtst:{
-				type:Boolean,
-				default:false
-			}
+			 
 		},
 		data() {
 			return {
-				userInfo:{},
-				principalData:{},
+				userInfo:'',
+				principalData:{
+					code:'',
+					password:'',
+				},
 				isCodeType:true,
 				seconds: 60,//秒
 				tips: '',
+				flag2:false
 			}
 		},
-		onShow() {
+		created() {
 			this.userbaseInfoFun()
 			this.ajaxsendMyCodeFun()
 		},
-		watch:{
-			showtst(e){
-				console.log(e)
-			}
-		},
 		methods: {
+			Withdrawal(){
+				this.$emit('Withdrawal')
+			},
 			close(){
-				this.showst = false
+				this.flag2 = false
+				this.principalData.code = ''
+				this.principalData.password = ''
+				this.isCodeType = !this.isCodeType
 			},
 			open(){
-				this.showst = true
+				this.flag2 = true
 			},
 			userbaseInfoFun(){//用户信息
 				userbaseInfo().then(res=>{

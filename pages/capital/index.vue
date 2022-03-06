@@ -79,7 +79,7 @@
 					</view>
 					
 					<view class="" style="margin-left: 24rpx;font-size: 32rpx;text-shadow: 0px 0px #000;">
-						{{item.available >0 ? item.available.toFixed(4) : item.available}}
+						{{item.profit >0 ? item.profit.toFixed(4) : item.profit}}
 					</view>
 				</view>
 			</view>
@@ -104,21 +104,12 @@
 			<u-collapse :border="false" @change="changest" @close="closest" @open="openst" >
 			    <u-collapse-item style="padding-right: 18rpx;" :border="false" title="阶段说明" >
 			      <view style="font-size: 24rpx;" class="">
-			      	<view class="">
-			      		第一阶段：入账时间未满30天(含30天)
-			      	</view>
-			      	<view class="" style="margin-top: 20rpx;">
-			      		第二阶段：入账时间在31-60天(含60天)
-			      	</view>
-			      	<view class="" style="margin-top: 20rpx;">
-			      		第三阶段：入账时间在61-90天(含90天)
-			      	</view>
-			      	<view class="" style="margin-top: 20rpx;">
-			      		第四阶段：入账时间在90天以上(不含90天)
+			      	<view v-for="(item,index) in stageArr" :key="index" :class="index!=0 ? 'mt_20' : ''">
+			      		{{item}} 
 			      	</view>
 			      </view>
-			    </u-collapse-item>
-			  </u-collapse>
+			</u-collapse-item>
+		  </u-collapse>
 		</view>
 	</view>
 </template>
@@ -144,7 +135,10 @@
 					url:'../../static/685894.png',
 					name:'划转'
 				}],
-				
+				stageArr:['第一阶段：入账时间未满30天(含30天)',
+				'第二阶段：入账时间在31-60天(含60天)',
+				'第三阶段：入账时间在61-90天(含90天)',
+				'第四阶段：入账时间在90天以上(不含90天)'],
 				account:[{
 					url:'../../static/13451346.png',
 					url2:'../../static/2581.png',
@@ -176,15 +170,11 @@
 				currentst:'',
 				typefunst:0,
 				availableData:'',
-				rechargetimeAndPriceData:{}
+				rechargetimeAndPriceData:{},
 			};
 		},
 		
 		onShow() {
-			statistic().then(res => {
-				this.totalCnyData = res.obj.totalCny
-				
-			})
 			this.assetlistData = []
 			this.totalCnyData = ''
 			this.availableData = ''			this.rechargetimeAndPriceData = {}
@@ -192,8 +182,18 @@
 			this.assetlistFun()
 			this.rechargeuserAllWallet()
 			this.rechargetimeAndPriceFun()
+			this.statisticFun()
+			this.asdf()
 		},
 		methods: {
+			asdf(){
+				
+			},
+			statisticFun(){//总收益
+				statistic().then(res => {
+					this.totalCnyData = res.obj
+				})
+			},
 			rechargetimeAndPriceFun(){//充值时间段
 				rechargetimeAndPrice().then(res=>{
 					this.rechargetimeAndPriceData = res.obj.obj
@@ -206,7 +206,7 @@
 			},
 			openst(e) {
 			  // console.log('open', e)
-			},
+			}, 
 			closest(e) {
 			  // console.log('close', e)
 			},
@@ -268,7 +268,7 @@
 					})
 				}
 			},
-			accountDetailsNext(e){
+			accountDetailsNext(e){//详情
 				uni.navigateTo({
 					url:'./accountDetails?id='+e.currencyId
 				})

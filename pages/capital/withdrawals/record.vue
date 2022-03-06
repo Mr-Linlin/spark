@@ -1,27 +1,27 @@
 <template>
 	<view>
-		<view v-for="(item,index) in 5" :key="index" class="record">
+		<view v-for="(item,index) in datast" :key="index" class="record">
 			<view class="recordLeft">
 				<view class="recordLeftTitle">
-					本金提现
+					{{types == 0 ? item.prifitstate : item.pricestate}}
 				</view>
 				<view class="recordLeftTime">
-					2022-02-25 12:36
+					{{item.create_time}}
 				</view>
 			</view>
 			
 			<view class="recordCtn">
-				提现成功
+				{{item.rechargeState}}
 			</view>
 			<view class="flex1">
 				
 			</view>
 			<view class="recordRig">
 				<view class="recordRigTitle">
-					+58.22
+					+{{(item.top_up_amount - (item.top_up_amount * item.earningsprifit)).toFixed(4)}}
 				</view>
 				<view class="recordRigMoeny">
-					手续费15
+					手续费{{(item.top_up_amount * item.earningsprifit).toFixed(4)}}
 				</view>
 			</view>
 		</view>
@@ -29,14 +29,30 @@
 </template>
 
 <script>
+	import {rechargeEarningsWalletLog,rechargeWalletLog} from '@/http/common.js'
 	export default {
 		data() {
 			return {
-				
+				datast:[],
+				types:0
 			}
 		},
+		onLoad(e) {
+			this.types = e.type
+			if(e.type == 0)this.rechargeEarningsWalletLogFun()
+			else this.rechargeWalletLogFun()
+		},
 		methods: {
-			
+			rechargeEarningsWalletLogFun(){//收益提现记录
+				rechargeEarningsWalletLog().then(res=>{
+					this.datast = res.obj
+				})
+			},
+			rechargeWalletLogFun(){//本金提现记录
+				rechargeWalletLog().then(res=>{
+					this.datast = res.obj.obj
+				})
+			}
 		}
 	}
 </script>
@@ -74,6 +90,7 @@
 			font-weight: 500;
 			color: #1A1B1C;
 			font-size: 28rpx;
+			text-align: right;
 		}
 		.recordRigMoeny{
 			font-size: 22rpx;

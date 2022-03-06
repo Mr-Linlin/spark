@@ -13,7 +13,6 @@
 		},
 		onShow() {
 			setTimeout(() => {
-				console.log('jinlasdf')
 				if(uni.getStorageSync('token')){//有登录
 					uni.reLaunch({
 						url: '/pages/home/index',

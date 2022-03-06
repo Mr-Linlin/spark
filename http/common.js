@@ -12,8 +12,8 @@ export const registerTwo = info => http.post('/front/register/two', info)
 export const forgetOne = info => http.post('/front/forget/one', info)
 // 忘记密码第二步
 export const forgetTwo = info => http.post('/front/forget/two', info)
-// 资产统计
-export const statistic = user => http.post('/front/financial/asset/statistic', user)
+// 总收益
+export const statistic = user => http.post('/front/recharge/TotalProfit', user)
 
 // 获取充币地址
 export const rechargeAddress = user => http.post('/front/financial/recharge/address', user)
@@ -122,3 +122,12 @@ export const knockdownList= user => http.post('/front/trade/trustee/list', user)
 
 // 本金提现
 export const rechargeConfirmTopUpMoney = user => http.post('/front/recharge/ConfirmTopUpMoney', user)
+
+// 收益提现记录
+export const rechargeEarningsWalletLog = user => http.post('/front/recharge/EarningsWalletLog', user)
+
+// 本金提现记录
+export const rechargeWalletLog = user => http.post('/front/recharge/WalletLog', user)
+
+// 本金提现记录
+export const helpversionCheck = user => http.post('/search/help/versionCheck', user)
