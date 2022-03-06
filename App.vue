@@ -21,7 +21,6 @@
 			// #endif
 		},
 		onShow: function() {
-			console.log('asdfasdfas')
 			//热更新
 			//#ifdef APP-PLUS
 			plus.runtime.getProperty(plus.runtime.appid, function(widgetInfo) {

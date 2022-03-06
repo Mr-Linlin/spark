@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "能量守护",
+  "usingComponents": {
+    "u-loadmore": "/node-modules/uview-ui/components/u-loadmore/u-loadmore"
+  }
+}

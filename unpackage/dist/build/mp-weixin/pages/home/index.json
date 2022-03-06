@@ -1,0 +1,11 @@
+{
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "cuihai-xingqiu": "/components/cuihai-xingqiu/cuihai-xingqiu",
+    "u-count-down": "/node-modules/uview-ui/components/u-count-down/u-count-down",
+    "vus-sphere-progress": "/components/vus-sphere-progress/vus-sphere-progress",
+    "u-notice-bar": "/node-modules/uview-ui/components/u-notice-bar/u-notice-bar",
+    "con-sulting": "/pages/home/consulting",
+    "load-line": "/components/load-line/load-line"
+  }
+}
