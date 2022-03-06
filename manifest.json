@@ -2,8 +2,8 @@
     "name" : "spark",
     "appid" : "__UNI__EC939B4",
     "description" : "",
-    "versionName" : "1.0.0",
-    "versionCode" : 100,
+    "versionName" : "4.0.1",
+    "versionCode" : 101,
     "transformPx" : false,
     "networkTimeout" : {
         "request" : 15000
@@ -94,7 +94,22 @@
                 "iosStyle" : "common"
             }
         },
-        "nativePlugins" : {}
+        "nativePlugins" : {
+            "CL-UpDater" : {
+                "__plugin_info__" : {
+                    "name" : "app版本升级原生弹框和进度提示(包含wgt升级)",
+                    "description" : "app版本升级(包含热更新)弹框提示和进度显示，apk自动安装",
+                    "platforms" : "Android,iOS",
+                    "url" : "https://ext.dcloud.net.cn/plugin?id=1371",
+                    "android_package_name" : "uni.UNIEC939B4",
+                    "ios_bundle_id" : "",
+                    "isCloud" : true,
+                    "bought" : 1,
+                    "pid" : "1371",
+                    "parameters" : {}
+                }
+            }
+        }
     },
     "compatible" : {
         "ignoreVersion" : true

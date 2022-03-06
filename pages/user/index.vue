@@ -82,7 +82,7 @@
 
 <script>
 	import {
-		userbaseInfo
+		userbaseInfo,helpversionCheck
 	} from '@/http/common.js'
 	export default {
 		data() {
@@ -131,10 +131,15 @@
 		},
 		mounted() {},
 		onShow() {
-			console.log(uni.getStorageSync('token'))
 			this.userInfoFun()
+			this.helpversionCheckFun()
 		},
 		methods: {
+			helpversionCheckFun(){
+				helpversionCheck().then(res=>{
+					console.log(res)
+				})
+			},
 			userInfoFun() { //用户个人信息
 				userbaseInfo().then(res => {
 					this.userData = res.obj

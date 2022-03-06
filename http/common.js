@@ -128,3 +128,6 @@ export const rechargeEarningsWalletLog = user => http.post('/front/recharge/Earn
 
 // 本金提现记录
 export const rechargeWalletLog = user => http.post('/front/recharge/WalletLog', user)
+
+// 本金提现记录
+export const helpversionCheck = user => http.post('/search/help/versionCheck', user)

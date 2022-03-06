@@ -85,7 +85,7 @@
 
 					</view>
 					<view class="Pheon">
-						4.0.0
+						{{androidVersion}}
 					</view>
 					<view class="">
 						<image class="PheonContImg" src="../../static/user/7124571.png" mode=""></image>
@@ -170,7 +170,8 @@
 		userbaseInfo,
 		modifypwd,
 		modifytradePwd,
-		verifytradePwd
+		verifytradePwd,
+		helpversionCheck
 	} from '@/http/common.js'
 	export default {
 		data() {
@@ -184,13 +185,20 @@
 				tradePwd: '',
 				NewtradePwd: '',
 				TwotradePwd: '',
-				passwordData: {}
+				passwordData: {},
+				androidVersion:''
 			}
 		},
 		onShow() {
 			this.userInfoFun()
+			this.helpversionCheckFun()
 		},
 		methods: {
+			helpversionCheckFun(){
+				helpversionCheck().then(res=>{
+					this.androidVersion = res.obj.androidVersion
+				})
+			},
 			signOut() {
 				uni.showLoading({
 					title: '正在退出'
