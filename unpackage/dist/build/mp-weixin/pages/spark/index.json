@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "u-icon": "/node-modules/uview-ui/components/u-icon/u-icon",
+    "wyb-popup": "/components/wyb-popup/wyb-popup",
+    "u-toast": "/node-modules/uview-ui/components/u-toast/u-toast",
+    "liuyuno-tabs": "/components/pzy-tabs/pzy-tabs",
+    "spark-deals": "/pages/spark/spark-deals",
+    "spark-entrust": "/pages/spark/spark-entrust",
+    "spark-buy": "/pages/spark/spark-buy",
+    "spark-sell": "/pages/spark/spark-sell",
+    "spark-data": "/pages/spark/spark-data"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "u-count-to": "/node-modules/uview-ui/components/u-count-to/u-count-to",
+    "u-loadmore": "/node-modules/uview-ui/components/u-loadmore/u-loadmore"
+  }
+}

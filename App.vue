@@ -4,7 +4,6 @@
 
 		},
 		onShow: function() {
-
 		},
 
 		onHide: function() {
