@@ -99,7 +99,7 @@
 		</view>
 		<!-- 修改密码弹出 -->
 
-		<u-popup :round="20" :show="show" @close="show = false" @open="open">
+		<u-popup :round="20" :show="show" @close="show = false" >
 			<image @click="handleClose" class="close-img" :src="require('../../static/img/close.png')"></image>
 			<view class="password-box">
 				<view class="p-title">修改密码</view>
@@ -116,7 +116,7 @@
 		</u-popup> 
 
 		<!--    资金密码-->
-		<u-popup :round="20" :show="show2" @close="handleClose" @open="open">
+		<u-popup :round="20" :show="show2" @close="handleClose" >
 			<view class="" style="background-color: #F7FAFF;border-radius: 32rpx;">
 				<image @click="handleClose" class="close-img" :src="require('../../static/img/close.png')"></image>
 				<view class="trade-box">

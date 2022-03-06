@@ -2,8 +2,8 @@
     "name" : "spark",
     "appid" : "__UNI__EC939B4",
     "description" : "",
-    "versionName" : "4.0.2",
-    "versionCode" : 101,
+    "versionName" : "4.0.0",
+    "versionCode" : 10,
     "transformPx" : false,
     "networkTimeout" : {
         "request" : 15000
@@ -146,21 +146,21 @@
             "base" : "",
             "mode" : "hash"
         },
-        /* "devServer" : {
-            "port" : 8080, //端口号
-            "disableHostCheck" : true,
-            "proxy" : {
-                "/" : {
-                    "target" : "http://192.168.0.111:7799/",
-                    "changeOrigin" : true, //是否跨域`
-                    "secure" : false, // 设置支持https协议的代理
-                    "pathRewrite" : {
-                        "^/" : ""
-                    }
-                }
-            },
-            "https" : false
-        }, */
+        // "devServer" : {
+        //     "port" : 8080, //端口号
+        //     "disableHostCheck" : true,
+        //     "proxy" : {
+        //         "/" : {
+        //             "target" : "http://192.168.0.111:7799/",
+        //             "changeOrigin" : true, //是否跨域`
+        //             "secure" : false, // 设置支持https协议的代理
+        //             "pathRewrite" : {
+        //                 "^/" : ""
+        //             }
+        //         }
+        //     },
+        //     "https" : false
+        // },
         "sdkConfigs" : {
             "maps" : {}
         }

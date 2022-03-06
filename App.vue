@@ -1,60 +1,12 @@
 <script>
 	export default {
 		onLaunch: function() {
-			// #ifdef H5
-			var lastTouchEnd = 0;
-			document.documentElement.addEventListener('touchend', function(event) {
-				var now = Date.now();
-				if (now - lastTouchEnd <= 300) {
-					event.preventDefault();
-				}
-				lastTouchEnd = now;
-			}, false);
-			document.addEventListener("touchstart", function(event) {
-				if (event.touches.length > 1) {
-					event.preventDefault();
-				}
-			});
-			document.addEventListener("gesturestart", function(event) {
-				event.preventDefault();
-			});
-			// #endif
+
 		},
 		onShow: function() {
-			const me = this;
-			//热更新
-			//#ifdef APP-PLUS
-			plus.runtime.getProperty(plus.runtime.appid, function(widgetInfo) {
-				let version = widgetInfo.version
-				uni.request({
-					url: 'http://211.149.135.240:7799/search/help/versionCheck',
-					method: 'post',
-					success: (result) => {
-						var data = result.data.obj;
-						if (version !== data.androidVersion && data.androidAddress) {
-							uni.showModal({ //提醒用户更新
-								title: "更新提示",
-								content: '检测到新版本，即将进入更新',
-								showCancel: false,
-								success: (res) => {
-									if (res.confirm) {
-										plus.nativeUI.toast("下载wgt文件...");
-										me.downWgt() //下载wgt文件的方法
-									}
-								}
-							})
-						}
-					},
-					fail: (res) => {
-						console.log('res', res)
-					}
-				});
-			});
 
-			// this.$store.commit('initRECORD');
-			plus.screen.lockOrientation('portrait-primary');
-			//#endif
 		},
+
 		onHide: function() {
 
 		},
