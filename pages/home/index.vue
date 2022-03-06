@@ -224,76 +224,73 @@
 		},
 		onShow() {
 			this.getNotice()
-			// this.asdf()
+			
+			// #ifdef APP-PLUS
+				let that = this
+				//热更新版本号和整包的版本号不一样;
+				//第一步要获取本地的wgt版本号；这是异步方法;
+				plus.runtime.getProperty( plus.runtime.appid, function ( wgtinfo ) {
+					that.wgtver=wgtinfo.version;	
+				});		
+				//（5+ API中可以通过plus.runtime.version获取当前apk/ipa的版本号，注意打包方生效）这是获取app的整包版本号;	
+				this.appver=plus.runtime.version;
+				
+				helpversionCheck().then(res=>{
+					let a = this.wgtver.split('.').join('')
+					let b = res.obj.androidVersion.split('.').join('')
+					if (a < b) {
+						this.asdf(res)
+					}
+				})
+			// #endif
 		},
 		onLoad() {
-			let that = this
-			//热更新版本号和整包的版本号不一样;
-			//第一步要获取本地的wgt版本号；这是异步方法;
-			plus.runtime.getProperty( plus.runtime.appid, function ( wgtinfo ) {
-				that.wgtver=wgtinfo.version;	
-			});		
-			//（5+ API中可以通过plus.runtime.version获取当前apk/ipa的版本号，注意打包方生效）这是获取app的整包版本号;	
-			this.appver=plus.runtime.version;
-			
 			this.getMessage()
 			this.getTexts()
-			helpversionCheck().then(res=>{
-				let a = this.wgtver.split('.').join('')
-				let b = res.obj.androidVersion.split('.').join('')
-				if (a < b) {
-					this.asdf()
-				}
-			})
 		},
 		methods: {
 			// 热跟新
-			asdf(){
-				helpversionCheck().then(res=>{
-					if (this.wgtver != res.obj.androidVersion) { //本地版本小于线上的版本需要更新
-						console.log('进来了几次几次')
-						let topIconPath = plus.io.convertLocalFileSystemURL(this.iconRootPath) + "/top_3.png";
-						//第一步要获取本地的wgt版本号；
-						const upDater = uni.requireNativePlugin("CL-UpDater");
-						let options = {
-							title: "升级,有数据需要更新，请点击升级",
-							con: "",
-							downUrl: res.obj.androidAddress,
-							hidCancelbtn: true, //可选
-							btnBgColor: "#ffaa00", //可选
-							downMsgTip: "资源下载中，请稍后...", //可选
-							updateBtnText: "升级", //可选 升级按钮文字,
-							topImgBg: topIconPath, //可选 除非需要自定义头部logo，否则不需要传;
-						} 
-						//第一步创建文件下载路径，并创建文件;
-						plus.io.requestFileSystem(plus.io.PUBLIC_DOWNLOADS, function(fobject) {
-							//设置文件下载根路径;	
-							let rootPath = fobject.root.fullPath;
-							upDater.wgtUpdate(options, rootPath, result => {
-								if (result) {
-									var pathNew = plus.io.convertAbsoluteFileSystem(result);
-									
-									plus.runtime.install(pathNew, {
-										force: false
-									}, function() {
-										//进行重新启动;
-										upDater.close();
-										console.log('关闭')
-										plus.runtime.restart();
-									}, (e) => {
-										uni.showToast({
-											title: '安装升级包失败' + JSON
-												.stringify(e),
-											icon: 'none'
-										})
-									});
-								}
-							}, () => {
-								console.log("弹框关闭了");
-							});
-						})
+			asdf(res){
+					//注意：服务器的热更新版本号必需大于本地wgt版本号
+					//http://192.168.50.201/update.wgt,
+					let topIconPath=plus.io.convertLocalFileSystemURL(this.iconRootPath)+"/top_5.png";		
+					let that=this;
+					//第一步要获取本地的wgt版本号；
+					const upDater=uni.requireNativePlugin("CL-UpDater");
+					let options={
+						title:"升级,有数据需要更新，请点击升级",
+						con:"1、修复已知bug",
+						downUrl:res.obj.androidAddress,
+						hidCancelbtn:true,//可选
+						btnBgColor:"#ffaa00",//可选
+						downMsgTip:"资源下载中，请稍后...", //可选
+						updateBtnText:"升级",//可选 升级按钮文字,
+						topImgBg:topIconPath,//可选 除非需要自定义头部logo，否则不需要传;
 					}
-				})
+					//第一步创建文件下载路径，并创建文件;
+					plus.io.requestFileSystem(plus.io.PUBLIC_DOWNLOADS,function(fobject){
+						//设置文件下载根路径;	
+						let rootPath=fobject.root.fullPath;	
+						upDater.wgtUpdate(options,rootPath,result=>{
+							if(result){
+								var pathNew = plus.io.convertAbsoluteFileSystem(result);
+								console.log(pathNew);
+								plus.runtime.install(pathNew, {
+									force: false
+								}, function() {
+									//进行重新启动;
+									plus.runtime.restart();
+								}, (e) => {
+									uni.showToast({
+										title: '安装升级包失败'+JSON.stringify(e),
+										icon: 'none'
+									})								
+								});
+							}
+						},()=>{
+							console.log("弹框关闭了");
+						});
+					})
 			},
 			// 测试数据
 			getTexts() {
