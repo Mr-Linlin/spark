@@ -2,8 +2,8 @@
     "name" : "spark",
     "appid" : "__UNI__EC939B4",
     "description" : "",
-    "versionName" : "4.0.1",
-    "versionCode" : 101,
+    "versionName" : "4.0.0",
+    "versionCode" : 10,
     "transformPx" : false,
     "networkTimeout" : {
         "request" : 15000

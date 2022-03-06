@@ -53,6 +53,11 @@ Date.prototype.Format = function (fmt) { //author: meizz
 }
 App.mpType = 'app'
 
+const currentVersion = {
+    verson: 100   //代表当前项目的版本
+}
+Vue.prototype.$current = currentVersion  //挂载到抢钱vue示例的原型上，方便全局访问
+
 const app = new Vue({
 	...App,
 	store
